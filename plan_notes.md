@@ -26,7 +26,7 @@
   - For each milestone - decompose into atomic tasks: name, one-sentence description, estimated time for completion 
 	- As a table
     - Mention dependencies - which tasks need to be done beforehand?
-    - Gannt chart
+    - Gantt chart
 
 ## Resource distribution
 - How will we deploy 200 hours per group member?
