@@ -181,12 +181,84 @@ To keep your folders clean, it is often a good idea to keep your images in a sep
 
 
 \subsection{Resource distribution}
-The plan should explain how you will deploy your resources - 200 hours per group member over the semester - to achieve your goals. Note you should take into account time required by scheduled sessions (workshops, demo days, final presentations) and time used in planning and presenting (group meetings, report writing etc.). 
 
-You should also list the resources you have in terms of skills, equipment, etc. The use of tables is also recommended for this section.
+The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 500 hours per team.
+
+
+\underline{Robot building} 
+
+The first milestone is to have an early version bot built with basic moving functions. This will take around 100 hours. The breakdown of this time is: 20 hours of initial design, 40 hours of building, and 20 hours worth of testing.
+
+The second milestone will take around 40 hours of design, 100 hours of building, and 40 hours of testing. This should be plenty of time to have the final robot designed and ready for milestone 3.
+
+The third milestone will take around 40 hours of designing improvements for the aesthetic and how to add the camera/screen, 20 hours worth of 3D printer work, 20 hours of implementing the improvements, and another 20 hours on testing.
+
+The fourth and final milestone will have all 120 hours dedicated to testing and troubleshooting. The largest amount of time has been allocated to this milestone as it is without a doubt the most critical milestone in the development of the product.
+
+The team will work as a unit at every stage in this with daily subtasks delegated as needed. They will be keeping in close contact with the robot software team and will likely spend a lot of this time working together.
+
+\underline{Robot coding}
+
+The first milestone of having the robot move, turn, recognise tape, and begin movement along the tape will take around 140 hours. That's 25 hours per task, with 10 hours of testing per feature.
+
+Milestone two is to have the robot moving along the line and some light patient interaction. This will take another 140 hours. This will be 100 hours of development on the line following, with 20 hours of testing on this feature, and then 20 hours in the initial development of some basic patient interaction.
+
+The basic connection with the app and the cup holder extension will take 100 hours: 20 hours in the connection, 60 on the holder extension and 20 of testing with the majority of the testing on this phase concentrated on the cup holder extension.
+
+The final 100 hours will be used for the final milestone. 75 of these hours will be on developing the robot path features to work with the app. 25 hours for testing.
+
+\underline{App}
+
+The basic UI design and database setup for milestone one will take around 120 hours. 60 hours of UI design, 30 hours of database setup, and 30 hours to test these two aspects of the app.
+
+Improving the UI and establishing a secure connection with the robot will take a further 100 hours with 60 of these dedicated to the security of the connection, 20 to UI improvement and 20 to test all improvements.
+
+The calendar, alarm, and robot photo features will take another 180 hours. The photo feature will take 70 hours to build and test, the alarm will take 50 to build and test, and the calendar will take 60. The bulk of the work on the app will take place on these 3 complex features.
+
+Polishing up the UI and building potential extensions to the app will be allocated the final 100 hours. This is the point in the development that can be trimmed down if there is more time required for earlier milestones.
+
+\begin{table}[]
+  \begin{tabular}{|l|l|l|}
+    \hline
+    {\bf Team}           & {\bf Member}& {\bf Main skills} \\ \hline
+    Project manager      & Michael     & Project management \\ \hline
+                         & Jakub       & \\ \cline{2-3}
+    Robot building       & Luukas      & \\ \cline{2-3}
+                         & Rebecca     & \\ \hline
+                         & Ben         & ML/general coding\\ \cline{2-3}
+    Robot coding         & Errikos     & Ros/Vis \\ \cline{2-3}
+                         & Wojtek      & Ros/Vis \\ \hline
+                         & Theo        & \\ \cline{2-3}
+    App                  & Yuchen      & \\ \cline{2-3}
+                         & Ching Ling  & \\ \hline
+  \end{tabular}
+  \caption{}
+\end{table}
+
+\begin{table}[]
+  \begin{tabular}{|l|l|}
+    \hline
+    {\bf Team}           & {\bf Equipment} \\ \hline
+    Robot building       & Turtlebot, Lego, sensors, 3D printer\\ \hline
+    Robot coding         & \\ \hline
+    App                  & \\ \hline
+  \end{tabular}
+  \caption{}
+\end{table}
 
 \subsection{Risk assessment} 
-The report should also contain an assessment of the risks that you anticipate for the project, and contingency planning that you have done to guard against them. 
+
+\underline{Robot building}
+
+One of the risks with the hardware that we identified is the fact that it could be stolen. We addressed this by including an alarm system that will sound if the robot is removed from the area it is expected to be in at any given moment.
+
+\underline{Robot coding}
+
+The main risk to the coding of the robots software is that certain features are not implemented on time. The safeguard to this is that the bulk of the teams time will be used on the essential features with the less important features allocated less time.
+
+\underline{App}
+
+The risk with the app is that the connection is not secure and will be open for attack. Special effort will be put in to this aspect of the product as discussed in Section 2.3.
 
 \section{Group organisation}
 \begin{table}[]
