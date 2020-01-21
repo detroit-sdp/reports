@@ -26,13 +26,47 @@
 
 \begin{abstract}
   We propose an assistive healthcare robot, {\it Tadashi}, to automate simple tasks within a care home or supported living environment and allow caregivers to spend more time caring for their patients.
-  {\it Tadashi} will automate three key tasks in the caregiver's day. Firstly, waking a patient up at a time specified by a nurse, by coming into their room and speaking to them. Secondly, checking the patient is taking the correct medication at the correct time, by coming into their room; taking a picture of their medication; and having the caregiver verify it is the correct medication. Thirdly, checking on the welfare of the patient while the caregiver is occupied elsewhere, by coming to their room and asking the patient if they are okay and if they need a caregiver to attend to them. 
+  {\it Tadashi} will automate three key tasks in the caregiver's day. Firstly, waking a patient up at a time specified by the caregiver, by coming into their room and speaking to them. Secondly, checking the patient is taking the correct medication at the correct time, by coming into their room; taking a picture of their medication; and having the caregiver verify it is the correct medication. Thirdly, checking on the welfare of the patient while the caregiver is occupied elsewhere, by coming to their room and asking the patient if they are okay and if they need a caregiver to attend to them. 
 \end{abstract} 
 
 \section{Goal description}
-Caregivers are overworked: they spend a large amount of time on menial tasks, limiting the amount of time they can spend caring for patients. Our assistive healthcare robot that allows caregivers to automate certain menial tasks, allowing them to spend less time on the menial work, and more time doing what matters: caring for their patients. 
+Caregivers are overworked: they spend a large amount of time on menial tasks, limiting the amount of time they can spend caring for patients. Our assistive healthcare robot allows caregivers to automate certain menial and administrative tasks, allowing them to spend less time on the menial work, and more time doing what matters: caring for their patients. 
 
-\subsection{Relevance of the system} 
+\subsection{Relevance of the system}
+\subsubsection{The problem space}
+Tadashi is designed to tackle two problems facing caregivers in assisted living situations:
+\begin{enumerate}
+\item High caregiver:patient ratios, meaning caregivers have little time to dedicate per patient;
+\item High administrative loads on caregivers, meaning they must spend more time on administration and menial tasks and less on caring for their patients directly.
+\end{enumerate}
+
+There is no national guidance on staffing levels and caregiver:patient ratios in care homes \cite{rcnstaffingadvice}, but research shows that in care homes there is an average ratio of 18 patients per registered nurse during the day, and 26 patients at night \cite{rcnstaffingguidance}.
+
+With this many patients to take care of, nurses struggle to get the time they need with patients. In a 2017 survey on the impact of high nurse:patient ratios \cite{unison}:
+\begin{itemize}
+\item 63.2\% of nurses said that comforting or talking to patients was rushed, unfinished, not done to an acceptable standard, or missed entirely. 
+\item 54\% said medication administration errors happened often or sometimes; only 54\% said that administering medication on time was done to acceptable standards.
+\end{itemize}
+
+Equally, a 2013 survey showed that nurses spend almost 1/5 of their day on administrative tasks; and only 20\% are satisfied with how they spend their time --- preferring to spend less time on admin and more time on direct care \cite{rcnpol}.
+
+These problems will only get worse in the future. It is estimated that by 2035, up to 190,000 people more people aged 65 years or above will require some level of care, and increase of 86\% from today \cite{lancet}. Meanwhile, ongoing staffing issues in the NHS mean that in 10 years time the NHS will have a shortfall of 108,000 nurses \cite{nuffield}. This combination of factors will drive demand for innovative solutions --- including assistive technology like Tadashi. 
+
+\subsubsection{Compliance with existing guidelines}
+NICE healthcare guidelines \cite{niceguidance} advise care home providers to consider two key aspects in administering medication:
+\begin{enumerate}
+\item The 6 R's of administration: the right resident, the right medicine, the right route, the right dose, the right time, and the resident's right to refuse. 
+\item Ensuring a record of administration is made as soon as possible. 
+\end{enumerate}
+
+Tadashi helps caregivers with these key aspects:
+\begin{enumerate}
+  \item Using the schedule specified by the caregiver, Tadashi ensures the right resident receives medication at the right time.
+  \item By having the caregiver confirm the medication via the picture, Takashi ensures that the right medication is being taken at the right dose.
+  \item By taking a picture of the medication and storing proof of the nurse's confirmation, Tadashi ensures a record of administration is made as soon as possible. 
+\end{enumerate}
+
+\subsubsection{Existing solutions}
 
 \subsection{High-level description} 
 

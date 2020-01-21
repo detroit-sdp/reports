@@ -30,6 +30,13 @@ NICE healthcare guidelines advice care home providers to consider the following 
 - 6 R's of administration: right (resident, medicine, route, dose, time), resident's right to refuse
 - Make record of administration as soon as possible
 
+R&D work relating to existing assistive technology
+https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/706841/Assistive_Technology_Report_2016-17.pdf - CHIRON?
+
+How will the population grow?
+https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(18)30118-X/fulltext
+ 190,000 more people aged 65 years or older will require care by 2035 - a rise of 86%. 
+ 
 ### Similar existing solutions
 - Number of existing solutions for logistical assistance 
 
