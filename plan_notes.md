@@ -38,6 +38,21 @@
 
 ## Group organization
 - What roles are group members taking?
-  - Hardware, software, misc
+  - Intention is to split the team into two sub-teams: hardware, software
+  - Each team will have a dedicated POC for co-ordinating with the other team
+  - Who will be in each team?
+	- Hardware: Rebecca, Jakub, Wojtek, Luukas, Errikos 
+    - Software: Ben, Theo, Errikos, Yuchen, Ching Ling
 - How will we communicate with each other?
-  - Meetings, communication, code-sharing, task allocation, progress tracking
+  - Meetings:
+	- First two weeks are daily meetings
+    - Afterwards - sub-teams will have meetings as needed (min. weekly) and POC from each team will meet weekly on progress
+  - Communication:
+	- Primarly using Slack channel (detroit15.slack.com)
+  - Code sharing:
+	- Collaboration using GitHub (github.com/detroit-sdp)
+  - Task allocation:
+	- GitHub project boards per section (example: github.com/detroit-sdp/reports/projects/1)
+    - Kanban-style (to do, in progress, done)
+    - Also covers progress tracking
+      - Update on progress in meetings
