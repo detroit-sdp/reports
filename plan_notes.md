@@ -39,6 +39,7 @@
 ## Group organization
 - What roles are group members taking?
   - Intention is to split the team into two sub-teams: hardware, software
+  - Strongly functional organizational structure
   - Each team will have a dedicated POC for co-ordinating with the other team
   - Who will be in each team?
 	- Hardware: Rebecca, Jakub, Wojtek, Luukas, Errikos 
