@@ -5,14 +5,32 @@
 
 ## High-level description
 - Describe the robot in terms of user stories
-- User stories:
-  - Waking a patient up at a pre-specified time
-  - Checking the patient's medication at a pre-specified time
-	- Come to room, ask for pills (using arm), take photo, send to nurse for verification, give back to patient (and possibly give water?)
-    - This could be broken up into multiple user stories
-  - Checking up on the patient when asked to by the nurse
-	- Modes for if the patient is ok / not ok and what it does in each case
-- Could we include a flowchart here or similar - of the various states of the robot?
+### Waking patient
+- Nurse specifies wake-up time for each patient in an app
+- At the specified time, the robot goes to the specified patient's room
+- Once in the room, the robot speaks to wake the patient up
+  - We may want to have a 'yes, I've woken up' button or something similar
+	- If the patient does not press it, alert the nurse through the app who can then go check on the person
+- The robot returns to its spot to await its next command. 
+### Checking patient medication
+- Nurse specifies the time that a patient needs to take medication through the app
+- At the specified time, the robot goes to the specified patient's room
+- Once in the room, the robot goes to the patient and:
+  - Stretches out arm to receive the medication
+  - Moves arm to itself to take a picture of the medication
+  - The picture is sent to the nurse for verification through the app
+  - Once the nurse approves the medication, the robot uses its arm to return it to the patient
+  - (Optional extension) the robot gives a cup to the patient for water
+- The robot returns to its spot to await its next command. 
+### Checking on patient
+- Nurse specifies that the robot should go check on a patient
+- The robot moves to the specified patient's room
+- The robot approaches the patient and:
+  - Indicates with its voice that the nurse would like to check on the patient
+  - The patient can indicate if they are ok:
+	- If they press the ok button, the robot informs the nurse through the app
+    - If they press the not ok button OR do not respond at all, the robot informs the nurse through the app
+- The robot returns to its spot to await its next command. 
 
 ## Milestones and task decomposition
 - What are the main technical subgoals?
