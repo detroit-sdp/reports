@@ -62,7 +62,7 @@ NICE healthcare guidelines \cite{niceguidance} advise care home providers to con
 Tadashi helps caregivers with these key aspects:
 \begin{enumerate}
   \item Using the schedule specified by the caregiver, Tadashi ensures the right resident receives medication at the right time.
-  \item By having the caregiver confirm the medication via the picture, Takashi ensures that the right medication is being taken at the right dose.
+  \item By having the caregiver confirm the medication via the picture, Tadashi ensures that the right medication is being taken at the right dose.
   \item By taking a picture of the medication and storing proof of the nurse's confirmation, Tadashi ensures a record of administration is made as soon as possible. 
 \end{enumerate}
 
@@ -77,7 +77,54 @@ The key takeaways from this work that we will take into account in our project:
 \end{itemize}
 
 \subsection{High-level description} 
+We can describe three key user stories to exemplify the functionality of our solution:
+\begin{enumerate}
+\item Waking the patient
+\item Checking the patient's medication
+\item Checking on the patient
+\end{enumerate}
 
+\subsubsection{Waking the patient}
+\begin{enumerate}
+\item The caregiver specifies in the app what time each patient should wake up.
+\item At the specified time, Tadashi navigates to the specified patient's room.
+\item Once in the room, Tadashi speaks to wake the user up. A button is accessible to the patient to press once they have woken up:
+  \begin{enumerate} 
+  \item If the patient does not press the button, Tadashi sends an alert to the caregiver's app, who can then go check on the person. 
+  \end{enumerate}
+\item Tadashi returns to his starting spot to await the next command. 
+\end{enumerate}
+
+\subsubsection{Checking the patient's medication}
+\begin{enumerate}
+\item The caregiver specifies the times that each patient should take their medication through the app.
+\item At the specified time, Tadashi navigates to the specified patient's room. 
+\item Once in the room, Tadashi goes to the patient and:
+  \begin{enumerate}
+  \item Stretches out his arm to receive the patient's medication.
+  \item Moves the arm towards himself to take a picture of the medication.
+  \item Sends a picture of the medication to the caregiver's app for verification
+    \begin{enumerate}
+    \item If the caregiver approves the medication, Tadashi uses its arm to return the medication to the patient. 
+    \item If the caregiver does not approve the medication, Tadashi keeps the medication close to itself and waits for the caregiver to come and check personally.
+    \end{enumerate}
+  \end{enumerate}
+\item Tadashi returns to his staring spot to await the next command.
+\end{enumerate}
+
+
+\subsubsection{Checking on the patient}
+\begin{enumerate}
+\item The caregiver specifies in the app that Tadashi should go check on a specified patient. 
+\item Tadashi navigates to the specified patient's room.
+\item Once in the room, Tadashi speaks to the user and asks if they are okay:
+  \begin{enumerate}
+  \item A button is accessible to the patient to press to reply yes or no.
+  \item If the user presses the okay button, Tadashi informs the caregiver through the app. 
+  \item If the user presses the not okay button or does not press a button at all, Tadashi informs the caregiver through the app.
+  \end{enumerate}
+\item Tadashi returns to his starting spot to await the next command. 
+\end{enumerate}
 
 \section{Task planning}
 In this section you must provide a detailed plan of the tasks to be completed to achieve your goals. The plan must comprise two levels: first a few milestones that correspond to major achievements in the project, then a detailed list of atomic tasks that must be achieved.
