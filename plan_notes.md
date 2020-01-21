@@ -3,6 +3,45 @@
 - Is there a need / potential market?
 - Has anyone done anything similar?
 
+### Research showing a need
+Our key argument:
+- High nurse:patient ratios mean nurses have a lot of work to do in a short time.
+- Nurses spend a lot of time on admin and want to spend more time on caring.
+- Automation of manual tasks will free up more time for caring. 
+
+**Ratios not rationing: UNISON safe staffing report 2017** https://www.unison.org.uk/content/uploads/2017/04/Rationotrationing.pdf
+63.2% of nurses say that comforting or talking to patients was rushed, unfinished, not done to an acceptable standard, or missed entirely. 
+54% said medication administration errors happened often or sometimes; 54% said that administering medication on time was done to acceptable standards
+
+**Staffing levels: advice guides (Royal College of Nursing)**
+https://www.rcn.org.uk/get-help/rcn-advice/staffing-levels
+There is no national guidance on staffing levels and nurse:patient ratios in care homes.
+
+**Guidance on safe nurse staffing levels in the UK (Royal College of Nursing)**
+http://www.weds.wales.nhs.uk/sitesplus/documents/1076/rcn%20safe%20staffing%20levels.pdf
+In care homes there is an average ratio of 18 patients per registered nurse during the day, and 26 patients per RN at night. 
+
+**Survey of district and community nurses in 2013** https://www.rcn.org.uk/about-us/policy-briefings/pol-1414
+19% of the day is spent on administration: only 20% of district and community nurses are satisfied with the distribution of their time across activites, preferring to spend less time on admin and more on direct care and leadership
+
+**Managing medicines in care homes**
+https://www.nice.org.uk/guidance/sc1/evidence/full-guideline-pdf-2301173677
+NICE healthcare guidelines advice care home providers to consider the following in a medicines administration process:
+- 6 R's of administration: right (resident, medicine, route, dose, time), resident's right to refuse
+- Make record of administration as soon as possible
+
+### Similar existing solutions
+- Number of existing solutions for logistical assistance 
+
+https://www.ipa.fraunhofer.de/content/dam/ipa/en/documents/Expertises/Roboter--und-Assistenzsysteme/Servicerobots_residential_care.pdf
+- WiMi-Care project: Care-O-bot 3 tracks per-patient hydration and brings them water if they have not drunk enough (in German: https://www.uni-due.de/wimi-care/)
+- "inhabitants  understood  the  idea  of  a  robot  supporting  the  staff  without replacing them and showed no fear to interact with the machine" (https://link.springer.com/chapter/10.1007/978-3-642-37346-6_9)
+- speech input - addressing them by name (https://ieeexplore.ieee.org/abstract/document/6213397)
+- moving on a pre-determined path - but avoiding obstacles (ibid)
+
+What do we add?
+- 
+
 ## High-level description
 - Describe the robot in terms of user stories
 ### Waking patient
