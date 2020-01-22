@@ -26,7 +26,7 @@
 
 \begin{abstract}
   We propose an assistive healthcare robot, {\it Tadashi}, to automate simple tasks within a care home or supported living environment and allow caregivers to spend more time caring for their patients.
-  {\it Tadashi} will automate three key tasks in the caregiver's day. Firstly, waking a patient up at a time specified by the caregiver, by coming into their room and speaking to them. Secondly, checking the patient is taking the correct medication at the correct time, by coming into their room; taking a picture of their medication; and having the caregiver verify it is the correct medication. Thirdly, checking on the welfare of the patient while the caregiver is occupied elsewhere, by coming to their room and asking the patient if they are okay and if they need a caregiver to attend to them. 
+  {\it Tadashi} will automate three key tasks in the caregiver's day. Firstly, waking a patient up at a time specified by the caregiver, by coming into their room and speaking to them. Secondly, bringing water and food to patients at specified times. Thirdly, checking on the welfare of the patient while the caregiver is occupied elsewhere, by coming to their room and asking the patient if they are okay and if they need a caregiver to attend to them. 
 \end{abstract} 
 
 \section{Goal description}
@@ -42,29 +42,16 @@ Tadashi is designed to tackle two problems facing caregivers in assisted living 
 
 There is no national guidance on staffing levels and caregiver:patient ratios in care homes \cite{rcnstaffingadvice}, but research shows that in care homes there is an average ratio of 18 patients per registered nurse during the day, and 26 patients at night \cite{rcnstaffingguidance}.
 
-With this many patients to take care of, nurses struggle to get the time they need with patients. In a 2017 survey on the impact of high nurse:patient ratios \cite{unison}:
-\begin{itemize}
-\item 63.2\% of nurses said that comforting or talking to patients was rushed, unfinished, not done to an acceptable standard, or missed entirely. 
-\item 54\% said medication administration errors happened often or sometimes; only 54\% said that administering medication on time was done to acceptable standards.
-\end{itemize}
+With this many patients to take care of, nurses struggle to get the time they need with patients. In a 2017 survey on the impact of high nurse:patient ratios \cite{unison}, 63.2\% of nurses said that comforting or talking to patients was rushed, unfinished, not done to an acceptable standard, or missed entirely.
 
 Equally, a 2013 survey showed that nurses spend almost 1/5 of their day on administrative tasks; and only 20\% are satisfied with how they spend their time --- preferring to spend less time on admin and more time on direct care \cite{rcnpol}.
 
-These problems will only get worse in the future. It is estimated that by 2035, up to 190,000 more people aged 65 years or above will require some level of care, and increase of 86\% from today \cite{lancet}. Meanwhile, ongoing staffing issues in the NHS mean that in 10 years time the NHS will have a shortfall of 108,000 nurses \cite{nuffield}. This combination of factors will drive demand for innovative solutions --- including assistive technology like Tadashi. 
+By automating some tasks using Tadashi, we propose that nurses can decrease the amount of time they spend on administrative tasks, and increase the amount of time they spend caring for patients. 
 
-\subsubsection{Compliance with existing guidelines}
-NICE healthcare guidelines \cite{niceguidance} advise care home providers to consider two key aspects in administering medication:
-\begin{enumerate}
-\item The 6 R's of administration: the right resident, the right medicine, the right route, the right dose, the right time, and the resident's right to refuse. 
-\item Ensuring a record of administration is made as soon as possible. 
-\end{enumerate}
+With elderly populations in particular, hydration and nutrition presents a pressing concern \cite{hydrate}. A Care Quality Commission inspection in 2011 found that three out of 12 NHS trusts inspected failed to meet standards required by law in meeting patient needs regarding nutrition and hydration \cite{cqc}. A 2018 report from the Office for National Statistics found that more than 600 care home residents died suffering from malnutrition or dehydration between 2013 and 2017 \cite{ons}.
 
-Tadashi helps caregivers with these key aspects:
-\begin{enumerate}
-  \item Using the schedule specified by the caregiver and by taking a picture of the medication the resident intends to take, Tadashi ensures the right resident receives medication at the right time.
-  \item By having the caregiver confirm the medication via the picture, Tadashi ensures that the right medication is being taken at the right dose.
-  \item By taking a picture of the medication and storing proof of the nurse's confirmation, Tadashi ensures a record of administration is made as soon as possible. 
-\end{enumerate}
+The problems mentioned above will only get worse in the future. It is estimated that by 2035, up to 190,000 more people aged 65 years or above will require some level of care, and increase of 86\% from today \cite{lancet}. Meanwhile, ongoing staffing issues in the NHS mean that in 10 years time the NHS will have a shortfall of 108,000 nurses \cite{nuffield}. This combination of factors will drive demand for innovative solutions --- including assistive technology like Tadashi.
+
 
 \subsubsection{Existing solutions}
 The most relevant existing solution to the problems we have identified is the work of Fraunhofer IPA on service robots in residential care facilities. As part of the WiMi-Care project, they implemented and tested Care-O-bot 3, a `robot butler' that tracks residents' hydration and brings them water if they have not drunk enough. The goal of this project was to automate certain service-related tasks in order to relieve pressure on care staff \cite{fraunhofer}.
@@ -80,7 +67,7 @@ The key takeaways from this work that we will take into account in our project:
 We can describe three key user stories to exemplify the functionality of our solution:
 \begin{enumerate}
 \item Waking the patient
-\item Checking the patient's medication
+\item Bringing food or water to the patient
 \item Checking on the patient
 \end{enumerate}
 
@@ -95,21 +82,16 @@ We can describe three key user stories to exemplify the functionality of our sol
 \item Tadashi returns to his starting spot to await the next command. 
 \end{enumerate}
 
-\subsubsection{Checking the patient's medication}
+\subsubsection{Bringing food or water to the patient}
 \begin{enumerate}
-\item The caregiver specifies the times that each patient should take their medication through the app.
-\item At the specified time, Tadashi navigates to the specified patient's room. 
-\item Once in the room, Tadashi goes to the patient and:
-  \begin{enumerate}
-  \item Stretches out his arm to receive the patient's medication.
-  \item Moves the arm towards himself to take a picture of the medication.
-  \item Sends a picture of the medication to the caregiver's app for verification
-    \begin{enumerate}
-    \item If the caregiver approves the medication, Tadashi uses its arm to return the medication to the patient. 
-    \item If the caregiver does not approve the medication, Tadashi keeps the medication close to itself and waits for the caregiver to come and check personally.
-    \end{enumerate}
-  \end{enumerate}
-\item Tadashi returns to his staring spot to await the next command.
+\item The caregiver specifies in the app for each patient:
+  \begin{itemize}
+  \item The intervals at which they should be brought water (or another drink).
+  \item The times at which they should be brought food.
+  \end{itemize}
+\item At the specified time, Tadashi navigates to the pick-up point for food or water.
+\item Tadashi moves to the patient's room and passes over the food or water using its arm.
+\item Tadashi returns to his starting spot to await the next command.
 \end{enumerate}
 
 
