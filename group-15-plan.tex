@@ -130,11 +130,101 @@ We can describe three key user stories to exemplify the functionality of our sol
 In this section you must provide a detailed plan of the tasks to be completed to achieve your goals. The plan must comprise two levels: first a few milestones that correspond to major achievements in the project, then a detailed list of atomic tasks that must be achieved.
 
 \subsection{Milestones} 
-From the user stories, you should extract the main technical subgoals, i.e., what you need to accomplish to get to the desired final result. For each subgoal you should provide an explicit milestone that states what you should have achieved, by what date, and what evidence you will present to show you have achieved it (e.g. a demonstration of the feature to the experts).
+%From the user stories, you should extract the main technical subgoals, i.e., what you need to accomplish to get to the desired final result. For each subgoal you should provide an explicit milestone that states what you should have achieved, by what date, and what evidence you will present to show you have achieved it (e.g. a demonstration of the feature to the experts).
 
-Robot Building
+\subsubsection{Milestone 1}
 
-Milestone 1: Early version of the robot base frame built with basic moving functionality in all directions and with a colour sensor mounted underneath to track a line of tape to follow. The base should be sturdy and able to hold a medium load. This will take around 100 hours total. The breakdown of this time is: 20 hours of initial design, 40 hours of building, and 20 hours worth of testing.
+For the first demo on February 5th we plan to present our robot base frame with basic movement and tracking functionality, as well as a skeleton android app.
+
+Robot sub goals:
+
+The base frame will be able to rotate on the spot to face a given direction.
+The chassis is sturdy enough to carry a light load, representing future components.
+The robot can move around freely by remote control.
+Attach a mounted colour sensor to track tape on the floor.  
+
+Once these sub goals are achieved, our robot base frame will be able to reliably and precisely follow along a straight line path of tape. 
+
+App sub goals:
+
+Create a functioning android app which can run on a mobile device.
+Produce a Database which can store a patient's name and one of their health conditions.
+Implement GDPR features into the Database.
+Implement functionality in the App to create and edit patient information in the Database.
+
+With these sub goals achieved, we can demonstrate updating the Database from the Android app.
+
+\subsubsection{Milestone 2}
+
+For the second demo on February 26th we will showcase our robot with several new components and movement abilities, plus connectivity and interaction with the android app.  
+
+Movement sub goals:
+
+Program the robot to recognise turns in a tape path
+Implement a memory system that allows the robot to remember it's current state 
+
+With these new features, we will demonstrate the robot following along a bending line of tape on the floor, navigating around turns in the path.
+
+Component sub goals:
+
+Attach a robotic arm which can later be programmed to perform patient assisting tasks.
+Equip the base frame with a lift system, which can be used to raise the robot's height in order to interact with patients in hospital beds.
+Implement external buttons which can be pressed to send a signal.
+
+
+App sub goals:
+
+Accessible User Interface.
+Recieves alerts from the robot when it's button is pressed.
+
+\subsubsection{Milestone 3}
+
+On March 11th for the third demo we will present the robot with more freedom of movement as well as camera and app functionality.
+
+Camera sub goals:
+
+Mount a camera to the robot
+Send pictures from the camera to the app
+
+With these goals achieved, we aim to demonstrate the robot taking an image and then sending it to the mobile app for verification.
+
+Movement sub goals:
+
+Implement functionality to move around between rooms without needing a line of tape to follow.
+
+App connectivity sub goals:
+
+Direct remote control of movement from the app.
+App provides arm remote control.
+The app will recieve photos from the robot and display them to the user for verification.
+
+
+\subsubsection{Milestone 4}
+
+On the final demonstration on March 30th we will show our completed prototype with all components working together
+
+App sub goals:
+
+A timetable will be implemented, allowing the user to plan out which rooms should be visited at which times, to check up on the patients.
+GPS functionality will be provided, so that the robot can be tracked if it is stolen.
+Full remote control over the robot via the app.
+
+Robot behaviour sub goals:
+
+Feature to avoid bumping into obstacles in it's path
+
+Finally, our robot should be able to present our use case by using full connectivity between the app and it's components to plan out it's movement between rooms and in each room interact approriately with the patient, reporting relevant info back to the app for a user to review.
+
+
+\subsection{Task Decomposition}
+
+We have split our team into three groups to manage the respective tasks of Robot Building, Robot Coding and App Development. For each Milestone we assigned the sub goals to the relevant team, and also planned how our sub teams will work together to implement these as working features.
+For each sub-task we assigned a difficulty rating ranging from simplest to most complex with XS, S, M, L , XL
+
+
+\subsubsection{Robot Building}
+
+Milestone 1: We will build two early versions of the robot base frame with basic moving functionality in all directions and with a colour sensor mounted for tracking a line of tape. The base should be sturdy and able to hold a light load. 
 
 Sub tasks:
 
@@ -156,18 +246,17 @@ Components
     Lift to raise robot(XL)
     Physical buttons (M)
     
-Milestone 3: Camera attached(M)
+Milestone 3: Camera attached and sending a signal(M)
 
-Milestone 4:
-
-Robot has all components and is sturdy enough to move between rooms and complete tasks according to it's timetable(L) 
+Milestone 4: Robot has all components attached and is sturdy enough to move between rooms and complete tasks according to it's timetable(L) 
 
 
-
-Robot coding
+\subsubsection{Robot Coding}
 
 Milestone 1: Robot can move around and follow a straight line of tape.
+
 Sub tasks: 
+
 Basic RC of robot
     Connecting software to motor controls using ROS and EV3 (S)
     Moving forward and backwards (S)
@@ -178,8 +267,6 @@ Robot Pathfinding system
     
 Testing
     Testing out the ROS programming of Turtlebot vs the Python programming of Lego mindstorms EV3 block to decide which is simplest and     most customisable to find the best platform solution on which to build our pathfinding algorithms (M)
-    
-.140 hours total. That's 25 hours per task, with 10 hours of testing per feature.
 
 Milestone Two: Robot can follow a line of tape with turns and send alerts to app 
 
@@ -190,7 +277,7 @@ Pathfinding
 Connectivity    
     Robot can send an alert to app when it's button is pressed(M) 
     
-Milestone 3: Independence
+Milestone 3: Robot can manouver through it's environment more independently and also recieve remote controls
     
 Pathfinding
     Can navigate between rooms on it's own without line of tape(XL)
@@ -208,28 +295,29 @@ Pathfinding
     Can navigate carefully around obstacles(XL)       
     
 App connectivity 
-    Robot can recieve Calendar timetable and database information from the app to plan it's route through the rooms and to know who needs which medications at what times(L)
+    Robot can recieve Calendar timetable and database information from the app to plan it's route through the rooms and to know who         needs which medications at what times(L)
     
-Robot App
+\subsubsection{App Development}
 
-Milestone 1:
+Milestone 1: Skeleton app
 
 Database
     Database server set up which contains patient name and basic information(S)
     Implement GDPR compliant design with ethical and security considerations (XL)
+    
 App
     Skeleton android app set up on a mobile device using Firebase(S)
     Updating database patient information through app(L)
     
-Milestone 2:
+Milestone 2: Basic robot connectivity
 
 App
-    Basic RC control of robot from app
+    Basic RC control of robot from app(S)
     Show alerts from pressing button on robot(M)
     Creating a few different UI designs(L)
     Testing UI designs on consumers with ethical approval(M)
     
-Milestone 3:
+Milestone 3: Sending and recieving complex information to and from robot
 
 App
     Recieving photos from robot's camera(XL)
@@ -239,7 +327,7 @@ Database
     Store additional information for patient, including their health conditions and medication timetable(M)
     Implement encryption security for this sensitive personal information(L)
 
-Milestone 4:
+Milestone 4: Final UI, features and full robot control
 
 App
     Shows GPS location of robot and alerts for if it is stolen(XL)
@@ -250,44 +338,40 @@ App
    
     
 
+%Each milestone should then be decomposed into a set of ``atomic'' tasks, taking no more than 20 hours each. Each task should be given a name, a one-sentence-long description, and an estimated time for completion.
 
 
+%You can summarize the tasks in a table, (for instance, table~\ref{tab:sample-table}, using the \verb+table+ environment).
 
-\subsection{Task decomposition} 
-Each milestone should then be decomposed into a set of ``atomic'' tasks, taking no more than 20 hours each. Each task should be given a name, a one-sentence-long description, and an estimated time for completion.
+%\begin{table*}[h]
+%\vskip 3mm
+%\begin{center}
+%\begin{small}
+%\begin{sc}
+%\begin{tabular}{lcccr}
+%\hline
+%\abovespace\belowspace
+%Task Name & Milestone  & Estimated time & Dependency &  Rough description \\
+%\hline
+%\abovespace
+%Task 1 & Milestone 1    & 0.5 Days & - & Description 1 \\
+%Task 2 & Milestone 1    & 1 Day  & Task 1 & Description 2 \\
+%Task 3 & Milestone 2    & 2 Days & Milestone 1 & Description 3 
+%\belowspace
+%\end{tabular}
+%\end{sc}
+%\end{small}
+%\caption{Task decomposition for the system}
+%\label{tab:sample-table}
+%\end{center}
+%\vskip -3mm
+%\end{table*}
 
+%The report must include a Gantt chart, which should clearly identify any dependencies between the tasks. You may find it useful to make a revised version of your plan/gantt chart at key points in the project, in discussion with the experts. 
 
-You can summarize the tasks in a table, (for instance, table~\ref{tab:sample-table}, using the \verb+table+ environment).
+%You can include the Gantt chart as a Latex figure (such as figure~\ref{fig:sample-fig}), use the \verb+\includegraphics+ environment to include an image (pdf, png, or jpg formats), ideally with informative labels added. 
 
-\begin{table*}[h]
-\vskip 3mm
-\begin{center}
-\begin{small}
-\begin{sc}
-\begin{tabular}{lcccr}
-\hline
-\abovespace\belowspace
-Task Name & Milestone  & Estimated time & Dependency &  Rough description \\
-\hline
-\abovespace
-Task 1 & Milestone 1    & 0.5 Days & - & Description 1 \\
-Task 2 & Milestone 1    & 1 Day  & Task 1 & Description 2 \\
-Task 3 & Milestone 2    & 2 Days & Milestone 1 & Description 3 
-\belowspace
-\end{tabular}
-\end{sc}
-\end{small}
-\caption{Task decomposition for the system}
-\label{tab:sample-table}
-\end{center}
-\vskip -3mm
-\end{table*}
-
-The report must include a Gantt chart, which should clearly identify any dependencies between the tasks. You may find it useful to make a revised version of your plan/gantt chart at key points in the project, in discussion with the experts. 
-
-You can include the Gantt chart as a Latex figure (such as figure~\ref{fig:sample-fig}), use the \verb+\includegraphics+ environment to include an image (pdf, png, or jpg formats), ideally with informative labels added. 
-
-To keep your folders clean, it is often a good idea to keep your images in a separate folder. In this example, we've put the figures in the \texttt{figs/} folder. To include images from different folders, give the relative path from this file. Example: \verb+\includegraphics{figs/image_filename}+.
+%To keep your folders clean, it is often a good idea to keep your images in a separate folder. In this example, we've put the figures in the \texttt{figs/} folder. To include images from different folders, give the relative path from this file. Example: \verb+\includegraphics{figs/image_filename}+.
 
 \begin{figure}[tb]
 \vskip 5mm
