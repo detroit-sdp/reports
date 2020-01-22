@@ -119,21 +119,23 @@ In this section you must provide a detailed plan of the tasks to be completed to
 For the first demo on February 5th we plan to present our robot base frame with basic movement and tracking functionality, as well as a skeleton android app.
 
 Robot sub goals:
+/begin{itemize}
+/item The base frame will be able to rotate on the spot to face a given direction.
+/item The chassis is sturdy enough to carry a light load, representing future components.
+/item The robot can move around freely by remote control.
+/item Attach a mounted colour sensor to track tape on the floor.  
+/end{itemize}
 
-The base frame will be able to rotate on the spot to face a given direction.
-The chassis is sturdy enough to carry a light load, representing future components.
-The robot can move around freely by remote control.
-Attach a mounted colour sensor to track tape on the floor.  
 
 Once these sub goals are achieved, our robot base frame will be able to reliably and precisely follow along a straight line path of tape. 
 
 App sub goals:
-
-Create a functioning android app which can run on a mobile device.
-Produce a Database which can store a patient's name and one of their health conditions.
-Implement GDPR features into the Database.
-Implement functionality in the App to create and edit patient information in the Database.
-
+/begin{itemize}
+/item Create a functioning android app which can run on a mobile device.
+/item Produce a Database which can store a patient's name and one of their health conditions.
+/item Implement GDPR features into the Database.
+/item Implement functionality in the App to create and edit patient information in the Database.
+/end{itemize}
 With these sub goals achieved, we can demonstrate updating the Database from the Android app.
 
 \subsubsection{Milestone 2}
@@ -141,55 +143,59 @@ With these sub goals achieved, we can demonstrate updating the Database from the
 For the second demo on February 26th we will showcase our robot with several new components and movement abilities, plus connectivity and interaction with the android app.  
 
 Movement sub goals:
-
-Program the robot to recognise turns in a tape path
-Implement a memory system that allows the robot to remember it's current state 
+/begin{itemize}
+/item Program the robot to recognise turns in a tape path
+/item Implement a memory system that allows the robot to remember it's current state 
+/end{itemize}
 
 With these new features, we will demonstrate the robot following along a bending line of tape on the floor, navigating around turns in the path.
 
 Component sub goals:
-
-Attach a robotic arm which can later be programmed to perform patient assisting tasks.
-Equip the base frame with a lift system, which can be used to raise the robot's height in order to interact with patients in hospital beds.
-Implement external buttons which can be pressed to send a signal.
-
+/begin{itemize}
+/item Attach a robotic arm which can later be programmed to perform patient assisting tasks.
+/item Equip the base frame with a lift system, which can be used to raise the robot's height in order to interact with patients in hospital beds.
+/item Implement external buttons which can be pressed to send a signal.
+/end{itemize}
 
 App sub goals:
-
-Accessible User Interface.
-Recieves alerts from the robot when it's button is pressed.
+/begin{itemize}
+/item Accessible User Interface.
+/item Recieves alerts from the robot when it's button is pressed.
+/end{itemize}
 
 \subsubsection{Milestone 3}
 
 On March 11th for the third demo we will present the robot with more freedom of movement as well as camera and app functionality.
 
 Camera sub goals:
-
-Mount a camera to the robot
-Send pictures from the camera to the app
+/begin{itemize}
+/item Mount a camera to the robot
+/item Send pictures from the camera to the app
+/end{itemize}
 
 With these goals achieved, we aim to demonstrate the robot taking an image and then sending it to the mobile app for verification.
 
 Movement sub goals:
-
-Implement functionality to move around between rooms without needing a line of tape to follow.
-
+/begin{itemize}
+/item Implement functionality to move around between rooms without needing a line of tape to follow.
+/end{itemize}
 App connectivity sub goals:
-
-Direct remote control of movement from the app.
-App provides arm remote control.
-The app will recieve photos from the robot and display them to the user for verification.
-
+/begin{itemize}
+/item Direct remote control of movement from the app.
+/item App provides arm remote control.
+/item The app will recieve photos from the robot and display them to the user for verification.
+/end{itemize}
 
 \subsubsection{Milestone 4}
 
 On the final demonstration on March 30th we will show our completed prototype with all components working together
 
 App sub goals:
-
-A timetable will be implemented, allowing the user to plan out which rooms should be visited at which times, to check up on the patients.
-GPS functionality will be provided, so that the robot can be tracked if it is stolen.
-Full remote control over the robot via the app.
+/begin{itemize}
+/item  A timetable will be implemented, allowing the user to plan out which rooms should be visited at which times, to check up on the patients.
+/item GPS functionality will be provided, so that the robot can be tracked if it is stolen.
+/item Full remote control over the robot via the app.
+/end{itemize}
 
 Robot behaviour sub goals:
 
@@ -211,22 +217,27 @@ Milestone 1: We will build two early versions of the robot base frame with basic
 Sub tasks:
 
 Movement Base Frame
-    Building two frames: One from Lego and one using TurtleBot (M)
-    
+/begin{itemize}
+/item Building two frames: One from Lego and one using TurtleBot (M)
+/end{itemize}
 Testing
-    Testing base frames of Lego vs Turtlebot (L)
-    Metrics: Battery life, turn radius, maximum load, speed
-    Also test for potential customisability
+/begin{itemize}
+/item Testing base frames of Lego vs Turtlebot (L)
+/item Metrics: Battery life, turn radius, maximum load, speed
+/item Also test for potential customisability
+/end{itemize}
     
 Colour sensor
     Attaching lego colour sensor underneath the base pointing towards tape on the ground, and wiring this to a lego EV3 brick for the       coding team to use in pathfinding (S)
     
 Milestone 2: Main robot components attached
 
-Components
-    Arm(S)
-    Lift to raise robot(XL)
-    Physical buttons (M)
+Components:
+/begin{itemize}
+/item Arm(S)
+/item Lift to raise robot(XL)
+/item Physical buttons (M)
+/end{itemize}
     
 Milestone 3: Camera attached and sending a signal(M)
 
@@ -239,85 +250,104 @@ Milestone 1: Robot can move around and follow a straight line of tape.
 
 Sub tasks: 
 
-Basic RC of robot
-    Connecting software to motor controls using ROS and EV3 (S)
-    Moving forward and backwards (S)
-    Rotating on the spot and turning to face a specified direction angle (M)
-    
-Robot Pathfinding system
-    Robot can recognise tape underneath it and follow the tape in a straight line (L)
-    
-Testing
-    Testing out the ROS programming of Turtlebot vs the Python programming of Lego mindstorms EV3 block to decide which is simplest and     most customisable to find the best platform solution on which to build our pathfinding algorithms (M)
+Basic RC of robot:
+/begin{itemize}
+/item Connecting software to motor controls using ROS and EV3 (S)
+/item Moving forward and backwards (S)
+/item Rotating on the spot and turning to face a specified direction angle (M)
+/end{itemize}
+Robot Pathfinding system:
+/begin{itemize}
+/item Robot can recognise tape underneath it and follow the tape in a straight line (L)
+/end{itemize}
+Testing:
+/begin{itemize}
+/item Testing out the ROS programming of Turtlebot vs the Python programming of Lego mindstorms EV3 block to decide which is simplest and most customisable to find the best platform solution on which to build our pathfinding algorithms (M)
+/end{itemize}
 
 Milestone Two: Robot can follow a line of tape with turns and send alerts to app 
 
 Pathfinding
-    Robot can follow the tape around turns (M)
-    Robot has a memory system that remembers it's current state of position on the line (XL)
-    
-Connectivity    
-    Robot can send an alert to app when it's button is pressed(M) 
-    
+/begin{itemize}
+/item Robot can follow the tape around turns (M)
+/item Robot has a memory system that remembers it's current state of position on the line (XL)
+/end{itemize}
+Connectivity:
+/begin{itemize}
+/item Robot can send an alert to app when it's button is pressed(M) 
+/end{itemize}
+
 Milestone 3: Robot can manouver through it's environment more independently and also recieve remote controls
     
-Pathfinding
-    Can navigate between rooms on it's own without line of tape(XL)
-    
-Connectivity 
-    Robot can recieve basic movement RC commands from app(L)
-    Robot arm can be operated to assist patients(XL)   
-   
+Pathfinding:
+/begin{itemize}
+/item Can navigate between rooms on it's own without line of tape(XL)
+/end{itemize}    
+Connectivity:
+/begin{itemize}
+/item Robot can recieve basic movement RC commands from app(L)
+/item Robot arm can be operated to assist patients(XL)   
+/end{itemize}
     
 Milestone 4: Final prototype
 
 Robot can follow it's timetable recieved from the app, travelling to rooms at given times and performing it's programmed tasks.
 
-Pathfinding
-    Can navigate carefully around obstacles(XL)       
-    
+Pathfinding:
+/begin{itemize}
+/item Can navigate carefully around obstacles(XL)       
+/end{itemize}
 App connectivity 
-    Robot can recieve Calendar timetable and database information from the app to plan it's route through the rooms and to know who         needs which medications at what times(L)
+/begin{itemize}
+/item Robot can recieve Calendar timetable and database information from the app to plan it's route through the rooms and to know who         needs which medications at what times(L)
+/end{itemize}
     
 \subsubsection{App Development}
 
 Milestone 1: Skeleton app
 
-Database
-    Database server set up which contains patient name and basic information(S)
-    Implement GDPR compliant design with ethical and security considerations (XL)
+Database:
+/begin{itemize}
+/item Database server set up which contains patient name and basic information(S)
+/item Implement GDPR compliant design with ethical and security considerations (XL)
+/end{itemize}
     
-App
-    Skeleton android app set up on a mobile device using Firebase(S)
-    Updating database patient information through app(L)
-    
+App:
+/begin{itemize}
+/item Skeleton android app set up on a mobile device using Firebase(S)
+/item Updating database patient information through app(L)
+/end{itemize}    
 Milestone 2: Basic robot connectivity
 
-App
-    Basic RC control of robot from app(S)
-    Show alerts from pressing button on robot(M)
-    Creating a few different UI designs(L)
-    Testing UI designs on consumers with ethical approval(M)
-    
+App:
+/begin{itemize}
+/item Basic RC control of robot from app(S)
+/item Show alerts from pressing button on robot(M)
+/item Creating a few different UI designs(L)
+/item Testing UI designs on consumers with ethical approval(M)
+/end{itemize}
 Milestone 3: Sending and recieving complex information to and from robot
 
-App
-    Recieving photos from robot's camera(XL)
-    Add calendar functionality for managing and updating a patient's medication timetable(M)
-
-Database
-    Store additional information for patient, including their health conditions and medication timetable(M)
-    Implement encryption security for this sensitive personal information(L)
-
+App:
+/begin{itemize}
+/item Recieving photos from robot's camera(XL)
+/item Add calendar functionality for managing and updating a patient's medication timetable(M)
+/end{itemize}
+Database:
+/begin{itemize}
+/item Store additional information for patient, including their health conditions and medication timetable(M)
+/item Implement encryption security for this sensitive personal information(L)
+/end{itemize}
 Milestone 4: Final UI, features and full robot control
 
-App
-    Shows GPS location of robot and alerts for if it is stolen(XL)
-    Final UI with easy to use sections(L)
-    App provides full RC control over the robot and it's components(M)
-    App conveys relevant information about the robot's location, activity and timetable for the day(L)
-    App allows user to plan a timetable for the robot's daily tasks(L)
-   
+App:
+/begin{itemize}
+/item Shows GPS location of robot and alerts for if it is stolen(XL)
+/item Final UI with easy to use sections(L)
+/item App provides full RC control over the robot and it's components(M)
+/item App conveys relevant information about the robot's location, activity and timetable for the day(L)
+/item App allows user to plan a timetable for the robot's daily tasks(L)
+/end{itemize}
     
 
 %Each milestone should then be decomposed into a set of ``atomic'' tasks, taking no more than 20 hours each. Each task should be given a name, a one-sentence-long description, and an estimated time for completion.
