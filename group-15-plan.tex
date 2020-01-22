@@ -134,7 +134,123 @@ From the user stories, you should extract the main technical subgoals, i.e., wha
 
 Robot Building
 
-Demo 1 Feb 5th: Create a basic moving 
+Milestone 1: Early version of the robot base frame built with basic moving functionality in all directions and with a colour sensor mounted underneath to track a line of tape to follow. The base should be sturdy and able to hold a medium load. This will take around 100 hours total. The breakdown of this time is: 20 hours of initial design, 40 hours of building, and 20 hours worth of testing.
+
+Sub tasks:
+
+Movement Base Frame
+    Building two frames: One from Lego and one using TurtleBot (M)
+    
+Testing
+    Testing base frames of Lego vs Turtlebot (L)
+    Metrics: Battery life, turn radius, maximum load, speed
+    Also test for potential customisability
+    
+Colour sensor
+    Attaching lego colour sensor underneath the base pointing towards tape on the ground, and wiring this to a lego EV3 brick for the       coding team to use in pathfinding (S)
+    
+Milestone 2: Main robot components attached
+
+Components
+    Arm(S)
+    Lift to raise robot(XL)
+    Physical buttons (M)
+    
+Milestone 3: Camera attached(M)
+
+Milestone 4:
+
+Robot has all components and is sturdy enough to move between rooms and complete tasks according to it's timetable(L) 
+
+
+
+Robot coding
+
+Milestone 1: Robot can move around and follow a straight line of tape.
+Sub tasks: 
+Basic RC of robot
+    Connecting software to motor controls using ROS and EV3 (S)
+    Moving forward and backwards (S)
+    Rotating on the spot and turning to face a specified direction angle (M)
+    
+Robot Pathfinding system
+    Robot can recognise tape underneath it and follow the tape in a straight line (L)
+    
+Testing
+    Testing out the ROS programming of Turtlebot vs the Python programming of Lego mindstorms EV3 block to decide which is simplest and     most customisable to find the best platform solution on which to build our pathfinding algorithms (M)
+    
+.140 hours total. That's 25 hours per task, with 10 hours of testing per feature.
+
+Milestone Two: Robot can follow a line of tape with turns and send alerts to app 
+
+Pathfinding
+    Robot can follow the tape around turns (M)
+    Robot has a memory system that remembers it's current state of position on the line (XL)
+    
+Connectivity    
+    Robot can send an alert to app when it's button is pressed(M) 
+    
+Milestone 3: Independence
+    
+Pathfinding
+    Can navigate between rooms on it's own without line of tape(XL)
+    
+Connectivity 
+    Robot can recieve basic movement RC commands from app(L)
+    Robot arm can be operated to assist patients(XL)   
+   
+    
+Milestone 4: Final prototype
+
+Robot can follow it's timetable recieved from the app, travelling to rooms at given times and performing it's programmed tasks.
+
+Pathfinding
+    Can navigate carefully around obstacles(XL)       
+    
+App connectivity 
+    Robot can recieve Calendar timetable and database information from the app to plan it's route through the rooms and to know who needs which medications at what times(L)
+    
+Robot App
+
+Milestone 1:
+
+Database
+    Database server set up which contains patient name and basic information(S)
+    Implement GDPR compliant design with ethical and security considerations (XL)
+App
+    Skeleton android app set up on a mobile device using Firebase(S)
+    Updating database patient information through app(L)
+    
+Milestone 2:
+
+App
+    Basic RC control of robot from app
+    Show alerts from pressing button on robot(M)
+    Creating a few different UI designs(L)
+    Testing UI designs on consumers with ethical approval(M)
+    
+Milestone 3:
+
+App
+    Recieving photos from robot's camera(XL)
+    Add calendar functionality for managing and updating a patient's medication timetable(M)
+
+Database
+    Store additional information for patient, including their health conditions and medication timetable(M)
+    Implement encryption security for this sensitive personal information(L)
+
+Milestone 4:
+
+App
+    Shows GPS location of robot and alerts for if it is stolen(XL)
+    Final UI with easy to use sections(L)
+    App provides full RC control over the robot and it's components(M)
+    App conveys relevant information about the robot's location, activity and timetable for the day(L)
+    App allows user to plan a timetable for the robot's daily tasks(L)
+   
+    
+
+
 
 
 \subsection{Task decomposition} 
@@ -227,21 +343,9 @@ The team will work as a unit at every stage in this with daily subtasks delegate
 
 \underline{Robot coding}
 
-Our first milestone is to have the robot move around and follow a tape line.
-Sub tasks: 
-Basic RC of robot
-    Connecting software to motor controls using ROS
-    Moving forward and backwards
-    Rotating on the spot and turning to face a specified direction angle
-    
-Robot Pathfinding system
-    Internal memory to keep track of the robot's state 
-    
-    
 
-.140 hours total. That's 25 hours per task, with 10 hours of testing per feature.
 
-Milestone two is to have the robot moving along the line and some light patient interaction. This will take another 140 hours. This will be 100 hours of development on the line following, with 20 hours of testing on this feature, and then 20 hours in the initial development of some basic patient interaction.
+This will take another 140 hours. This will be 100 hours of development on the line following, with 20 hours of testing on this feature, and then 20 hours in the initial development of some basic patient interaction.
 
 The basic connection with the app and the cup holder extension will take 100 hours: 20 hours in the connection, 60 on the holder extension and 20 of testing with the majority of the testing on this phase concentrated on the cup holder extension.
 
