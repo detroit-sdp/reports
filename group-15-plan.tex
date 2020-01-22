@@ -132,6 +132,10 @@ In this section you must provide a detailed plan of the tasks to be completed to
 \subsection{Milestones} 
 From the user stories, you should extract the main technical subgoals, i.e., what you need to accomplish to get to the desired final result. For each subgoal you should provide an explicit milestone that states what you should have achieved, by what date, and what evidence you will present to show you have achieved it (e.g. a demonstration of the feature to the experts).
 
+Robot Building
+
+Demo 1 Feb 5th: Create a basic moving 
+
 
 \subsection{Task decomposition} 
 Each milestone should then be decomposed into a set of ``atomic'' tasks, taking no more than 20 hours each. Each task should be given a name, a one-sentence-long description, and an estimated time for completion.
@@ -187,7 +191,12 @@ The 200 hours per member will include the following for every member: {\bf at le
 
 \underline{Robot building} 
 
-The first milestone is to have an early version bot built with basic moving functions. This will take around 100 hours. The breakdown of this time is: 20 hours of initial design, 40 hours of building, and 20 hours worth of testing.
+Our first milestone is to have an early version of the robot base frame built with basic moving functionality in all directions and with a mounted underneath camera to track a pathfinding line of tape. The base should be sturdy and able to hold a medium load. This will take around 100 hours total. The breakdown of this time is: 20 hours of initial design, 40 hours of building, and 20 hours worth of testing.
+
+Sub tasks:
+
+Movement Base Frame
+    
 
 The second milestone will take around 40 hours of design, 100 hours of building, and 40 hours of testing. This should be plenty of time to have the final robot designed and ready for milestone 3.
 
@@ -199,7 +208,19 @@ The team will work as a unit at every stage in this with daily subtasks delegate
 
 \underline{Robot coding}
 
-The first milestone of having the robot move, turn, recognise tape, and begin movement along the tape will take around 140 hours. That's 25 hours per task, with 10 hours of testing per feature.
+Our first milestone is to have the robot move around and follow a tape line.
+Sub tasks: 
+Basic RC of robot
+    Connecting software to motor controls using ROS
+    Moving forward and backwards
+    Rotating on the spot and turning to face a specified direction angle
+    
+Robot Pathfinding system
+    Internal memory to keep track of the robot's state 
+    
+    
+
+.140 hours total. That's 25 hours per task, with 10 hours of testing per feature.
 
 Milestone two is to have the robot moving along the line and some light patient interaction. This will take another 140 hours. This will be 100 hours of development on the line following, with 20 hours of testing on this feature, and then 20 hours in the initial development of some basic patient interaction.
 
