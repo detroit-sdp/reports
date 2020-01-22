@@ -186,17 +186,12 @@ To keep your folders clean, it is often a good idea to keep your images in a sep
 
 \subsection{Resource distribution}
 
-The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 500 hours per team.
+The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 500 hours per team. 
 
 
 \underline{Robot building} 
 
-Our first milestone is to have an early version of the robot base frame built with basic moving functionality in all directions and with a mounted underneath camera to track a pathfinding line of tape. The base should be sturdy and able to hold a medium load. This will take around 100 hours total. The breakdown of this time is: 20 hours of initial design, 40 hours of building, and 20 hours worth of testing.
-
-Sub tasks:
-
-Movement Base Frame
-    
+Our first milestone is to have an early version of the robot base frame built with basic moving functionality in all directions and with a mounted underneath camera to track a pathfinding line of tape. The base should be sturdy and able to hold a medium load. This will take around 100 hours total. The breakdown of this time is: 20 hours of initial design, 40 hours of building, and 20 hours worth of testing.  
 
 The second milestone will take around 40 hours of design, 100 hours of building, and 40 hours of testing. This should be plenty of time to have the final robot designed and ready for milestone 3.
 
@@ -205,6 +200,30 @@ The third milestone will take around 40 hours of designing improvements for the 
 The fourth and final milestone will have all 120 hours dedicated to testing and troubleshooting. The largest amount of time has been allocated to this milestone as it is without a doubt the most critical milestone in the development of the product.
 
 The team will work as a unit at every stage in this with daily subtasks delegated as needed. They will be keeping in close contact with the robot software team and will likely spend a lot of this time working together.
+
+\begin{table*}[]
+  \begin{center}
+  \begin{small}
+  \begin{tabular}{|c|l|l|l|c|}
+    \hline
+    {\bf Milestone} & {\bf Tasks} & {\bf Equipment} & {\bf Skills} & {\bf Est. Hours} \\ \hline
+    1               & Build Lego bot & Lego & Lego building, Lego designing & 25 \\ \cline{2-5}
+                    & Build Turtlebot & Turtlebot &  & 25 \\ \cline{2-5}
+                    & Test and evaluate the two & - & Ability to evaluate from different metrics & 50 \\ \hline
+    2               & Install arm & Turtlebot arm/Lego arm & Design Lego arm & 80 \\ \cline{2-5}
+                    & Design and build scissor lift & Lego to build lift & Lego design/build & 60 \\ \cline{2-5}
+                    & Design and build controls & Electronic components & Circuitry & 60 \\ \hline
+    3               & Integrate camera to send to app & Camera, RasPi & Interfacing cam with software & 70 \\ \cline{2-5}
+                    & Design 3D printed buttons & 3D print design tools & Ability to use said tools & 30 \\ \cline{2-5}
+                    & Print and implement buttons & 3D printer & - & 20 \\ \hline
+    4               & Tidy up of the aesthetic & - & Design, getting feedback & 50 \\ \cline{2-5}
+                    & Maintainence & - & - & 30 \\ \hline
+                    &                           &  & {\bf Total} & 500 \\ \hline
+  \end{tabular}
+  \end{small}
+  \caption{{\bf Robot building team} resource distribution. Each milestone's deadline is the corresponding demo date.}
+  \end{center}
+\end{table*}
 
 \underline{Robot coding}
 
@@ -228,6 +247,7 @@ The basic connection with the app and the cup holder extension will take 100 hou
 
 The final 100 hours will be used for the final milestone. 75 of these hours will be on developing the robot path features to work with the app. 25 hours for testing.
 
+
 \underline{App}
 
 The basic UI design and database setup for milestone one will take around 120 hours. 60 hours of UI design, 30 hours of database setup, and 30 hours to test these two aspects of the app.
@@ -238,34 +258,28 @@ The calendar, alarm, and robot photo features will take another 180 hours. The p
 
 Polishing up the UI and building potential extensions to the app will be allocated the final 100 hours. This is the point in the development that can be trimmed down if there is more time required for earlier milestones.
 
-\begin{table}[]
-  \begin{tabular}{|l|l|l|}
+\begin{table*}[]
+  \begin{center}
+  \begin{small}
+  \begin{tabular}{|c|l|l|l|c|}
     \hline
-    {\bf Team}           & {\bf Member}& {\bf Main skills} \\ \hline
-    Project manager      & Michael     & Project management \\ \hline
-                         & Jakub       & \\ \cline{2-3}
-    Robot building       & Luukas      & \\ \cline{2-3}
-                         & Rebecca     & \\ \hline
-                         & Ben         & ML/general coding\\ \cline{2-3}
-    Robot coding         & Errikos     & Ros/Vis \\ \cline{2-3}
-                         & Wojtek      & Ros/Vis \\ \hline
-                         & Theo        & \\ \cline{2-3}
-    App                  & Yuchen      & \\ \cline{2-3}
-                         & Ching Ling  & \\ \hline
+    {\bf Milestone} & {\bf Tasks} & {\bf Equipment} & {\bf Skills} & {\bf Est. Hours} \\ \hline
+    1               & Set up app UI & Emulator, UI testing permission & UI design, Android & 80 \\ \cline{2-5}
+                    & Set up database system & Firebase & SQL(?) & 30 \\ \cline{2-5}
+                    & Interface the database with the app & - & - & 40 \\ \hline
+    2               & Set up robot control UI & - & - & 50 \\ \cline{2-5}
+                    & Test UI & More UI testing required & - & 20 \\ \cline{2-5}
+                    & Have app show alerts from bot & Information from robot &  & 50 \\ \hline
+    3               & Implement calendar system & - &  &  \\ \cline{2-5}
+                    & Add wake up alarm feature & - &  &  \\ \cline{2-5}
+                    & Receive photo from bot & Access to bot &  &  \\ \hline
+    4               & Maintainence &  &  &  \\ \hline
+                    &                           &  & {\bf Total} & 500 \\ \hline
   \end{tabular}
-  \caption{}
-\end{table}
-
-\begin{table}[]
-  \begin{tabular}{|l|l|}
-    \hline
-    {\bf Team}           & {\bf Equipment} \\ \hline
-    Robot building       & Turtlebot, Lego, sensors, 3D printer\\ \hline
-    Robot coding         & \\ \hline
-    App                  & \\ \hline
-  \end{tabular}
-  \caption{}
-\end{table}
+  \end{small}
+  \caption{{\bf App team} resource distribution. Each milestone's deadline is the corresponding demo date.}
+  \end{center}
+\end{table*}
 
 \subsection{Risk assessment} 
 
