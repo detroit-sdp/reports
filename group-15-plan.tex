@@ -302,20 +302,21 @@ To keep your folders clean, it is often a good idea to keep your images in a sep
 
 \subsection{Resource distribution}
 
-The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 500 hours per team. 
-
-
-\underline{Robot building} 
-
-Our first milestone is to have an early version of the robot base frame built with basic moving functionality in all directions and with a mounted underneath camera to track a pathfinding line of tape. The base should be sturdy and able to hold a medium load. This will take around 100 hours total. The breakdown of this time is: 20 hours of initial design, 40 hours of building, and 20 hours worth of testing.  
-
-The second milestone will take around 40 hours of design, 100 hours of building, and 40 hours of testing. This should be plenty of time to have the final robot designed and ready for milestone 3.
-
-The third milestone will take around 40 hours of designing improvements for the aesthetic and how to add the camera/screen, 20 hours worth of 3D printer work, 20 hours of implementing the improvements, and another 20 hours on testing.
-
-The fourth and final milestone will have all 120 hours dedicated to testing and troubleshooting. The largest amount of time has been allocated to this milestone as it is without a doubt the most critical milestone in the development of the product.
-
-The team will work as a unit at every stage in this with daily subtasks delegated as needed. They will be keeping in close contact with the robot software team and will likely spend a lot of this time working together.
+The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 500 hours per team. Each milestone has the same deadline across the teams - the date of the corresponding demo. They are shown in Table 2. Tables 3, 4, and 5 show the individual resource distribution for each of our three teams.
+\begin{table}[]
+  \begin{center}
+  \begin{tabular}{ll}
+    \hline
+    Demo & Date   \\
+    \hline
+    1 & Feb 5 \\
+    2 & Feb 26 \\
+    3 & Mar 11 \\
+    4 & Apr 1\\ \hline
+  \end{tabular}
+  \end{center}
+  \caption{Demo dates.}
+\end{table}
 
 \begin{table*}[]
   \begin{center}
@@ -337,30 +338,9 @@ The team will work as a unit at every stage in this with daily subtasks delegate
                     &                           &  & {\bf Total} & 500 \\ \hline
   \end{tabular}
   \end{small}
-  \caption{{\bf Robot building team} resource distribution. Each milestone's deadline is the corresponding demo date.}
+  \caption{{\bf Robot building team} resource distribution.}
   \end{center}
 \end{table*}
-
-\underline{Robot coding}
-
-
-
-This will take another 140 hours. This will be 100 hours of development on the line following, with 20 hours of testing on this feature, and then 20 hours in the initial development of some basic patient interaction.
-
-The basic connection with the app and the cup holder extension will take 100 hours: 20 hours in the connection, 60 on the holder extension and 20 of testing with the majority of the testing on this phase concentrated on the cup holder extension.
-
-The final 100 hours will be used for the final milestone. 75 of these hours will be on developing the robot path features to work with the app. 25 hours for testing.
-
-
-\underline{App}
-
-The basic UI design and database setup for milestone one will take around 120 hours. 60 hours of UI design, 30 hours of database setup, and 30 hours to test these two aspects of the app.
-
-Improving the UI and establishing a secure connection with the robot will take a further 100 hours with 60 of these dedicated to the security of the connection, 20 to UI improvement and 20 to test all improvements.
-
-The calendar, alarm, and robot photo features will take another 180 hours. The photo feature will take 70 hours to build and test, the alarm will take 50 to build and test, and the calendar will take 60. The bulk of the work on the app will take place on these 3 complex features.
-
-Polishing up the UI and building potential extensions to the app will be allocated the final 100 hours. This is the point in the development that can be trimmed down if there is more time required for earlier milestones.
 
 \begin{table*}[]
   \begin{center}
@@ -368,36 +348,70 @@ Polishing up the UI and building potential extensions to the app will be allocat
   \begin{tabular}{|c|l|l|l|c|}
     \hline
     {\bf Milestone} & {\bf Tasks} & {\bf Equipment} & {\bf Skills} & {\bf Est. Hours} \\ \hline
-    1               & Set up app UI & Emulator, UI testing permission & UI design, Android & 80 \\ \cline{2-5}
-                    & Set up database system & Firebase & SQL(?) & 30 \\ \cline{2-5}
-                    & Interface the database with the app & - & - & 40 \\ \hline
-    2               & Set up robot control UI & - & - & 50 \\ \cline{2-5}
-                    & Test UI & More UI testing required & - & 20 \\ \cline{2-5}
-                    & Have app show alerts from bot & Information from robot &  & 50 \\ \hline
-    3               & Implement calendar system & - &  &  \\ \cline{2-5}
-                    & Add wake up alarm feature & - &  &  \\ \cline{2-5}
-                    & Receive photo from bot & Access to bot &  &  \\ \hline
-    4               & Maintainence &  &  &  \\ \hline
+    1               & Get robot moving & Access to robot & Ros (Turtlebot, Python (motors) & 60 \\ \cline{2-5}
+                    & Get working with sensor input & Sensors & - & 25 \\ \hline
+    2               & Using sensor input to stop & Sensor readings & Analysis & 120 \\ \cline{2-5}
+                    & Using sensor input to detect environment & - & Real-time sensor analysis & 115 \\ \hline
+    3               & Have lift working & - &  & 40 \\ \hline
+    4               & Bot moves around to user defined paths/input &  &  & 140 \\ \hline
+                    &  &  & {\bf Total} & 500 \\ \hline
+  \end{tabular}
+  \end{small}
+  \caption{{\bf Robot coding team} resource distribution.}
+  \end{center}
+\end{table*}
+
+\begin{table*}[]
+  \begin{center}
+  \begin{small}
+  \begin{tabular}{|c|l|l|l|c|}
+    \hline
+    {\bf Milestone} & {\bf Tasks} & {\bf Equipment} & {\bf Skills} & {\bf Est. Hours} \\ \hline
+    1               & Set up app UI & Firebase & UI design, Android & 70 \\ \cline{2-5}
+                    & Set up database system & Database management server & SQL(?) & 20 \\ \cline{2-5}
+                    & Interface the database with the app & - & - & 30 \\ \hline
+    2               & Set up robot control UI & - & - & 40 \\ \cline{2-5}
+                    & Test UI & More UI testing required & - & 10 \\ \cline{2-5}
+                    & Have app show alerts from bot & Information from robot & - & 40 \\ \hline
+    3               & Implement calendar system & - & - & 40 \\ \cline{2-5}
+                    & Add wake up alarm feature & - & - & 30 \\ \cline{2-5}
+                    & Encryption of personal data & - & Network security & 60 \\ \cline{2-5}
+                    & Receive photo from bot & Access to bot & - & 70 \\ \hline
+    4               & App shows location of bot & Information from GPS tracker & - & 30 \\ \cline{2-5}
+                    & App shows timetable/activity of bot & - & - & 30 \\ \cline{2-5}
+                    & Final design of UI & Memory to store information & - & 30 \\ \hline
                     &                           &  & {\bf Total} & 500 \\ \hline
   \end{tabular}
   \end{small}
-  \caption{{\bf App team} resource distribution. Each milestone's deadline is the corresponding demo date.}
+  \caption{{\bf App team} resource distribution.}
   \end{center}
 \end{table*}
+
 
 \subsection{Risk assessment} 
 
 \underline{Robot building}
 
-One of the risks with the hardware that we identified is the fact that it could be stolen. We addressed this by including an alarm system that will sound if the robot is removed from the area it is expected to be in at any given moment.
+In terms of milestone 1, the main risk would be that the bot turned out to be infeasible as a design. We have decided to develop 2 prototypes as a contingency plan for this exact issue. This allows us to compare two designs and ultimately pick the one which we find to be a better choice.
+
+For milestone 2, our team are planning to design and build a scissor lift from Lego. This should be fairly risk free. We also plan to build a hardware controller for the bot. At least one of these should be doable and whichever is not completed for this milestone can be worked on during the period of maintainence running up to the fourth demo.
+
+This 30 hours of maintainence between milestone 3 and 4 will actually prevent mostly any risk that should arise with individual pieces of hardware, as it can be eaten into by the hardware team if need be.
 
 \underline{Robot coding}
 
-The main risk to the coding of the robots software is that certain features are not implemented on time. The safeguard to this is that the bulk of the teams time will be used on the essential features with the less important features allocated less time.
+Having the robot move without the aid of a line on the ground is definitely a risk the robot coding team will have to keep in mind. It could prove to be more difficult than anticipated. The fact that sensors are not always 100\% accurate means that special care will have to be taken in the implementation of this.
+
+Failure of a sensor could be catastrophic in a project where they are the centerpiece of the functionality. It is therefore of vital importance that we constantly check that they are all functioning as they should be.
+
+The algorithms used by the robot will also be a challenge facing our robot coding team. We will make use of Traiko's help at this stage of development if the task proves to be more difficult than we anticipate.
 
 \underline{App}
 
-The risk with the app is that the connection is not secure and will be open for attack. Special effort will be put in to this aspect of the product as discussed in Section 2.3.
+The use of Firebase should alleviate most of the risk in terms of the building of the app as it allows an easy way to get things off the ground. There are extensive resources to aid our developers in their progress should they hit a brick wall.
+
+The UI will have to be usable for novice users and one of the risks is that this is not the case. The app team will use user testing in order to make sure they are putting out a usable product.
+
 
 \section{Group organisation}
 \begin{table}[]
