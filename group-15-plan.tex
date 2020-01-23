@@ -458,26 +458,25 @@ The 200 hours per member will include the following for every member: {\bf at le
 
 \subsubsection{Robot building}
 
-In terms of milestone 1, the main risk would be that the robot design is not able to fulfill expected tasks (particularly carrying loads). We have decided to develop 2 prototypes as a contingency plan for this exact issue. This allows us to compare two designs and ultimately pick the one which we find to be a better choice. 25 hours for the design and building for each robot may seem like a large amount of time when one of them will be discarded. However, ultimately this counters the many more hours that we would have to spend later down the line should we find that our bot was infeasible. Having to redevelop the bot as well as the software and some features in our app would require far more than 25 hours.
+In terms of milestone 1, the main risk would be that the robot design is not able to fulfill expected tasks (particularly carrying loads). We have decided to develop 2 prototypes as a contingency plan for this exact issue. This allows us to compare two designs and ultimately pick the one which we find to be a better choice. 25 hours for the design and building for each robot may seem like a large amount of time when one of them will be discarded. However, ultimately this is levelled against the many more hours that we would have to spend further down the line should we find that our bot was impractical. Having to redevelop the bot as well as the software and some features in our app would require far more than 50 hours between our 3 teams.
 
-For milestone 2, our team are planning to design and build a scissor lift from Lego. This should be fairly risk free. We also plan to build a hardware controller for the bot. At least one of these should be achievable and whichever is not completed for this milestone can be worked on during the period of maintenance running up to the fourth demo.
+Another concern we have as a group is that we have underestimated the size of the tasks we have scheduled for each milestone. In the even that this were to happen, the plan for our hardware team to work linearly on multiple features per demo is our contingency plan. We believe that one of these features - if not more - is achievable in a presentable manner for each of the demos.
 
-This 30 hours of maintenance between milestone 3 and 4 will actually prevent mostly any risk that should arise with individual pieces of hardware, as it can be eaten into by the hardware team if need be.
+The 80 hours of 'maintainence' gives the hardware a large amount of time to eat into for any features they find to be more challenging than anticipated whilst also allowing them time for actual maintainence of features that the robot programming team may encounter issues with.
 
 \subsubsection{Robot programming}
 
-Having the robot move without the aid of a line on the ground is definitely a risk the robot programming team will have to keep in mind. It could prove to be more difficult than anticipated. The fact that sensors are not always 100\% accurate means that special care will have to be taken in the implementation of this. We will reduce this risk by re-planning regularly in software to make sure tolerances do not grow too much over time. 
+The failure of the sensors in a bot designed for use in nursing homes and also hospital settings is a major risk in such a project. In order to minimise this particular risk we plan to make use of both the overhead cameras in the demo space, as well as sensors on the robot. In a real world setting the overhead cameras would be mounted in corridors and communal areas which are highly congested with humans, but in which there is less concern for privacy. The sensors will be made use of and in fact very handy in these areas, but moreso in those such as patient rooms where the issue of patient privacy is of the highest priority.
 
-Failure of a sensor could be catastrophic in a project where they are the centerpiece of the functionality. It is therefore of vital importance that we constantly check that they are all functioning as they should be.
-
-The algorithms used by the robot will also be a challenge facing our robot programming team. If implementing these turns out to be more difficult than we anticipate we will refer to advice from the expert consultant in electronics and software.
+The overhead cameras should, in an ideal world, be able to track the bot at all times, but the aim of the on board sensors is to step in should the cameras lose track of the bot or in the case of a sudden change in the environment.
 
 \subsubsection{App}
 
-The use of Firebase should alleviate most of the risk in terms of the building of the app as it allows an easy way to get things off the ground. There are extensive resources to aid our developers in their progress should they hit a brick wall.
+A risk the app team have considered is that the end product is not usable for novice users. The app team will embark on a large amount of UI testing, some 50 hours, before the final demo in order to make sure that the app is of a standard someone in our target industry would be comfortable with.
 
-The UI will have to be usable for novice users and one of the risks is that this is not the case. The app team will use user testing in order to make sure they are putting out a usable product.
+Concerns of confidentiality are ones which we take with the utmost seriousness, especially given the data we will be processing could be classed as sensitive data under GDPR. It is therefore a key aim of the app team to ensure that the connection between app and robot is encrypted. We plan to use HTTPS connections between the two to fulfil this aim.
 
+The app team will be using Firebase the facilitate the database system behind the app. This is a relatively safe and reliable choice, and comes with very little risk. Using Kotlin could potentially be seen as a risk. However, given it is fully interoperable with Java and is becoming increasingly popular for Android development, our team have decided to build the app with it. The transition is extremely straighforward and therefore we do not consider this a risk, even for a developer who may have little experience in using it.
 
 \section{Group organisation}
 \begin{table}[]
