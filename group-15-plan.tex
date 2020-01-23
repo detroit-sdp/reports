@@ -12,7 +12,7 @@
 \setGroupNumber{15}
 \setGroupName{Detroit}
 \setProductName{Tadashi}
-\setLogoFileName{figs/logo.png}
+\setLogoFileName{figs/logo-small.png}
 
 \begin{document} 
 
@@ -133,11 +133,22 @@ We describe the following user stories to exemplify the functionality of the sys
 By the final demo, the robot will have the following key functionality:
 \begin{itemize}
 \item Free movement of the robot to patient rooms;
-\item Steady movement of a mechanical arm along a horizontal plane, allowing for delivery of food and water;
-\item Steady movement of a lift up and down, allowing for the robot to be level with the patient;
+\item Steady movement of a mechanical arm along a horizontal plane, allowing for delivery of food and water: the arm will have a bucket or container attached to it to allow for transportation without needing to consider gripping mechanisms;
+\item Steady movement of a lift up and down, allowing for the robot to be level with the patient (figure~\ref{fig:lift});
 \item Ability to move to a room on request and on a timetable;
 \item Ability to send and receive messages to and from the app. 
 \end{itemize}
+
+
+\begin{figure}[tb]
+\vskip 5mm
+\begin{center}
+\centerline{\includegraphics[width=\columnwidth]{figs/lift}}
+\caption{Proposed scissor lift using Lego, allowing the robot to adjust its height to the patient. Image source: \href{https://education.lego.com/en-us/lessons/pneumatics/scissor-lift}{Lego Education}}
+\label{fig:lift}
+\end{center}
+\vskip -5mm
+\end{figure}
 
 Likewise, the app will have the following functionality to support the robot:
 \begin{itemize}
