@@ -29,7 +29,7 @@
 
 \begin{abstract}
   We propose an assistive healthcare robot, {\it Tadashi}, to automate simple tasks within a care home or supported living environment and allow nurses to spend more time caring for their patients.
-  {\it Tadashi} will automate three key tasks in the nurse's day. Firstly, waking a patient up at a time specified by the nurse, by coming into their room and speaking to them. Secondly, bringing water and food to patients at specified times. Thirdly, checking on the welfare of the patient while the nurse is occupied elsewhere, by coming to their room and asking the patient if they are okay and if they need a nurse to attend to them. 
+  {\it Tadashi} will automate three key tasks in the nurse's day. Firstly, waking a patient up at a time specified by the nurse, by coming into their room and speaking to them. Secondly, bringing water and food to patients at specified times or on request. Thirdly, checking on the welfare of the patient while the nurse is occupied elsewhere, by coming to their room and asking the patient if they are okay and if they need a nurse to attend to them. 
 \end{abstract} 
 
 \section{Goal description}
@@ -49,9 +49,11 @@ With this many patients to take care of, nurses struggle to get the time they ne
 
 Equally, a 2013 survey showed that nurses spend almost 1/5 of their day on administrative tasks; and only 20\% are satisfied with how they spend their time --- preferring to spend less time on admin and more time on direct care \cite{rcnpol}.
 
-By automating some tasks using Tadashi, nurses can decrease the amount of time they spend on administrative tasks, and increase the amount of time they spend caring for patients. 
+By automating some tasks using Tadashi, nurses can decrease the amount of time they spend on administrative tasks, and increase the amount of time they spend caring for patients.
 
 With elderly populations in particular, hydration and nutrition presents a pressing concern \cite{hydrate}. A Care Quality Commission inspection in 2011 found that three out of 12 NHS trusts inspected failed to meet standards required by law in meeting patient needs regarding nutrition and hydration \cite{cqc}. A 2018 report from the Office for National Statistics found that more than 600 care home residents died suffering from malnutrition or dehydration between 2013 and 2017 \cite{ons}.
+
+Tadashi will allow for delivery of water or food to patients at a specified time --- or patients to request these deliveries themselves --- in order to ensure patients have access to regular food and water. Aditionally, by tracking these requests we will provide a dashboard for nurses to view when patients last had food or water: this provides added value to nurses along with reducing their workload through automation. 
 
 The problems mentioned above will only get worse in the future. It is estimated that by 2035, up to 190,000 more people aged 65 years or above will require some level of care, and increase of 86\% from today \cite{lancet}. Meanwhile, ongoing staffing issues in the NHS mean that in 10 years time the NHS will have a shortfall of 108,000 nurses \cite{nuffield}. This combination of factors will drive demand for innovative solutions --- including assistive technology like Tadashi.
 
@@ -67,11 +69,12 @@ The key takeaways from this work that we will take into account in our project:
 \end{itemize}
 
 \subsection{High-level description} 
-We can describe three key user stories to exemplify the functionality of our solution:
+We describe the following user stories to exemplify the functionality of the system: 
 \begin{enumerate}
-\item Waking the patient
-\item Bringing food or water to the patient
-\item Checking on the patient
+\item Tadashi waking the patient
+\item Tadashi bringing food or water to the patient
+\item Tadashi checking on the patient
+\item Nurse viewing patient nutrition / hydration on an app
 \end{enumerate}
 
 \subsubsection{Waking the patient}
@@ -87,12 +90,16 @@ We can describe three key user stories to exemplify the functionality of our sol
 
 \subsubsection{Bringing food or water to the patient}
 \begin{enumerate}
-\item The nurse specifies in the app for each patient:
+\item Either the nurse or the patient specifies a need for food or water:
   \begin{itemize}
-  \item The intervals at which they should be brought water (or another drink).
-  \item The times at which they should be brought food.
+  \item The nurse specifies in the app for each patient:
+    \begin{itemize}
+    \item The intervals at which they should be brought water (or another drink).
+    \item The times at which they should be brought food.
+    \end{itemize}
+  \item The patient presses a button on their controller to request Tadashi brings them food or water. 
   \end{itemize}
-\item At the specified time, Tadashi navigates to the pick-up point for food or water.
+\item Tadashi navigates to the pick-up point for food or water.
 \item Tadashi moves to the patient's room and passes over the food or water using its arm.
   \begin{itemize}
   \item If the patient is at a different height to the robot, Tadashi will increase his height using a lift to get to an appropriate height for the patient and deliver food or water without spillage. 
@@ -109,11 +116,20 @@ We can describe three key user stories to exemplify the functionality of our sol
   \begin{enumerate}
   \item A button is accessible to the patient to press to reply yes or no.
   \item If the user presses the okay button, Tadashi informs the nurse through the app. 
-  \item If the user presses the not okay button or does not press a button at all, Tadashi informs the nurse through the app.
+  \item If the user presses the not okay button, Tadashi informs the nurse through the app with an urgent alert.
+    \begin{itemize}
+    \item The patient can alternatively, when Tadashi is not present, request the nurse's help by pressing a dedicated button on their controller. 
+    \end{itemize}
   \end{enumerate}
 \item Tadashi returns to his starting spot to await the next command. 
 \end{enumerate}
 
+
+\subsubsection{Checking patient nutrition and hydration}
+\begin{enumerate}
+\item The nurse opens the app to `dashboard mode'.
+\item The app displays for each patient a history of their nutrition and hydration deliveries. 
+\end{enumerate}
 \section{Task planning}
 
 \subsection{Milestones} 
@@ -206,36 +222,31 @@ For each sub-task we have assigned a difficulty rating ranging from simplest to 
 
 \subsubsection{Robot Building}
 
-{\bf Milestone 1}: We will build two early versions of the robot base frame with basic moving functionality in all directions and with a colour sensor mounted for tracking a line of tape. The base should be sturdy and able to hold a light load. 
+{\bf Milestone 1}: We will build two early versions of the robot base frame with basic moving functionality (forward movement and turning). The base will be steady enough to hold a light load. 
 
 Sub tasks:
 
-Movement Base Frame
+Robot chassis
 \begin{itemize}
-\item Building two frames: one from Lego and one using TurtleBot (M)
+\item Build two frames: one from Lego and one using TurtleBot (M)
 \end{itemize}
 Testing
 \begin{itemize}
-\item Testing base frames of Lego vs Turtlebot (L)
-\item Metrics: Battery life, turn radius, maximum load, speed
-\item Also test for potential customisability
+\item Test base frames of Lego vs Turtlebot based on battery life, turn radius, maximum load, speed (L)
 \end{itemize}
-    
-Colour sensor
-    Attaching Lego colour sensor underneath the base pointing towards tape on the ground, and wiring this to a Lego EV3 brick for the       coding team to use in pathfinding (S)
-    
-Milestone 2: Main robot components attached
+
+{\bf Milestone 2}: Main robot components attached
 
 Components:
 \begin{itemize}
-\item Arm (S)
-\item Lift to raise robot (XL)
-\item Physical buttons (M)
+\item Build and add arm operating on one axis to deliver food and water to patient (S)
+\item Build and add scissor lift to raise robot up and down (XL)
+\item 3D print and add physical buttons (M)
 \end{itemize}
     
-Milestone 3: Camera attached and sending a signal (M)
+{\bf Milestone 3}: Interface with robot programming to allow components to be controlled through software
 
-Milestone 4: Robot has all components attached and is sturdy enough to move between rooms and complete tasks according to its timetable (L) 
+{\bf Milestone 4}: Robot has all components attached and is sturdy enough to move between rooms and complete tasks according to its timetable (L) 
 
 
 \subsubsection{Robot Programming}
