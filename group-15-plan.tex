@@ -234,7 +234,7 @@ For each sub-task we have assigned a difficulty rating ranging from simplest to 
 
 \subsection{Resource distribution}
 
-The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 1500 hours in total, or 500 hours per team. Each milestone has the same deadline across the teams - the date of the corresponding demo. They are shown in (Table~\ref{tab:demo-dates}). (Table~\ref{tab:rb-rd}) shows the resource distribution of the robot building teams 500 hours in terms of the equipment, skills, and estimated hours each subtask of the milestones will require. Similarly, (table~\ref{tab:rp-rd}) shows the robot coding teams resource distribution, and (table~\ref{tab:app-rd}) shows for the app team.
+The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 1500 hours in total, or 500 hours per team. Each milestone has the same deadline across the teams - the date of the corresponding demo. They are shown in (Table~\ref{tab:demo-dates}). (Table~\ref{tab:rb-rd}) shows the resource distribution of the robot building teams 500 hours in terms of the equipment, skills, and estimated hours each subtask of the milestones will require. Similarly, (table~\ref{tab:rp-rd}) shows the robot coding teams resource distribution, and (table~\ref{tab:app-rd}) shows this for the app team.
 \begin{table}[]
   \begin{center}
   \begin{tabular}{ll}
@@ -281,16 +281,23 @@ The 200 hours per member will include the following for every member: {\bf at le
   \begin{tabular}{|c|l|l|l|c|}
     \hline
     {\bf Milestone} & {\bf Tasks} & {\bf Equipment} & {\bf Skills} & {\bf Est. Hours} \\ \hline
-    1               & Get robot moving & Access to robot & ROS (Turtlebot, Python, motors) & 60 \\ \cline{2-5}
-                    & Get working with sensor input & Sensors & - & 25 \\ \hline
-    2               & Using sensor input to stop & Sensor readings & Analysis & 120 \\ \cline{2-5}
-                    & Using sensor input to detect environment & - & Real-time sensor analysis & 115 \\ \hline
-    3               & Have lift working & - & Python for lift & 40 \\ \hline
-    4               & Bot moves around to user defined paths/input & - & Sensor and/or camera analysis & 140 \\ \hline
+    1               & Robot moves set distances in straight line & Turtlebot/Lego-bot & ROS, Python for motors & 30\\ \cline{2-5}
+                    & Robot can turn in place &  & ROS, basic physics/movement & 30\\ \cline{2-5}
+                    & Begin working with sensors and readings & Sensors (input) & Analysis of sensor readings & 50 \\ \hline
+    2               & Bot can locate itself & Sensors, cameras & Object recognition & 70\\ \cline{2-5}
+                    & Begin using sensors for bot to stop itself & Sensors, robot & Reading analysis & 20\\ \cline{2-5}
+                    & Map environment & - & Machine learning methods (yet to be explored) & 80\\ \hline
+    3               & Movement of bot complete & - & More ROS & 20\\ \cline{2-5}
+                    & Obstacle avoidance & - & More machine learning & 70\\ \cline{2-5}
+                    & Control of scissor lift & Access to scissor lift & - & 20\\ \cline{2-5}
+                    & Begin software-app functionality & - & Networking & 10\\ \hline
+    4               & Complete software-app functionality & Working build of app & - & 70\\ \cline{2-5}
+                    & Wiggle room for extensions & - & - & 30\\ \hline
                     &  &  & {\bf Total} & 500 \\ \hline
   \end{tabular}
   \end{small}
   \caption{{\bf Robot programming team} resource distribution.}
+  \label{tab:rp-rd}
   \end{center}
 \end{table*}
 
@@ -316,6 +323,7 @@ The 200 hours per member will include the following for every member: {\bf at le
   \end{tabular}
   \end{small}
   \caption{{\bf App team} resource distribution.}
+  \label{tab:app-rd}
   \end{center}
 \end{table*}
 
