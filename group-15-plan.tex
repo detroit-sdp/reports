@@ -63,7 +63,7 @@ The key takeaways from this work that we will take into account in our project:
 \begin{itemize}
 \item Patient feedback to the robot was positive: ``inhabitants  understood  the  idea  of  a  robot  supporting  the  staff  without replacing them and showed no fear to interact with the machine'' \cite{springer}. 
 \item Adding speech output to address patients by name helped to improve perceptions of the robot and compliance with drinking the water it offered \cite{ieee}. 
-\item Staff reaced positively to the introduction of the robot: ``The overall reaction from the personnel ... was very positive'' (ibid). 
+\item Staff reacted positively to the introduction of the robot: ``The overall reaction from the personnel ... was very positive'' (ibid). 
 \end{itemize}
 
 \subsection{High-level description} 
@@ -149,7 +149,7 @@ For the second demo on February 26th we will showcase our robot with several new
 
 Movement sub goals:
 \begin{itemize}
-\item Program the robot to recognise turns in a tape path
+\item Program the robot to recognize turns in a tape path
 \item Implement a memory system that allows the robot to remember its current state 
 \end{itemize}
 
@@ -165,7 +165,7 @@ Component sub goals:
 App sub goals:
 \begin{itemize}
 \item Accessible user interface allowing users to enter and show data from the database; and allow seeing alerts from the robot. Accessibility will be based on user testing.  
-\item Recieves alerts from the robot when its button is pressed.
+\item Receives alerts from the robot when its button is pressed.
 \end{itemize}
 
 \subsubsection{Milestone 3}
@@ -190,6 +190,7 @@ App connectivity sub goals:
   \item Visiting a patient for an impromptu check-up;
   \item Scheduling meal and water times for patients. 
   \end{itemize}
+\item Implement encryption at rest and in movement of patient data, to support GDPR compliance. 
 \end{itemize}
 
 \subsubsection{Milestone 4}
@@ -198,13 +199,14 @@ On the final demonstration on March 30th we will show our completed prototype wi
 
 \subsection{Task Decomposition}
 
-We have split our team into three groups to manage the respective tasks of robot building, robot programming and app development. For each milestone we assigned the sub goals to the relevant team, and also planned how our sub teams will work together to implement these as working features.
-For each sub-task we assigned a difficulty rating ranging from simplest to most complex with XS, S, M, L, XL. We assign these values as estimations of the time and difficulty involved with implementing the sub-task, based on initial research, expert feedback, and gut feeling. 
+We have split our team into three groups to manage the respective tasks of robot building, robot programming and app development. For each milestone we have assigned the sub goals to the relevant team, and also planned how our sub teams will work together to implement these as working features.
+
+For each sub-task we have assigned a difficulty rating ranging from simplest to most complex with XS, S, M, L, XL. We assign these values as estimations of the time and difficulty involved with implementing the sub-task, based on initial research, expert feedback, and gut feeling. 
 
 
 \subsubsection{Robot Building}
 
-Milestone 1: We will build two early versions of the robot base frame with basic moving functionality in all directions and with a colour sensor mounted for tracking a line of tape. The base should be sturdy and able to hold a light load. 
+{\bf Milestone 1}: We will build two early versions of the robot base frame with basic moving functionality in all directions and with a colour sensor mounted for tracking a line of tape. The base should be sturdy and able to hold a light load. 
 
 Sub tasks:
 
@@ -220,7 +222,7 @@ Testing
 \end{itemize}
     
 Colour sensor
-    Attaching lego colour sensor underneath the base pointing towards tape on the ground, and wiring this to a lego EV3 brick for the       coding team to use in pathfinding (S)
+    Attaching Lego colour sensor underneath the base pointing towards tape on the ground, and wiring this to a Lego EV3 brick for the       coding team to use in pathfinding (S)
     
 Milestone 2: Main robot components attached
 
@@ -248,13 +250,13 @@ Basic RC of robot:
 \item Moving forward and backwards (S)
 \item Rotating on the spot and turning to face a specified direction angle (M)
 \end{itemize}
-Robot Pathfinding system:
+Robot pathfinding system:
 \begin{itemize}
 \item Robot can recognise tape underneath it and follow the tape in a straight line (L)
 \end{itemize}
 Testing:
 \begin{itemize}
-\item Testing out the ROS programming of Turtlebot vs the Python programming of Lego mindstorms EV3 block to decide which is simplest and most customisable to find the best platform solution on which to build our pathfinding algorithms (M)
+\item Testing out the ROS programming of Turtlebot vs the Python programming of Lego Mindstorms EV3 block to decide which is simplest and most customisable to find the best platform solution on which to build our pathfinding algorithms (M)
 \end{itemize}
 
 Milestone Two: Robot can follow a line of tape with turns and send alerts to app 
@@ -269,7 +271,7 @@ Connectivity:
 \item Robot can send an alert to app when it's button is pressed (M) 
 \end{itemize}
 
-Milestone 3: Robot can manouver through it's environment more independently and also recieve remote controls
+Milestone 3: Robot can maneuver through it's environment more independently and also receive remote controls
     
 Pathfinding:
 \begin{itemize}
@@ -277,13 +279,13 @@ Pathfinding:
 \end{itemize}    
 Connectivity:
 \begin{itemize}
-\item Robot can recieve basic movement RC commands from app (L)
+\item Robot can receive basic movement RC commands from app (L)
 \item Robot arm can be operated to assist patients (XL)   
 \end{itemize}
     
 Milestone 4: Final prototype
 
-Robot can follow it's timetable recieved from the app, travelling to rooms at given times and performing it's programmed tasks.
+Robot can follow it's timetable received from the app, travelling to rooms at given times and performing it's programmed tasks.
 
 Pathfinding:
 \begin{itemize}
@@ -291,7 +293,7 @@ Pathfinding:
 \end{itemize}
 App connectivity 
 \begin{itemize}
-\item Robot can recieve Calendar timetable and database information from the app to plan it's route through the rooms and to know who         needs which medications at what times (L)
+\item Robot can receive Calendar timetable and database information from the app to plan it's route through the rooms and to know who         needs which medications at what times (L)
 \end{itemize}
     
 \subsubsection{App Development}
@@ -318,11 +320,11 @@ App:
 \item Creating a few different UI designs (L)
 \item Testing UI designs on consumers with ethical approval (M)
 \end{itemize}
-Milestone 3: Sending and recieving complex information to and from robot
+Milestone 3: Sending and receiving complex information to and from robot
 
 App:
 \begin{itemize}
-\item Recieving photos from robot's camera (XL)
+\item Receiving photos from robot's camera (XL)
 \item Add calendar functionality for managing and updating a patient's medication timetable (M)
 \end{itemize}
 Database:
@@ -340,18 +342,6 @@ App:
 \item App conveys relevant information about the robot's location, activity and timetable for the day (L)
 \item App allows user to plan a timetable for the robot's daily tasks (L)
 \end{itemize}
-    
-
-
-\begin{figure}[tb]
-\vskip 5mm
-\begin{center}
-\centerline{\includegraphics[width=\columnwidth]{figs/crane}}
-\caption{Lego construction: highlight any salient features in the caption}
-\label{fig:sample-fig}
-\end{center}
-\vskip -5mm
-\end{figure} 
 
 
 \subsection{Resource distribution}
@@ -402,7 +392,7 @@ The 200 hours per member will include the following for every member: {\bf at le
   \begin{tabular}{|c|l|l|l|c|}
     \hline
     {\bf Milestone} & {\bf Tasks} & {\bf Equipment} & {\bf Skills} & {\bf Est. Hours} \\ \hline
-    1               & Get robot moving & Access to robot & Ros (Turtlebot, Python (motors) & 60 \\ \cline{2-5}
+    1               & Get robot moving & Access to robot & ROS (Turtlebot, Python, motors) & 60 \\ \cline{2-5}
                     & Get working with sensor input & Sensors & - & 25 \\ \hline
     2               & Using sensor input to stop & Sensor readings & Analysis & 120 \\ \cline{2-5}
                     & Using sensor input to detect environment & - & Real-time sensor analysis & 115 \\ \hline
@@ -422,7 +412,7 @@ The 200 hours per member will include the following for every member: {\bf at le
     \hline
     {\bf Milestone} & {\bf Tasks} & {\bf Equipment} & {\bf Skills} & {\bf Est. Hours} \\ \hline
     1               & Set up app UI & Firebase & UI design, Android & 70 \\ \cline{2-5}
-                    & Set up database system & Database management server & SQL(?) & 20 \\ \cline{2-5}
+                    & Set up database system & Database management server & Firebase & 20 \\ \cline{2-5}
                     & Interface the database with the app & - & - & 30 \\ \hline
     2               & Set up robot control UI & - & - & 40 \\ \cline{2-5}
                     & Test UI & More UI testing required & - & 10 \\ \cline{2-5}
@@ -446,11 +436,11 @@ The 200 hours per member will include the following for every member: {\bf at le
 
 \subsubsection{Robot building}
 
-In terms of milestone 1, the main risk would be that the robot design is not able to fulfil expected tasks (particularly carrying loads). We have decided to develop 2 prototypes as a contingency plan for this exact issue. This allows us to compare two designs and ultimately pick the one which we find to be a better choice.
+In terms of milestone 1, the main risk would be that the robot design is not able to fulfill expected tasks (particularly carrying loads). We have decided to develop 2 prototypes as a contingency plan for this exact issue. This allows us to compare two designs and ultimately pick the one which we find to be a better choice.
 
-For milestone 2, our team are planning to design and build a scissor lift from Lego. This should be fairly risk free. We also plan to build a hardware controller for the bot. At least one of these should be achieveable and whichever is not completed for this milestone can be worked on during the period of maintenance running up to the fourth demo.
+For milestone 2, our team are planning to design and build a scissor lift from Lego. This should be fairly risk free. We also plan to build a hardware controller for the bot. At least one of these should be achievable and whichever is not completed for this milestone can be worked on during the period of maintenance running up to the fourth demo.
 
-This 30 hours of maintainence between milestone 3 and 4 will actually prevent mostly any risk that should arise with individual pieces of hardware, as it can be eaten into by the hardware team if need be.
+This 30 hours of maintenance between milestone 3 and 4 will actually prevent mostly any risk that should arise with individual pieces of hardware, as it can be eaten into by the hardware team if need be.
 
 \subsubsection{Robot programming}
 
@@ -484,7 +474,7 @@ The UI will have to be usable for novice users and one of the risks is that this
   \label{tab:group-split}
 \end{table}
 
-We will split the group into {\bf three core teams}: robot building, robot software, and app development (table~\ref{tab:group-split}). Each team has a team lead (in bold), responsible for co-ordinating with the other groups as necessary during the development process and holding responsibility for ensuring the group is tracking to its milestones.
+We will split the group into {\bf three core teams}: robot building, robot software, and app development (table~\ref{tab:group-split}). Each team has a team lead (in bold), responsible for coordinating with the other groups as necessary during the development process and holding responsibility for ensuring the group is tracking to its milestones.
 
 The project manager (PM) holds overall responsibility for keeping the project on track: primarily through helping each team plan, execute, and validate its progress against milestones. The PM is also responsible for time management; writing up reports; and helping teams with any blockers they encounter in their work.
 
