@@ -12,7 +12,7 @@
 \setGroupNumber{15}
 \setGroupName{Detroit}
 \setProductName{Tadashi}
-\setLogoFileName{figs/logo.png}
+\setLogoFileName{figs/logo-small.png}
 
 \begin{document} 
 
@@ -50,7 +50,7 @@ By automating some tasks using Tadashi, nurses can decrease the amount of time t
 
 With elderly populations in particular, hydration and nutrition presents a pressing concern \cite{hydrate}. A Care Quality Commission inspection in 2011 found that three out of 12 NHS trusts inspected failed to meet standards required by law in meeting patient needs regarding nutrition and hydration \cite{cqc}. A 2018 report from the Office for National Statistics found that more than 600 care home residents died suffering from malnutrition or dehydration between 2013 and 2017 \cite{ons}.
 
-Tadashi will allow for delivery of water or food to patients at a specified time --- or patients to request these deliveries themselves --- in order to ensure patients have access to regular food and water. Aditionally, by tracking these requests we will provide a dashboard for nurses to view when patients last had food or water: this provides added value to nurses along with reducing their workload through automation. 
+Tadashi will allow for delivery of water or food to patients at a specified time --- or patients to request these deliveries themselves --- in order to ensure patients have access to regular food and water. Additionally, by tracking these requests we will provide a dashboard for nurses to view when patients last had food or water: this provides added value to nurses along with reducing their workload through automation. 
 
 The problems mentioned above will only get worse in the future. It is estimated that by 2035, up to 190,000 more people aged 65 years or above will require some level of care, and increase of 86\% from today \cite{lancet}. Meanwhile, ongoing staffing issues in the NHS mean that in 10 years time the NHS will have a shortfall of 108,000 nurses \cite{nuffield}. This combination of factors will drive demand for innovative solutions --- including assistive technology like Tadashi.
 
@@ -133,11 +133,22 @@ We describe the following user stories to exemplify the functionality of the sys
 By the final demo, the robot will have the following key functionality:
 \begin{itemize}
 \item Free movement of the robot to patient rooms;
-\item Steady movement of a mechanical arm along a horizontal plane, allowing for delivery of food and water;
-\item Steady movement of a lift up and down, allowing for the robot to be level with the patient;
+\item Steady movement of a mechanical arm along a horizontal plane, allowing for delivery of food and water: the arm will have a bucket or container attached to it to allow for transportation without needing to consider gripping mechanisms;
+\item Steady movement of a lift up and down, allowing for the robot to be level with the patient (figure~\ref{fig:lift});
 \item Ability to move to a room on request and on a timetable;
 \item Ability to send and receive messages to and from the app. 
 \end{itemize}
+
+
+\begin{figure}[tb]
+\vskip 5mm
+\begin{center}
+\centerline{\includegraphics[width=\columnwidth]{figs/lift}}
+\caption{Proposed scissor lift using Lego, allowing the robot to adjust its height to the patient. Image source: \href{https://education.lego.com/en-us/lessons/pneumatics/scissor-lift}{Lego Education}}
+\label{fig:lift}
+\end{center}
+\vskip -5mm
+\end{figure}
 
 Likewise, the app will have the following functionality to support the robot:
 \begin{itemize}
@@ -176,7 +187,7 @@ The app building team will demonstrate the ability to receive alerts from the ro
 \subsubsection{Milestone 3 (March 8th)}
 At this milestone we flesh out key functionality within each component, building out APIs and beginning to fully connect all components. 
 
-The robot building team will integrate 3D printed buttons and finalize any component choices, as well as demonstrating smooth movement of the arm and lift. 
+The robot building team will integrate 3D printed buttons and finalize any component choices, as well as demonstrating smooth movement of the arm and lift. They will also create a prototype for the patient controller. 
 
 The robot software team will demonstrate functional movement of the robot around the space using overhead and built-in sensors, possibly avoiding obstacles. 
 
@@ -201,36 +212,151 @@ For each sub-task we have assigned a difficulty rating ranging from simplest to 
 
 
 \subsubsection{Robot building}
-
 {\bf Milestone 1}
+
+Decide if using Turtlebot or Lego:
+\begin{itemize}
+\item Build Lego and Turtlebot robots (M)
+\item Implement basic movement ability (move forward / backward, turn) (M)
+\item Test each robot on battery life, turn radius, maximum load, speed (L)
+\item Based on tests, choose Turtlebot or Lego (M)
+\end{itemize}
 
 {\bf Milestone 2}
 
+Finalize design of robot and component integration:
+\begin{itemize}
+\item Build and add arm operating on one plane, intended to deliver food and water to patient (M)
+\item Build and add scissor lift to move robot up and down (L)
+\item Integrate buttons and sensor with hardware, working with robot software team (L)
+\item Allow components to be controlled by command (M)
+\end{itemize}
+
 {\bf Milestone 3}
 
+Integrate 3D printed buttons for the users to press:
+\begin{itemize}
+\item Design and manufacture buttons for 3D printing (L)
+\end{itemize}
+
+Create and integrate patient controller:
+\begin{itemize}
+  \item Design and manufacture basic controller (L)
+  \item Interface controller using WiFi or Bluetooth with robot or app (M)
+\end{itemize}
+
+Finalize component choices based on robot software testing:
+\begin{itemize}
+\item Ensure smooth movement of arm on horizontal plane (M)
+\item Ensure smooth movement of lift on vertical plane (M)
+\end{itemize}
+
+
 {\bf Milestone 4}
+
+Work with software and app teams to finalize connectivity (XL)
 
 
 \subsubsection{Robot programming}
 
 {\bf Milestone 1}
 
+Demonstrate basic movement control:
+\begin{itemize}
+\item Implement moving set distances and turning (S)
+\end{itemize}
+
+Demonstrate input from sensors:
+\begin{itemize}
+\item Test to see if we can get inputs from overhead and internal sensors (M)
+\end{itemize}
+
 {\bf Milestone 2}
+
+Demonstrate advanced movement control:
+\begin{itemize}
+\item Recognize robot location in demo space using overhead cameras (M)
+\item Recognize robot orientation using internal sensors (S)
+\item Locate target in demo space (L)
+\item Store internal representation of demo space (L)
+\end{itemize}
 
 {\bf Milestone 3}
 
+Demonstrate functional movement of the robot:
+\begin{itemize}
+\item Independent navigation of the space using sensor inputs (overhead cameras / internal sensors); allowing the robot to move to specific locations (XL)
+\end{itemize}
+
+Establish connectivity with the Android app:
+\begin{itemize}
+\item Work with app team to research and determine approach to connectivity (M)
+\item Add software to send / receive messages (L)
+\end{itemize}
+
+Establish connectivity with patient controller:
+\begin{itemize}
+\item Work with hardware team to receive alerts from patient controller (M)
+\end{itemize}
+
 {\bf Milestone 4}
+
+Work with hardware and app teams to finalize connectivity (XL)
+
 
 \subsubsection{App development}
 
 {\bf Milestone 1}
 
+Demonstrate skeleton Android app:
+\begin{itemize}
+\item Start an Android app project in Kotlin (S)
+\item Create 5 activity screens (M)
+\end{itemize}
+
+Demonstrate basic database:
+\begin{itemize}
+\item Plan out and set up database schema (S)
+\item Implement database using Firebase (M)
+\item Show ability to connect to database (send / receive information) through app (L)
+\end{itemize}
+
 {\bf Milestone 2}
+
+Demonstrate connectivity:
+\begin{itemize}
+\item Integrate with robot software team to build communication API (L)
+\item Show alert from robot within the app (M)
+\end{itemize}
 
 {\bf Milestone 3}
 
+Implement key app functionality:
+\begin{itemize}
+\item Timetabling of food / water delivery (M)
+\item Timetabling of wake-up time (M)
+\item Ad-hoc `check-in' requests (M)
+\item Dashboard to see hydration and nutrition history (M)
+\end{itemize}
+
+Encrypt user data at rest and in transit:
+\begin{itemize}
+\item Investigate encryption options for Firebase (M)
+\item Use HTTPS connections when communicating over WiFi (M)
+\end{itemize}
+
 {\bf Milestone 4}
 
+Work with hardware and software teams to finalize connectivity (XL)
+
+Test UI accessibility:
+\begin{itemize}
+\item Set up ethical approval, if necessary (S)
+\item Research accessibility principles (M)
+\item Find survey participants (M)
+\item Test accessibility of UI based on metrics found in research (L)
+\item Make UI changes based on feedback from survey (M)
+\end{itemize}
 
 \subsection{Resource distribution}
 
