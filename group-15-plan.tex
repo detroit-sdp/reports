@@ -25,6 +25,7 @@
 % ]
 
 % TODO how are we navigating?
+% TODO diagrams
 
 \begin{abstract}
   We propose an assistive healthcare robot, {\it Tadashi}, to automate simple tasks within a care home or supported living environment and allow nurses to spend more time caring for their patients.
@@ -93,6 +94,9 @@ We can describe three key user stories to exemplify the functionality of our sol
   \end{itemize}
 \item At the specified time, Tadashi navigates to the pick-up point for food or water.
 \item Tadashi moves to the patient's room and passes over the food or water using its arm.
+  \begin{itemize}
+  \item If the patient is at a different height to the robot, Tadashi will increase his height using a lift to get to an appropriate height for the patient and deliver food or water without spillage. 
+  \end{itemize}
 \item Tadashi returns to his starting spot to await the next command.
 \end{enumerate}
 
@@ -122,7 +126,6 @@ Robot sub goals:
 \begin{itemize}
 \item The chassis is sturdy enough to carry a light load, initially 500g, representing future components. % TODO how much will this load weigh?
 \item The robot can move around freely by remote control.
-\item Attach a mounted colour sensor to track tape on the floor.  % TODO which sensor do we intend to use?
 \item Choose whether to use a TurtleBot or Lego frame for building the robot, based on which performs better in testing on battery life, turn radius, speed, and maximum load. 
 \end{itemize}
 
@@ -131,79 +134,67 @@ Once these sub goals are achieved, our robot base frame will be able to reliably
 
 App sub goals:
 \begin{itemize}
-\item Create a functioning android app which can run on a mobile device.
-\item Produce a Database which can store a patient's name and one of their health conditions.
-\item Implement GDPR features into the Database.
-\item Implement functionality in the App to create and edit patient information in the Database.
+\item Create a functioning Android app which can run on a mobile device. % TODO should we specify exactly which?
+\item Set up a basic user interface, consisting of five different activity screens in the app. 
+\item Design and implement a database which can store a patient's information using Firebase.
+\item Implement GDPR features into the database. % TODO how will we do this?
+\item Implement functionality in the app to create and edit patient information in the database.
 \end{itemize}
 
 With these sub goals achieved, we can demonstrate updating the database from the Android app.
 
 \subsubsection{Milestone 2}
 
-For the second demo on February 26th we will showcase our robot with several new components and movement abilities, plus connectivity and interaction with the android app.  
+For the second demo on February 26th we will showcase our robot with several new components and movement abilities, plus connectivity and interaction with the Android app.  
 
 Movement sub goals:
 \begin{itemize}
 \item Program the robot to recognise turns in a tape path
-\item Implement a memory system that allows the robot to remember it's current state 
+\item Implement a memory system that allows the robot to remember its current state 
 \end{itemize}
 
-With these new features, we will demonstrate the robot following along a bending line of tape on the floor, navigating around turns in the path.
+With these new features, we will demonstrate the robot following along a bending line of tape on the floor, navigating around turns in the path. % TODO do we want to do tape? Let's rework these goals. 
 
 Component sub goals:
 \begin{itemize}
-\item Attach a robotic arm which can later be programmed to perform patient assisting tasks.
+\item Attach a robotic arm, which will later be used to pass food and water to the patient along one axis.
 \item Equip the base frame with a lift system, which can be used to raise the robot's height in order to interact with patients in hospital beds.
-\item Implement external buttons which can be pressed to send a signal.
+\item Implement external buttons which can be pressed by the patient to send a signal.
 \end{itemize}
 
 App sub goals:
 \begin{itemize}
-\item Accessible User Interface.
-\item Recieves alerts from the robot when it's button is pressed.
+\item Accessible user interface allowing users to enter and show data from the database; and allow seeing alerts from the robot. Accessibility will be based on user testing.  
+\item Recieves alerts from the robot when its button is pressed.
 \end{itemize}
 
 \subsubsection{Milestone 3}
 
-On March 11th for the third demo we will present the robot with more freedom of movement as well as camera and app functionality.
+On March 11th for the third demo we will present the robot with more freedom of movement as well as app functionality. 
 
-Camera sub goals:
+Robot sub goals:
 \begin{itemize}
-\item Mount a camera to the robot
-\item Send pictures from the camera to the app
+\item Establish ability to move arm, lift, and robot on external command, to be integrated with app at a later stage. 
 \end{itemize}
-
-With these goals achieved, we aim to demonstrate the robot taking an image and then sending it to the mobile app for verification.
 
 Movement sub goals:
 \begin{itemize}
 \item Implement functionality to move around between rooms without needing a line of tape to follow.
 \end{itemize}
+
 App connectivity sub goals:
 \begin{itemize}
-\item Direct remote control of movement from the app.
-\item App provides arm remote control.
-\item The app will recieve photos from the robot and display them to the user for verification.
+\item Implement input and saving of:
+  \begin{itemize}
+  \item Scheduling wake-up times for patients;
+  \item Visiting a patient for an impromptu check-up;
+  \item Scheduling meal and water times for patients. 
+  \end{itemize}
 \end{itemize}
 
 \subsubsection{Milestone 4}
 
-On the final demonstration on March 30th we will show our completed prototype with all components working together
-
-App sub goals:
-\begin{itemize}
-\item  A timetable will be implemented, allowing the user to plan out which rooms should be visited at which times, to check up on the patients.
-\item GPS functionality will be provided, so that the robot can be tracked if it is stolen.
-\item Full remote control over the robot via the app.
-\end{itemize}
-
-Robot behaviour sub goals:
-
-Feature to avoid bumping into obstacles in its path
-
-Finally, our robot should be able to present our use case by using full connectivity between the app and it's components to plan out it's movement between rooms and in each room interact approriately with the patient, reporting relevant info back to the app for a user to review.
-
+On the final demonstration on March 30th we will show our completed prototype with all components working together: we will fully integrate app functionality with hardware and robot software, being able to demonstrate how a nurse setting up actions for the robot can then be performed by the robot. 
 
 \subsection{Task Decomposition}
 
@@ -315,7 +306,7 @@ Database:
     
 App:
 \begin{itemize}
-\item Skeleton android app set up on a mobile device using Firebase (S)
+\item Skeleton Android app set up on a mobile device using Firebase (S)
 \item Updating database patient information through app (L)
 \end{itemize}    
 Milestone 2: Basic robot connectivity
@@ -389,7 +380,7 @@ The 200 hours per member will include the following for every member: {\bf at le
     {\bf Milestone} & {\bf Tasks} & {\bf Equipment} & {\bf Skills} & {\bf Est. Hours} \\ \hline
     1               & Build Lego bot & Lego & Lego building, Lego designing & 25 \\ \cline{2-5}
                     & Build Turtlebot & Turtlebot &  & 25 \\ \cline{2-5}
-                    & Test and evaluate the two & - & Ability to evaluate from different metrics & 50 \\ \hline
+                    & Test and evaluate the two & - & Quantitative analysis & 50 \\ \hline
     2               & Install arm & Turtlebot arm/Lego arm & Design Lego arm & 80 \\ \cline{2-5}
                     & Design and build scissor lift & Lego to build lift & Lego design/build & 60 \\ \cline{2-5}
                     & Design and build controls & Electronic components & Circuitry & 60 \\ \hline
@@ -397,7 +388,7 @@ The 200 hours per member will include the following for every member: {\bf at le
                     & Design 3D printed buttons & 3D print design tools & Ability to use said tools & 30 \\ \cline{2-5}
                     & Print and implement buttons & 3D printer & - & 20 \\ \hline
     4               & Tidy up of the aesthetic & - & Design, getting feedback & 50 \\ \cline{2-5}
-                    & Maintainence & - & - & 30 \\ \hline
+                    & Maintenance & - & - & 30 \\ \hline
                     &                           &  & {\bf Total} & 500 \\ \hline
   \end{tabular}
   \end{small}
@@ -453,23 +444,23 @@ The 200 hours per member will include the following for every member: {\bf at le
 
 \subsection{Risk assessment} 
 
-\underline{Robot building}
+\subsubsection{Robot building}
 
 In terms of milestone 1, the main risk would be that the robot design is not able to fulfil expected tasks (particularly carrying loads). We have decided to develop 2 prototypes as a contingency plan for this exact issue. This allows us to compare two designs and ultimately pick the one which we find to be a better choice.
 
-For milestone 2, our team are planning to design and build a scissor lift from Lego. This should be fairly risk free. We also plan to build a hardware controller for the bot. At least one of these should be doable and whichever is not completed for this milestone can be worked on during the period of maintenance running up to the fourth demo.
+For milestone 2, our team are planning to design and build a scissor lift from Lego. This should be fairly risk free. We also plan to build a hardware controller for the bot. At least one of these should be achieveable and whichever is not completed for this milestone can be worked on during the period of maintenance running up to the fourth demo.
 
 This 30 hours of maintainence between milestone 3 and 4 will actually prevent mostly any risk that should arise with individual pieces of hardware, as it can be eaten into by the hardware team if need be.
 
-\underline{Robot programming}
+\subsubsection{Robot programming}
 
-Having the robot move without the aid of a line on the ground is definitely a risk the robot programming team will have to keep in mind. It could prove to be more difficult than anticipated. The fact that sensors are not always 100\% accurate means that special care will have to be taken in the implementation of this.
+Having the robot move without the aid of a line on the ground is definitely a risk the robot programming team will have to keep in mind. It could prove to be more difficult than anticipated. The fact that sensors are not always 100\% accurate means that special care will have to be taken in the implementation of this. We will reduce this risk by re-planning regularly in software to make sure tolerances do not grow too much over time. 
 
 Failure of a sensor could be catastrophic in a project where they are the centerpiece of the functionality. It is therefore of vital importance that we constantly check that they are all functioning as they should be.
 
-The algorithms used by the robot will also be a challenge facing our robot programming team. We will make use of Traiko's help at this stage of development if the task proves to be more difficult than we anticipate.
+The algorithms used by the robot will also be a challenge facing our robot programming team. If implementing these turns out to be more difficult than we anticipate we will refer to advice from the expert consultant in electronics and software.
 
-\underline{App}
+\subsubsection{App}
 
 The use of Firebase should alleviate most of the risk in terms of the building of the app as it allows an easy way to get things off the ground. There are extensive resources to aid our developers in their progress should they hit a brick wall.
 
@@ -509,7 +500,7 @@ In keeping with an Agile approach, {\bf team members will give daily updates on 
 
 Using GitHub also allows us to do {\bf task allocation and progress sharing} using GitHub projects. We will follow a Kanban approach, separating tasks into ``to do'', ``in progress'', and ``done'', with one board per team. Using Kanban allows for team members to clearly see what tasks need to be done before the next demo; choose to begin working on tasks they feel they are suitable for; and to identify where there may be blockers within their work (ie. cards that are spending extended time in ``to do''). Additionally, making these boards public allows for other teams to see how work is progressing in the rest of the group. Progress updates will also be discussed in weekly team meetings on a granular level and more broadly in POC meetings.
 
-Additionally, in {\bf task allocation}, teams will decide the complexity of tasks by evaluating them using {\bf T-Shirt Sizing}, where the size or difficulty of each task is graded on a scale: XS, S, M, L, XL. This will allow team members to clearly see the estimated difficulty of each task and to assess where they need to dedicate their effort. 
+Additionally, in {\bf task allocation}, teams will decide the complexity of tasks by evaluating them using {\bf T-Shirt sizing}, where the size or difficulty of each task is graded on a scale: XS, S, M, L, XL. This will allow team members to clearly see the estimated difficulty of each task and to assess where they need to dedicate their effort. 
 
 {\bf Communication} will be done primarily through a dedicated Slack workspace, with separate channels for each team ({\tt robot-app}, {\tt robot-building}, {\tt robot-coding}, {\tt report-writing}, and {\tt general} for cross-team discussion). Using Slack allows us to integrate other apps, for example Doodle polls to decide group meeting times; and GitHub to track push or other notifications from our project repository. 
 
