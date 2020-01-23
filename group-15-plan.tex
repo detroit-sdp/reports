@@ -12,7 +12,7 @@
 \setGroupNumber{15}
 \setGroupName{Detroit}
 \setProductName{Tadashi}
-\setLogoFileName{figs/sdp_logo_placeholder.png}
+\setLogoFileName{figs/logo.png}
 
 \begin{document} 
 
@@ -24,29 +24,31 @@
     % \centerline{Group \groupNumber: \groupName}
 % ]
 
+% TODO how are we navigating?
+
 \begin{abstract}
-  We propose an assistive healthcare robot, {\it Tadashi}, to automate simple tasks within a care home or supported living environment and allow caregivers to spend more time caring for their patients.
-  {\it Tadashi} will automate three key tasks in the caregiver's day. Firstly, waking a patient up at a time specified by the caregiver, by coming into their room and speaking to them. Secondly, bringing water and food to patients at specified times. Thirdly, checking on the welfare of the patient while the caregiver is occupied elsewhere, by coming to their room and asking the patient if they are okay and if they need a caregiver to attend to them. 
+  We propose an assistive healthcare robot, {\it Tadashi}, to automate simple tasks within a care home or supported living environment and allow nurses to spend more time caring for their patients.
+  {\it Tadashi} will automate three key tasks in the nurse's day. Firstly, waking a patient up at a time specified by the nurse, by coming into their room and speaking to them. Secondly, bringing water and food to patients at specified times. Thirdly, checking on the welfare of the patient while the nurse is occupied elsewhere, by coming to their room and asking the patient if they are okay and if they need a nurse to attend to them. 
 \end{abstract} 
 
 \section{Goal description}
-Caregivers are overworked: they spend a large amount of time on menial tasks, limiting the amount of time they can spend caring for patients. Our assistive healthcare robot allows caregivers to automate certain menial and administrative tasks, allowing them to spend less time on the menial work, and more time doing what matters: caring for their patients. 
+Nurses are overworked: they spend a large amount of time on menial tasks, limiting the amount of time they can spend caring for patients. Our assistive healthcare robot allows nurses to automate certain menial and administrative tasks, allowing them to spend less time on the menial work, and more time doing what matters: caring for their patients. 
 
 \subsection{Relevance of the system}
 \subsubsection{The problem space}
-Tadashi is designed to tackle two problems facing caregivers in assisted living situations:
+Tadashi is designed to tackle two problems facing nurses in assisted living situations:
 \begin{enumerate}
-\item High caregiver:patient ratios, meaning caregivers have little time to dedicate per patient;
-\item High administrative loads on caregivers, meaning they must spend more time on administration and menial tasks and less on caring for their patients directly.
+\item High nurse:patient ratios (ie. many patients to one nurse), meaning nurses have little time to dedicate per patient;
+\item High administrative loads on nurses, meaning they must spend more time on administration and menial tasks and less on caring for their patients directly.
 \end{enumerate}
 
-There is no national guidance on staffing levels and caregiver:patient ratios in care homes \cite{rcnstaffingadvice}, but research shows that in care homes there is an average ratio of 18 patients per registered nurse during the day, and 26 patients at night \cite{rcnstaffingguidance}.
+There is no national guidance on staffing levels and nurse:patient ratios in care homes \cite{rcnstaffingadvice}, but research shows that in care homes there is an average ratio of 18 patients per registered nurse during the day, and 26 patients at night \cite{rcnstaffingguidance}.
 
 With this many patients to take care of, nurses struggle to get the time they need with patients. In a 2017 survey on the impact of high nurse:patient ratios \cite{unison}, 63.2\% of nurses said that comforting or talking to patients was rushed, unfinished, not done to an acceptable standard, or missed entirely.
 
 Equally, a 2013 survey showed that nurses spend almost 1/5 of their day on administrative tasks; and only 20\% are satisfied with how they spend their time --- preferring to spend less time on admin and more time on direct care \cite{rcnpol}.
 
-By automating some tasks using Tadashi, we propose that nurses can decrease the amount of time they spend on administrative tasks, and increase the amount of time they spend caring for patients. 
+By automating some tasks using Tadashi, nurses can decrease the amount of time they spend on administrative tasks, and increase the amount of time they spend caring for patients. 
 
 With elderly populations in particular, hydration and nutrition presents a pressing concern \cite{hydrate}. A Care Quality Commission inspection in 2011 found that three out of 12 NHS trusts inspected failed to meet standards required by law in meeting patient needs regarding nutrition and hydration \cite{cqc}. A 2018 report from the Office for National Statistics found that more than 600 care home residents died suffering from malnutrition or dehydration between 2013 and 2017 \cite{ons}.
 
@@ -60,7 +62,7 @@ The key takeaways from this work that we will take into account in our project:
 \begin{itemize}
 \item Patient feedback to the robot was positive: ``inhabitants  understood  the  idea  of  a  robot  supporting  the  staff  without replacing them and showed no fear to interact with the machine'' \cite{springer}. 
 \item Adding speech output to address patients by name helped to improve perceptions of the robot and compliance with drinking the water it offered \cite{ieee}. 
-\item Staff reaced positively to the introduction of the robot: ``The overall reaction from the personnel (...) was very positive'' (ibid). 
+\item Staff reaced positively to the introduction of the robot: ``The overall reaction from the personnel ... was very positive'' (ibid). 
 \end{itemize}
 
 \subsection{High-level description} 
@@ -73,18 +75,18 @@ We can describe three key user stories to exemplify the functionality of our sol
 
 \subsubsection{Waking the patient}
 \begin{enumerate}
-\item The caregiver specifies in the app what time each patient should wake up.
+\item The nurse specifies in the app what time each patient should wake up.
 \item At the specified time, Tadashi navigates to the specified patient's room.
 \item Once in the room, Tadashi speaks to wake the user up. A button is accessible to the patient to press once they have woken up:
   \begin{enumerate} 
-  \item If the patient does not press the button, Tadashi sends an alert to the caregiver's app, who can then go check on the person. 
+  \item If the patient does not press the button, Tadashi sends an alert to the nurse's app, who can then go check on the person. 
   \end{enumerate}
 \item Tadashi returns to his starting spot to await the next command. 
 \end{enumerate}
 
 \subsubsection{Bringing food or water to the patient}
 \begin{enumerate}
-\item The caregiver specifies in the app for each patient:
+\item The nurse specifies in the app for each patient:
   \begin{itemize}
   \item The intervals at which they should be brought water (or another drink).
   \item The times at which they should be brought food.
@@ -97,13 +99,13 @@ We can describe three key user stories to exemplify the functionality of our sol
 
 \subsubsection{Checking on the patient}
 \begin{enumerate}
-\item The caregiver specifies in the app that Tadashi should go check on a specified patient. 
+\item The nurse specifies in the app that Tadashi should go check on a specified patient. 
 \item Tadashi navigates to the specified patient's room.
 \item Once in the room, Tadashi speaks to the user and asks if they are okay:
   \begin{enumerate}
   \item A button is accessible to the patient to press to reply yes or no.
-  \item If the user presses the okay button, Tadashi informs the caregiver through the app. 
-  \item If the user presses the not okay button or does not press a button at all, Tadashi informs the caregiver through the app.
+  \item If the user presses the okay button, Tadashi informs the nurse through the app. 
+  \item If the user presses the not okay button or does not press a button at all, Tadashi informs the nurse through the app.
   \end{enumerate}
 \item Tadashi returns to his starting spot to await the next command. 
 \end{enumerate}
@@ -111,18 +113,17 @@ We can describe three key user stories to exemplify the functionality of our sol
 \section{Task planning}
 
 \subsection{Milestones} 
-We will split the work of each team into four milestones, each corresponding to a demo date. 
+We will split the work of each team into four milestones, each corresponding to the Sunday before the demo date on Wednesday. 
 
 \subsubsection{Milestone 1}
-
-For the first demo on February 5th we plan to present our robot base frame with basic movement and tracking functionality, as well as a skeleton android app.
+For the first demo on February 5th we plan to present our robot base frame with basic movement and tracking functionality, as well as a skeleton Android app.
 
 Robot sub goals:
 \begin{itemize}
-\item The base frame will be able to rotate on the spot to face a given direction.
-\item The chassis is sturdy enough to carry a light load, representing future components.
+\item The chassis is sturdy enough to carry a light load, initially 500g, representing future components. % TODO how much will this load weigh?
 \item The robot can move around freely by remote control.
-\item Attach a mounted colour sensor to track tape on the floor.  
+\item Attach a mounted colour sensor to track tape on the floor.  % TODO which sensor do we intend to use?
+\item Choose whether to use a TurtleBot or Lego frame for building the robot, based on which performs better in testing on battery life, turn radius, speed, and maximum load. 
 \end{itemize}
 
 
@@ -135,7 +136,8 @@ App sub goals:
 \item Implement GDPR features into the Database.
 \item Implement functionality in the App to create and edit patient information in the Database.
 \end{itemize}
-With these sub goals achieved, we can demonstrate updating the Database from the Android app.
+
+With these sub goals achieved, we can demonstrate updating the database from the Android app.
 
 \subsubsection{Milestone 2}
 
@@ -198,15 +200,15 @@ App sub goals:
 
 Robot behaviour sub goals:
 
-Feature to avoid bumping into obstacles in it's path
+Feature to avoid bumping into obstacles in its path
 
 Finally, our robot should be able to present our use case by using full connectivity between the app and it's components to plan out it's movement between rooms and in each room interact approriately with the patient, reporting relevant info back to the app for a user to review.
 
 
 \subsection{Task Decomposition}
 
-We have split our team into three groups to manage the respective tasks of Robot Building, Robot Coding and App Development. For each Milestone we assigned the sub goals to the relevant team, and also planned how our sub teams will work together to implement these as working features.
-For each sub-task we assigned a difficulty rating ranging from simplest to most complex with XS, S, M, L , XL
+We have split our team into three groups to manage the respective tasks of robot building, robot programming and app development. For each milestone we assigned the sub goals to the relevant team, and also planned how our sub teams will work together to implement these as working features.
+For each sub-task we assigned a difficulty rating ranging from simplest to most complex with XS, S, M, L, XL. We assign these values as estimations of the time and difficulty involved with implementing the sub-task, based on initial research, expert feedback, and gut feeling. 
 
 
 \subsubsection{Robot Building}
@@ -217,7 +219,7 @@ Sub tasks:
 
 Movement Base Frame
 \begin{itemize}
-\item Building two frames: One from Lego and one using TurtleBot (M)
+\item Building two frames: one from Lego and one using TurtleBot (M)
 \end{itemize}
 Testing
 \begin{itemize}
@@ -233,17 +235,17 @@ Milestone 2: Main robot components attached
 
 Components:
 \begin{itemize}
-\item Arm(S)
-\item Lift to raise robot(XL)
+\item Arm (S)
+\item Lift to raise robot (XL)
 \item Physical buttons (M)
 \end{itemize}
     
-Milestone 3: Camera attached and sending a signal(M)
+Milestone 3: Camera attached and sending a signal (M)
 
-Milestone 4: Robot has all components attached and is sturdy enough to move between rooms and complete tasks according to it's timetable(L) 
+Milestone 4: Robot has all components attached and is sturdy enough to move between rooms and complete tasks according to its timetable (L) 
 
 
-\subsubsection{Robot Coding}
+\subsubsection{Robot Programming}
 
 Milestone 1: Robot can move around and follow a straight line of tape.
 
@@ -294,7 +296,7 @@ Robot can follow it's timetable recieved from the app, travelling to rooms at gi
 
 Pathfinding:
 \begin{itemize}
-\item Can navigate carefully around obstacles (XL)       
+\item Can navigate carefully around obstacles (XL)
 \end{itemize}
 App connectivity 
 \begin{itemize}
@@ -418,7 +420,7 @@ The 200 hours per member will include the following for every member: {\bf at le
                     &  &  & {\bf Total} & 500 \\ \hline
   \end{tabular}
   \end{small}
-  \caption{{\bf Robot coding team} resource distribution.}
+  \caption{{\bf Robot programming team} resource distribution.}
   \end{center}
 \end{table*}
 
@@ -453,19 +455,19 @@ The 200 hours per member will include the following for every member: {\bf at le
 
 \underline{Robot building}
 
-In terms of milestone 1, the main risk would be that the bot turned out to be infeasible as a design. We have decided to develop 2 prototypes as a contingency plan for this exact issue. This allows us to compare two designs and ultimately pick the one which we find to be a better choice.
+In terms of milestone 1, the main risk would be that the robot design is not able to fulfil expected tasks (particularly carrying loads). We have decided to develop 2 prototypes as a contingency plan for this exact issue. This allows us to compare two designs and ultimately pick the one which we find to be a better choice.
 
 For milestone 2, our team are planning to design and build a scissor lift from Lego. This should be fairly risk free. We also plan to build a hardware controller for the bot. At least one of these should be doable and whichever is not completed for this milestone can be worked on during the period of maintenance running up to the fourth demo.
 
 This 30 hours of maintainence between milestone 3 and 4 will actually prevent mostly any risk that should arise with individual pieces of hardware, as it can be eaten into by the hardware team if need be.
 
-\underline{Robot coding}
+\underline{Robot programming}
 
-Having the robot move without the aid of a line on the ground is definitely a risk the robot coding team will have to keep in mind. It could prove to be more difficult than anticipated. The fact that sensors are not always 100\% accurate means that special care will have to be taken in the implementation of this.
+Having the robot move without the aid of a line on the ground is definitely a risk the robot programming team will have to keep in mind. It could prove to be more difficult than anticipated. The fact that sensors are not always 100\% accurate means that special care will have to be taken in the implementation of this.
 
 Failure of a sensor could be catastrophic in a project where they are the centerpiece of the functionality. It is therefore of vital importance that we constantly check that they are all functioning as they should be.
 
-The algorithms used by the robot will also be a challenge facing our robot coding team. We will make use of Traiko's help at this stage of development if the task proves to be more difficult than we anticipate.
+The algorithms used by the robot will also be a challenge facing our robot programming team. We will make use of Traiko's help at this stage of development if the task proves to be more difficult than we anticipate.
 
 \underline{App}
 
@@ -476,16 +478,17 @@ The UI will have to be usable for novice users and one of the risks is that this
 
 \section{Group organisation}
 \begin{table}[]
+  \resizebox{\columnwidth}{!}{
   \begin{tabular}{lll}
     \hline
-    Robot building & Robot coding & App development   \\
+    Robot building & Robot programming & App development   \\
     \hline
     {\bf Jakub}          & {\bf Wojtek}       & {\bf Theo}              \\
     Luukas         & Ben          & Yuchen            \\
     Rebecca        & Errikos      & Ching Ling \\
     \hline
     Project management: & {\bf Michael} & \\
-  \end{tabular}
+  \end{tabular}}
   \caption{Team splits across the group. Names in bold are key points of contact.}
   \label{tab:group-split}
 \end{table}
@@ -502,7 +505,7 @@ The disadvantage of using a functional structure is that it can make communicati
 
 In keeping with an Agile approach, {\bf team members will give daily updates on their work} (how they are progressing, if they have any blockers, and whether they need any help from other team members) in online `standups' on Slack. Additionally the team POCs will meet once a week to make sure that any cross-team integration issues are handled, as well as to support each other if needed. 
 
-{\bf Code-sharing} will be done exclusively through GitHub. Using version control more generally allows us to track our work over time and easily deal with any merge conflicts or other issues that may come up in doing distributed development. GitHub was chosen primarily because all members of the group are somewhat familiar with it, meaning there will be a shallower learning curve to complete our project using it. 
+{\bf Code-sharing} will be done exclusively through GitHub. Using version control more generally allows us to track our work over time and easily deal with any merge conflicts or other issues that may come up in doing distributed development. GitHub was chosen primarily because all members of the group are somewhat familiar with it, meaning there will be a shallower learning curve to complete our project using it. When working to demos we will put in place a {\bf code freeze} on midnight on the Sunday before the demo date to reduce risks to the system at the demo itself. 
 
 Using GitHub also allows us to do {\bf task allocation and progress sharing} using GitHub projects. We will follow a Kanban approach, separating tasks into ``to do'', ``in progress'', and ``done'', with one board per team. Using Kanban allows for team members to clearly see what tasks need to be done before the next demo; choose to begin working on tasks they feel they are suitable for; and to identify where there may be blockers within their work (ie. cards that are spending extended time in ``to do''). Additionally, making these boards public allows for other teams to see how work is progressing in the rest of the group. Progress updates will also be discussed in weekly team meetings on a granular level and more broadly in POC meetings.
 
