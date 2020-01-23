@@ -132,232 +132,105 @@ We describe the following user stories to exemplify the functionality of the sys
 \end{enumerate}
 \section{Task planning}
 
-\subsection{Milestones} 
-We will split the work of each team into four milestones, each corresponding to the Sunday before the demo date on Wednesday. 
-
-\subsubsection{Milestone 1}
-For the first demo on February 5th we plan to present our robot base frame with basic movement and tracking functionality, as well as a skeleton Android app.
-
-Robot sub goals:
+\subsection{Milestones}
+By the final demo, the robot will have the following key functionality:
 \begin{itemize}
-\item The chassis is sturdy enough to carry a light load, initially 500g, representing future components. % TODO how much will this load weigh?
-\item The robot can move around freely by remote control.
-\item Choose whether to use a TurtleBot or Lego frame for building the robot, based on which performs better in testing on battery life, turn radius, speed, and maximum load. 
+\item Free movement of the robot to patient rooms;
+\item Steady movement of a mechanical arm along a horizontal plane, allowing for delivery of food and water;
+\item Steady movement of a lift up and down, allowing for the robot to be level with the patient;
+\item Ability to move to a room on request and on a timetable;
+\item Ability to send and receive messages to and from the app. 
 \end{itemize}
 
-
-Once these sub goals are achieved, our robot base frame will be able to reliably and precisely follow along a straight line path of tape. 
-
-App sub goals:
+Likewise, the app will have the following functionality to support the robot:
 \begin{itemize}
-\item Create a functioning Android app which can run on a mobile device. % TODO should we specify exactly which?
-\item Set up a basic user interface, consisting of five different activity screens in the app. 
-\item Design and implement a database which can store a patient's information using Firebase.
-\item Implement GDPR features into the database. % TODO how will we do this?
-\item Implement functionality in the app to create and edit patient information in the database.
+\item A usable and accessible Android app, supported by user testing;
+\item Ability to send and receive messages to and from the robot;
+\item Ability to create calendars and timetables for when patients should be woken up and given food and water;
+\item A visualization dashboard for patient hydration and nutrition, showing their history of food and water deliveries;
+\item GDPR compliance to protect patient privacy, including a privacy policy and data encryption at rest and in transit. 
 \end{itemize}
 
-With these sub goals achieved, we can demonstrate updating the database from the Android app.
+We have split our team into three groups to manage the respective tasks of robot building, robot programming and app development. The work for each team is designated by four milestones, each corresponding to the Sunday before the Wednesday demo date. In the following sections we detail what we expect to have achieved by each milestone. 
 
-\subsubsection{Milestone 2}
+\subsubsection{Milestone 1 (February 2nd)}
+For the first milestone we build and test basic components, from which we will build on throughout the rest of the course. 
 
-For the second demo on February 26th we will showcase our robot with several new components and movement abilities, plus connectivity and interaction with the Android app.  
+The robot building team will present their prototype design, choosing from either TurtleBot or Lego: a minimal chassis that can hold loads of at least 500 grams, move forwards and backwards, and make turns.
 
-Movement sub goals:
+The app building team will demonstrate a skeleton Android app running on a device, with basic UI design for activity screens; as well as demonstrate a database set up in Firebase interacting with the Android app. 
+
+\subsubsection{Milestone 2 (February 23rd)}
+At this milestone we begin to integrate each team's work together, building the connections necessary to connect between each component of the project. 
+
+The robot building team will finalize the design of the chassis, and demonstrate basic component integration, showing all components controllable by command:
 \begin{itemize}
-\item Program the robot to recognize turns in a tape path
-\item Implement a memory system that allows the robot to remember its current state 
+\item An arm operating on a horizontal plane to deliver food and water to the patient;
+\item A scissor lift able to raise the robot up and down;
+\item Buttons and sensors integrated with the hardware.
 \end{itemize}
 
-With these new features, we will demonstrate the robot following along a bending line of tape on the floor, navigating around turns in the path. % TODO do we want to do tape? Let's rework these goals. 
+The app building team will demonstrate the ability to receive alerts from the robot or patient controller; and to demonstrate analysis of the usability of the app based on user testing. 
 
-Component sub goals:
+\subsubsection{Milestone 3 (March 8th)}
+At this milestone we flesh out key functionality within each component, building out APIs and beginning to fully connect all components. 
+
+The robot building team will integrate 3D printed buttons and finalize any component choices, as well as demonstrating smooth movement of the arm and lift. 
+
+
+The app building team will demonstrate key functionality within the app, allowing for:
 \begin{itemize}
-\item Attach a robotic arm, which will later be used to pass food and water to the patient along one axis.
-\item Equip the base frame with a lift system, which can be used to raise the robot's height in order to interact with patients in hospital beds.
-\item Implement external buttons which can be pressed by the patient to send a signal.
+\item Timetabling of food/water delivery;
+\item Timetabling of wake-up time;
+\item Requesting the robot to check-in on a patient.
 \end{itemize}
+The app will also demonstrate GDPR compliance with a written privacy policy and encrypted data at rest and during transit.
 
-App sub goals:
-\begin{itemize}
-\item Accessible user interface allowing users to enter and show data from the database; and allow seeing alerts from the robot. Accessibility will be based on user testing.  
-\item Receives alerts from the robot when its button is pressed.
-\end{itemize}
-
-\subsubsection{Milestone 3}
-
-On March 11th for the third demo we will present the robot with more freedom of movement as well as app functionality. 
-
-Robot sub goals:
-\begin{itemize}
-\item Establish ability to move arm, lift, and robot on external command, to be integrated with app at a later stage. 
-\end{itemize}
-
-Movement sub goals:
-\begin{itemize}
-\item Implement functionality to move around between rooms without needing a line of tape to follow.
-\end{itemize}
-
-App connectivity sub goals:
-\begin{itemize}
-\item Implement input and saving of:
-  \begin{itemize}
-  \item Scheduling wake-up times for patients;
-  \item Visiting a patient for an impromptu check-up;
-  \item Scheduling meal and water times for patients. 
-  \end{itemize}
-\item Implement encryption at rest and in movement of patient data, to support GDPR compliance. 
-\end{itemize}
-
-\subsubsection{Milestone 4}
-
-On the final demonstration on March 30th we will show our completed prototype with all components working together: we will fully integrate app functionality with hardware and robot software, being able to demonstrate how a nurse setting up actions for the robot can then be performed by the robot. 
+\subsubsection{Milestone 4 (March 29th)}
+By this milestone we are ready to demonstrate a functioning robot, connecting the work of the robot hardware and software teams and the app team. We will be able to demonstrate each of the use-cases in practice, with full integration between components. 
 
 \subsection{Task Decomposition}
 
-We have split our team into three groups to manage the respective tasks of robot building, robot programming and app development. For each milestone we have assigned the sub goals to the relevant team, and also planned how our sub teams will work together to implement these as working features.
+For each milestone we have assigned sub-tasks to the relevant team, and also planned how our sub teams will work together to implement these as working features.
 
 For each sub-task we have assigned a difficulty rating ranging from simplest to most complex with XS, S, M, L, XL. We assign these values as estimations of the time and difficulty involved with implementing the sub-task, based on initial research, expert feedback, and gut feeling. 
 
 
-\subsubsection{Robot Building}
+\subsubsection{Robot building}
 
-{\bf Milestone 1}: We will build two early versions of the robot base frame with basic moving functionality (forward movement and turning). The base will be steady enough to hold a light load. 
+{\bf Milestone 1}
 
-Sub tasks:
+{\bf Milestone 2}
 
-Robot chassis
-\begin{itemize}
-\item Build two frames: one from Lego and one using TurtleBot (M)
-\end{itemize}
-Testing
-\begin{itemize}
-\item Test base frames of Lego vs Turtlebot based on battery life, turn radius, maximum load, speed (L)
-\end{itemize}
+{\bf Milestone 3}
 
-{\bf Milestone 2}: Main robot components attached
-
-Components:
-\begin{itemize}
-\item Build and add arm operating on one axis to deliver food and water to patient (S)
-\item Build and add scissor lift to raise robot up and down (XL)
-\item 3D print and add physical buttons (M)
-\end{itemize}
-    
-{\bf Milestone 3}: Interface with robot programming to allow components to be controlled through software
-
-{\bf Milestone 4}: Robot has all components attached and is sturdy enough to move between rooms and complete tasks according to its timetable (L) 
+{\bf Milestone 4}
 
 
-\subsubsection{Robot Programming}
+\subsubsection{Robot programming}
 
-Milestone 1: Robot can move around and follow a straight line of tape.
+{\bf Milestone 1}
 
-Sub tasks: 
+{\bf Milestone 2}
 
-Basic RC of robot:
-\begin{itemize}
-\item Connecting software to motor controls using ROS and EV3 (S)
-\item Moving forward and backwards (S)
-\item Rotating on the spot and turning to face a specified direction angle (M)
-\end{itemize}
-Robot pathfinding system:
-\begin{itemize}
-\item Robot can recognise tape underneath it and follow the tape in a straight line (L)
-\end{itemize}
-Testing:
-\begin{itemize}
-\item Testing out the ROS programming of Turtlebot vs the Python programming of Lego Mindstorms EV3 block to decide which is simplest and most customisable to find the best platform solution on which to build our pathfinding algorithms (M)
-\end{itemize}
+{\bf Milestone 3}
 
-Milestone Two: Robot can follow a line of tape with turns and send alerts to app 
+{\bf Milestone 4}
 
-Pathfinding
-\begin{itemize}
-\item Robot can follow the tape around turns (M)
-\item Robot has a memory system that remembers it's current state of position on the line (XL)
-\end{itemize}
-Connectivity:
-\begin{itemize}
-\item Robot can send an alert to app when it's button is pressed (M) 
-\end{itemize}
+\subsubsection{App development}
 
-Milestone 3: Robot can maneuver through it's environment more independently and also receive remote controls
-    
-Pathfinding:
-\begin{itemize}
-\item Can navigate between rooms on it's own without line of tape (XL)
-\end{itemize}    
-Connectivity:
-\begin{itemize}
-\item Robot can receive basic movement RC commands from app (L)
-\item Robot arm can be operated to assist patients (XL)   
-\end{itemize}
-    
-Milestone 4: Final prototype
+{\bf Milestone 1}
 
-Robot can follow it's timetable received from the app, travelling to rooms at given times and performing it's programmed tasks.
+{\bf Milestone 2}
 
-Pathfinding:
-\begin{itemize}
-\item Can navigate carefully around obstacles (XL)
-\end{itemize}
-App connectivity 
-\begin{itemize}
-\item Robot can receive Calendar timetable and database information from the app to plan it's route through the rooms and to know who         needs which medications at what times (L)
-\end{itemize}
-    
-\subsubsection{App Development}
+{\bf Milestone 3}
 
-Milestone 1: Skeleton app
-
-Database:
-\begin{itemize}
-\item Database server set up which contains patient name and basic information (S)
-\item Implement GDPR compliant design with ethical and security considerations  (XL)
-\end{itemize}
-    
-App:
-\begin{itemize}
-\item Skeleton Android app set up on a mobile device using Firebase (S)
-\item Updating database patient information through app (L)
-\end{itemize}    
-Milestone 2: Basic robot connectivity
-
-App:
-\begin{itemize}
-\item Basic RC control of robot from app (S)
-\item Show alerts from pressing button on robot (M)
-\item Creating a few different UI designs (L)
-\item Testing UI designs on consumers with ethical approval (M)
-\end{itemize}
-Milestone 3: Sending and receiving complex information to and from robot
-
-App:
-\begin{itemize}
-\item Receiving photos from robot's camera (XL)
-\item Add calendar functionality for managing and updating a patient's medication timetable (M)
-\end{itemize}
-Database:
-\begin{itemize}
-\item Store additional information for patient, including their health conditions and medication timetable (M)
-\item Implement encryption security for this sensitive personal information (L)
-\end{itemize}
-Milestone 4: Final UI, features and full robot control
-
-App:
-\begin{itemize}
-\item Shows GPS location of robot and alerts for if it is stolen (XL)
-\item Final UI with easy to use sections (L)
-\item App provides full RC control over the robot and it's components (M)
-\item App conveys relevant information about the robot's location, activity and timetable for the day (L)
-\item App allows user to plan a timetable for the robot's daily tasks (L)
-\end{itemize}
+{\bf Milestone 4}
 
 
 \subsection{Resource distribution}
 
-The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 500 hours per team. Each milestone has the same deadline across the teams - the date of the corresponding demo. They are shown in Table 2. Tables 3, 4, and 5 show the individual resource distribution for each of our three teams.
+The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 1500 hours in total, or 500 hours per team. Each milestone has the same deadline across the teams - the date of the corresponding demo. They are shown in Table 2. Tables 3, 4, and 5 show the individual resource distribution for each of our three teams.
 \begin{table}[]
   \begin{center}
   \begin{tabular}{ll}
