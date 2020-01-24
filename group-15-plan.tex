@@ -161,7 +161,7 @@ Likewise, the app will have the following functionality to support the robot:
 
 We have split our team into three groups to manage the respective tasks of robot building, robot programming and app development. The work for each team is designated by four milestones, each corresponding to the Sunday before the Wednesday demo date. In the following sections we detail what we expect to have achieved by each milestone. 
 
-\subsubsection{Milestone 1 (February 2nd)}
+\subsubsection{Milestone 1 (February 2nd / Feburary 5th)}
 For the first milestone we build and test basic components, from which we will build on throughout the rest of the course. 
 
 The robot building team will present their prototype design, choosing from either TurtleBot or Lego: a minimal chassis that can hold loads of at least 500 grams, move forwards and backwards, and make turns.
@@ -170,7 +170,7 @@ The robot software team will demonstrate basic movement control, where the robot
 
 The app building team will demonstrate a skeleton Android app running on a OnePlus 5T, with basic UI design for activity screens; as well as demonstrate a database set up in Firebase interacting with the Android app. 
 
-\subsubsection{Milestone 2 (February 23rd)}
+\subsubsection{Milestone 2 (February 23rd / February 26th)}
 At this milestone we begin to integrate each team's work together, building the connections necessary to connect between each component of the project. 
 
 The robot building team will finalize the design of the chassis, and demonstrate basic component integration, showing all components controllable by command:
@@ -184,7 +184,7 @@ The robot software team will demonstrate more advanced movement control: being a
 
 The app building team will demonstrate the ability to receive alerts from the robot or patient controller. 
 
-\subsubsection{Milestone 3 (March 8th)}
+\subsubsection{Milestone 3 (March 8th / March 11th)}
 At this milestone we flesh out key functionality within each component, building out APIs and beginning to fully connect all components. 
 
 The robot building team will integrate 3D printed buttons and finalize any component choices, as well as demonstrating smooth movement of the arm and lift. They will also create a prototype for the patient controller. 
@@ -199,7 +199,7 @@ The app building team will demonstrate key functionality within the app, allowin
 \end{itemize}
 The app will also demonstrate GDPR compliance with a written privacy policy and encrypted data at rest and during transit.
 
-\subsubsection{Milestone 4 (March 29th)}
+\subsubsection{Milestone 4 (March 29th / April 1st)}
 By this milestone we are ready to demonstrate a functioning robot, connecting the work of the robot hardware and software teams and the app team. We will be able to demonstrate each of the use-cases in practice, with full integration between components.
 
 The app team will demonstrate quantitative and qualitative analysis of UI usability testing, and any steps made to improve the UI based on this testing.
@@ -367,7 +367,8 @@ Test UI accessibility:
 
 \subsection{Resource distribution}
 
-The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 1500 hours in total, or 500 hours per team. Each milestone has the same deadline across the teams --- a code freeze on the Sunday before a demo, and then a demonstration on the demo date. They are shown in Table~\ref{tab:demo-dates}. Table~\ref{tab:rb-rd} shows the resource distribution of the robot building teams 500 hours in terms of the equipment, skills, and estimated hours each sub-task of the milestones will require. Similarly, Table~\ref{tab:rp-rd} shows the robot coding teams resource distribution, and Table~\ref{tab:app-rd} shows this for the app team.
+The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 1500 hours in total, or 500 hours per team. Each milestone has the same deadline across the teams --- a code freeze on the Sunday before a demo, and then a demonstration on the demo date. They are shown in Table~\ref{tab:demo-dates}. Table~\ref{tab:rb-rd} shows the resource distribution of the robot building team's 500 hours in terms of the equipment, skills, and estimated hours each sub-task of the milestones will require. Similarly, Table~\ref{tab:rp-rd} shows the robot coding team's resource distribution, and Table~\ref{tab:app-rd} shows this for the app team.
+
 \begin{table}[]
   \begin{center}
   \begin{tabular}{lll}
@@ -418,10 +419,10 @@ The 200 hours per member will include the following for every member: {\bf at le
     1               & P.1.1: Robot moves set distances in straight line & Turtlebot/Lego-bot & ROS, Python for motors & 30\\ \cline{2-5}
                     & P.1.2: Robot can turn in place & - & ROS, basic physics/movement & 30\\ \cline{2-5}
                     & P.1.3: Begin working with sensors and readings & Sensors (input) & Analysis of sensor readings & 50 \\ \hline
-    2               & P.2.1: Bot can locate itself & Sensors, cameras & Object recognition & 70\\ \cline{2-5}
-                    & P.2.2: Begin using sensors for bot to stop itself & Sensors, robot & Reading analysis & 20\\ \cline{2-5}
+    2               & P.2.1: Robot can locate itself & Sensors, cameras & Object recognition & 70\\ \cline{2-5}
+                    & P.2.2: Begin using sensors for robot to stop itself & Sensors, robot & Reading analysis & 20\\ \cline{2-5}
                     & P.2.3: Begin software-app functionality & - & Networking & 10\\ \hline
-    3               & P.3.1: Movement of bot complete & - & More ROS & 20\\ \cline{2-5}
+    3               & P.3.1: Movement of robot complete & - & More ROS & 20\\ \cline{2-5}
                     & P.3.2: Obstacle avoidance & - & Machine learning & 70\\ \cline{2-5}
                     & P.3.3: Control of scissor lift & Access to scissor lift & - & 20\\ \cline{2-5}
                     & P.3.4: Map environment & - & More ML & 80\\ \hline
@@ -444,10 +445,10 @@ The 200 hours per member will include the following for every member: {\bf at le
     1               & A.1.1: Create Android skeleton app & IDE & Kotlin, Android & 30\\ \cline{2-5}
                     & A.1.2: Set up a database management system & Firebase & XML & 30\\ \cline{2-5}
                     & A.1.3: Send/receive data to database from app & - & Firebase with networking & 30\\ \hline
-    2               & A.2.1: Build bot communication API & - & Communication (RP team) & 70\\ \cline{2-5}
-                    & A.2.2: Integrate robot alert feature & Access to bot & Networking features & 40\\ \hline
+    2               & A.2.1: Build robot communication API & - & Communication (RP team) & 70\\ \cline{2-5}
+                    & A.2.2: Integrate robot alert feature & Access to robot & Networking features & 40\\ \hline
     3               & A.3.1: Timetable of deliveries & - & Communication (RP team) & 40\\ \cline{2-5}
-                    & A.3.2: Timetable wake-up alarm & Access to bot & Networking features & 30\\ \cline{2-5}
+                    & A.3.2: Timetable wake-up alarm & Access to robot & Networking features & 30\\ \cline{2-5}
                     & A.3.3: On demand check-in request feature & - & Kotlin, Android & 40\\ \cline{2-5}
                     & A.3.4: Dashboard for timetable history & Memory & Memory management & 50\\ \cline{2-5}
                     & A.3.5: Encrypt the data transmissions & - & HTTPS & 60\\ \hline
@@ -471,25 +472,25 @@ One risk we face is in meeting milestone dates. It is possible that something go
 
 \subsubsection{Robot building}
 
-In terms of milestone 1, the main risk would be that the robot design is not able to fulfill expected tasks (particularly carrying loads). We have decided to develop {\bf two prototypes} as a contingency plan for this exact issue. This allows us to compare two designs and ultimately pick the one which we find to be a better choice. 25 hours for the design and building for each robot may seem like a large amount of time when one of them will be discarded. However, ultimately this is leveled against the many more hours that we would have to spend further down the line should we find that our bot was impractical. Having to redevelop the bot as well as the software and some features in our app would require far more than 50 hours between our three teams.
+In terms of milestone 1, the main risk would be that the robot design is not able to fulfill expected tasks (particularly carrying loads). We have decided to develop {\bf two prototypes} as a contingency plan for this exact issue. This allows us to compare two designs and ultimately pick the one which we find to be a better choice. 25 hours for the design and building for each robot may seem like a large amount of time when one of them will be discarded. However, ultimately this is leveled against the many more hours that we would have to spend further down the line should we find that our robot was impractical. Having to redevelop the robot as well as the software and some features in our app would require far more than 50 hours between our three teams.
 
-Another concern we have as a group is that we have underestimated the size of the tasks we have scheduled for each milestone. In the even that this were to happen, the plan for our hardware team to work linearly on multiple features per demo is our contingency plan. We believe that one of these features - if not more - is achievable in a presentable manner for each of the demos.
+Another concern we have as a group is that we have underestimated the size of the tasks we have scheduled for each milestone. In the even that this were to happen, the plan for our hardware team to {\bf work linearly on multiple features} per demo is our contingency plan. We believe that one of these features --- if not more --- is achievable in a presentable manner for each of the demos.
 
-The 80 hours of `maintenance' in milestone 4 gives the hardware team `flex time' to use for any features they find to be more challenging than anticipated whilst also allowing them time for actual maintenance of features that the robot programming team may encounter issues with.
+The 80 hours of `maintenance' in milestone 4 gives the hardware team {\bf `flex time'} to use for any features they find to be more challenging than anticipated whilst also allowing them time for actual maintenance of features that the robot programming team may encounter issues with.
 
 \subsubsection{Robot programming}
 
-The failure of the sensors in a bot designed for use in nursing homes and also hospital settings is a major risk in such a project. In order to minimise this particular risk we plan to make use of both the overhead cameras in the demo space, as well as sensors on the robot. In a real world setting the overhead cameras would be mounted in corridors and communal areas which are highly congested with humans, but in which there is less concern for privacy. The sensors will be made use of and in fact very handy in these areas, but moreso in those such as patient rooms where the issue of patient privacy is of the highest priority.
+The failure of the sensors in a robot designed for use in nursing homes and also hospital settings is a major risk in such a project. In order to minimise this particular risk we plan to make use of {\bf both the overhead cameras in the demo space, as well as sensors on the robot}. In a real world setting the overhead cameras would be mounted in corridors and communal areas which are highly congested with humans, but in which there is less concern for privacy. The sensors will be made use of --- and in fact very handy --- in these areas, but moreso in those such as patient rooms where the issue of patient privacy is of the highest priority.
 
-The overhead cameras should, in an ideal world, be able to track the bot at all times, but the aim of the on board sensors is to step in should the cameras lose track of the bot or in the case of a sudden change in the environment.
+The overhead cameras should, in an ideal world, be able to track the robot at all times, but the aim of the on board sensors is to step in should the cameras lose track of the robot or in the case of a sudden change in the environment.
 
 \subsubsection{App}
 
-A risk the app team have considered is that the end product is not usable for novice users. The app team will embark on a large amount of UI testing, some 50 hours, before the final demo in order to make sure that the app is of a standard someone in our target industry would be comfortable with.
+A risk the app team have considered is that the end product is not usable for novice users. The app team will embark on a {\bf large amount of UI testing}, some 50 hours, before the final demo in order to make sure that the app is of a standard someone in our target industry would be comfortable with.
 
-Concerns of confidentiality are ones which we take with the utmost seriousness, especially given the data we will be processing could be classed as sensitive data under GDPR. It is therefore a key aim of the app team to ensure that the connection between app and robot is encrypted. We plan to use HTTPS connections between the two to fulfill this aim.
+Concerns of confidentiality are ones which we take with the utmost seriousness, especially given the data we will be processing could be classed as sensitive data under GDPR. It is therefore a key aim of the app team to ensure that the {\bf connection between app and robot is encrypted}. We plan to use HTTPS connections between the two to fulfill this aim. We will also ensure patient and nurse confidence in our solution protecting their privacy by writing an easily-understandable {\bf privacy policy}. 
 
-The app team will be using Firebase the facilitate the database system behind the app. This is a relatively safe and reliable choice, and comes with very little risk. Using Kotlin could potentially be seen as a risk. However, given it is fully interoperable with Java and is becoming increasingly popular for Android development, our team have decided to build the app with it. The transition is extremely straightforward and therefore we do not consider this a risk, even for a developer who may have little experience in using it.
+The app team will be using Firebase the facilitate the database system behind the app. This is a relatively safe and reliable choice, and comes with very little risk. Using Kotlin could potentially be seen as a risk. However, given it is {\bf fully interoperable with Java} and is becoming increasingly popular for Android development, our team have decided to build the app with it. The transition is extremely straightforward and therefore we do not consider this a risk, even for a developer who may have little experience in using it.
 
 \section{Group organisation}
 \begin{table}[]
