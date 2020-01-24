@@ -210,6 +210,13 @@ For each milestone we have assigned sub-tasks to the relevant team, and also pla
 
 For each sub-task we have assigned a difficulty rating ranging from simplest to most complex with XS, S, M, L, XL. We assign these values as estimations of the time and difficulty involved with implementing the sub-task, based on initial research, expert feedback, and gut feeling. 
 
+We show how all sub-tasks relate to each other using a {\bf Gantt chart} in figure~\ref{gantt}.
+
+\begin{figure*}
+  \includegraphics[width=\textwidth]{figs/gantt_screenshot.png}
+  \caption{Gantt chart representing dependencies between tasks and flow of tasks over time. Due to limitations in text width, tasks are represented using the shortened versions mentioned in tables~\ref{tab:rb-rd}, ~\ref{tab:rp-rd}, and ~\ref{tab:app-rd}. Milestone dates track to the Wednesday of the demo date rather than the Sunday: work on features for a milestone is expected to finish on the Sunday but work on new features will not begin until Monday.  }
+  \label{gantt}
+\end{figure*}
 
 \subsubsection{Robot building}
 {\bf Milestone 1}
@@ -360,20 +367,21 @@ Test UI accessibility:
 
 \subsection{Resource distribution}
 
-The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 1500 hours in total, or 500 hours per team. Each milestone has the same deadline across the teams - the date of the corresponding demo. They are shown in Table~\ref{tab:demo-dates}. Table~\ref{tab:rb-rd} shows the resource distribution of the robot building teams 500 hours in terms of the equipment, skills, and estimated hours each subtask of the milestones will require. Similarly, Table~\ref{tab:rp-rd} shows the robot coding teams resource distribution, and Table~\ref{tab:app-rd} shows this for the app team.
+The 200 hours per member will include the following for every member: {\bf at least} 15-20 hours worth of team meetings, 4 hours of demos with another 4 for preparation, 2 hours of workshops with each member attending at least one, and 1-2 hours for the individual reflection report. This leaves each member with 168 hours to dedicate to their work; roughly 1500 hours in total, or 500 hours per team. Each milestone has the same deadline across the teams --- a code freeze on the Sunday before a demo, and then a demonstration on the demo date. They are shown in Table~\ref{tab:demo-dates}. Table~\ref{tab:rb-rd} shows the resource distribution of the robot building teams 500 hours in terms of the equipment, skills, and estimated hours each subtask of the milestones will require. Similarly, Table~\ref{tab:rp-rd} shows the robot coding teams resource distribution, and Table~\ref{tab:app-rd} shows this for the app team.
 \begin{table}[]
   \begin{center}
-  \begin{tabular}{ll}
+  \begin{tabular}{lll}
     \hline
-    Demo & Date   \\
+    Milestone & Code freeze & Demo date \\
     \hline
-    1 & Feb 5 \\
-    2 & Feb 26 \\
-    3 & Mar 11 \\
-    4 & Apr 1\\ \hline
+    1 & Feb 2 & Feb 5 \\
+    2 & Feb 23 & Feb 26 \\
+    3 & Mar 8 & Mar 11 \\
+    4 & Mar 29 & Apr 1 \\
+    \hline
   \end{tabular}
   \end{center}
-  \caption{Demo dates.}
+  \caption{Milestones and their associated code freeze and demo dates.}
   \label{tab:demo-dates}
 \end{table}
 
