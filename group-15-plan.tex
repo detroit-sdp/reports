@@ -26,7 +26,7 @@
 
 \begin{abstract}
   We propose an assistive healthcare robot, {\it Tadashi}, to automate simple tasks within a care home or supported living environment and allow nurses to spend more time caring for their patients.
-  {\it Tadashi} will automate three key tasks in the nurse's day. Firstly, waking a patient up at a time specified by the nurse, by coming into their room and speaking to them. Secondly, bringing water and food to patients at specified times or on request. Thirdly, checking on the welfare of the patient while the nurse is occupied elsewhere, by coming to their room and asking the patient if they are okay and if they need a nurse to attend to them. {\it Tadashi} will be able to move autonomously around a prototype living space using input from sensors, initially overhead cameras then sensors integrated into the robot itself. 
+  {\it Tadashi} will automate three key tasks in the nurse's day. Firstly, waking a patient up at a time specified by the nurse, by coming into their room and speaking to them. Secondly, bringing water and food to patients at specified times or on request. Thirdly, checking on the welfare of the patient while the nurse is occupied elsewhere, by coming to their room and asking the patient if they are okay and if they need a nurse to attend to them. {\it Tadashi} will be able to move autonomously around a prototype living space using input from sensors: overhead cameras and sensors integrated into the robot itself. 
 \end{abstract} 
 
 \section{Goal description}
@@ -44,13 +44,13 @@ There is no national guidance on staffing levels and nurse:patient ratios in car
 
 With this many patients to take care of, nurses struggle to get the time they need with patients. In a 2017 survey on the impact of high nurse:patient ratios \cite{unison}, 63.2\% of nurses said that comforting or talking to patients was rushed, unfinished, not done to an acceptable standard, or missed entirely.
 
-Equally, a 2013 survey showed that nurses spend almost 1/5 of their day on administrative tasks; and only 20\% are satisfied with how they spend their time --- preferring to spend less time on admin and more time on direct care \cite{rcnpol}.
+Equally, a 2013 survey showed that nurses spend almost 1/5 of their day on administrative tasks, and only 20\% are satisfied with how they spend their time --- preferring to spend less time on admin and more time on direct care \cite{rcnpol}.
 
-By automating some tasks using Tadashi, nurses can decrease the amount of time they spend on administrative tasks, and increase the amount of time they spend caring for patients.
+By automating some tasks using Tadashi, nurses can {\bf decrease the amount of time they spend on administrative tasks}, and increase the amount of time they spend caring for patients.
 
-With elderly populations in particular, hydration and nutrition presents a pressing concern \cite{hydrate}. A Care Quality Commission inspection in 2011 found that three out of 12 NHS trusts inspected failed to meet standards required by law in meeting patient needs regarding nutrition and hydration \cite{cqc}. A 2018 report from the Office for National Statistics found that more than 600 care home residents died suffering from malnutrition or dehydration between 2013 and 2017 \cite{ons}.
+With elderly populations in particular, {\bf hydration and nutrition presents a pressing concern} \cite{hydrate}. A Care Quality Commission inspection in 2011 found that three out of 12 NHS trusts inspected failed to meet standards required by law in meeting patient needs regarding nutrition and hydration \cite{cqc}. A 2018 report from the Office for National Statistics found that more than 600 care home residents died suffering from malnutrition or dehydration between 2013 and 2017 \cite{ons}.
 
-Tadashi will allow for delivery of water or food to patients at a specified time --- or patients to request these deliveries themselves --- in order to ensure patients have access to regular food and water. Additionally, by tracking these requests we will provide a dashboard for nurses to view when patients last had food or water: this provides added value to nurses along with reducing their workload through automation. 
+Tadashi will allow for {\bf delivery of water or food to patients} at a specified time --- or patients to request these deliveries themselves --- in order to ensure patients have access to regular food and water. Additionally, by tracking these requests we will {\bf provide a dashboard for nurses to view} when patients last had food or water: this provides added value to nurses along with reducing their workload through automation. 
 
 The problems mentioned above will only get worse in the future. It is estimated that by 2035, up to 190,000 more people aged 65 years or above will require some level of care, and increase of 86\% from today \cite{lancet}. Meanwhile, ongoing staffing issues in the NHS mean that in 10 years time the NHS will have a shortfall of 108,000 nurses \cite{nuffield}. This combination of factors will drive demand for innovative solutions --- including assistive technology like Tadashi.
 
@@ -65,6 +65,8 @@ The key takeaways from this work that we will take into account in our project:
 \item Staff reacted positively to the introduction of the robot: ``The overall reaction from the personnel ... was very positive'' (ibid). 
 \end{itemize}
 
+Based on this, if we have additional time at milestone 4 we will implement speech output, but this is not considered a core task so has not been mentioned in the sections below.
+
 \subsection{High-level description} 
 We describe the following user stories to exemplify the functionality of the system: 
 \begin{enumerate}
@@ -78,9 +80,10 @@ We describe the following user stories to exemplify the functionality of the sys
 \begin{enumerate}
 \item The nurse specifies in the app what time each patient should wake up.
 \item At the specified time, Tadashi navigates to the specified patient's room.
-\item Once in the room, Tadashi speaks to wake the user up. A button is accessible to the patient to press once they have woken up:
+\item Once in the room, Tadashi wakes the user up. A button is accessible to the patient to press once they have woken up:
   \begin{enumerate} 
   \item If the patient does not press the button, Tadashi sends an alert to the nurse's app, who can then go check on the person. 
+  \item If the patient presses a button on their own controller indicating they are okay, Tadashi informs the nurse and no further action will be taken.
   \end{enumerate}
 \item Tadashi returns to his starting spot to await the next command. 
 \end{enumerate}
@@ -159,7 +162,7 @@ Likewise, the app will have the following functionality to support the robot:
 \item GDPR compliance to protect patient privacy, including a privacy policy and data encryption at rest and in transit. 
 \end{itemize}
 
-We have split our team into three groups to manage the respective tasks of robot building, robot programming and app development. The work for each team is designated by four milestones, each corresponding to the Sunday before the Wednesday demo date. In the following sections we detail what we expect to have achieved by each milestone. 
+We have {\bf split our team into three groups} to manage the respective tasks of robot building, robot programming and app development. The work for each team is designated by {\bf four milestones, each corresponding to the Sunday before the Wednesday demo date}. In the following sections we detail what we expect to have achieved by each milestone. 
 
 \subsubsection{Milestone 1 (February 2nd / Feburary 5th)}
 For the first milestone we build and test basic components, from which we will build on throughout the rest of the course. 
@@ -214,7 +217,7 @@ We show how all sub-tasks relate to each other using a {\bf Gantt chart} in figu
 
 \begin{figure*}
   \includegraphics[width=\textwidth]{figs/gantt_screenshot.png}
-  \caption{Gantt chart representing dependencies between tasks and flow of tasks over time. Due to limitations in text width, tasks are represented using the shortened versions mentioned in tables~\ref{tab:rb-rd}, ~\ref{tab:rp-rd}, and ~\ref{tab:app-rd}. Milestone dates track to the Wednesday of the demo date rather than the Sunday: work on features for a milestone is expected to finish on the Sunday but work on new features will not begin until Monday.  }
+  \caption{{\bf Gantt chart} representing dependencies between tasks and flow of tasks over time. Due to limitations in text width, tasks are represented using the shortened versions mentioned in tables~\ref{tab:rb-rd}, ~\ref{tab:rp-rd}, and ~\ref{tab:app-rd}. {\bf Milestone dates} track to the Wednesday of the demo date rather than the Sunday: work on features for a milestone is expected to finish on the Sunday but work on new features will not begin until Monday. Arrows between bars indicate key {\bf dependencies}: minor dependencies are not marked but can be seen as a bar not being started until another is finished. }
   \label{gantt}
 \end{figure*}
 
@@ -469,6 +472,7 @@ The 200 hours per member will include the following for every member: {\bf at le
 
 One risk we face is in meeting milestone dates. It is possible that something goes wrong before a demo, and we do not have time to fix it --- for example, some troublesome code is pushed which decreases or stops functionality of a key feature we wish to demonstrate. To minimize the risk of this, we have chosen to use {\bf code freezes}: code for a new feature can only be pushed up to midnight on the Sunday before a demo date, giving Monday through Wednesday to fix any bugs arising. This is a method commonly used in software teams working to critical deadlines, and will allow us to minimize the risk of failure at a demo date.
 
+Another risk we face as a team is in a sub-team not completing a task that other sub-teams are relying on being complete to continue with their work. To reduce this risk we have {\bf minimized inter-team dependencies}, meaning that if a sub-team is delayed in reaching a milestone other teams can continue working on other tasks in the meantime. 
 
 \subsubsection{Robot building}
 
