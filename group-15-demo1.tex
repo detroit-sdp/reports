@@ -33,44 +33,41 @@ The abstract should consist of one sentence describing the intended functionalit
 
 This section should start with your goals:
 \begin{itemize}
-    \item List each of the goals you had set for this demo, appended with "achieved", "partly achieved" "not achieved"
+\item List each of the goals you had set for this demo, appended with "achieved", "partly achieved" "not achieved"
+\item Start an Android app project in Kotlin: {\bf achieved}
+\item Create five activity screens for the app: {\bf achieved}
+\item Plan out and set up database schema: {\bf achieved}
+\item Implement database using Firebase: {\bf achieved}
+\item Show ability to connect to database (second / receive information to / from database) through app: {\bf achieved}
+\item Implement moving set distances and turning: {\bf achieved}
+\item Test to see if we can get inputs from overhead and internal sensors: {\bf partially achieved}
 \end{itemize}
 
-Concisely summarise the reasons for any deviations from achievement of your intended goals.
+We were only partially able to achieve getting inputs from overhead and internal sensors. This was for two reasons: firstly, we chose to implement arrow key control for moving set distances and tunring in the TurtleBot and this took longer than expected. Secondly, understanding how to process and use Lidar input on the Turtlebot took longer than expected because of a lack of clear documentation on its usage. This meant that we did not have time to get to using the overhead sensors before the demo deadline. 
 
-Provide a one paragraph description of how your group organised the work towards the goals, including specific indication of which group member worked on which aspect(s). Highlight any methods used to ensure effective group work such as protocols for code integration, task tracking, automated testing, etc.
 
-Provide a summary of how your budget has been spent so far.
+In app development, Yuchen built the skeleton of the UI and implemented accessing the database; Theo improved the UI to make it more user friendly; Ching Ling has been studying Android and preparing her work on the dashboard and user fragment. 
+Robot coding and app development work has been done using GitHub to ensure effective integration of code between team members. We have continued to communicate with Slack to manage inter- and intra-group work.
+
+We have not yet spent any of our budget. 
 
 Provide a clear statement of any modification (relative to your original plan) that you wish to make to your goals for the next demonstration.
 
 \section{Technical details}
 
-This section should describe in technical terms the current status of your system implementation. It should provide clear justification for any design decisions, with brief reference to any alternatives considered or explored. If your implementation is based on the work of others (e.g. you have found a specific vision processing algorithm) you should cite the source (e.g. \cite{Newell81}) and add the details to the example-refs.bib file so that the full reference appears in the bibliography section. Note you can also refer back to your own previous reports. 
-
-You can export references in the bibtex format from Google Scholar. Click the quotation marks underneath the study name, click 'Bibtex' in the new popup. You can then copy and paste this code into example-refs.bib.
-
-The following are some suggested subsections. You might also want to include a system overview diagram showing how all the relevant parts connect. 
 
 \subsection{Hardware}
 
 Explain any construction on the hardware parts of your system, including choice and placement of sensors and actuators. Pictures should be used if appropriate (for instance, figure~\ref{fig:sample-fig}), using the \verb+\includegraphics+ environment to include an image (pdf, png, or jpg formats), ideally with informative labels added. 
 
-To keep your folders clean, it is often a good idea to keep your images in a separate folder. In this example, we've put the figures in the \texttt{figs/} folder. To include images from different folders, give the relative path from this file. Example: \verb+\includegraphics{figs/image_filename}+.
-
-\begin{figure}[tb]
-\vskip 5mm
-\begin{center}
-\centerline{\includegraphics[width=\columnwidth]{figs/crane}}
-\caption{Lego construction: highlight any salient features in the caption}
-\label{fig:sample-fig}
-\end{center}
-\vskip -5mm
-\end{figure} 
-
 \subsection{User interface}
+We have set up two core activities within the app:
 
-Depending on your system and its stage of development, it could be useful to include a section about the user interface design, and the usability decisions behind it. Note, however, that you will be asked to provide a separate 'user guide' for the final demo.
+The {\bf login activity} authenticates the email and password provided by the user using Firebase Authentication. New users can create an account using the signup activity. After the user registers a new account, the app creates an entry for the user with Firebase Authentication and the user will be signed in automatically the next time the app starts.
+
+The {\bf main activity} contains five fragments. For now these fragments are empty skeletons. The `patients' fragment can show a list of patient names, retreieved from Firebase Cloud Firestore, and add new patients for demonstration purposes.
+
+In order to demonstrate user familiarity, we designed the skeleton to look like other apps on the market. We chose to use Firebase for our prototype. Firebase is much easier to use than a traditional SQL database and allows us to sync application data in real time if the database changes. For the patient list view, we chose to use `recyclerview' rather than a traditional `listview' to support flexibility on the design of each item. 
 
 \subsection{Software}
 
