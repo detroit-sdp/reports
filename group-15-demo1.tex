@@ -50,8 +50,11 @@ We were only partially able to achieve getting inputs from overhead and internal
 
 
 In robot building, 
+
 In app development, Yuchen built the skeleton of the UI and implemented accessing the database; Theo improved the UI to make it more user friendly; Ching Ling has been studying Android and preparing her work on the dashboard and user fragment.
-On the project management side, Michael has been off due to illness so primarily contributing to report writing / proofreading and helping with robot coding debugging. 
+
+On the project management side, Michael has been off due to illness so primarily contributing to report writing / proofreading and helping with robot coding debugging.
+
 Robot coding and app development work has been done using GitHub to ensure effective integration of code between team members. We have continued to communicate with Slack to manage inter- and intra-group work.
 
 We have not yet spent any of our budget. 
@@ -97,42 +100,44 @@ If you present algorithms, you can use the \verb+algorithm+ and \verb+algorithmi
 \end{algorithm}
 
 \section{Evaluation}
+Our main quantitative testing in this demo was in comparing the TurtleBot and Lego robots. We considered four aspects of the robot important in choosing which to use for our final product:
+\begin{enumerate}
+\item Rotational velocity
+\item Payload
+\item Battery life
+\item Weight
+\end{enumerate}
 
-This section should first outline any testing methods you used (e.g. repeated runs of subsystems, data-logging, naive user testing). 
+Information for the TurtleBot was read from the specification sheet provided by the manufacturers {\bf BEN PLEASE REFERENCE THIS DOCUMENT - I DON'T KNOW WHERE IT IS}.
 
-It should then present relevant quantitative results. If you are using graphs, please make sure they are properly labelled and logically illustrate the point you want to make (e.g. to compare two algorithms).
+Having built the Lego robot ourselves, we got information about the metrics by performing testing ourselves. Payload was measured by placing objects on the robot until the frame began to buckle, at 5kg of weight: we estimate failure of the frame at 7kg. Battery life was estimated by running the robot's motors until they slowed down to 50\% of speed. 
 
+Having performed this testing, it is clear that the TurtleBot meets our needs much better than the Lego robot. In particular, the significant difference in maximum carrying capacity (30kg vs 7kg) alone means that we have chosen to go for the TurtleBot. As the robot will need to be capable of carrying additional loads --- food and water --- it is essential that it is able to carry these loads without being able to buckle.
 
-At an absolute minimum, this section should provide a table (for instance, table~\ref{tab:sample-table}, using the \verb+table+ environment) of success rates for repeated runs of the whole system (as you will only be able to show one run in the demo).
 
 \begin{table}[h]
 \vskip 3mm
 \begin{center}
 \begin{small}
 \begin{sc}
-\begin{tabular}{lcccr}
+\begin{tabular}{lcc}
 \hline
 \abovespace\belowspace
-Test  & Time(mins) & Errors & Success \\
+Metric & TurtleBot & Lego \\
 \hline
-\abovespace
-1    & 1:30 & 0 & $\surd$ \\
-2    & 3:00 & 2 & $\times$\\
-3    & 2:20 & 1 & $\surd$ \\
-4    & 1:50 & 1 & $\times$\\
-\belowspace
-5    & 2:10 & 0 & $\surd$ \\
-\hline
+  Rotational velocity (rad / s) & 1.8 & 0.5 \\
+  Payload (kg) & 30 & 5 in testing (est. 7) \\
+  Battery life (hours) & 2 & 1.5 \\
+  Weight (kg) & 1.8 & 2.5 
 \end{tabular}
 \end{sc}
 \end{small}
-\caption{Results for 5 tests of the system.}
+\caption{Comparison of key aspects of TurtleBot and Lego robots.}
 \label{tab:sample-table}
 \end{center}
 \vskip -3mm
 \end{table}
 
-If you need a figure or table to stretch across two columns use the \verb+figure*+ or \verb+table*+ environment instead of the \verb+figure+ or \verb+table+ environment.  Use the \verb+subfigure+ environment if you want to include multiple graphics in a single figure.
 
 \section{Budget}
 We have not yet spent any of our budget, so there is nothing to note. 
