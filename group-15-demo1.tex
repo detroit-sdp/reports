@@ -26,36 +26,47 @@
 % ]
 
 \begin{abstract}
-  {\it Tadashi} is an assistive robot to automate simple tasks within a healthcare environment: waking patients up, bringing food and water to patients at specified times, and checking on the welfare of patients when needed.
-  In this demo we will demonstrate remote control of movement and turning for the TurtleBot; as well as the ability to recognize objects in its path using the built-in Lidar sensor. We will demonstrate the Lego robot we built, although after testing we have decided to proceed with the TurtleBot. We will also demonstrate a skeleton Android app allowing for basic interaction with a database. 
+  {\it Tadashi} is an assistive robot to automate simple tasks within a healthcare environment: waking patients up, bringing food and water to patients at specified times, and checking on the welfare of patients when needed. 
+
+  In this demo we will demonstrate remote control of movement and turning for the TurtleBot; as well as the ability to recognize objects in its path using the built-in Lidar sensor. We will demonstrate the Lego robot we built, although after testing we have decided to proceed with the TurtleBot. We will also demonstrate a skeleton Android app allowing for basic interaction with a database.
 \end{abstract} 
 
 \section{Project plan update} 
-
-This section should start with your goals:
+Our hardware team had the following goals for this demo:
 \begin{itemize}
 \item Build Lego and TurtleBot robots: {\bf achieved}
 \item Test each robot against chosen metrics: {\bf achieved}
 \item Decide which robot to use: {\bf achieved}
+\end{itemize}
+
+Our app team had the following goals for this demo:
+\begin{itemize}
 \item Start an Android app project in Kotlin: {\bf achieved}
 \item Create five activity screens for the app: {\bf achieved}
 \item Plan out and set up database schema: {\bf achieved}
 \item Implement database using Firebase: {\bf achieved}
 \item Show ability to connect to database (send / receive information to / from database) through app: {\bf achieved}
+\end{itemize}
+
+Our software team had the following goals for this demo:
+\begin{itemize}
 \item Implement moving set distances and turning: {\bf achieved}
 \item Test to see if we can get inputs from overhead and internal sensors: {\bf partially achieved}
 \end{itemize}
 
-We were only partially able to achieve getting inputs from overhead and internal sensors. This was for two reasons: firstly, we chose to implement arrow key control for moving set distances and turning in the TurtleBot and this took longer than expected. Secondly, understanding how to process and use Lidar input on the Turtlebot took longer than expected because of a lack of clear documentation on its usage. This meant that we did not have time to get to using the overhead sensors before the demo deadline. 
+We were only partially able to achieve getting inputs from overhead and internal sensors. This was for two reasons: firstly, we chose to implement arrow key control for moving set distances and turning in the TurtleBot and this took longer than expected. Secondly, understanding how to process and use Lidar input on the Turtlebot took longer than expected because of a lack of clear documentation on its usage. This meant that we did not have time to get to using the overhead sensors before the demo deadline.
 
+\subsection{Organisation}
 
-In robot building, 
+In robot building,
+
+The robot software team has been a collaborative effort using the popular agile development technique 'pair programming' - or in this case 'trio programming' - whereby at any give time one member was programming with the other two debugging, testing, or just generally brainstorming. Ben coded the original skeleton of the remote control scripts, but all 3 members contributed equally towards the final product.
+
 In app development, Yuchen built the skeleton of the UI and implemented accessing the database; Theo improved the UI to make it more user friendly; Ching Ling has been studying Android and preparing her work on the dashboard and user fragment.
+
 On the project management side, Michael has been off due to illness so primarily contributing to report writing / proofreading and helping with robot coding debugging. 
+
 Robot coding and app development work has been done using GitHub to ensure effective integration of code between team members. We have continued to communicate with Slack to manage inter- and intra-group work.
-
-We have not yet spent any of our budget. 
-
 
 \section{Technical details}
 
