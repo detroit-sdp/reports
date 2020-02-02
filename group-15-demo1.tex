@@ -69,9 +69,9 @@ We have set up two core activities within the app:
 
 The {\bf login activity} authenticates the email and password provided by the user using Firebase Authentication. New users can create an account using the signup activity. After the user registers a new account, the app creates an entry for the user with Firebase Authentication and the user will be signed in automatically the next time the app starts.
 
-The {\bf main activity} contains five fragments. For now these fragments are empty skeletons. The `patients' fragment can show a list of patient names, retreieved from Firebase Cloud Firestore, and add new patients for demonstration purposes.
+The {\bf main activity} contains five fragments. For now these fragments are empty skeletons. The `patients' fragment can show a list of patient names, retrieved from Firebase Cloud Firestore, and add new patients for demonstration purposes.
 
-In order to demonstrate user familiarity, we designed the skeleton to look like other apps on the market. We chose to use Firebase for our prototype. Firebase is much easier to use than a traditional SQL database and allows us to sync application data in real time if the database changes. For the patient list view, we chose to use `RecyclerView' rather than the traditional `ListView' for design flexibility. 
+In order to demonstrate user familiarity, we designed the skeleton to look like other apps on the market. We chose to use Firebase for our prototype. Firebase is much easier to use than a traditional SQL database and allows us to sync application data in real time if the database changes. For the patient list view, we chose to use `RecyclerView' rather than the traditional `ListView' for design flexibility. We chose to use Cloud Firestore to store patient details as we do not expect existing patient data to change often, only for new patients to be added. For future development we plan to use the Firebase realtime database for storing real-time patient information (if they're ok, as well as existing food / water requests).
 
 \subsection{Software}
 
