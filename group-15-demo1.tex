@@ -58,9 +58,9 @@ We were only partially able to achieve getting inputs from overhead and internal
 
 \subsection{Organisation}
 
-Robot building began with a meeting to build smaller modules of the system and make some key decisions in terms of the implementation. Luukas then built the rear of the vehicle and the driving mechanism, with Jakub implementing the turning, connecting the motors to the EV3 brick, and building the hardware controller mechanism.
+Robot building began with a meeting to build smaller modules of the system and make some key decisions in terms of the implementation. Luukas then built the rear of the vehicle and the driving mechanism, with Jakub implementing the turning, connecting the motors controlling turning and movement to the EV3 brick, and building the hardware controller mechanism.
 
-The robot software team has been a collaborative effort using the popular agile development technique 'pair programming' - or in this case 'trio programming' - whereby at any give time one member was programming with the other two debugging, testing, or just generally brainstorming. Ben coded the original skeleton of the remote control scripts, but all 3 members contributed equally towards the final product.
+The robot software team has been a collaborative effort using the popular Agile development technique `pair programming' --- or in this case `trio programming' --- whereby at any give time one member was programming with the other two debugging, testing, or just generally brainstorming. Ben coded the original skeleton of the remote control scripts, but all three members contributed equally towards the final product.
 
 In app development, Yuchen built the skeleton of the UI and implemented accessing the database; Theo improved the UI to make it more user friendly; Ching Ling has been studying Android and preparing her work on the dashboard and user fragment.
 
@@ -74,7 +74,7 @@ We have not yet spent any of our \pounds 200 budget.
 
 \subsection{Hardware}
 
-The hardware teams final prototype consists of the Lego frame with two motors mounted to it - one for movement, another for turning - controlled by an EV3 brick. The steering system is handled by a medium motor, whilst the movement requires a large motor. It is shown in figure~\ref{fig:lego-proto}.
+The hardware team's final prototype consists of the Lego frame with two motors mounted to it - one for movement, another for turning - controlled by an EV3 brick. The steering system is handled by a medium motor, whilst the movement requires a large motor. It is shown in figure~\ref{fig:lego-proto}.
 
 Attached to the robot is a hardware controller. The remote consists of two buttons which is connected to the brick. Different combinations of these buttons cause the robot to move in different ways.
 
@@ -90,7 +90,7 @@ The code for the controller was written in C++ using a custom user-made library 
 \vskip -5mm
 \end{figure}
 
-Our Turtlebot setup is a Turtlebot3 Waffle-Pi model that runs scripts using ROS and Python. We have not mounted the arm on the top layer of the robot and we do not anticipate that we will have to for our final product. 
+Our Turtlebot setup is a Turtlebot3 Waffle-Pi model that runs scripts using ROS and Python. We have not yet mounted the arm on the top layer of the robot. 
 
 \subsection{User interface}
 We have set up two core activities within the app:
@@ -99,7 +99,7 @@ The {\bf login activity} authenticates the email and password provided by the us
 
 The {\bf main activity} contains five fragments. For now these fragments are empty skeletons. The `patients' fragment can show a list of patient names, retrieved from Firebase Cloud Firestore, and add new patients for demonstration purposes.
 
-In order to demonstrate user familiarity, we designed the skeleton to look like other apps on the market. We chose to use Firebase for our prototype. Firebase is much easier to use than a traditional SQL database and allows us to sync application data in real time if the database changes. For the patient list view, we chose to use `RecyclerView' rather than the traditional `ListView' for design flexibility. We chose to use Cloud Firestore to store patient details as we do not expect existing patient data to change often, only for new patients to be added. For future development we plan to use the Firebase realtime database for storing real-time patient information (if they're ok, as well as existing food / water requests).
+In order to ensure user familiarity, we designed the skeleton to look like other apps on the market. We chose to use Firebase for our prototype. Firebase is much easier to use than a traditional SQL database and allows us to sync application data in real time if the database changes. For the patient list view, we chose to use `RecyclerView' rather than the traditional `ListView' for design flexibility. We chose to use Cloud Firestore to store patient details as we do not expect existing patient data to change often, only for new patients to be added. For future development we plan to use the Firebase realtime database for storing real-time patient information (if they're ok, as well as existing food / water requests).
 
 \subsection{Software}
 
@@ -111,7 +111,7 @@ We used Pygame as it allows for simple, real time tracking of keyboard presses. 
 
 However the arrow key control script will not simply be discarded after this demo. It will be useful to have to test our implementation further down the line, as well as having the potential to be worked into a manual override feature when our robot is eventually autonomous.
 
-Our final goal was to get working with overhead sensor readings, and in-built sensor readings. We have started to use the in-built sensor readings to detect when something walks in front of the Turtlebot. We modified the {\it laser\_scan\_callback()} function provided in the Turtlebot instruction sheet on the SDP course Wiki to print a warning message if something was placed in front of the lidar. This code is again easily adapted for use in our future work.
+Our final goal was to be able to process the overhead and in-built sensor readings. We have started to use the in-built sensor readings to detect when something walks in front of the Turtlebot. We modified the {\it laser\_scan\_callback()} function provided in the Turtlebot instruction sheet on the SDP course Wiki \cite{sdpwiki} to print a warning message if something was placed in front of the lidar. This code is again easily adapted for use in our future work.
 
 \section{Evaluation}
 Our main quantitative testing in this demo was in comparing the TurtleBot and Lego robots. We considered four aspects of the robot important in choosing which to use for our final product:
@@ -122,7 +122,7 @@ Our main quantitative testing in this demo was in comparing the TurtleBot and Le
 \item Weight
 \end{enumerate}
 
-Information for the TurtleBot was read from the official manual provided on the Turtlebot website (\cite{turtle}).
+Information for the TurtleBot was read from the official manual provided on the Turtlebot website \cite{turtle}.
 
 Having built the Lego robot ourselves, we got information about the metrics by performing testing ourselves. Payload was measured by placing objects on the robot until the frame began to buckle, at 5kg of weight: we estimate failure of the frame at 7kg. Battery life was estimated by running the robot's motors until they slowed down to 50\% of speed. 
 
