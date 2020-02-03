@@ -68,7 +68,7 @@ On the project management side, Michael has been off due to illness so primarily
 
 Robot coding and app development work has been done using GitHub to ensure effective integration of code between team members. We have continued to communicate with Slack to manage inter- and intra-group work.
 
-We have not yet spent any of our £200 budget.
+We have not yet spent any of our \pounds 200 budget.
 
 \section{Technical details}
 
@@ -76,9 +76,9 @@ We have not yet spent any of our £200 budget.
 
 The hardware teams final prototype consists of the Lego frame with two motors mounted to it - one for movement, another for turning - controlled by an EV3 brick. The steering system is handled by a medium motor, whilst the movement requires a large motor. It is shown in figure~\ref{fig:lego-proto}.
 
-Attached to the bot is a hardware controller. The remote consists of two buttons which is connected to the brick. Different combinations of these buttons cause the bot to move in different ways.
+Attached to the robot is a hardware controller. The remote consists of two buttons which is connected to the brick. Different combinations of these buttons cause the robot to move in different ways.
 
-The code for the controller was written in C++ using a custom user-made library (\url{https://github.com/ddemidov/ev3dev-lang-cpp/}). C++ was used due to its massive speed advantage over Python. The code runs in less than 1 second compared to around 15 seconds for Python. This made testing the code a lot easier.
+The code for the controller was written in C++ using a custom user-made library \cite{cpp}. C++ was used due to its massive speed advantage over Python. The code runs in less than 1 second compared to around 15 seconds for Python. This made testing the code a lot easier.
 
 \begin{figure}[tb]
 \vskip 5mm
@@ -90,7 +90,7 @@ The code for the controller was written in C++ using a custom user-made library 
 \vskip -5mm
 \end{figure}
 
-Our Turtlebot setup is a Turtlebot3 Waffle-Pi model that runs scripts using ROS and Python. We have not mounted the arm on the top layer of the bot and we do not anticipate that we will have to for our final product. 
+Our Turtlebot setup is a Turtlebot3 Waffle-Pi model that runs scripts using ROS and Python. We have not mounted the arm on the top layer of the robot and we do not anticipate that we will have to for our final product. 
 
 \subsection{User interface}
 We have set up two core activities within the app:
@@ -105,11 +105,11 @@ In order to demonstrate user familiarity, we designed the skeleton to look like 
 
 The software on the Turtlebot allows for all movement functions we shall require further down the line. These are forwards/backwards movement, stopping, and turning in place. There are two scripts which demonstrate this movement on top of the movement script itself.
 
-The first script we wrote allows the user to input a direction, followed by a speed, and finally a duration with the robot then carrying out the desired movement. However, to increase interactivity for demo purposes we decided to write a second script allowing for remote control of the bot using a keyboard. This functionality was implemented using Pygame, a set of Python modules used in game development.
+The first script we wrote allows the user to input a direction, followed by a speed, and finally a duration with the robot then carrying out the desired movement. However, to increase interactivity for demo purposes we decided to write a second script allowing for remote control of the robot using a keyboard. This functionality was implemented using Pygame, a set of Python modules used in game development.
 
 We used Pygame as it allows for simple, real time tracking of keyboard presses. One of the built-in functions, {\it pygame.key.get\_pressed()}, returns an array of boolean values - one per key - which is True if the key is currently being pressed and False otherwise. Realising our goal using this single function was trivial.
 
-However the arrow key control script will not simply be discarded after this demo. It will be useful to have to test our implementation further down the line, as well as having the potential to be worked into a manual override feature when our bot is eventually autonomous.
+However the arrow key control script will not simply be discarded after this demo. It will be useful to have to test our implementation further down the line, as well as having the potential to be worked into a manual override feature when our robot is eventually autonomous.
 
 Our final goal was to get working with overhead sensor readings, and in-built sensor readings. We have started to use the in-built sensor readings to detect when something walks in front of the Turtlebot. We modified the {\it laser\_scan\_callback()} function provided in the Turtlebot instruction sheet on the SDP course Wiki to print a warning message if something was placed in front of the lidar. This code is again easily adapted for use in our future work.
 
@@ -122,7 +122,7 @@ Our main quantitative testing in this demo was in comparing the TurtleBot and Le
 \item Weight
 \end{enumerate}
 
-Information for the TurtleBot was read from the official manual provided on the Turtlebot website (\url{http://emanual.robotis.com/docs/en/platform/turtlebot3/specifications/\#specifications}).
+Information for the TurtleBot was read from the official manual provided on the Turtlebot website (\cite{turtle}).
 
 Having built the Lego robot ourselves, we got information about the metrics by performing testing ourselves. Payload was measured by placing objects on the robot until the frame began to buckle, at 5kg of weight: we estimate failure of the frame at 7kg. Battery life was estimated by running the robot's motors until they slowed down to 50\% of speed. 
 
@@ -154,7 +154,7 @@ Metric & TurtleBot & Lego \\
 
 
 \section{Budget}
-In terms of our budget whilst we have not yet used any of our £200 budget, we estimate our system in its current state would cost around £1410. The breakdown of this estimate (along with a list of components used) is summarised in table~\ref{tab:budget}.
+While we have not yet used any of our \pounds 200 budget, we estimate our system in its current state would cost around \pounds 1410. The breakdown of this estimate (along with a list of components used) is summarised in table~\ref{tab:budget}.
 
 \begin{table}[h]
 \vskip 3mm
@@ -163,7 +163,7 @@ In terms of our budget whilst we have not yet used any of our £200 budget, we e
 \begin{tabular}{lc}
 \hline
 \abovespace\belowspace
-Component & Est. Cost (£) \\
+Component & Est. Cost (\pounds) \\
 \hline
   Turtlebot & 1085 \\
   EV3 kit & 325 \\ \hline
@@ -178,7 +178,7 @@ Component & Est. Cost (£) \\
 
 %% Include any references in a bibliography
 
-\bibliography{example-refs}
+\bibliography{demo1-refs}
 
 
 \end{document} 
