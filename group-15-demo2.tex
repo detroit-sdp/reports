@@ -20,36 +20,62 @@
 \makeSDPTitle{Demo}
 
 \begin{abstract}
+  Tadashi is an assistive robot for delivering food and water to residents in supported living and care home environments.
 
+  In this demo, we demonstrate the robot mapping the arena using ROS; locating itself in the demo space; moving around the space while avoiding obstacles; recognizing when it is stuck; and autonomously moving from the starting location to a target location, and then returning to its original location. We will also demonstrate the lift being able to move weights of up to 2kg up and down in a stable manner. We will demonstrate the dashboard, calendar, and map pages of the app, and being able to send commands to the robot from the app. We will discuss our intended user testing and user surveys and how they will influence our future work.
 \end{abstract} 
 
 \section{Project plan update}
-List each goal set for this demo, appended with achieved, partly achieved, not achieved.
+Our goals for this demo do not match the goals we originally set ourselves in the project plan for milestone 2. After demo 1, we decided to pivot our project work to focus exclusively on the food and water delivery system and dashboarding functionality. This meant changing our group goals to achieve this functionality, rather than tracking to the goals from our original plan. The goals we set ourselves for this sprint better match our intended `Agile' approach, as we will demonstrate a basic working product in this demo which will be iteratively improved for the next demo.
+
+We have managed to achieve or partially achieve all the goals we set ourselves for this demo.
 \begin{itemize}
-\item {\bf TODO write up}
+\item Design and build scissor lift to lift up to 2kg: {\bf achieved}.
+\item Identify and reinforce weak points in scissor lift: {\bf achieved}.
+\item Mount lift to Turtlebot: {\bf partially achieved}.
+\item Implement autonomous mapping and movement for the robot: {\bf achieved}.
+\item Set up server to allow communication between the robot and the app: {\bf partially achieved}. 
+\item Implement patient prioritization and key screens in app: calendar, map, dashboard: {\bf achieved}.
+\item Plan out user testing and user surveys: {\bf achieved}.
 \end{itemize}
 
-Concisely summarize reasons for deviations from achievement of intended goals. 
-\begin{itemize}
-\item {\bf TODO write up}
-\end{itemize}
+We were not able to complete mounting the scissor lift to the robot as there has been a delay in ordering and receiving the officially-supported Turtlebot mount platforms. We expect to receive these within the next two weeks: in the meantime, we worked with the technicians to create a temporary platform using an MDF base.
 
-Provide one-paragraph description of how group organised work towards the goals: which group members worked on which aspect? How did we ensure effective group work?
-\begin{itemize}
-\item {\bf TODO who did what}
-\item Moving Rebecca off hardware to longer-term planning + user surveys; Yuchen taking over app development; Theo moving to UI/UX work; Ben taking lead on robot coding; 
-\end{itemize}
+We were only able to implement unidirectional (app $\rightarrow$ robot) communication, enough to allow the app to send instructions on where the robot should move to. This is because we had issues in sending packets between the app and server: we needed to wait until a network technician was available to help us resolve this issue. 
 
-Provide summary of budget spent so far.
-\begin{itemize}
-\item 1h45m of technician time
-\item To build the lift: 8 + 2 + 2 + 5 = \pounds 17 (+ \pounds 37.5 of Lego)
-\end{itemize}
 
-Provide clear statement for any modification you wish to make to your goals for the next demonstration.
+\subsection{Organization}
+\begin{table}[]
+  \begin{tabular}{c|c}
+    Team & Members \\
+    \hline
+    Robot building & {\bf Jakub}, Luukas \\
+    Robot programming & {\bf Ben}, Wojtek, Errikos \\
+    App development & {\bf Yuchen}, Ching Ling \\
+    Project management & {\bf Michael}  \\
+    UI/UX and user testing & {\bf Theo}  \\
+    Product development & {\bf Rebecca}  
+  \end{tabular}
+  \caption{New team splits across the group. Names in bold are key points of contact.}
+  \label{tab:group-split}
+\end{table}
+
+At the beginning of this sprint, we rearranged group members across teams according to table \ref{tab:group-split}. Rebecca began the sprint in the robot building team, designing a CAD model of the lift, in case the Lego lift was too unstable and we needed to manufacture it instead. We found the Lego lift to be sufficiently stable, so Rebecca has moved to working on product development. Likewise Theo began the spring in the app development team, but after Yuchen and Ching Ling were able to implement key functionality, Theo moved to working on UI/UX to ensure the app would be usable by non-technical caregivers.
+
+The entire team met once a week with our mentor to discuss group progress against goals. Michael met with each sub-team twice a week to track any possible blockers and identify any possible support they needed. Inter-team meetings were arranged ad-hoc between POCs for each team when collaboration was needed. 
+
+Slack has been our main mode of communication, allowing for communication between team members and setting meetings. When needing to collaborate between teams, private DMs were set up with the POCs of each team to arrange meeting times. As with previous sprints, we have used GitHub to allow collaboration when writing code for the robot and the app. In writing the app, each member of the team worked on a feature branch and once work was complete, the team met to merge these branches and resolve any merge conflicts together. 
+
+Budget spending so far consists of \pounds 1787.43 on monetary costs that come from the starting kit, so not deducted from total budget (the Turtlebot, and parts needed to make the lift); \pounds 22.59 spent on monetary costs to build the lift and prepare the arena; and 1.75 hours of technician time. This leaves us with \pounds 177.41 remaining in our budget and 5.25 hours of technician time. 
+
+We have changed our intended goals from the original project plan, so we have decided new goals for demo 3 as below:
 \begin{itemize}
-\item {\bf TODO decide next goals}
-\item Big change: moving user testing forward as much as possible so we can get as much done as we can
+\item Begin testing app with non-technical users to gain insights on accessibility and ease of use; and make changes to app justified against results of testing.
+\item Complete user interviews with caregivers to assess demand for project features and implement new features based on caregiver requests. \footnote{We intend for this to be done by demo 3; however, due to UCU strike action it is possible that ethical approval will be delayed which will delay our ability to do interviews. This is outside of our control.}
+\item Physically integrate lift mechanism into robot body, and integrate lift control into robot control software.
+\item Add sensor to lift to determine whether items have been removed. 
+\item Refine robot problem-solving when stuck by tuning mapping sensitivity and obstacle avoidance logic.
+\item Implement bi-directional communication between the app and robot.
 \end{itemize}
 
 \section{Technical details}
@@ -129,7 +155,7 @@ Testing:
   \end{tabular}
 \end{sc}
 \end{small}
-\caption{Non-budgeted monetary costs at demo 2.}
+\caption{Non-budgeted monetary costs at demo \demoNumber.}
 \label{tab:non-budget-cost}
 \end{center}
 \vskip -3mm
@@ -155,7 +181,7 @@ Testing:
   \end{tabular}
 \end{sc}
 \end{small}
-\caption{Budgeted monetary costs at demo 2.}
+\caption{Budgeted monetary costs at demo \demoNumber.}
 \label{tab:budget-cost-monetary}
 \end{center}
 \vskip -3mm
@@ -179,7 +205,7 @@ Testing:
   \end{tabular}
 \end{sc}
 \end{small}
-\caption{Budgeted technician hours at demo 2.}
+\caption{Budgeted technician time at demo \demoNumber.}
 \label{tab:budget-cost-non-monetary}
 \end{center}
 \vskip -3mm
