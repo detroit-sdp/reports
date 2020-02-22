@@ -107,51 +107,83 @@ Testing:
 \end{itemize}
   
 \section{Budget}
-We need more details for this section:
-\begin{itemize}
-  \item Calculate how much total budget we have left. We started with 10 hours and one hour has been deducted every week since week 2. Budget started at \pounds 200. Nominal amounts (\pounds 5-10) should be included to cover misc. small items. 
-  \item Luukas needs to provide detailed breakdown of costs for lift: in terms of technician time and material cost. My best guess right now is:
-    \begin{itemize}
-    \item 1 hour 45 minutes of technician time. 90 minutes for setting up the lift (need more details as to what this involved) + 15 minutes for Garry to drill holes in base connecting to robot.
-    \item To build the lift: some Lego (likely <1kg); misc wires; WiFi USB adaptor (\pounds 5); \pounds 10 to build supports (what does this mean?) and \pounds 2 for the MDF base (12mm x 270mm x 400mm)
-    \end{itemize}
-  \item We need to add the following items to the budget breakdown (deducted from our \pounds 200 budget):
-    \begin{itemize}
-    \item Cost of misc parts (nominally \pounds 5 - 10) - to include angle brackets and screws for pegboard, misc wires etc. 
-    \item Cost of pegboard to make arena. Pegboard cost is \pounds 12 per 1220 x 2440mm sheet. We need to measure how much we have used. I think we have used 6026cm squared so far but I need to double-chceck this. 
-    \item Lego at \pounds 15 per kg. 
-    \end{itemize}
-  \item We need to add the following items to the budget breakdown, not deducted from budget:
-    \begin{itemize}
-    \item EV3 kit at \pounds 371.99.
-    \item Turtlebot Waffle at \pounds 1275.80. 
-    \item Costs are from: \url{http://www.inf.ed.ac.uk/teaching/courses/sdp/SDP2020/sdppricelist.pdf}
-    \end{itemize}
-\end{itemize}
 
-We have used \pounds 12 on materials to support the lift, split as below. Additional costs for building the lift are included below but not taken out of total budget. 
+\begin{table*}[h]
+\vskip 3mm
+\begin{center}
+\begin{small}
+\begin{sc}
+  \begin{tabular}{lllll}
+    {\bf Item} & {\bf Units} & {\bf Cost (\pounds\ per unit)} & {\bf Total cost (\pounds)} & {\bf Use} \\
+    \hline
+    Turtlebot Waffle & 1 & 1275.80 & 1275.80 & Robot \\
+    EV3 brick & 1 & 247.19 & 247.19 & Lift \\
+    EV3 battery & 1 & 86.39 & 86.39 & Lift \\
+    EV3 battery charger & 1 & 32.39 & 32.39 & Lift \\
+    EV3 large motor & 2 & 32.39 & 64.78 & Lift \\
+    EV3 touch sensor & 2 & 19.19 & 38.38 & Lift \\
+    WiFi USB adaptor & 1 & 5.00 & 5.00 & Lift \\
+    Lego & 2.5kg & 15.00 & 37.50 & Lift \\
+    \hline \hline
+         &       & Overall cost (\pounds) & 1787.43
+  \end{tabular}
+\end{sc}
+\end{small}
+\caption{Non-budgeted monetary costs at demo 2.}
+\label{tab:non-budget-cost}
+\end{center}
+\vskip -3mm
+\end{table*}
 
-\begin{tabular}{l|c}
-  \hline
-  {\bf Use} & {\bf Cost (\pounds)} \\
-  \hline 
-  Turtlebot supports & 10 \\
-  MDF base for lift & 2 \\
-  \hline
-  Total (charged) & 12 \\
-  \hline
-  
-\end{tabular}
+\begin{table*}[h]
+\vskip 3mm
+\begin{center}
+\begin{small}
+\begin{sc}
+  \begin{tabular}{lllll}
+    {\bf Item} & {\bf Total cost (\pounds)} & {\bf Use} \\
+    \hline
+    Turtlebot supports  & 8.00 & Lift \\
+    MDF sheet (12mm x 270mm x 400mm) & 2.00 & Lift \\
+    Lift support rods & 5.00 & Lift \\
+    Pegboard ($0.62 \text{m}^2$ at \pounds 12 per $2.88 \text{m}^2$)& 2.59 & Arena \\
+    Misc (wires, screws, angle brackets) & 5.00 & Lift, arena \\
+    \hline
+    \hline
+     Budget spent (\pounds) & 22.59 \\
+     Budget remaining (\pounds) & 177.41   
+  \end{tabular}
+\end{sc}
+\end{small}
+\caption{Budgeted monetary costs at demo 2.}
+\label{tab:budget-cost-monetary}
+\end{center}
+\vskip -3mm
+\end{table*}
 
-We have used one hour 45 minutes of technician time, split as below:
-
-\begin{tabular}{l|c}
-  \hline
-  {\bf Use} & {\bf Time cost} \\
-  \hline 
-  ? & 90 minutes \\ 
-  Drilling holes in base for lift & 15 minutes \\
-\end{tabular}
+\begin{table*}[h]
+\vskip 3mm
+\begin{center}
+\begin{small}
+\begin{sc}
+  \begin{tabular}{lll}
+    {\bf Purpose} & {\bf Hours spent} & {\bf Use} \\
+    \hline
+    Manufacturing lift support bars & 1 & Lift \\
+    Manufacturing lift base (MDF) & 0.5 & Lift \\
+    Drilling holes in lift base & 0.25 & Lift \\
+    \hline
+    \hline
+    Overall hours spent & 1.75 & \\
+    Total hours remaining & 
+  \end{tabular}
+\end{sc}
+\end{small}
+\caption{Budgeted technician hours at demo 2.}
+\label{tab:budget-cost-non-monetary}
+\end{center}
+\vskip -3mm
+\end{table*}
 
 \end{document} 
 
