@@ -22,7 +22,7 @@
 \begin{abstract}
   Tadashi is an assistive robot for delivering food and water to residents in supported living and care home environments.
 
-  In this demo, we demonstrate the robot mapping the arena using ROS; locating itself in the demo space; moving around the space while avoiding obstacles; recognizing when it is stuck; and autonomously moving from the starting location to a target location, and then returning to its original location. We will also demonstrate the lift being able to move weights of up to 2kg up and down in a stable manner. We will demonstrate the dashboard, calendar, and map pages of the app, and being able to send commands to the robot from the app. We will discuss our intended user testing and user surveys and how they will influence our future work.
+  In this demo, we demonstrate the robot mapping the arena using ROS; locating itself in the demo space; moving around the space while avoiding obstacles; recognizing when it is stuck; and autonomously moving from the starting location to a target location, and then returning to its original location. We will also demonstrate the lift being able to move weights of up to 1kg up and down in a stable manner. We will demonstrate the dashboard, calendar, and map pages of the app, and being able to send commands to the robot from the app. We will discuss our intended user testing and user surveys and how they will influence our future work.
 \end{abstract} 
 
 \section{Project plan update}
@@ -30,7 +30,7 @@ Our goals for this demo do not match the goals we originally set ourselves in th
 
 We have managed to achieve or partially achieve all the goals we set ourselves for this demo.
 \begin{itemize}
-\item Design and build scissor lift to lift up to 2kg: {\bf achieved}.
+\item Design and build scissor lift to lift up to 1kg: {\bf achieved}.
 \item Identify and reinforce weak points in scissor lift: {\bf achieved}.
 \item Mount lift to Turtlebot: {\bf partially achieved}.
 \item Implement autonomous mapping and movement for the robot: {\bf achieved}.
@@ -66,13 +66,14 @@ The entire team met once a week with our mentor to discuss group progress agains
 
 Slack has been our main mode of communication, allowing for communication between team members and setting meetings. When needing to collaborate between teams, private DMs were set up with the POCs of each team to arrange meeting times. As with previous sprints, we have used GitHub to allow collaboration when writing code for the robot and the app. In writing the app, each member of the team worked on a feature branch and once work was complete, the team met to merge these branches and resolve any merge conflicts together. 
 
-Budget spending so far consists of \pounds 1787.43 on monetary costs that come from the starting kit, so not deducted from total budget (the Turtlebot, and parts needed to make the lift); \pounds 22.59 spent on monetary costs to build the lift and prepare the arena; and 1.75 hours of technician time. This leaves us with \pounds 177.41 remaining in our budget and 5.25 hours of technician time. 
+Budget spending so far consists of \pounds 1787.43 on monetary costs that come from the starting kit, so not deducted from total budget (the Turtlebot, and parts needed to make the lift); \pounds 21.59 spent on monetary costs to build the lift and prepare the arena; and 1.75 hours of technician time. This leaves us with \pounds 178.41 remaining in our budget and 5.25 hours of technician time. 
 
 We have changed our intended goals from the original project plan, so we have decided new goals for demo 3 as below:
 \begin{itemize}
 \item Begin testing app with non-technical users to gain insights on accessibility and ease of use; and make changes to app justified against results of testing.
 \item Complete user interviews with caregivers to assess demand for project features and implement new features based on caregiver requests. \footnote{We intend for this to be done by demo 3; however, due to UCU strike action it is possible that ethical approval will be delayed which will delay our ability to do interviews. This is outside of our control.}
 \item Physically integrate lift mechanism into robot body, and integrate lift control into robot control software.
+\item Design and manufacture a tray to place on top of the lift to hold items.
 \item Add sensor to lift to determine whether items have been removed. 
 \item Refine robot problem-solving when stuck by tuning mapping sensitivity and obstacle avoidance logic.
 \item Implement bi-directional communication between the app and robot.
@@ -133,7 +134,7 @@ Testing:
 \end{itemize}
   
 \section{Budget}
-The bulk of our budget leading up to this demo has been spent on building, reinforcing, and mounting the lift. We have spent a total of \pounds 22.59 from our monetary budget and 1.75 hours of technician time. Detailed breakdowns of costs are provided in tables \ref{tab:non-budget-cost}, \ref{tab:budget-cost-monetary}, and \ref{tab:budget-cost-non-monetary}.
+The bulk of our budget leading up to this demo has been spent on building, reinforcing, and mounting the lift. We have spent a total of \pounds 21.59 from our monetary budget and 1.75 hours of technician time. Detailed breakdowns of costs are provided in tables \ref{tab:non-budget-cost}, \ref{tab:budget-cost-monetary}, and \ref{tab:budget-cost-non-monetary}.
 
 \begin{table}[h]
 \begin{center}
@@ -164,16 +165,16 @@ The bulk of our budget leading up to this demo has been spent on building, reinf
     {\bf Item} & {\bf Total cost (\pounds)} & {\bf Use} \\
     \hline
     Turtlebot supports  & 8.00 & Lift \\
-    MDF sheet (12mm x 270mm x 400mm) & 2.00 & Lift \\
+    MDF support (12mm x 270mm x 400mm) & 1.00  & Lift \\
     Lift support rods & 5.00 & Lift \\
     Pegboard ($0.62 \text{m}^2$ at \pounds 12 per $2.88 \text{m}^2$)& 2.59 & Arena \\
     Misc (wires, screws, angle brackets) & 5.00 & Lift, arena \\
     \hline
     \hline
-     Budget spent (\pounds) & 22.59 \\
-     Budget remaining (\pounds) & 177.41   
+     Budget spent (\pounds) & 21.59 \\
+     Budget remaining (\pounds) & 178.41   
   \end{tabular}}
-\caption{Budgeted monetary costs at demo \demoNumber.}
+\caption{Budgeted monetary costs at demo \demoNumber. MDF value is approximate as 12mm MDF is not on the SDP price sheet.}
 \label{tab:budget-cost-monetary}
 \end{center}
 \end{table}
