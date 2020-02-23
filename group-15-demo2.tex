@@ -92,7 +92,7 @@ We have changed our intended goals from the original project plan, so we have de
 \item For this milestone we have implemented Autonomous movement using Rviz and the ROS navigation stack. Rviz was used because it allows for visualising the map and plotting the goal of the Turtlebot which allowed us to work on the movement of the Turtlebot while the communication with the app was still being implemented. We also used Gazebo to create simulations of the Turtlebot to test any code we write early while we were getting connection established to the Turtlebot from a remote machine. An NTP server was also used to sync the clocks of the remote machine, that ran Rviz and the navigation packages, and the Turtlebot. This was necessary because the navigation would not run with the clocks out of sync by 0.5 milliseconds.
 \item The Turtlebot also has the ability to fully map it's area. To do this we used Rviz, to visualise the map, and the lidar readings to detect any walls or obstacles. The Turtlebot can create and store a map by driving around an area manually. The code that was written in the previous demo was used to aid the manual movement for mapping an area.
 \item For our final product we want an app to communicate with the Turtlebot.
-The server-client connection makes use of the UDP protocol for sending and receiving packets. Each packet for movement should take the form “GOTO [room \#]“; it will be ignored otherwise. UDP was used as there is no ‘handshake’ required between the app and our ROS mainframe meaning that packet loss will not severely impact our performance.
+The server-client connection makes use of the UDP protocol for sending and receiving packets. Each packet for movement should take the form ``GOTO [room \#]''; it will be ignored otherwise. UDP was used as there is no `handshake' required between the app and our ROS mainframe meaning that packet loss will not severely impact our performance.
 \end{itemize}
 
 \subsection{App}
@@ -112,23 +112,56 @@ The server-client connection makes use of the UDP protocol for sending and recei
 \end{itemize}
 
 \section{Evaluation}
-Testing:
-\begin{itemize}
-\item Lift team quantitative analysis:
-  \begin{itemize}
-  \item Can the lift get to the same height consistently? What's the margin of error to get to the max height?
-  \item Is the lift stable with increasing amounts of weight?
-  \item Can the lift handle off-centre loads?
-  \end{itemize}
-\item Coding team quantitative analysis:
-  \begin{itemize}
-  \item Can the robot reach its intended destination (from different starting spots?)
-  \item How long does the robot take to reach its intended destination (how far does it travel vs ideal distance?)
-  \item How long does the robot's battery last? Does performance degrade as battery degrades?
-  \item Do the struts added to the base impede the lidar? 
-  \end{itemize}
-\end{itemize}
-  
+Our quantitative analysis in this section concerned the functioning of the lift against use-cases. We considered the following questions:
+\begin{enumerate}
+\item To allow residents to pick up food and water without needing to bend down: what height can the lift reach?
+\item To inform caregivers how many things can safely be put on the lift: how much weight can the robot consistently carry?
+\item To estimate how long residents need to wait to pick up their delivery after the robot arrives: how long does the lift take to achieve maximum height? Is this time affected by the weight the lift is carrying?
+\end{enumerate}
+\begin{table}
+  \begin{center}
+    \begin{tabular}{lll}
+      {\bf Weight (g)} & {\bf \# tests} & {\bf \# successes} \\
+      \hline
+      79 &   10 & 10 \\
+      613 &  10 & 10 \\
+      1149 & 10 & 10 \\
+      1326 & 10 & 10 \\
+      1682 & 10 & 10 \\
+      1858 & 10 & 10 \\
+      2034 & 7 & 6
+    \end{tabular}
+    \caption{Table showing number of times each weight was tried on the lift, and how many times the lift successfully raised and lowered the load. }
+    \label{tab:weight}
+  \end{center}
+\end{table}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=6cm]{figs/Lift_speed.png}
+    \caption{Scatter plot showing the reciprocal relationship between the motor speed and the time taken for the lift to reach its maximum height. $n = 90$ samples for all tests. $n = 10$ samples per speed. Lift weighted at 784 grams for testing.}
+  \label{fig:speed-testing}
+  \end{center}
+\end{figure}
+
+\begin{figure*}
+  \begin{center}
+    \includegraphics[width=\linewidth]{figs/Lift_time.png}
+    \caption{Box plots of the time taken for the lift to reach its maximum height with increasing weights. $n = 66$ samples for all tests. $n = 10$ samples per weight except at 2.034kg with $n = 6$.}
+    \label{fig:weight-testing}
+  \end{center}
+\end{figure*}
+
+To answer question 1 we measured the maximum height reached by the lift. When folded, the lift is 28cm tall. When fully extended, it is 54cm tall. When mounted on the Turtlebot, this means the lif can reach a maximum height of 71cm - sufficient to allow a resident sitting or lying down to reach the food or water delivery placed on the lift.
+
+To answer question 2 we trialed a range of weights, checking to see if the lift could raise and lower the load successfully. We tested weights ranging from 79 grams to 2.0 kilograms, as seen in table \ref{tab:weight}. We say a lift can reliably lift the weight if it successfully raises and lowers it in all 10 trials. All weights below 2kg succeeded: at 2.0kg, the lift broke on the 7th trial and testing was halted to fix the structure. Based on this we recommend the lift be used only with weights below 2kg.
+
+To answer question 3 we performed two tests. Firstly, we tested the variation in time taken to reach maximum height with increasing weights, from 79 grams to 2.0 kilograms (figure \ref{fig:weight-testing}). We found a statistically significant difference between the mean speed achieved by the lift with the smallest and largest weights ($p < 0.01$, $n = (10, 6)$ using a two-sample t-test), indicating that deliveries with lower weights will be delivered to residents faster. 
+
+Secondly, we tested the time the lift with a 784 gram loads took to reach maximum height with varying speeds (200 to 1000) of the EV3 motor and calculated the mean over 10 trials for each speed. The relationship between the speed of the motor and the time the lift took to reach the height is approximately reciprocal (figure \ref{fig:speed-testing}): this is expected because speed $s$ and time $t$ have a reciprocal relationship: $s = d / t$. Based on this testing, we have chosen to proceed with a speed of 400, which is on the `elbow' of the curve and strikes a balance between the speed of the lift moving up (20.03 seconds) and the noise involved in the motors spinning quickly.
+
+
+
 \section{Budget}
 The bulk of our budget leading up to this demo has been spent on building, reinforcing, and mounting the lift. We have spent a total of \pounds 21.59 from our monetary budget and 1.75 hours of technician time. Detailed breakdowns of costs are provided in tables \ref{tab:non-budget-cost}, \ref{tab:budget-cost-monetary}, and \ref{tab:budget-cost-non-monetary}.
 
