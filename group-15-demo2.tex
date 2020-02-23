@@ -93,13 +93,9 @@ We have changed our intended goals from the original project plan, so we have de
 \par The server-client connection makes use of the UDP protocol for sending and receiving packets. Each packet for movement takes the form ``GOTO [room \#]''; packets not matching this form are ignored. UDP was used as there is no `handshake' required between the client and server, meaning that packet loss will not severely impact our performance.
 
 \subsection{App}
-\begin{itemize}
-\item Implementation of key screens: calendar, map, dashboard
-\item Include pictures of each screen
-\item Patient prioritization
-\item Possible dashboards prepared against expected use-cases: details?
-\item User tests designed to evaluate usability
-\end{itemize}
+\par We have created various screens on the application. The app now includes a calendar to allow the caregivers to see keys dates for the residents and care home, a map which will be used to check the layout of the care home and see what rooms each patient is allocated to. The final addition to the app is the dashboard which shows graphs and charts of information about the residents. 
+\par Another feature we have worked on is a prioritisation system allowing the caregivers to see which of the residents is more likely to need assistance and then will in future will be used in the scheduling of the robot; deciding the order of who the robot should visit next.
+\par We have implemented 3 possible dashboards to be used depending on what the results of user testing gives us. The first includes a summary over all residents of the food and water delivered displayed on bar charts. It also includes a stacked bar chart of the number of the visits to each resident by the robot each day. The second allows the caregiver to select a resident and can view their weekly records of food and water delivered. The third is categorised into priorities and under each the caregiver can see the daily number of deliveries. The interviews should inform us on what design the caregivers would find the most useful and any of the 3 could also be adapted to display information that we had not discovered to be useful before the interviews but have since decided to include them.
 
 \subsection{User testing}
 \par In order to ensure that our robot is going to aid caregivers in their job we have decided to interview several caregivers. Our approach for these interviews is to initially understand what jobs are involved in working in this environment as well as finding out what information is tracked and recorded throughout each day. We are then going to introduce our robot design and get feedback on the usefulness and if they have any issues with our design or additions/improvements that could be made. The last section of the interview will involve the app dashboard design. We will let the caregivers give us some ideas of what they would like to have recorded and displayed along with any calculation tasks that would be quicker for a computer to calculate automatically.
@@ -113,6 +109,15 @@ Our quantitative analysis in this section concerned the functioning of the lift 
 \item To inform caregivers how many things can safely be put on the lift: how much weight can the robot consistently carry?
 \item To estimate how long residents need to wait to pick up their delivery after the robot arrives: how long does the lift take to achieve maximum height? Is this time affected by the weight the lift is carrying?
 \end{enumerate}
+
+To answer question 1 we measured the maximum height reached by the lift. When folded, the lift is 28cm tall. When fully extended, it is 54cm tall. When mounted on the Turtlebot, this means the lif can reach a maximum height of 71cm - sufficient to allow a resident sitting or lying down to reach the food or water delivery placed on the lift.
+
+To answer question 2 we trialed a range of weights, checking to see if the lift could raise and lower the load successfully. We tested weights ranging from 79 grams to 2.0 kilograms, as seen in table \ref{tab:weight}. We say a lift can reliably lift the weight if it successfully raises and lowers it in all 10 trials. All weights below 2kg succeeded: at 2.0kg, the lift broke on the 7th trial and testing was halted to fix the structure. Based on this we recommend the lift be used only with weights below 2kg.
+
+To answer question 3 we performed two tests. Firstly, we tested the variation in time taken to reach maximum height with increasing weights, from 79 grams to 2.0 kilograms (figure \ref{fig:weight-testing}). We found a statistically significant difference between the mean speed achieved by the lift with the smallest and largest weights ($p < 0.01$, $n = (10, 6)$ using a two-sample t-test), indicating that deliveries with lower weights will be delivered to residents faster. 
+
+Secondly, we tested the time the lift with a 784 gram loads took to reach maximum height with varying speeds (200 to 1000) of the EV3 motor and calculated the mean over 10 trials for each speed. The relationship between the speed of the motor and the time the lift took to reach the height is approximately reciprocal (figure \ref{fig:speed-testing}): this is expected because speed $s$ and time $t$ have a reciprocal relationship: $s = d / t$. Based on this testing, we have chosen to proceed with a speed of 400, which is on the `elbow' of the curve and strikes a balance between the speed of the lift moving up (20.03 seconds) and the noise involved in the motors spinning quickly.
+
 \begin{table}
   \begin{center}
     \begin{tabular}{lll}
@@ -146,14 +151,6 @@ Our quantitative analysis in this section concerned the functioning of the lift 
     \label{fig:weight-testing}
   \end{center}
 \end{figure*}
-
-To answer question 1 we measured the maximum height reached by the lift. When folded, the lift is 28cm tall. When fully extended, it is 54cm tall. When mounted on the Turtlebot, this means the lif can reach a maximum height of 71cm - sufficient to allow a resident sitting or lying down to reach the food or water delivery placed on the lift.
-
-To answer question 2 we trialed a range of weights, checking to see if the lift could raise and lower the load successfully. We tested weights ranging from 79 grams to 2.0 kilograms, as seen in table \ref{tab:weight}. We say a lift can reliably lift the weight if it successfully raises and lowers it in all 10 trials. All weights below 2kg succeeded: at 2.0kg, the lift broke on the 7th trial and testing was halted to fix the structure. Based on this we recommend the lift be used only with weights below 2kg.
-
-To answer question 3 we performed two tests. Firstly, we tested the variation in time taken to reach maximum height with increasing weights, from 79 grams to 2.0 kilograms (figure \ref{fig:weight-testing}). We found a statistically significant difference between the mean speed achieved by the lift with the smallest and largest weights ($p < 0.01$, $n = (10, 6)$ using a two-sample t-test), indicating that deliveries with lower weights will be delivered to residents faster. 
-
-Secondly, we tested the time the lift with a 784 gram loads took to reach maximum height with varying speeds (200 to 1000) of the EV3 motor and calculated the mean over 10 trials for each speed. The relationship between the speed of the motor and the time the lift took to reach the height is approximately reciprocal (figure \ref{fig:speed-testing}): this is expected because speed $s$ and time $t$ have a reciprocal relationship: $s = d / t$. Based on this testing, we have chosen to proceed with a speed of 400, which is on the `elbow' of the curve and strikes a balance between the speed of the lift moving up (20.03 seconds) and the noise involved in the motors spinning quickly.
 
 \section{Budget}
 The bulk of our budget leading up to this demo has been spent on building, reinforcing, and mounting the lift. We have spent a total of \pounds 21.59 from our monetary budget and 1.75 hours of technician time. Detailed breakdowns of costs are provided in tables \ref{tab:non-budget-cost}, \ref{tab:budget-cost-monetary}, and \ref{tab:budget-cost-non-monetary}.
