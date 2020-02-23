@@ -61,11 +61,11 @@ We were only able to implement unidirectional (app $\rightarrow$ robot) communic
   \label{tab:group-split}
 \end{table}
 
-At the beginning of this sprint, we rearranged group members across teams according to table \ref{tab:group-split}. Rebecca began the sprint in the robot building team, designing a CAD model of the lift, in case the Lego lift was too unstable and we needed to manufacture it instead. We found the Lego lift to be sufficiently stable, so Rebecca has moved to working on product development. Likewise Theo began the spring in the app development team, but after Yuchen and Ching Ling were able to implement key functionality, Theo moved to working on UI/UX to ensure the app would be usable by non-technical caregivers. Recognizing the importance of quantitative analysis in this demo, Michael has additionally taken on quantitative analysis duties. 
+At the beginning of this sprint, we rearranged group members across teams according to Table \ref{tab:group-split}. Rebecca began the sprint in the robot building team, designing a CAD model of the lift, in case the Lego lift was too unstable and we needed to manufacture it instead. We found the Lego lift to be sufficiently stable, so Rebecca has moved to working on product development. Likewise Theo began the sprint in the app development team, but after Yuchen and Ching Ling were able to implement key functionality, Theo moved to working on UI/UX to ensure the app would be usable by non-technical caregivers. Recognizing the importance of quantitative analysis in this demo, Michael has additionally taken on quantitative analysis duties. 
 
 The entire team met once a week with our mentor to discuss group progress against goals. Michael met with each sub-team twice a week to track any possible blockers and identify any possible support they needed. Inter-team meetings were arranged ad-hoc between POCs for each team when collaboration was needed. 
 
-Slack has been our main mode of communication, allowing for communication between team members and setting meetings. When needing to collaborate between teams, private DMs were set up with the POCs of each team to arrange meeting times. As with previous sprints, we have used GitHub to allow collaboration when writing code for the robot and the app. In writing the app, each member of the team worked on a feature branch and once work was complete, the team met to merge these branches and resolve any merge conflicts together. 
+Slack has been our main mode of communication, allowing for communication between team members and setting meetings. When needing to collaborate between teams, private DMs were set up with the POCs of each team to arrange meeting times. As with previous sprints, we have used GitHub to allow collaboration when writing code for the robot and the app. In writing the app, each member of the team worked on a feature branch and once work was complete, the team met to merge these branches and resolve any merge conflicts together. By agreeing to work on separate features of the app, team members ensured they weren't working on the same files and therefore made the merging process simpler. 
 
 Budget spending so far consists of \pounds 1787.43 on monetary costs that come from the starting kit, so not deducted from total budget (the Turtlebot, and parts needed to make the lift); \pounds 21.59 spent on monetary costs to build the lift and prepare the arena; and 1.75 hours of technician time. This leaves us with \pounds 178.41 remaining in our budget and 5.25 hours of technician time. 
 
@@ -82,20 +82,28 @@ We have changed our intended goals from the original project plan, so we have de
 
 \section{Technical details}
 \subsection{Hardware}
-\par The scissor lift is made from Lego. A scissor lift design was chosen as it is the most stable of the possible alternatives that can be made from Lego. A major consideration in the lift design is its ability to carry weights, so we decided to add extra gears to make sure that the lift mechanism could withstand loads. 
-\par When the lift was initially built, we quickly identified that the scissor arms were not stable. This was concluded from initial test runs that were run once the lift was built. To reinforce the lift, metal rods were added to make sure that the scissor arms were stable and that Lego components did not disconnect from each other. We decided to use metal rods because they are much more stable than using the Lego alternative. We considered manufacturing large parts of our lift to make it more stable, but these metal rods allow us to stabilise the lift without needing to spend our entire technician budget and a significant part of our monetary budget. 
+\par The scissor lift is made from Lego (Figure \ref{fig:lift}). A scissor lift design was chosen as it is the most stable of the possible alternatives that can be made from Lego. A major consideration in the lift design is its ability to carry weights, so we decided to add extra gears to make sure that the lift mechanism could withstand loads. 
+\par When the lift was initially built, we quickly identified that the scissor arms were not stable. This was concluded from initial test runs that were run once the lift was built. To reinforce the lift, metal rods were added to make sure that the scissor arms were stable and that Lego components did not disconnect from each other. We decided to use metal rods because they are much more stable than using the Lego alternative. We considered manufacturing large parts of our lift to make it more stable, but these metal rods allow us to stabilize the lift without needing to spend our entire technician budget and a significant part of our monetary budget. 
 \par We will mount the lift on the robot using a platform. The official supported platform has not arrived yet so we were not able to get the lift fixed onto the Turtlebot. In the meantime, the struts the platform have been installed and a temporary platform was made with the help of the technicians.
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=4cm]{figs/lift_down.jpg}
+    \includegraphics[width=4cm]{figs/lift_up.jpg}
+    \caption{The lift at rest (left) and fully extended (right). Fully extended, the lift reaches 71cm in height above the ground.}
+  \label{fig:lift}
+  \end{center}
+\end{figure}
 
 \subsection{Software}
-\par For this milestone we have implemented autonomous movement using Rviz and the ROS navigation stack. Rviz was used because it allows for visualising the map and plotting the goal of the Turtlebot which allowed us to work on the movement of the Turtlebot while the communication with the app was still being implemented. We also used Gazebo to create simulations of the Turtlebot to test any code we write early while we were getting connection established to the Turtlebot from a remote machine. An NTP server was also used to sync the clock of the remote machine used to run Rviz and the navigation packages with the clock of the Turtlebot. This was necessary because the navigation would not run if the clocks were out of sync by more than 0.5 milliseconds.
-\par The Turtlebot also has the ability to fully map its area. To do this we used Rviz to visualise the map, and the Lidar readings to detect any walls or obstacles. The Turtlebot can create and store a map while being driven around the arena manually. The code that was written in the previous demo was used to aid the manual movement for mapping an area. 
+\par For this milestone we have implemented autonomous movement using Rviz and the ROS navigation stack. Rviz was used because it allows for visualizing the map and plotting the goal of the Turtlebot which allowed us to work on the movement of the Turtlebot while the communication with the app was still being implemented. We also used Gazebo to create simulations of the Turtlebot to test any code we write early while we were getting connection established to the Turtlebot from a remote machine. An NTP server was also used to sync the clock of the remote machine used to run Rviz and the navigation packages with the clock of the Turtlebot. This was necessary because the navigation would not run if the clocks were out of sync by more than 0.5 milliseconds.
+\par The Turtlebot also has the ability to fully map its area. To do this we used Rviz to visualize the map, and the Lidar readings to detect any walls or obstacles. The Turtlebot can create and store a map while being driven around the arena manually. The code that was written in the previous demo was used to aid the manual movement for mapping an area. 
 \par The server-client connection makes use of the UDP protocol for sending and receiving packets. Each packet for movement takes the form ``GOTO [room \#]''; packets not matching this form are ignored. UDP was used as there is no `handshake' required between the client and server, meaning that packet loss will not severely impact our performance.
 
 \subsection{App}
 \par We have added three screens to the application: calendar, map, and dashboard. The calendar allows the caregivers to see key dates for the residents and care home; the map which will be used to check the layout of the care home and see what rooms each patient is allocated to; the dashboard shows graphs and charts of information about the residents and deliveries. 
-\par Another feature we have worked on is a prioritisation system allowing the caregivers to see which of the residents is more likely to need assistance. In the future it future will be used in the scheduling of the robot by deciding the order of who the robot should visit next.
-\par We have implemented 3 possible dashboards to be used depending on what the results of user testing gives us. The first includes a summary over all residents of the food and water delivered displayed on bar charts. It also includes a stacked bar chart of the number of the visits to each resident by the robot each day. The second allows the caregiver to select a resident and can view their weekly records of food and water delivered. The third is categorised into priorities and under each the caregiver can see the daily number of deliveries. The interviews should inform us on what design the caregivers would find the most useful and any of the 3 could also be adapted to display information that we had not discovered to be useful before the interviews but have since decided to include them.
+\par Another feature we have worked on is a prioritization system allowing the caregivers to see which of the residents is more likely to need assistance. In the future it future will be used in the scheduling of the robot by deciding the order of who the robot should visit next.
+\par We have implemented 3 possible dashboards to be used depending on what the results of user testing gives us. The first includes a summary over all residents of the food and water delivered displayed on bar charts. It also includes a stacked bar chart of the number of the visits to each resident by the robot each day. The second allows the caregiver to select a resident and can view their weekly records of food and water delivered. The third is categorized into priorities and under each the caregiver can see the daily number of deliveries. The interviews should inform us on what design the caregivers would find the most useful and any of the 3 could also be adapted to display information that we had not discovered to be useful before the interviews but have since decided to include them.
 
 \subsection{User testing}
 \par In order to ensure that our robot is going to aid caregivers in their job we have decided to interview several caregivers. Our approach for these interviews is to initially understand what jobs are involved in working in this environment as well as finding out what information is tracked and recorded throughout each day. We are then going to introduce our robot design and get feedback on the usefulness and if they have any issues with our design or additions/improvements that could be made. The last section of the interview will involve the app dashboard design. We will let the caregivers give us some ideas of what they would like to have recorded and displayed along with any calculation tasks that would be quicker for a computer to calculate automatically.
@@ -105,18 +113,18 @@ We have changed our intended goals from the original project plan, so we have de
 \section{Evaluation}
 Our quantitative analysis in this section concerned the functioning of the lift against use-cases. We considered the following questions:
 \begin{enumerate}
-\item To allow residents to pick up food and water without needing to bend down: what height can the lift reach?
-\item To inform caregivers how many things can safely be put on the lift: how much weight can the robot consistently carry?
-\item To estimate how long residents need to wait to pick up their delivery after the robot arrives: how long does the lift take to achieve maximum height? Is this time affected by the weight the lift is carrying?
+\item {\bf Goal:} allow residents to pick up food and water without needing to bend down. \\{\bf Question 1: } what height can the lift reach?
+\item {\bf Goal:} inform caregivers how many things can safely be put on the lift. \\{\bf Question 2: }how much weight can the robot consistently carry?
+\item {\bf Goal:} estimate how long residents need to wait to pick up their delivery after the robot arrives. \\{\bf Question 3: } how long does the lift take to achieve maximum height? Is this time affected by the weight the lift is carrying?
 \end{enumerate}
 
-To answer question 1 we measured the maximum height reached by the lift. When folded, the lift is 28cm tall. When fully extended, it is 54cm tall. When mounted on the Turtlebot, this means the lif can reach a maximum height of 71cm - sufficient to allow a resident sitting or lying down to reach the food or water delivery placed on the lift.
+To answer Question 1 we measured the maximum height reached by the lift. When folded, the lift is 28cm tall. When fully extended, it is 54cm tall. When mounted on the Turtlebot, this means the lift can reach a maximum height of 71cm - sufficient to allow a resident sitting or lying down to reach the food or water delivery placed on the lift.
 
-To answer question 2 we trialed a range of weights, checking to see if the lift could raise and lower the load successfully. We tested weights ranging from 79 grams to 2.0 kilograms, as seen in table \ref{tab:weight}. We say a lift can reliably lift the weight if it successfully raises and lowers it in all 10 trials. All weights below 2kg succeeded: at 2.0kg, the lift broke on the 7th trial and testing was halted to fix the structure. Based on this we recommend the lift be used only with weights below 2kg.
+To answer Question 2 we trialed a range of weights, checking to see if the lift could raise and lower the load successfully. We tested weights ranging from 79 grams to 2.0 kilograms, as seen in Table \ref{tab:weight}. We say a lift can reliably lift the weight if it successfully raises and lowers it in all 10 trials. All weights below 2.0kg succeeded: at 2.0kg, the lift broke on the 7th trial and testing was halted to fix the structure. Based on this we recommend the lift be used only with weights below 2.0kg.
 
-To answer question 3 we performed two tests. Firstly, we tested the variation in time taken to reach maximum height with increasing weights, from 79 grams to 2.0 kilograms (figure \ref{fig:weight-testing}). We found a statistically significant difference between the mean speed achieved by the lift with the smallest and largest weights ($p < 0.01$, $n = (10, 6)$ using a two-sample t-test), indicating that deliveries with lower weights will be delivered to residents faster. 
+To answer Question 3 we performed two tests. Firstly, we tested the variation in time taken to reach maximum height with increasing weights, from 79 grams to 2.0 kilograms (Figure \ref{fig:weight-testing}). We found a statistically significant difference between the mean speed achieved by the lift with the smallest and largest weights ($p < 0.01$, $n = (10, 6)$ using a two-sample t-test), indicating that deliveries with lower weights will be delivered to residents faster. 
 
-Secondly, we tested the time the lift with a 784 gram loads took to reach maximum height with varying speeds (200 to 1000) of the EV3 motor and calculated the mean over 10 trials for each speed. The relationship between the speed of the motor and the time the lift took to reach the height is approximately reciprocal (figure \ref{fig:speed-testing}): this is expected because speed $s$ and time $t$ have a reciprocal relationship: $s = d / t$. Based on this testing, we have chosen to proceed with a speed of 400, which is on the `elbow' of the curve and strikes a balance between the speed of the lift moving up (20.03 seconds) and the noise involved in the motors spinning quickly.
+Secondly, we tested the time the lift with a 784 gram loads took to reach maximum height with varying speeds (200 to 1000) of the EV3 motor and calculated the mean over 10 trials for each speed. The relationship between the speed of the motor and the time the lift took to reach the height is approximately reciprocal (Figure \ref{fig:speed-testing}): this is expected because speed $s$ and time $t$ have a reciprocal relationship: $s = d / t$. \footnote{It is not entirely reciprocal at the beginning of the curve due to friction in the motors at low speeds.} Based on this testing, we have chosen to proceed with a speed of 400, which is on the `elbow' of the curve and strikes a balance between the speed of the lift moving up (20.03 seconds) and the noise involved in the motors spinning quickly.
 
 \begin{table}
   \begin{center}
@@ -138,7 +146,7 @@ Secondly, we tested the time the lift with a 784 gram loads took to reach maximu
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=6cm]{figs/Lift_speed.png}
+    \includegraphics[width=6cm]{figs/Lift_speed.pdf}
     \caption{Scatter plot showing the reciprocal relationship between the motor speed and the time taken for the lift to reach its maximum height. $n = 90$ samples for all tests. $n = 10$ samples per speed. Lift weighted at 784 grams for testing.}
   \label{fig:speed-testing}
   \end{center}
@@ -146,14 +154,14 @@ Secondly, we tested the time the lift with a 784 gram loads took to reach maximu
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=\linewidth]{figs/Lift_time.png}
+    \includegraphics[width=\linewidth]{figs/Lift_time.pdf}
     \caption{Box plots of the time taken for the lift to reach its maximum height with increasing weights. $n = 66$ samples for all tests. $n = 10$ samples per weight except at 2.034kg with $n = 6$.}
     \label{fig:weight-testing}
   \end{center}
 \end{figure}
 
 \section{Budget}
-The bulk of our budget leading up to this demo has been spent on building, reinforcing, and mounting the lift. We have spent a total of \pounds 21.59 from our monetary budget and 1.75 hours of technician time. Detailed breakdowns of costs are provided in tables \ref{tab:non-budget-cost}, \ref{tab:budget-cost-monetary}, and \ref{tab:budget-cost-non-monetary}.
+The bulk of our budget leading up to this demo has been spent on building, reinforcing, and mounting the lift. We have spent a total of \pounds 21.59 from our monetary budget and 1.75 hours of technician time. Detailed breakdowns of costs are provided in Tables \ref{tab:non-budget-cost}, \ref{tab:budget-cost-monetary}, and \ref{tab:budget-cost-non-monetary}.
 
 \begin{table}[h]
 \begin{center}
@@ -167,7 +175,7 @@ The bulk of our budget leading up to this demo has been spent on building, reinf
     EV3 battery charger & 1 & 32.39 & 32.39 & Lift \\
     EV3 large motor & 2 & 32.39 & 64.78 & Lift \\
     EV3 touch sensor & 2 & 19.19 & 38.38 & Lift \\
-    WiFi USB adaptor & 1 & 5.00 & 5.00 & Lift \\
+    WiFi USB adapter & 1 & 5.00 & 5.00 & Lift \\
     Lego & 2.5kg & 15.00 & 37.50 & Lift \\
     \hline \hline
          &       & Overall cost (\pounds) & 1787.43
