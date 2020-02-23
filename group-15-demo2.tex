@@ -53,6 +53,7 @@ We were only able to implement unidirectional (app $\rightarrow$ robot) communic
     Robot programming & {\bf Ben}, Wojtek, Errikos \\
     App development & {\bf Yuchen}, Ching Ling \\
     Project management & {\bf Michael}  \\
+    Quant. analysis & {\bf Michael} \\
     UI/UX and user testing & {\bf Theo}  \\
     Product development & {\bf Rebecca}  
   \end{tabular}
@@ -60,7 +61,7 @@ We were only able to implement unidirectional (app $\rightarrow$ robot) communic
   \label{tab:group-split}
 \end{table}
 
-At the beginning of this sprint, we rearranged group members across teams according to table \ref{tab:group-split}. Rebecca began the sprint in the robot building team, designing a CAD model of the lift, in case the Lego lift was too unstable and we needed to manufacture it instead. We found the Lego lift to be sufficiently stable, so Rebecca has moved to working on product development. Likewise Theo began the spring in the app development team, but after Yuchen and Ching Ling were able to implement key functionality, Theo moved to working on UI/UX to ensure the app would be usable by non-technical caregivers.
+At the beginning of this sprint, we rearranged group members across teams according to table \ref{tab:group-split}. Rebecca began the sprint in the robot building team, designing a CAD model of the lift, in case the Lego lift was too unstable and we needed to manufacture it instead. We found the Lego lift to be sufficiently stable, so Rebecca has moved to working on product development. Likewise Theo began the spring in the app development team, but after Yuchen and Ching Ling were able to implement key functionality, Theo moved to working on UI/UX to ensure the app would be usable by non-technical caregivers. Recognizing the importance of quantitative analysis in this demo, Michael has additionally taken on quantitative analysis duties. 
 
 The entire team met once a week with our mentor to discuss group progress against goals. Michael met with each sub-team twice a week to track any possible blockers and identify any possible support they needed. Inter-team meetings were arranged ad-hoc between POCs for each team when collaboration was needed. 
 
@@ -81,19 +82,15 @@ We have changed our intended goals from the original project plan, so we have de
 
 \section{Technical details}
 \subsection{Hardware}
-\begin{itemize}
-\item Since we decided to make the lift out of lego deciding on the lift design was easy. The scissor lift was by far the most stable design to be made out of lego. One major factor for the lift was carry weight, so we decided to add extra gears to make sure that the lift mechanism can withstand the pressure.
-\item Maximum weight identified + stress points identified--- When the lift was initially built, we quickly identified that the scissor arms were not stable . This was concluded from initial test runs that were run once the lift was built. To reinforce the lift metal rods were added to make sure that the scissor arms were stable and that chunks of lego were not disconnecting. We decided to use metal rods because they are much more stable than using the lego alternative. The rods also allowed us to save our budget instead of manufacturing lots of parts from metal.
-\item  To mount the lift to the Turtlebot another platform is going to be added. The official supported platform has not arrived yet so we were not able to get the lift fixed onto the Turtlebot however, the struts the platform have been installed and a temporary platform was made with the help of the technicians.
-\end{itemize}
+\par The scissor lift is made from Lego. A scissor lift design was chosen as it is the most stable of the possible alternatives that can be made from Lego. A major consideration in the lift design is its ability to carry weights, so we decided to add extra gears to make sure that the lift mechanism could withstand loads. 
+\par When the lift was initially built, we quickly identified that the scissor arms were not stable. This was concluded from initial test runs that were run once the lift was built. To reinforce the lift, metal rods were added to make sure that the scissor arms were stable and that Lego components did not disconnect from each other. We decided to use metal rods because they are much more stable than using the Lego alternative. We considered manufacturing large parts of our lift to make it more stable, but these metal rods allow us to stabilise the lift without needing to spend our entire technician budget and a significant part of our monetary budget. 
+\par We will mount the lift on the robot using a platform. The official supported platform has not arrived yet so we were not able to get the lift fixed onto the Turtlebot. In the meantime, the struts the platform have been installed and a temporary platform was made with the help of the technicians.
+
 
 \subsection{Software}
-\begin{itemize}
-\item For this milestone we have implemented Autonomous movement using Rviz and the ROS navigation stack. Rviz was used because it allows for visualising the map and plotting the goal of the Turtlebot which allowed us to work on the movement of the Turtlebot while the communication with the app was still being implemented. We also used Gazebo to create simulations of the Turtlebot to test any code we write early while we were getting connection established to the Turtlebot from a remote machine. An NTP server was also used to sync the clocks of the remote machine, that ran Rviz and the navigation packages, and the Turtlebot. This was necessary because the navigation would not run with the clocks out of sync by 0.5 milliseconds.
-\item The Turtlebot also has the ability to fully map it's area. To do this we used Rviz, to visualise the map, and the lidar readings to detect any walls or obstacles. The Turtlebot can create and store a map by driving around an area manually. The code that was written in the previous demo was used to aid the manual movement for mapping an area.
-\item For our final product we want an app to communicate with the Turtlebot.
-The server-client connection makes use of the UDP protocol for sending and receiving packets. Each packet for movement should take the form ``GOTO [room \#]''; it will be ignored otherwise. UDP was used as there is no `handshake' required between the app and our ROS mainframe meaning that packet loss will not severely impact our performance.
-\end{itemize}
+\par For this milestone we have implemented autonomous movement using Rviz and the ROS navigation stack. Rviz was used because it allows for visualising the map and plotting the goal of the Turtlebot which allowed us to work on the movement of the Turtlebot while the communication with the app was still being implemented. We also used Gazebo to create simulations of the Turtlebot to test any code we write early while we were getting connection established to the Turtlebot from a remote machine. An NTP server was also used to sync the clock of the remote machine used to run Rviz and the navigation packages with the clock of the Turtlebot. This was necessary because the navigation would not run if the clocks were out of sync by more than 0.5 milliseconds.
+\par The Turtlebot also has the ability to fully map its area. To do this we used Rviz to visualise the map, and the Lidar readings to detect any walls or obstacles. The Turtlebot can create and store a map while being driven around the arena manually. The code that was written in the previous demo was used to aid the manual movement for mapping an area. 
+\par The server-client connection makes use of the UDP protocol for sending and receiving packets. Each packet for movement takes the form ``GOTO [room \#]''; packets not matching this form are ignored. UDP was used as there is no `handshake' required between the client and server, meaning that packet loss will not severely impact our performance.
 
 \subsection{App}
 \begin{itemize}
@@ -105,11 +102,9 @@ The server-client connection makes use of the UDP protocol for sending and recei
 \end{itemize}
 
 \subsection{User testing}
-\begin{itemize}
-\item Design of survey for speaking to carehome workers
-\item Analysis of how survey will affect work going forward
-\item Ethical approval requested (? - check with Rebecca - will be delayed with strikes)
-\end{itemize}
+\par In order to ensure that our robot is going to aid caregivers in their job we have decided to interview several caregivers. Our approach for these interviews is to initially understand what jobs are involved in working in this environment as well as finding out what information is tracked and recorded throughout each day. We are then going to introduce our robot design and get feedback on the usefulness and if they have any issues with our design or additions/improvements that could be made. The last section of the interview will involve the app dashboard design. We will let the caregivers give us some ideas of what they would like to have recorded and displayed along with any calculation tasks that would be quicker for a computer to calculate automatically.
+\par Once the surveys are completed we will be able to see where are focus should be aimed and allows us to remove any features that are found to not be required and as well as adding in new features that the caregivers found to be useful.
+\par We are in the process of getting ethical approval in order to conduct these interviews and hope to get them done as soon as the approval comes through in order to implement the changes as early as possible. However due to strikes this may be delayed (see footnote 1).
 
 \section{Evaluation}
 Our quantitative analysis in this section concerned the functioning of the lift against use-cases. We considered the following questions:
@@ -159,8 +154,6 @@ To answer question 2 we trialed a range of weights, checking to see if the lift 
 To answer question 3 we performed two tests. Firstly, we tested the variation in time taken to reach maximum height with increasing weights, from 79 grams to 2.0 kilograms (figure \ref{fig:weight-testing}). We found a statistically significant difference between the mean speed achieved by the lift with the smallest and largest weights ($p < 0.01$, $n = (10, 6)$ using a two-sample t-test), indicating that deliveries with lower weights will be delivered to residents faster. 
 
 Secondly, we tested the time the lift with a 784 gram loads took to reach maximum height with varying speeds (200 to 1000) of the EV3 motor and calculated the mean over 10 trials for each speed. The relationship between the speed of the motor and the time the lift took to reach the height is approximately reciprocal (figure \ref{fig:speed-testing}): this is expected because speed $s$ and time $t$ have a reciprocal relationship: $s = d / t$. Based on this testing, we have chosen to proceed with a speed of 400, which is on the `elbow' of the curve and strikes a balance between the speed of the lift moving up (20.03 seconds) and the noise involved in the motors spinning quickly.
-
-
 
 \section{Budget}
 The bulk of our budget leading up to this demo has been spent on building, reinforcing, and mounting the lift. We have spent a total of \pounds 21.59 from our monetary budget and 1.75 hours of technician time. Detailed breakdowns of costs are provided in tables \ref{tab:non-budget-cost}, \ref{tab:budget-cost-monetary}, and \ref{tab:budget-cost-non-monetary}.
