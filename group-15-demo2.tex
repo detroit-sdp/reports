@@ -80,23 +80,19 @@ We have changed our intended goals from the original project plan, so we have de
 \end{itemize}
 
 \section{Technical details}
-Describe technical details of current implementation. Provide clear justification for design decisions, with brief reference to alternatives considered or explored.
-
 \subsection{Hardware}
 \begin{itemize}
-\item Scissor lift designed + built 
-\item Include pictures: at rest, fully extended, detail of mounts, detail of metal supports
-\item Maximum weight identified + stress points identified
-\item Stress points reinforced (by what?)
-\item Mounting system designed + manufactured for mounting lift to Turtlebot 
-\item Struts added to Turtlebot to mount lift (but mounting not finalized)
+\item Since we decided to make the lift out of lego deciding on the lift design was easy. The scissor lift was by far the most stable design to be made out of lego. One major factor for the lift was carry weight, so we decided to add extra gears to make sure that the lift mechanism can withstand the pressure.
+\item Maximum weight identified + stress points identified--- When the lift was initially built, we quickly identified that the scissor arms were not stable . This was concluded from initial test runs that were run once the lift was built. To reinforce the lift metal rods were added to make sure that the scissor arms were stable and that chunks of lego were not disconnecting. We decided to use metal rods because they are much more stable than using the lego alternative. The rods also allowed us to save our budget instead of manufacturing lots of parts from metal.
+\item  To mount the lift to the Turtlebot another platform is going to be added. The official supported platform has not arrived yet so we were not able to get the lift fixed onto the Turtlebot however, the struts the platform have been installed and a temporary platform was made with the help of the technicians.
 \end{itemize}
 
 \subsection{Software}
 \begin{itemize}
-\item Autonomous mapping implemented
-\item Autonomous movement implemented 
-\item Server set up to allow communication with app
+\item For this milestone we have implemented Autonomous movement using Rviz and the ROS navigation stack. Rviz was used because it allows for visualising the map and plotting the goal of the Turtlebot which allowed us to work on the movement of the Turtlebot while the communication with the app was still being implemented. We also used Gazebo to create simulations of the Turtlebot to test any code we write early while we were getting connection established to the Turtlebot from a remote machine. An NTP server was also used to sync the clocks of the remote machine, that ran Rviz and the navigation packages, and the Turtlebot. This was necessary because the navigation would not run with the clocks out of sync by 0.5 milliseconds.
+\item The Turtlebot also has the ability to fully map it's area. To do this we used Rviz, to visualise the map, and the lidar readings to detect any walls or obstacles. The Turtlebot can create and store a map by driving around an area manually. The code that was written in the previous demo was used to aid the manual movement for mapping an area.
+\item For our final product we want an app to communicate with the Turtlebot.
+The server-client connection makes use of the UDP protocol for sending and receiving packets. Each packet for movement should take the form “GOTO [room \#]“; it will be ignored otherwise. UDP was used as there is no ‘handshake’ required between the app and our ROS mainframe meaning that packet loss will not severely impact our performance.
 \end{itemize}
 
 \subsection{App}
