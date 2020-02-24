@@ -22,7 +22,7 @@
 \begin{abstract}
   Tadashi is an assistive robot for delivering food and water to residents in supported living and care home environments.
 
-  In this demo, we demonstrate the robot mapping the arena using ROS; locating itself in the demo space; moving around the space while avoiding obstacles; recognizing when it is stuck; and autonomously moving from the starting location to a target location, and then returning to its original location. We will also demonstrate the lift being able to move weights of up to 1kg up and down in a stable manner. We will demonstrate the dashboard, calendar, and map pages of the app, and being able to send commands to the robot from the app. We will discuss our intended user testing and user surveys and how they will influence our future work.
+  In this demo, we demonstrate the robot mapping the arena using ROS; locating itself in the demo space; moving around the space while avoiding obstacles; recognizing when it is stuck; and autonomously moving from the starting location to a target location. We will also demonstrate the lift being able to move weights of up to 1kg up and down in a stable manner. We will demonstrate the dashboard, calendar, and map pages of the app, and being able to send commands to the robot from the app. We will discuss our intended user testing and user surveys and how they will influence our future work.
 \end{abstract} 
 
 \section{Project plan update}
@@ -64,7 +64,7 @@ At the beginning of this sprint, we rearranged group members across teams accord
 
 The entire team met once a week with our mentor to discuss group progress against goals. Michael met with each sub-team twice a week to track any possible blockers and identify any possible support they needed. Inter-team meetings were arranged ad-hoc between POCs for each team when collaboration was needed. 
 
-Slack has been our main mode of communication, allowing for communication between team members and setting meetings. When needing to collaborate between teams, private DMs were set up with the POCs of each team to arrange meeting times. As with previous sprints, we have used GitHub to allow collaboration when writing code for the robot and the app. In writing the app, each member of the team worked on a feature branch and once work was complete, the team met to merge these branches and resolve any merge conflicts together. By agreeing to work on separate features of the app, team members ensured they weren't working on the same files and therefore made the merging process simpler. 
+Slack has been our main mode of communication, allowing for communication between team members and setting meetings. When needing to collaborate between teams, direct messages were exchanged with the POCs of each team to arrange meeting times. As with previous sprints, we have used GitHub to allow collaboration when writing code for the robot and the app. In writing the app, each member of the team worked on a feature branch and once work was complete, the team met to merge these branches and resolve any merge conflicts together. By agreeing to work on separate features of the app, team members ensured they weren't working on the same files and therefore made the merging process simpler. Programming work for the robot and lift was completed using pair programming, meaning there were no needs to merge work.
 
 Budget spending so far consists of \pounds 1787.43 on monetary costs that come from the starting kit, so not deducted from total budget (the Turtlebot, and parts needed to make the lift); \pounds 21.59 spent on monetary costs to build the lift and prepare the arena; and 1.75 hours of technician time. This leaves us with \pounds 178.41 remaining in our budget and 5.25 hours of technician time. 
 
@@ -83,24 +83,24 @@ We have changed our intended goals from the original project plan, so we have de
 \subsection{Hardware}
 \par The scissor lift is made from Lego (Figure \ref{fig:lift}). A scissor lift design was chosen as it is the most stable of the possible alternatives that can be made from Lego. A major consideration in the lift design is its ability to carry weights, so we decided to add extra gears to make sure that the lift mechanism could withstand loads. 
 \par When the lift was initially built, we quickly identified that the scissor arms were not stable. This was concluded from initial test runs that were run once the lift was built. To reinforce the lift, metal rods were added to make sure that the scissor arms were stable and that Lego components did not disconnect from each other. We decided to use metal rods because they are much more stable than using the Lego alternative. We considered manufacturing large parts of our lift to make it more stable, but these metal rods allow us to stabilize the lift without needing to spend our entire technician budget and a significant part of our monetary budget. 
-\par We will mount the lift on the robot using a platform. The official supported platform has not arrived yet so we were not able to get the lift fixed onto the Turtlebot. In the meantime, the struts the platform have been installed and a temporary platform was made with the help of the technicians.
+\par We will mount the lift on the robot using a platform. The official supported platform has not arrived yet so we were not able to get the lift fixed onto the Turtlebot. In the meantime, temporary struts have been installed on the Turtlebot and a temporary platform was made with the help of the technicians.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=4cm]{figs/lift_down.jpg}
     \includegraphics[width=4cm]{figs/lift_up.jpg}
-    \caption{The lift at rest (left) and fully extended (right). Fully extended, the lift reaches 71cm in height above the ground.}
+    \caption{The lift at rest (left) and fully extended (right). When on the Turtlebot, the tray reaches 71cm in height above the ground with the lift fully extended.}
   \label{fig:lift}
   \end{center}
 \end{figure}
 
 \subsection{Software}
-\par For this milestone we have implemented autonomous movement using Rviz and the ROS navigation stack. Rviz was used because it allows for visualizing the map and plotting the goal of the Turtlebot which allowed us to work on the movement of the Turtlebot while the communication with the app was still being implemented. We also used Gazebo to create simulations of the Turtlebot to test any code we write early while we were getting connection established to the Turtlebot from a remote machine. An NTP server was also used to sync the clock of the remote machine used to run Rviz and the navigation packages with the clock of the Turtlebot. This was necessary because the navigation would not run if the clocks were out of sync by more than 0.5 milliseconds.
+\par For this milestone we have implemented autonomous movement using Rviz and the ROS navigation stack. Rviz was used because it allows for visualizing the map and plotting the goal of the Turtlebot which allowed us to work on the movement of the Turtlebot while the communication with the app was still being implemented. We also used Gazebo to create simulations of the Turtlebot to test any code we write early while we were getting a connection established to the Turtlebot from a remote machine. An NTP server was also used to sync the clock of the remote machine used to run Rviz and the navigation packages with the clock of the Turtlebot. This was necessary because the navigation would not run if the clocks were out of sync by more than 0.5 milliseconds.
 \par The Turtlebot also has the ability to fully map its area. To do this we used Rviz to visualize the map, and the Lidar readings to detect any walls or obstacles. The Turtlebot can create and store a map while being driven around the arena manually. The code that was written in the previous demo was used to aid the manual movement for mapping an area. 
 \par The server-client connection makes use of the UDP protocol for sending and receiving packets. Each packet for movement takes the form ``GOTO [room \#]''; packets not matching this form are ignored. UDP was used as there is no `handshake' required between the client and server, meaning that packet loss will not severely impact our performance.
 
 \subsection{App}
-\par We have added three screens to the application: calendar, map, and dashboard. The calendar allows the caregivers to see key dates for the residents and care home; the map which will be used to check the layout of the care home and see what rooms each patient is allocated to; the dashboard shows graphs and charts of information about the residents and deliveries (Figure \ref{fig:dashboard}). 
+\par We have added three screens to the application: calendar, map, and dashboard. The calendar allows the caregivers to see key dates for the residents and care home; the map is used to check the layout of the care home and see what rooms each patient is allocated to; the dashboard shows graphs and charts of information about the residents and deliveries (Figure \ref{fig:dashboard}). 
 \par Another feature we have worked on is a prioritization system allowing the caregivers to see which of the residents is more likely to need assistance. In the future it future will be used in the scheduling of the robot by deciding the order of who the robot should visit next.
 \par We have implemented 3 possible dashboards to be used depending on what the results of user testing gives us. The first includes a summary over all residents of the food and water delivered displayed on bar charts. It also includes a stacked bar chart of the number of the visits to each resident by the robot each day. The second allows the caregiver to select a resident and can view their weekly records of food and water delivered. The third is categorized into priorities and under each the caregiver can see the daily number of deliveries. The interviews should inform us on what design the caregivers would find the most useful and any of the 3 could also be adapted to display information that we had not discovered to be useful before the interviews but have since decided to include them.
 
@@ -122,7 +122,7 @@ We have changed our intended goals from the original project plan, so we have de
 Our quantitative analysis in this section concerned the functioning of the lift against use-cases. We considered the following questions:
 \begin{enumerate}
 \item {\bf Goal:} allow residents to pick up food and water without needing to bend down. \\{\bf Question 1:} what height can the lift reach?
-\item {\bf Goal:} inform caregivers how many things can safely be put on the lift. \\{\bf Question 2:} how much weight can the robot consistently carry?
+\item {\bf Goal:} inform caregivers how many things can safely be put on the lift. \\{\bf Question 2:} how much weight can the lift consistently carry?
 \item {\bf Goal:} estimate how long residents need to wait to pick up their delivery after the robot arrives. \\{\bf Question 3:} how long does the lift take to achieve maximum height? Is this time affected by the weight the lift is carrying?
 \end{enumerate}
 
@@ -163,7 +163,7 @@ Secondly, we tested the time the lift with a 784 gram loads took to reach maximu
 \begin{figure}
   \begin{center}
     \includegraphics[width=\linewidth]{figs/Lift_time.pdf}
-    \caption{Box plots of the time taken for the lift to reach its maximum height with increasing weights. $n = 66$ samples for all tests. $n = 10$ samples per weight except at 2.034kg with $n = 6$.}
+    \caption{Box plots of the time taken for the lift to reach its maximum height with increasing weights. $n = 66$ samples for all tests. $n = 10$ samples per weight except at 2.034kg with $n = 6$. The difference between the means for 79g and 2.0kg is only 0.77 seconds --- statistically significant but unlikely to be noticeable to the observer.}
     \label{fig:weight-testing}
   \end{center}
 \end{figure}
