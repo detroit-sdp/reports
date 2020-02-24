@@ -132,7 +132,7 @@ To answer Question 2 we trialed a range of weights, checking to see if the lift 
 
 To answer Question 3 we performed two tests. Firstly, we tested the variation in time taken to reach maximum height with increasing weights, from 79 grams to 2.0 kilograms (Figure \ref{fig:weight-testing}). We found a statistically significant difference between the mean speed achieved by the lift with the smallest and largest weights ($p < 0.01$, $n = (10, 6)$ using a two-sample t-test), indicating that deliveries with lower weights will be delivered to residents faster. 
 
-Secondly, we tested the time the lift with a 784 gram loads took to reach maximum height with varying speeds (200 to 1000) of the EV3 motor and calculated the mean over 10 trials for each speed. The relationship between the speed of the motor and the time the lift took to reach the height is approximately reciprocal (Figure \ref{fig:speed-testing}): this is expected because speed $s$ and time $t$ have a reciprocal relationship: $s = d / t$. \footnote{It is not entirely reciprocal at the beginning of the curve due to friction in the motors at low speeds.} Based on this testing, we have chosen to proceed with a speed of 400, which is on the `elbow' of the curve and strikes a balance between the time the lift takes to extend to full height (20.03 seconds) and the noise involved in the motors spinning quickly at faster speeds.
+Secondly, we loaded the lift with a load of 784 grams and tested how much time it took to fully extend at different speed settings of the EV3 motor (200 to 1000). We plotted the mean over 10 trials for each speed (Figure \ref{fig:speed-testing}). The relationship between the speed of the motor and the time the lift took to reach the height is approximately reciprocal \footnote{It is not entirely reciprocal at the beginning of the curve due to friction in the motors at low speeds.}: this is expected because speed $s$ and time $t$ have a reciprocal relationship: $s = d / t$. Based on this testing, we have chosen to proceed with a speed of 400, which is on the `elbow' of the curve and strikes a balance between the time the lift takes to extend to full height (20.03 seconds) and the noise involved in the motors spinning quickly at faster speeds.
 
 \begin{table}
   \begin{center}
@@ -163,7 +163,7 @@ Secondly, we tested the time the lift with a 784 gram loads took to reach maximu
 \begin{figure}
   \begin{center}
     \includegraphics[width=\linewidth]{figs/Lift_time.pdf}
-    \caption{Box plots of the time taken for the lift to reach its maximum height with increasing weights. $n = 66$ samples for all tests. $n = 10$ samples per weight except at 2.034kg with $n = 6$. The difference between the means for 79g and 2.0kg is only 0.77 seconds --- statistically significant but unlikely to be noticeable to the observer.}
+    \caption{Box plots of the time taken for the lift to reach its maximum height with increasing weights. $n = 66$ samples for all tests. $n = 10$ samples per weight except at 2.034kg with $n = 6$. The difference between the means for 79g and 2.0kg is 0.77 seconds --- statistically significant but unlikely to be noticeable to the observer.}
     \label{fig:weight-testing}
   \end{center}
 \end{figure}
