@@ -101,7 +101,7 @@ We have changed our intended goals from the original project plan, so we have de
 \par The server-client connection makes use of the UDP protocol for sending and receiving packets. Each packet for movement takes the form ``GOTO [room \#]''; packets not matching this form are ignored. UDP was used as there is no `handshake' required between the client and server, meaning that packet loss will not severely impact our performance.
 
 \subsection{App}
-\par We have added three screens to the application: calendar, map, and dashboard. The calendar allows the caregivers to see key dates for the residents and care home; the map which will be used to check the layout of the care home and see what rooms each patient is allocated to; the dashboard shows graphs and charts of information about the residents and deliveries. 
+\par We have added three screens to the application: calendar, map, and dashboard. The calendar allows the caregivers to see key dates for the residents and care home; the map which will be used to check the layout of the care home and see what rooms each patient is allocated to; the dashboard shows graphs and charts of information about the residents and deliveries (Figure \ref{fig:dashboard}). 
 \par Another feature we have worked on is a prioritization system allowing the caregivers to see which of the residents is more likely to need assistance. In the future it future will be used in the scheduling of the robot by deciding the order of who the robot should visit next.
 \par We have implemented 3 possible dashboards to be used depending on what the results of user testing gives us. The first includes a summary over all residents of the food and water delivered displayed on bar charts. It also includes a stacked bar chart of the number of the visits to each resident by the robot each day. The second allows the caregiver to select a resident and can view their weekly records of food and water delivered. The third is categorized into priorities and under each the caregiver can see the daily number of deliveries. The interviews should inform us on what design the caregivers would find the most useful and any of the 3 could also be adapted to display information that we had not discovered to be useful before the interviews but have since decided to include them.
 
@@ -110,12 +110,21 @@ We have changed our intended goals from the original project plan, so we have de
 \par Once the surveys are completed we will be able to see where are focus should be aimed and allows us to remove any features that are found to not be required and as well as adding in new features that the caregivers found to be useful.
 \par We are in the process of getting ethical approval in order to conduct these interviews and hope to get them done as soon as the approval comes through in order to implement the changes as early as possible. However due to strikes this may be delayed (see footnote 1).
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=4cm]{figs/dashboard_demo2.png}
+    \caption{A screenshot of the app showing an example of the dashboard interface which will be further developed.}
+  \label{fig:dashboard}
+  \end{center}
+\end{figure}
+
+
 \section{Evaluation}
 Our quantitative analysis in this section concerned the functioning of the lift against use-cases. We considered the following questions:
 \begin{enumerate}
-\item {\bf Goal:} allow residents to pick up food and water without needing to bend down. \\{\bf Question 1: } what height can the lift reach?
-\item {\bf Goal:} inform caregivers how many things can safely be put on the lift. \\{\bf Question 2: }how much weight can the robot consistently carry?
-\item {\bf Goal:} estimate how long residents need to wait to pick up their delivery after the robot arrives. \\{\bf Question 3: } how long does the lift take to achieve maximum height? Is this time affected by the weight the lift is carrying?
+\item {\bf Goal:} allow residents to pick up food and water without needing to bend down. \\{\bf Question 1:} what height can the lift reach?
+\item {\bf Goal:} inform caregivers how many things can safely be put on the lift. \\{\bf Question 2:} how much weight can the robot consistently carry?
+\item {\bf Goal:} estimate how long residents need to wait to pick up their delivery after the robot arrives. \\{\bf Question 3:} how long does the lift take to achieve maximum height? Is this time affected by the weight the lift is carrying?
 \end{enumerate}
 
 To answer Question 1 we measured the maximum height reached by the lift. When folded, the lift is 28cm tall. When fully extended, it is 54cm tall. When mounted on the Turtlebot, this means the lift can reach a maximum height of 71cm - sufficient to allow a resident sitting or lying down to reach the food or water delivery placed on the lift.
