@@ -85,9 +85,9 @@ From its state in the previous demo, the robot software has moved towards what w
 \begin{itemize}
   \item The robot now keeps track of a variety of variables regarding its state
   \item The robot now calculates a vector to its intended destination from its current position rather than using hardcoded distances on x and y
+  \item The parameters powering the robots autonomous navigation have been configured in order to suit our configuration more appropriately
   \item The robot can now control the lift directly through a serial connection between the Raspberry Pi board and the arduino controlling the lift
   \item The ROS node controlling the navigation stack and networking is now able to communicate with the app bidirectionally
-  \item The parameters powering the robots autonomous navigation have been configured in order to suit our configuration more appropriately
 \end{itemize}
 
 %Item 1
@@ -102,7 +102,7 @@ As a further complication, the robot always believes that it is facing forwards.
 
 With all this in mind, we store our room coordinates in another dictionary in Python. Before, the time complexity was not different between list and dictionary. This is not the case for the room dictionary as while retreival is still a key operation on the room dictionary, lookup is also important in order to verify if the room actually exists for error detection. Lookup, insertion, and deletion are O(n) in the average case for lists, but are O(1) for dictionaries. There is a clear advantage in us using dictionaries over lists here. This is not to mention that fact that it allows us to index the rooms however we please. Each entry in the dictionary stores the coordinates of the room, and the targeted rotation at this goal (L,B,F, or R).
 
-Our initial test runs of the code seemed to indicate that using the coordinates-vector system is far more accurate. Due to the team not feeling comfortable returning to Appleton Tower in the wake of the global COVID-19 pandemic, we were not able to carry out any official tests on this. Our plans are detailed in Evaluation section.
+Our initial test runs of the code seemed to indicate that using the coordinates-vector system is unsurprisingly far more accurate over time than using distances. Due to the team not feeling comfortable returning to Appleton Tower in the wake of the global COVID-19 pandemic, we were not able to carry out any official tests on this. Our plans are detailed in Evaluation section.
 
 \begin{table}[h]
 \vskip 3mm
@@ -126,6 +126,8 @@ Direction & x & y & z & w \\
 \end{center}
 \vskip -3mm
 \end{table}
+
+% Item 3
 
 % Explain the key details of the control and interface software developed for the project. Be clear about any packages used and the reason for choosing them. 
 
