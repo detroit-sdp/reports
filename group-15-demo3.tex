@@ -130,7 +130,7 @@ Direction & x & y & z & w \\
 % Item 3
 After we located the parameter files for the navigation stack, we altered them to suit our configuration more appropriately. We found a parameter under the robots description of itself that it provides to the stack named <collision>...</collision>. This seems to be the parameter the stack uses in order to avoid collision between the world and the robot. Furthermore, this xrdf tag features an attribute <box size> which was set on default to values very closely resembling the dimensions of the Turtlebot. We altered this to match the new dimensions of our bot. Specfically, the length of our bot is approximately 40.0cm as opposed to the original 28.1cm. Unfortunately, this is something that is incredibly difficult to test due to the robot avoiding obstacles very conservatively as a result of the parameter changes below.
 
-The other key parameters are mostly self-explanatory other than the following. [min/max]_trans_vel is the speed of the robot when moving in a straight line. path_distance_bias determines how closely the robot need follow the path it works out. Given our robot always calculated an accurate path, we increased this value. goal_distance_bias smoothes the trajectory of the path and makes it more efficient. Again, we decided to increase this. Finally, occdist_scale determines how 'afraid' the robot is of obstacles. We lowered this to make it behave a little safer. All our parameter changes are detailed in table~\ref{tab:params}.
+The other key parameters are mostly self-explanatory other than the following. [min/max]_trans_vel is the speed of the robot when moving in a straight line. path_distance_bias determines how closely the robot need follow the path it works out. Given our robot always calculated an accurate path, we increased this value. goal_distance_bias smoothes the trajectory of the path and makes it more efficient. Again, we decided to increase this. Finally, occdist_scale determines how 'afraid' the robot is of obstacles. We lowered this to make it behave a little safer. All our parameter changes are detailed in table~\ref{tab:params}. Our parameters - like our coordinate system - have not been formally tested due to the same reasons as the coordinate system. Much like the coordinate system, initial inspection by observation would suggest to us that our parameters are far better for us.
 
 \begin{table}[h]
 \vskip 3mm
@@ -160,26 +160,10 @@ Parameters & Original value & Our value \\
 \vskip -3mm
 \end{table}
 
-% Explain the key details of the control and interface software developed for the project. Be clear about any packages used and the reason for choosing them. 
+% Item 4
 
-% If you present algorithms, you can use the \verb+algorithm+ and \verb+algorithmic+ environments to format pseudocode (for instance, Algorithm~\ref{alg:example}). These require the corresponding style files, \verb+algorithm.sty+ and \verb+algorithmic.sty+ which are supplied with this package. 
-
-% \begin{algorithm}[ht]
-% \begin{algorithmic}
-%    \STATE {\bfseries Input:} data $x_i$, size $m$
-%    \REPEAT
-%    \STATE Initialize $noChange = true$.
-%    \FOR{$i=1$ {\bfseries to} $m-1$}
-%    \IF{$x_i > x_{i+1}$} 
-%    \STATE Swap $x_i$ and $x_{i+1}$
-%    \STATE $noChange = false$
-%    \ENDIF
-%    \ENDFOR
-%    \UNTIL{$noChange$ is $true$}
-% \end{algorithmic}
-%   \caption{Bubble Sort}
-%   \label{alg:example}
-% \end{algorithm}
+% Item 5
+Most of the work in terms of getting the bidirectional connectivity established with the app was done on the app side. Once they were able to forward packets from the host machine to the emulator, our job was to handle the sending of UDP packets to the app when appropriate. We discussed why UDP was used in previous demos and reports, but briefly, it was because there was no need for a formal connection to be held between the app and the robot. Due to the fact we were sending a single packet at any given time, packet loss is also a non-issue for our system. The system returns a packet to the app whenever the state changes. The packet simply contains one of the messages listed above and any logic for the handling of them happens on the app side. As mentioned in previous reports, we had to route the packets through the Turtlebot due to - what we believe to be - dynamic NAT being disabled on the sdp-robots router.
 
 \section{Evaluation}
 
