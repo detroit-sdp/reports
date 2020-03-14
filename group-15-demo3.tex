@@ -90,7 +90,42 @@ From its state in the previous demo, the robot software has moved towards what w
   \item The parameters powering the robots autonomous navigation have been configured in order to suit our configuration more appropriately
 \end{itemize}
 
+%Item 1
 For obvious reasons, we wanted the app to be able to access certain information about the current state of our robot. The information we decided would be particularly important is the state of its battery, as well as its current 'behaviour'. These different status' are stored in a dictionary. We decided to use a dictionary over a list so that we could assign our own code to each state. This would be useful later on if we were to implement some kind of error recognition i.e. \it{def a} should not run if the state is less than 0. We note that in the average case, item retreival is O(1) in both lists and dictionaries and so there was no obvious reason against using a dictionary here given this is all we use ours for. The states we had included at this stage were: low battery, assistance required, at base/not busy, moving, and arrived at goal.
+
+% Item 2
+At any given moment the robot knows both its own position (with respect to where it was booted up) and the map (again, placing itself in the origin on startup). The starting position can be altered. However, we decided to map our space beginning at the 'base' meaning that this is the origin on our map. Every time we start up the robot it is started in this position. In the real world, the base would be the area where the robot is loaded and charged.
+
+The navigation stack takes a goal in and calculates the path to this goal. The goal is not a set of coordinates in the map, but a pair of distances on the x and y axes and a rotation at this goal. If you were to always start at the same location facing the same direction, this would function the same as if you were to give it a set of coordinates. The problem is that you are not always moving from the same base due to goal tolerance allowing for some specified inaccuracy in order to save time, as well as natural drift. In order to correct this, we decided to have our robot take in the coordinates of the goal and calculate the vector from its current position.
+
+As a further complication, the robot always believes that it is facing forwards. That is, while you can specify a rotational movement using a quaternion (x,y,z,w), the robot will always think of its own rotation as being forward or (0,0,0,1). This means that the axes rotate with the robot in its own mind. Due to the obvious difficulties this presents when calculating our way back to base, we decided to restrict the robot to a four-directional goal system - forwards, backwards, right, and left with each having its own rotational movement (Table~\ref{tab:quaternions}).
+
+With all this in mind, we store our room coordinates in another dictionary in Python. Before, the time complexity was not different between list and dictionary. This is not the case for the room dictionary as while retreival is still a key operation on the room dictionary, lookup is also important in order to verify if the room actually exists for error detection. Lookup, insertion, and deletion are O(n) in the average case for lists, but are O(1) for dictionaries. There is a clear advantage in us using dictionaries over lists here. This is not to mention that fact that it allows us to index the rooms however we please. Each entry in the dictionary stores the coordinates of the room, and the targeted rotation at this goal (L,B,F, or R).
+
+Our initial test runs of the code seemed to indicate that using the coordinates-vector system is far more accurate. Due to the team not feeling comfortable returning to Appleton Tower in the wake of the global COVID-19 pandemic, we were not able to carry out any official tests on this. Our plans are detailed in Evaluation section.
+
+\begin{table}[h]
+\vskip 3mm
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{lcccc}
+\hline
+\abovespace\belowspace
+Direction & x & y & z & w \\
+\hline
+  Forward & 0 & 0 & 0 & 1\\
+  Backwards & 0 & 0 & 1 & 0 \\
+  Right & 0 & 0 & -0.7071 & 0.7071 \\
+  Left & 0 & 0 & 0.7071 & 0.7071 
+\end{tabular}
+\end{sc}
+\end{small}
+\caption{Quaternion movement inputs for each direction}
+\label{tab:quaternions}
+\end{center}
+\vskip -3mm
+\end{table}
 
 % Explain the key details of the control and interface software developed for the project. Be clear about any packages used and the reason for choosing them. 
 
