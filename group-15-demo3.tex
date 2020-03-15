@@ -27,7 +27,7 @@
 
 \begin{abstract}
   Tadashi is an assistive robot for delivering food and water to residents in supported living and care home environments.
-The abstract should consist of one sentence describing the intended functionality of your system, followed by a few sentences (100--200 words) summarising the key advances made for this demo. This should give the reader a clear expectation of what will be demonstrated.
+  In this demo, we demonstrate significant progress towards a minimum viable product (MVP). We integrate components of our system together, demonstrating a full use-case: the caregiver placing a delivery on the tray and scheduling the robot to visit a room; the robot navigating to the room; the lift extending on arrival and detecting that the resident has picked up the delivery using integrated weight sensors; the lift retracting once the delivery has been made, and the robot sending a message to the app to indicate this; and the robot returning to its starting point. We also discuss usability testing we have performed on our app to ensure it is usable by non-technical caregivers, and discuss future improvements to the app based on this. 
 \end{abstract} 
 
 \section{Project plan update} 
@@ -194,6 +194,7 @@ Test  & Time(mins) & Errors & Success \\
 If you need a figure or table to stretch across two columns use the \verb+figure*+ or \verb+table*+ environment instead of the \verb+figure+ or \verb+table+ environment.  Use the \verb+subfigure+ environment if you want to include multiple graphics in a single figure.
 
 \section{Budget}
+As with the previous demo, the bulk of our costs are associated with building, mounting, and integrating the lift. Tables \ref{tab:non-budget-cost}-\ref{tab:budget-cost-non-monetary} show spending to date including spending at previous demos. Equipment costs are based on values provided in the SDP wiki \cite{sdpcosts}.
 
 \begin{table}[h]
 \begin{center}
@@ -207,7 +208,7 @@ If you need a figure or table to stretch across two columns use the \verb+figure
     \hline \hline
                &       & Overall cost (\pounds) & 1373.3
   \end{tabular}}
-\caption{Non-budgeted monetary costs at demo \demoNumber. }
+\caption{Non-budgeted monetary costs at demo \demoNumber. Note that we have chosen to stop using the EV3 and instead use the Arduino kit.}
 \label{tab:non-budget-cost}
 \end{center}
 \end{table}
@@ -262,7 +263,7 @@ If you need a figure or table to stretch across two columns use the \verb+figure
 
 %% Include any references in a bibliography
 
-\bibliography{example-refs}
+\bibliography{demo1-refs}
 
 \end{document} 
 
