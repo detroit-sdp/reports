@@ -186,9 +186,9 @@ The Arduino already possessed the code to operate the lift, so it was a case of 
 The connection was initially unreliable due to synchronization issues. After they were resolved the bytes were successfully transmitted every time.
 
 % Item 5
-Most of the work in terms of getting the bidirectional connectivity established with the app was done on the app side. Once they were able to forward packets from the host machine to the emulator, our job was to handle the sending of UDP packets to the app when appropriate. The system returns a packet to the app whenever the state changes. The packet simply contains one of the status' listed above and any logic for the handling of them happens on the app side.
+Most of the work in terms of getting the bidirectional connectivity established with the app was done on the app side. Once they were able to forward packets from the host machine to the emulator, our job was to handle the sending of UDP packets to the app when appropriate. The use of UDP for our connection and the reasons behind it remains unchanged. The system returns a packet to the app whenever the state changes. The packet simply contains one of the status' listed above and any logic for the handling of them happens on the app side.
 
-The future of the coding team remains uncertain due to the crisis we face at the moment. However, we planned to next implement the Raspberry Pi inspecting for the {\bf STATUS ARRIVED} packet, and controlling the lift based on this. We also planned to have the robot retract the lift when items had been removed from the tray and return to the base after doing this. Finally, we planned to do testing for this demo as well as on our future plans followed by a general polishing of the product for industry day.
+For future presentations, we planned to next implement the Raspberry Pi inspecting for the {\bf STATUS ARRIVED} packet, and controlling the lift based on this. We also planned to have the robot retract the lift when items had been removed from the tray and return to the base after doing this. Finally, we planned to do testing for this demo as well as on our future plans followed by a general polishing of the product for industry day.
 
 \subsection{Business development}
 
