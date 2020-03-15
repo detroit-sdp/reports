@@ -110,6 +110,38 @@ To break down the task of managing the robot, we have finalized the four fragmen
   \item {\bf Calendar}: this allows users to set a schedule for the robot to follow and deliver at specific times.
   \item {\bf Me}: this contains account information and allows signing out. 
 \end{enumerate}
+
+The main focus for this demo was on the calendar fragment, and the networking service. The calendar has been set up with the basic UI design pre user testing. This simple design allows the user to select any date, and for the given date it displays the robots itinerary (past and future) for that date in chronological order. The events are stored in a database in our Firebase manager. The database layouts are shown in tables 
+
+The communication was uni-directional for the previous demo (app$\rightarrow$robot). It was of vital importance that it become bi-directional for this demo. The difficulty arose due to the fact that the app runs on an emulator which essentially has no access to the outer world on its own. The bidirectionality was achieved using a complex port forwarding setup. The host machine receives the packets on port 20002 and forwards them to port 20003 on itself. This port is setup through the emulator software to forward all traffic onto port 20002 on the emultor 'device'.
+
+\begin{table}[h]
+\vskip 3mm
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{l}
+\hline
+\abovespace\belowspace
+{\bf DeliveryHistory} \\
+\hline
+  deliveryID \\
+  time \\
+  location \\
+  category \\
+  weightBefore\\
+  weightAfter\\
+  {\it userID}\\
+  deliverySuccessful
+\end{tabular}
+\end{sc}
+\end{small}
+\caption{DeliveryHistory table from Firebase.}
+\label{tab:delivery-history}
+\end{center}
+\vskip -3mm
+\end{table}
+
 \subsection{Software}
 
 %Item 1
