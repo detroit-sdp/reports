@@ -166,10 +166,16 @@ Parameters & Original value & Our value \\
 \end{table}
 
 % Item 4
+In order to achieve our future goal of the robot controlling the lift uppon arrival, we had to establish a connection between the Raspberry Pi and the Arduino (lift controller). We reviewed multiple options including a variety of wireless methodologies (Bluetooth, WiFi etc), but decided in the end that the fastest and most reliable method would be to use a serial connection between USB ports on each board.
 
+The Arduino already possessed the code to operate the lift, so it was a case of writing a Python script that could read/write bytes of data over the connection. The Raspberry Pi sends a single byte to the Arduino with possible values from 0-3 indicating stop, extend lift, and retract lift respectively. The Arduino returns the status of the lift as well as the current readings from the two weight sensors.
+
+The connection was initially unreliable due to synchronization issues, however, after they were resolved the bytes were successfully transmitted every time.
 
 % Item 5
 Most of the work in terms of getting the bidirectional connectivity established with the app was done on the app side. Once they were able to forward packets from the host machine to the emulator, our job was to handle the sending of UDP packets to the app when appropriate. We discussed why UDP was used in previous demos and reports, but briefly, it was because there was no need for a formal connection to be held between the app and the robot. Due to the fact we were sending a single packet at any given time, packet loss is also a non-issue for our system. The system returns a packet to the app whenever the state changes. The packet simply contains one of the messages listed above and any logic for the handling of them happens on the app side. As mentioned in previous reports, we had to route the packets through the Turtlebot due to - what we believe to be - dynamic NAT being disabled on the sdp-robots router.
+
+The future of the coding team remains uncertain due to the crisis we face at the moment. However, we planned to next implement the Raspberry Pi inspecting packets for the \bf{STATUS ARRIVED} packet, and controlling the lift based on this. We also planned to have the robot retract the lift when items had been removed from the tray and return to the base on doing this. Finally, we planned to do testing for this demo as well as on our future plans followed by a general polishing of the product for industry day.
 
 \subsection{Business development}
 
