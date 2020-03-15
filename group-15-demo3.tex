@@ -79,28 +79,15 @@ Owing to the ongoing coronavirus situation, the entire team began working remote
 
 \section{Technical details}
 \subsection{Connectivity}
+To aid the reader with understanding how the system fits together, figure \ref{fig:connect} shows the connections we have set up between each of the parts that make up our product. The appendix also contains figure \ref{fig:seq} which shows how each part is involved in the running of the use case.
 \begin{figure}
   \begin{center}
     \includegraphics[width=\columnwidth]{figs/connectivity.pdf}
   \end{center}
   \caption{The connections between each aspect of our product, showing what messages are sent during the use-case.}
+  \label{fig:connect}
 \end{figure}
 \subsection{Hardware}
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=\columnwidth]{figs/weight_sensor.jpg}
-    \caption{The top of the lift, showing the manufactured tray with the Tadashi logo and weight sensor underneath.}
-  \label{fig:sensor}
-  \end{center}
-\end{figure}
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=\columnwidth]{figs/lift_view.jpg}
-    \caption{Side view of the lift mounted to the Turtlebot. Points to note include the metal brackets used to fix the lift in place; the removal of the EV3 brick and addition of the Arduino kit and batteries; and the tray placed on top.}
-  \label{fig:lift}
-  \end{center}
-\end{figure}
 
 \subsection{User interface}
 To break down the task of managing the robot, we have finalized the four fragments that make up the application using best practices for app design \cite{design, ux}:
@@ -221,7 +208,7 @@ As with the previous demo, the bulk of our costs are associated with building, m
      Budget spent (\pounds) & 52.39 \\
      Budget remaining (\pounds) & 147.61
   \end{tabular}}
-\caption{Budgeted monetary costs at demo \demoNumber. MDF value is approximate as 12mm MDF is not on the SDP price sheet.}
+\caption{Budgeted monetary costs at demo \demoNumber.}
 \label{tab:budget-cost-monetary}
 \end{center}
 \end{table}
@@ -257,6 +244,22 @@ As with the previous demo, the bulk of our costs are associated with building, m
     \includegraphics[width=\columnwidth]{figs/sequence.png}
   \end{center}
   \caption{A simplified view of the steps of our use case and how each part of the product is involved in the use case. Note that for simplicity, 'Tadashi' represents both the Turtlebot and the ROS master.}
+  \label{fig:seq}
+\end{figure}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\columnwidth]{figs/weight_sensor.jpg}
+    \caption{The top of the lift, showing the manufactured tray with the Tadashi logo and weight sensor underneath.}
+  \label{fig:sensor}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\columnwidth]{figs/lift_view.jpg}
+    \caption{Side view of the lift mounted to the Turtlebot. Points to note include the metal brackets used to fix the lift in place; the removal of the EV3 brick and addition of the Arduino kit and batteries; and the tray placed on top.}
+  \label{fig:lift}
+  \end{center}
 \end{figure}
 
 \subsection{Software and hardware testing}
@@ -265,6 +268,13 @@ We had planned to complete testing of the robot and lift to ensure it met the us
 \begin{itemize}
 \item To ensure the robot can consistently reach the target location for a delivery and return back to base, we would run the robot 10 times and measure how far it stopped from the goal. We defined the upper accuracy threshold as being 20cm radius away from the intended goal: this is still within reasonable reaching distance for a person collecting a delivery. If our testing found that the robot was not able to consistently stop within 20cm of the goal, ie. achieve this 9/10 times, we planned to undertake further work to investigate and fix the source of this issue. 
 \item We would also time how long each delivery took to ensure the robot can deliver food and water in a given amount of time (this is especially relevant if the food is hot). This would allow us to communicate to the caregiver a confidence interval for how long a delivery might take, as well as possibly send a notification to the app if the delivery were taking significantly longer than expected based on thse tests.
+\item The purpose of the weight sensors is to reliably be able to detect when objects have been placed onto and removed from the tray. We intended to perform tests where we would:
+  \begin{itemize}
+    \item Measure the weight with only the tray on top as the `empty' state of the lift.
+    \item Place a cup, and then a plate, on the lift, measuring the changes in weight to mark the lift as containing a delivery. 
+    \item Remove the cup, and then the plate, from the lift, measuring changes in weight to mark the delivery as completed. 
+  \end{itemize}
+  Based on a test run, we would program the lift control in the Turtlebot to be able to recognize when one or both objects were placed onto or removed from the tray. We would then perform 5 tests of these parameters by ensuring that the Turtlebot could reliably (5/5 times) recognize when both objects were placed on and taken off, or one at a time. 
 \end{itemize}
 
 \begin{table}[h]
