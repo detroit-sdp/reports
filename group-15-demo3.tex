@@ -26,7 +26,7 @@
 % ]
 
 \begin{abstract}
-  Tadashi is an assistive robot for delivering food and water to residents in supported living and care home environments.
+  Tadashi is an assistive robot for delivering food and water to residents in supported living, care home, and quarantine environments.
   In this demo, we demonstrate significant progress towards a minimum viable product (MVP). We integrate components of our system together, demonstrating a full use-case: the caregiver placing a delivery on the tray and scheduling the robot to visit a room; the robot navigating to the room; the lift extending on arrival and detecting that the resident has picked up the delivery using integrated weight sensors; the lift retracting once the delivery has been made, and the robot sending a message to the app to indicate this; and the robot returning to its starting point. We also discuss usability testing we have performed on our app to ensure it is usable by non-technical caregivers, and discuss future improvements to the app based on this. 
 \end{abstract} 
 
@@ -88,6 +88,7 @@ To aid the reader with understanding how the system fits together, figure \ref{f
   \caption{The connections between each aspect of our product, showing what messages are sent during the use-case.}
   \label{fig:connect}
 \end{figure}
+
 \subsection{Hardware}
 
 \subsection{User interface}
@@ -142,6 +143,9 @@ To communicate the state of the robot to the app, the robot stores the following
 Most of the work in terms of getting the bidirectional connectivity established with the app was done on the app side. The robot returns a packet to the app whenever the state changes. The packet simply contains one of the statuses listed above.
 
 \subsection{Business development}
+The target market for Tadashi is care homes and supported living environments. There are ~433,000 people occupying care homes in the UK, with 5500 providers \cite{carehomes}. Currently, robots are being designed to take care of the elderly however in these situations there is very little human interaction between the resident and the caregiver \cite{robotcarers}. Our robot is to be used to aid caregivers not to take over their jobs.
+
+Another target market we have recently identified for Tadashi is in quarantine situations. Tadashi could be used to deliver food, water, and other supplies to quarantined people without the need for medical staff to expose themselves to possible infection. With over 100 million Europeans in quarantine due to the ongoing threat of the coronavirus pandemic \cite{quarantine}, and people over 70 in the UK likely to be asked to self-isolate \cite{isolate}, we see a strong demand for assistive robots like Tadashi. A hotel in China has recently introduced a robot that serves food to quarantined patients \cite{peanut}. Tadashi improves on this idea by having a lift, which also allows quarantined people with mobility issues to access their food.
 
 \section{Evaluation}
 We performed usability testing to ensure the app was usable by non-technical caregivers. We decided to perform our testing in an iterative manner, performing three cycles of testing with app modifications during each cycle. Following discussions with Chris during his office hour, a cycle consists of:
@@ -167,7 +171,7 @@ For demo \demoNumber\ we performed one cycle of testing:
 
 {\bf Step 2}: During the self evaluation stage we completed a cognitive walkthrough of the app, putting us in the mind of a new user and completing our set tasks. The main problem found here was a general lack of direction and advice. Since the user starts at the dashboard, it wasn't immediately obvious that they should then use the map section to start adding residents.
 
-{\bf Step 3}: To quickly aid this problem before testing, we decided to add help buttons to the app which display a brief explanation of the current section, to help guide a user in case they get stuck.
+{\bf Step 3}: Before proceeding with testing, we added help buttons to the app which display a brief explanation of the current section, to help a user in case they get stuck.
 
 {\bf Step 4}: For our first cycle, we tested with three users. Each participant signed a consent form, and then sat down with a team member to complete the tasks. We gave each participant a quick briefing about our overall planned system use case. However we tried to give the testers as little technical advice as necessary so they could use the app as a real user would. {\bf Two of the testers successfully completed all the tasks. One failed to complete the third task but completed the rest with guidance.}
 
