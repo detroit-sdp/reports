@@ -27,7 +27,7 @@
 
 \begin{abstract}
   Tadashi is an assistive robot for delivering food and water to residents in supported living, care home, and quarantine environments.
-  In this demo, we demonstrate significant progress towards a minimum viable product (MVP). We integrate components of our system together, demonstrating a full use-case: the caregiver placing a delivery on the tray and scheduling the robot to visit a room; the robot navigating to the room; the lift extending on arrival and detecting that the resident has picked up the delivery using integrated weight sensors; the lift retracting once the delivery has been made, and the robot sending a message to the app to indicate this; and the robot returning to its starting point. We also discuss usability testing we have performed on our app to ensure it is usable by non-technical caregivers, and discuss future improvements to the app based on this. 
+  In this demo, we demonstrate significant progress towards a minimum viable product (MVP). We integrate components of our system together, demonstrating a full use case: the caregiver placing a delivery on the tray and scheduling the robot to visit a room; the robot navigating to the room; the lift extending on arrival and detecting that the resident has picked up the delivery using integrated weight sensors; the lift retracting once the delivery has been made, and the robot sending a message to the app to indicate this; and the robot returning to its starting point. We also discuss usability testing we have performed on our app to ensure it is usable by non-technical caregivers, and discuss future improvements to the app based on this. 
 \end{abstract} 
 
 \section{Project plan update} 
@@ -61,7 +61,7 @@ We were not able to complete user interviews due to delays in receiving ethical 
   \label{tab:group-split}
 \end{table}
 
-We began the sprint with teams working the same as for demo 2 in order to refine individual components: refining robot problem-solving logic and movement parameters, refining the app, and finalizing the design and physical mounting of the lift. We then began focusing on the connections between aspects of our project. To do this, ad-hoc teams were created based on the knowledge each person had of the system they worked on, as seen in table \ref{tab:group-split}. To ensure effective collaboration, these teams met and worked in person, doing pair-programming to ensure expertise could be effectively utilised and to reduce the need to spend time integrating or merging code. As with previous sprints, code was tracked using GitHub for version control, and group communication was done through Slack and once-weekly meetings.
+We began the sprint with teams working the same as for demo 2 in order to refine individual components: refining robot problem-solving logic and movement parameters, refining the app, and finalizing the design and physical mounting of the lift. We then began focusing on the connections between aspects of our project. To do this, ad-hoc teams were created based on the knowledge each person had of the system they worked on, as seen in table \ref{tab:group-split}. To ensure effective collaboration, these teams met and worked in person, doing pair-programming to ensure expertise could be effectively utilized and to reduce the need to spend time integrating or merging code. As with previous sprints, code was tracked using GitHub for version control, and group communication was done through Slack and once-weekly meetings.
 
 Our total budget spending so far consists of:
 \begin{itemize}
@@ -70,9 +70,9 @@ Our total budget spending so far consists of:
   \item 3 hours of technician time to mount the lift, leaving us with 1.25 hours technician time remaining. 
 \end{itemize}
 
-Owing to the ongoing coronavirus situation, the entire team began working remotely from Saturday 14th March. This means we need to halt work on the robot and the lift, as we cannot access or run these remotely. Decisions are still ongoing as to how to continue work in this situation, so our goals may change as the situation develops. Currently, we aim to do the following for demo 4:
+Owing to the ongoing coronavirus situation, the entire team began working remotely from Saturday 14th March. This means we need to halt work on the robot and the lift, as we cannot access or run these remotely. Decisions are still ongoing as to how to continue work in this situation, so our goals may change as the situation develops. Our original goals for demo 4 are given in the appendix, section \ref{goals}. Given the changing situation, we instead aim to do the following for demo 4:
 \begin{itemize}
-  \item Complete user interviews, analyse results, and implement changes to our product to match user demand.
+  \item Complete user interviews, analyze results, and implement changes to our product to match user demand.
   \item Improve app based on usability testing, and perform another round of usability tests to assess if changes have made a difference to usability. 
   \item Write the user guide. 
   \item Explore other technical additions to the product to ensure our technical time is spent in a way that adds value to the product. 
@@ -80,16 +80,14 @@ Owing to the ongoing coronavirus situation, the entire team began working remote
 
 \section{Technical details}
 \subsection{Connectivity}
-To aid the reader with understanding how the system fits together, figure \ref{fig:connect} shows the connections we have set up between each of the parts that make up our product. The appendix also contains figure \ref{fig:seq} which shows how each part is involved in the running of the use case.
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=\columnwidth]{figs/connectivity.pdf}
-  \end{center}
-  \caption{The connections between each part of the system, showing what messages are sent during the use-case.}
-  \label{fig:connect}
-\end{figure}
+To aid the reader with understanding how the system fits together, we provide two diagrams in the appendix. Figure \ref{fig:seq} is a sequence diagram showing how each part of the system is involved in the use case mentioned in the abstract. Figure \ref{fig:connect-larger} shows the connections we have set up between each of the parts. 
 
 \subsection{Hardware}
+We attached the lift to the Turtlebot using MDF and mounting screws drilled into the Lego (figure \ref{fig:lift}). The lift is stable when the robot is moving. We also designed and manufactured a tray to place on top of the lift, indicating where items are to be placed (figure \ref{fig:sensor}). The figure also shows one of the weight sensors. We placed two weight sensors under the tray: these can be used to detect when deliveries have been placed and picked up on the robot. The weight sensors send voltage values to the Arduino, which are sent forward to the Turtlebot for interpretation.
+
+To allow the Turtlebot to communicate with the lift, the EV3 brick was replaced with an Arduino (figure \ref{fig:arduino}), which contains scripts to move the lift up and down and communicate with the Turtlebot. The Turtlebot can send a command to extend or retract the lift to the Arduino. In return, the Arduino sends three bytes to the Turtlebot. The first two bytes are the voltage across the weight sensors, divided by 4 to fit 8 bits. The last byte is three zeroes followed by {\tt overloaded-retracted-retracting}\ {\tt -extended-extending}, representing the current state of the lift's movement.
+
+For safety reasons, if the connection between the Turtlebot and the Arduino is broken, the lift stops all operation. If the connection is not re-established within 20 seconds, the lift lowers itself down. 
 
 \subsection{User interface}
 To break down the task of managing the robot, we have finalized the four fragments that make up the application using best practices for app design \cite{design, ux}:
@@ -102,7 +100,7 @@ To break down the task of managing the robot, we have finalized the four fragmen
 
 The main focus for this demo was on the calendar fragment, and the networking service. The calendar allows the user to select any date, and for the given date it displays the robot's itinerary (past and future) for that date, in chronological order.
 
- The events are stored and kept track of in a database within our Firebase setup. The database layout is described in table~\ref{tab:delivery-history} and table~\ref{tab:residents}. Bold entries represent fields that are linked between the tables, and italic entries represent fields which are linked to Firebase's authentication feature for secure user data storage. The robot status is stored using Firebase's realtime database as it is a constantly updating piece of information. 
+ The events are stored and kept track of in a database within our Firebase setup. The database layout is described in table~\ref{tab:delivery-history} and table~\ref{tab:residents}. Bold entries represent fields that are linked between the tables, and italic entries represent fields which are linked to Firebase's authentication feature for secure user data storage. The robot status is stored using Firebase's real-time database as it is a constantly updating piece of information. 
 
 In the previous demo we only demonstrated app$\rightarrow$robot communication. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate bidirectional communication. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on the emulated device.
 
@@ -119,52 +117,46 @@ When receiving a GOTO command from the app, we receive the room number. We use a
 
 Based on observation, we believe that using the coordinates-vector system is more accurate over time than using distances. We were not able to test this before the team moved to remote working. 
 
-In mounting the lift onto the Turtlebot, we increased the length of its footprint from 28.1cm to 40.0cm. We were concerned that this would cause the Turtlebot to drive into obstacles. We altered the <box\_size> parameter within the <collision> tag in the description of itself the robot provides to the navigation stack to reflect the change in size. The effect of this is difficult to test as we have set the robot to be very conserative in avoiding obstacles. 
+In mounting the lift onto the Turtlebot, we increased the length of its footprint from 28.1cm to 40.0cm. We were concerned that this would cause the Turtlebot to drive into obstacles. We altered the <box\_size> parameter within the <collision> tag in the description of itself the robot provides to the navigation stack to reflect the change in size. The effect of this is difficult to test as we have set the robot to be very conservative in avoiding obstacles. 
 
-We fine-tuned a number of parameters for the robot, described in table~\ref{tab:params}. [min/max]\_trans\_vel is the speed of the robot when moving in a straight line. path\_distance\_bias determines how closely the robot need follow the path it works out. goal\_distance\_bias smoothes the trajectory of the path and makes it more efficient. Finally, occdist\_scale determines how `afraid' the robot is of obstacles. 
+We fine-tuned a number of parameters for the robot, described in table~\ref{tab:params}. [min/max]\_trans\_vel is the speed of the robot when moving in a straight line. path\_distance\_bias determines how closely the robot need follow the path it works out. goal\_distance\_bias smoothes the trajectory of the path and makes it more efficient. Finally, occdist\_scale determines how `afraid' the robot is of obstacles. Initial testing of these new parameters suggested that they improved the robot's obstacle avoidance, at the cost of a higher risk of the robot thinking it has gotten stuck.
 
 \subsubsection{Communication with lift}
-We had to establish a connection between the Turtlebot and the Arduino controlling the lift. We reviewed multiple options (Bluetooth, WiFi), but decided that the fastest and most reliable method would be to use a serial connection between USB ports on each board.
+To establish a connection between the Turtlebot and the Arduino controlling the lift, we reviewed multiple options (Bluetooth, WiFi). We decided that the fastest and most reliable method would be to use a serial connection between USB ports on each board.
 
-The code to extend and retract the lift was already on the Arduino, so it was a case of writing a Python script that could read/write bytes of data over the cable. The Raspberry Pi sends a single byte to the Arduino with possible values from 0-3 indicating stop, extend lift, and retract lift respectively. The Arduino returns the status of the lift as well as the current readings from the two weight sensors.
+The code to extend and retract the lift was already on the Arduino, so it was a case of writing a Python script that could read/write bytes of data over the cable. The Raspberry Pi sends a single byte to the Arduino with possible values from 0-2 indicating stop, extend lift, and retract lift respectively. The Arduino returns the status of the lift as well as the current readings from the two weight sensors.
 
-The connection was initially unreliable due to synchronization issues. After they were resolved we were able to reliably communicate with the lift.
+The connection was initially unreliable due to synchronization issues. These were resolved by repeatedly sending out 0-bytes to the Arduino. 
 
 \subsubsection{Communication with app}
-To communicate the state of the robot to the app, the robot stores the following information internally:
-\begin{itemize}
-\item {\bf Low battery}: set if the battery level gets below 15\%. This state requires the caregiver to charge the robot. 
-\item {\bf At base and not busy}. 
-\item {\bf Moving}.
-\item {\bf Assistance required}: set if the robot cannot find a path to the goal. This state requires rescue from the caregiver. 
-\item {\bf Arrived at goal}.
-\end{itemize}
+To communicate the state of the robot to the app, the robot stores the following information internally. Firstly, {\bf low battery}, which is set if the battery level gets below 15\%. This state requires the caregiver to charge the robot. {\bf Assistance required} is set if the robot cannot find a path to the goal. This state requires rescue from the caregiver. The other possible states are {\bf at base and not busy}, {\bf moving}, and {\bf arrived at goal}.
 
-Most of the work in terms of getting the bidirectional connectivity established with the app was done on the app side. The robot returns a packet to the app whenever the state changes. The packet simply contains one of the statuses listed above.
+Most of the work in terms of getting the bidirectional connectivity established with the app was done on the app side. The robot sends a packet to the app whenever its internal state changes. The packet simply contains one of the statuses listed above.
 
 \subsection{Business development}
-The target market for Tadashi is care homes and supported living environments. There are ~433,000 people occupying care homes in the UK, with 5500 providers \cite{carehomes}. Currently, robots are being designed to take care of the elderly however in these situations there is very little human interaction between the resident and the caregiver \cite{robotcarers}. Our robot is to be used to aid caregivers not to take over their jobs.
+The target market for Tadashi is care homes and supported living environments. There are approximately 433,000 people occupying care homes in the UK, with 5500 providers \cite{carehomes}. Currently, robots are being designed to take care of the elderly, however in these situations there is very little human interaction between the resident and the caregiver \cite{robotcarers}. Our robot is to be used to aid caregivers, not to take over their jobs.
 
-Another target market we have recently identified for Tadashi is in quarantine situations. Tadashi could be used to deliver food, water, and other supplies to quarantined people without the need for medical staff to expose themselves to possible infection. With over 100 million Europeans in quarantine due to the ongoing threat of the coronavirus pandemic \cite{quarantine}, and people over 70 in the UK likely to be asked to self-isolate \cite{isolate}, we see a strong demand for assistive robots like Tadashi. A hotel in China has recently introduced a robot that serves food to quarantined patients \cite{peanut}. Tadashi improves on this idea by having a lift, which also allows quarantined people with mobility issues to access their food.
+Another target market we have recently identified for Tadashi is in quarantine situations. Tadashi could be used to deliver food, water, and other supplies to quarantined people without the need for medical staff to expose themselves to possible infection. With over 100 million Europeans in quarantine due to the ongoing threat of the coronavirus pandemic \cite{quarantine}, and people over 70 in the UK likely to be asked to self-isolate \cite{isolate} in the near future, we see a strong demand for assistive robots like Tadashi. A hotel in China has recently introduced a robot that serves food to quarantined patients \cite{peanut}. Tadashi improves on this idea by having a lift, which allows quarantined people with mobility issues to reach their deliveries.
 
 \section{Evaluation}
+We were unable to perform software and hardware testing, but our planned tests are described in the appendix: \ref{testing}. 
 We performed usability testing to ensure the app was usable by non-technical caregivers. We decided to perform our testing in an iterative manner, performing three cycles of testing with app modifications during each cycle. Following discussions with Chris during his office hour, a cycle consists of:
 \begin{enumerate}
-  \item Prepare a testing task for the user to complete
-  \item Self-evaluate our app against the task to check for clear problems
-  \item Minor modifications to the task or app based on self-evaluation
-  \item Conduct user testing
-  \item Major app modifications based on testing
+  \item Prepare a testing task for the user to complete.
+  \item Self-evaluate our app against the task to check for clear problems.
+  \item Minor modifications to the task or app based on self-evaluation.
+  \item Conduct user testing.
+  \item Major app modifications based on testing.
 \end{enumerate}
 
 For demo \demoNumber\ we performed one cycle of testing:
 
 {\bf Step 1}: we set 6 steps for the user to follow, each relevant to one of the 10 usability principles \cite{heuristics}:
 \begin{enumerate}
-  \item Create an account and sign in. \\{\it Standardisation: since most users already have experience with sign-up screens, we used a default template.}
-  \item Add 3 new residents to the rooms of the map. \\{\it Matching between the system and the real world: since the map represents a real care home floor, we want the user to intuitively recognize the layout, so the map is in the layout of the carehome.}
+  \item Create an account and sign in. \\{\it Standardization: since most users already have experience with sign-up screens, we used a default template.}
+  \item Add 3 new residents to the rooms of the map. \\{\it Matching between the system and the real world: since the map represents a real care home floor, we want the user to intuitively recognize the layout, so the map is in the layout of the care home.}
   \item Send Tadashi to deliver to a resident. \\{\it User control: we want the user to feel in control of the robot, so we provide feedback and undo options.}
-  \item Set a delivery for a later date in the calendar. \\{\it Standardisation: the look of the scheduling system mimics Outlook, which users will be familiar with.}
+  \item Set a delivery for a later date in the calendar. \\{\it Standardization: the look of the scheduling system mimics Outlook, which users will be familiar with.}
   \item Report back information contained in the dashboard. \\{\it Visibility of system status: the dashboard is the most updated feature and contains key information, so it needs to display information relevant to the user in an intuitive manner.}
   \item Sign out. \\{\it Minimalism: we keep the settings area clear so users aren't confused on where to sign out.}
 \end{enumerate}
@@ -173,9 +165,9 @@ For demo \demoNumber\ we performed one cycle of testing:
 
 {\bf Step 3}: Before proceeding with testing, we added help buttons to the app which display a brief explanation of the current section, to help a user in case they get stuck.
 
-{\bf Step 4}: For our first cycle, we tested with three users. Each participant signed a consent form, and then sat down with a team member to complete the tasks. We gave each participant a quick briefing about our overall planned system use case. However we tried to give the testers as little technical advice as necessary so they could use the app as a real user would. {\bf Two of the testers successfully completed all the tasks. One failed to complete the third task but completed the rest with guidance.}
+{\bf Step 4}: For our first cycle, we tested with three users. Each participant signed a consent form, and then sat down with a team member to complete the tasks. We gave each participant a quick briefing about our overall planned system use case. However we tried to give the testers as little technical advice as necessary so they could use the app as a real user would. {\bf Two of the users successfully completed all six of the tasks. One failed to complete the third task but completed the rest with guidance.}
 
-{\bf Step 5}: In testing, one user suggested adding more feedback from the robot to confirm that it was on its way. This point indicates that we should make the system status of the robot more visible to the user, however without over-sharing non relevant information. One future implementation could be adding an avatar of the robot to show its movement over the map.
+{\bf Step 5}: In testing, one user suggested adding more feedback from the robot to confirm that it was on its way. This point indicates that we should make the system status of the robot more visible to the user, however without over-sharing non-relevant information. One future implementation could be adding an avatar of the robot to show its movement over the map.
 
 \section{Budget}
 As with the previous demo, the bulk of our costs are associated with building, mounting, and integrating the lift. Tables \ref{tab:non-budget-cost}-\ref{tab:budget-cost-non-monetary} show spending to date including spending at previous demos. Equipment costs are based on values provided in the SDP wiki \cite{sdpcosts}.
@@ -250,12 +242,22 @@ As with the previous demo, the bulk of our costs are associated with building, m
 % Clearpage also moves floats
 \clearpage
 \section{Appendix}
+\subsection{Planned goals for demo 4}
+\label{goals}
+Below are our initially planned goals for demo 4 which we will not be able to complete:
+\begin{itemize}
+  \item Stop the robot from moving if the lift is extended, for safety reasons.
+  \item Stop the lift from moving if it is overloaded (defined as loaded with a weight above 1.5kg).
+  \item Implement checking of the battery charge on the lift, allowing for notification of both lift and robot battery status.
+  \item Finalize and test connections between all components. 
+\end{itemize}
 \subsection{Software and hardware testing}
-We had planned to complete testing of the robot and lift to ensure it met the use-case needs. Unfortunately due to COVID-19 we were not able to complete these tests as planned. Below are the three tests we intended to do:
+\label{testing}
+We had planned to complete testing of the robot and lift to ensure it met the use case needs. We have not been able to complete these tests as planned. Below are the three tests we intended to do:
 
 \begin{itemize}
-\item To ensure the robot can consistently reach the target location for a delivery and return back to base, we would run the robot 10 times and measure how far it stopped from the goal. We defined the upper accuracy threshold as being 20cm radius away from the intended goal: this is still within reasonable reaching distance for a person collecting a delivery. If our testing found that the robot was not able to consistently stop within 20cm of the goal, ie. achieve this 9/10 times, we planned to undertake further work to investigate and fix the source of this issue. 
-\item We would also time how long each delivery took to ensure the robot can deliver food and water in a given amount of time (this is especially relevant if the food is hot). This would allow us to communicate to the caregiver a confidence interval for how long a delivery might take, as well as possibly send a notification to the app if the delivery were taking significantly longer than expected based on thse tests.
+\item To ensure the robot can consistently reach the target location for a delivery and return back to base, we would run the robot 10 times and measure how far it stopped from the goal. We defined the upper accuracy threshold as being 20cm radius away from the intended goal: this is still within reasonable reaching distance for a person collecting a delivery. If our testing found that the robot was not able to consistently stop within 20cm of the goal, ie. achieve this 9 out of 10 times, we planned to undertake further work to investigate and fix the source of this issue. 
+\item We would also time how long each delivery took to ensure the robot can deliver food and water in a given amount of time (this is especially relevant if the food is hot). This would allow us to communicate to the caregiver a confidence interval for how long a delivery might take, as well as possibly send a notification to the app if the delivery were taking significantly longer than expected based on these tests.
 \item The purpose of the weight sensors is to reliably be able to detect when objects have been placed onto and removed from the tray. We intended to perform tests where we would:
   \begin{itemize}
     \item Measure the weight with only the tray on top as the `empty' state of the lift.
@@ -264,13 +266,21 @@ We had planned to complete testing of the robot and lift to ensure it met the us
   \end{itemize}
   Based on a test run, we would program the lift control in the Turtlebot to be able to recognize when one or both objects were placed onto or removed from the tray. We would then perform 5 tests of these parameters by ensuring that the Turtlebot could reliably (5/5 times) recognize when both objects were placed on and taken off, or one at a time. 
 \end{itemize}
-\begin{figure}
+\begin{figure*}
   \begin{center}
-    \includegraphics[width=\columnwidth]{figs/sequence.png}
+    \includegraphics[width=1.8\columnwidth]{figs/sequence.png}
   \end{center}
   \caption{A simplified view of the steps of our use case and how each part of the product is involved in the use case. Note that for simplicity, `Tadashi' represents both the Turtlebot and the ROS master.}
   \label{fig:seq}
-\end{figure}
+\end{figure*}
+\begin{figure*}
+  \begin{center}
+    \includegraphics[width=1.8\columnwidth]{figs/connectivity.pdf}
+  \end{center}
+  \caption{The connections between each part of the system, showing what messages are sent during the use case.}
+  \label{fig:connect-larger}
+\end{figure*}
+
 \begin{figure}
   \begin{center}
     \includegraphics[width=\columnwidth]{figs/weight_sensor.jpg}
@@ -286,6 +296,16 @@ We had planned to complete testing of the robot and lift to ensure it met the us
   \label{fig:lift}
   \end{center}
 \end{figure}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\columnwidth]{figs/lift_detail.jpg}
+    \caption{Inside view of lift mechanics. Note that the motors and sensors are now controlled by an Arduino to better allow for communication with the robot. }
+  \label{fig:arduino}
+  \end{center}
+\end{figure}
+
+
 \begin{table}[h]
 \vskip 3mm
 \begin{center}
@@ -328,48 +348,51 @@ Parameters & Original value & Our value \\
 \vskip -3mm
 \end{table}
 
-\begin{table}[h]
-\vskip 3mm
-\begin{center}
-\begin{tabular}{l}
-\hline
-\abovespace\belowspace
-DeliveryHistory \\
-\hline
-  deliveryID \\
-  time \\
-  {\bf location} \\
-  category \\
-  weightBefore\\
-  weightAfter\\
-  {\it userID}\\
-  deliverySuccessful
+\begin{tabular}{cc}
+  \begin{minipage}{0.5\linewidth}
+    \begin{table}[H]
+      \centering
+    \begin{tabular}{|l|}
+      \hline
+      \abovespace\belowspace
+      DeliveryHistory \\
+      \hline
+      deliveryID \\
+      time \\
+      {\bf location} \\
+      category \\
+      weightBefore\\
+      weightAfter\\
+      {\it userID}\\
+      deliverySuccessful \\
+      \hline
+    \end{tabular}
+    
+    \caption{DeliveryHistory table from Firebase.}
+    \label{tab:delivery-history}
+    \end{table}
+  \end{minipage}
+  \begin{minipage}{0.5\linewidth}
+    \begin{table}[H]
+      \centering
+    \begin{tabular}{|l|}
+      \hline
+      \abovespace\belowspace
+      Residents \\
+      \hline
+      {\it carer} \\
+      firstName \\
+      lastName \\
+      {\bf location} \\
+      priority \\
+      \hline
+    \end{tabular}
+   
+    \caption{Residents table from Firebase.}
+    \label{tab:residents}
+    \end{table}
+  \end{minipage}
 \end{tabular}
-\caption{DeliveryHistory table from Firebase.}
-\label{tab:delivery-history}
-\end{center}
-\vskip -3mm
-\end{table}
-
-\begin{table}[h]
-\vskip 3mm
-\begin{center}
-\begin{tabular}{l}
-\hline
-\abovespace\belowspace
-Residents \\
-\hline
-  {\it carer} \\
-  firstName \\
-  lastName \\
-  {\bf location} \\
-  priority
-\end{tabular}
-\caption{Residents table from Firebase.}
-\label{tab:residents}
-\end{center}
-\vskip -3mm
-\end{table}
 
 \bibliography{demo1-refs}
 
