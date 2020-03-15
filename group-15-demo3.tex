@@ -25,12 +25,12 @@
     % \centerline{Group \groupNumber: \groupName}
 % ]
 
-\begin{abstract} 
+\begin{abstract}
+  Tadashi is an assistive robot for delivering food and water to residents in supported living and care home environments.
 The abstract should consist of one sentence describing the intended functionality of your system, followed by a few sentences (100--200 words) summarising the key advances made for this demo. This should give the reader a clear expectation of what will be demonstrated.
 \end{abstract} 
 
 \section{Project plan update} 
-
 \begin{itemize}
 \item Begin testing app with non-technical users to gain insights on accessibility and ease of use: {\bf achieved}.
 \item Make changes to app justified against results of testing: {\bf partially achieved}.
@@ -42,7 +42,7 @@ The abstract should consist of one sentence describing the intended functionalit
 \item Implement bi-directional communication between the app and robot: {\bf achieved}.
 \end{itemize}
 
-Concisely summarise the reasons for any deviations from achievement of your intended goals.
+We were not able to complete user interviews because strikes delayed ethical approval. We are hoping to receive ethical approval before the next demo, so this goal has been moved to demo 4. For robot problem solving, we were 
 
 Provide a one paragraph description of how your group organised the work towards the goals, including specific indication of which group member worked on which aspect(s). Highlight any methods used to ensure effective group work such as protocols for code integration, task tracking, automated testing, etc.
 
@@ -64,16 +64,6 @@ Explain any construction on the hardware parts of your system, including choice 
 
 To keep your folders clean, it is often a good idea to keep your images in a separate folder. In this example, we've put the figures in the \texttt{figs/} folder. To include images from different folders, give the relative path from this file. Example: \verb+\includegraphics{figs/image_filename}+.
 
-\begin{figure}[tb]
-\vskip 5mm
-\begin{center}
-\centerline{\includegraphics[width=\columnwidth]{figs/crane}}
-\caption{Lego construction: highlight any salient features in the caption}
-\label{fig:sample-fig}
-\end{center}
-\vskip -5mm
-\end{figure} 
-
 \subsection{User interface}
 
 Depending on your system and its stage of development, it could be useful to include a section about the user interface design, and the usability decisions behind it. Note, however, that you will be asked to provide a separate 'user guide' for the final demo.
@@ -91,7 +81,7 @@ From its state in the previous demo, the robot software has moved towards what w
 \end{itemize}
 
 %Item 1
-For obvious reasons, we wanted the app to be able to access certain information about the current state of our robot. The information we decided would be particularly important is the state of its battery, as well as its current 'behaviour'. These different status' are stored in a dictionary. We decided to use a dictionary over a list so that we could assign our own code to each state. This would be useful later on if we were to implement some kind of error recognition i.e. \it{def a} should not run if the state is less than 0. We note that in the average case, item retreival is O(1) in both lists and dictionaries and so there was no obvious reason against using a dictionary here given this is all we use ours for. The states we had included at this stage were: low battery, assistance required, at base/not busy, moving, and arrived at goal.
+For obvious reasons, we wanted the app to be able to access certain information about the current state of our robot. The information we decided would be particularly important is the state of its battery, as well as its current 'behaviour'. These different status' are stored in a dictionary. We decided to use a dictionary over a list so that we could assign our own code to each state. This would be useful later on if we were to implement some kind of error recognition i.e. {\it def a} should not run if the state is less than 0. We note that in the average case, item retreival is O(1) in both lists and dictionaries and so there was no obvious reason against using a dictionary here given this is all we use ours for. The states we had included at this stage were: low battery, assistance required, at base/not busy, moving, and arrived at goal.
 
 % Item 2
 At any given moment the robot knows both its own position (with respect to where it was booted up) and the map (again, placing itself in the origin on startup). The starting position can be altered. However, we decided to map our space beginning at the 'base' meaning that this is the origin on our map. Every time we start up the robot it is started in this position. In the real world, the base would be the area where the robot is loaded and charged.
@@ -130,7 +120,7 @@ Direction & x & y & z & w \\
 % Item 3
 After we located the parameter files for the navigation stack, we altered them to suit our configuration more appropriately. We found a parameter under the robots description of itself that it provides to the stack named <collision>...</collision>. This seems to be the parameter the stack uses in order to avoid collision between the world and the robot. Furthermore, this xrdf tag features an attribute <box size> which was set on default to values very closely resembling the dimensions of the Turtlebot. We altered this to match the new dimensions of our bot. Specfically, the length of our bot is approximately 40.0cm as opposed to the original 28.1cm. Unfortunately, this is something that is incredibly difficult to test due to the robot avoiding obstacles very conservatively as a result of the parameter changes below.
 
-The other key parameters are mostly self-explanatory other than the following. [min/max]_trans_vel is the speed of the robot when moving in a straight line. path_distance_bias determines how closely the robot need follow the path it works out. Given our robot always calculated an accurate path, we increased this value. goal_distance_bias smoothes the trajectory of the path and makes it more efficient. Again, we decided to increase this. Finally, occdist_scale determines how 'afraid' the robot is of obstacles. We lowered this to make it behave a little safer. All our parameter changes are detailed in table~\ref{tab:params}. Our parameters - like our coordinate system - have not been formally tested due to the same reasons as the coordinate system. Much like the coordinate system, initial inspection by observation would suggest to us that our parameters are far better for us.
+The other key parameters are mostly self-explanatory other than the following. [min/max]\_trans\_vel is the speed of the robot when moving in a straight line. path\_distance\_bias determines how closely the robot need follow the path it works out. Given our robot always calculated an accurate path, we increased this value. goal\_distance\_bias smoothes the trajectory of the path and makes it more efficient. Again, we decided to increase this. Finally, occdist\_scale determines how 'afraid' the robot is of obstacles. We lowered this to make it behave a little safer. All our parameter changes are detailed in table~\ref{tab:params}. Our parameters - like our coordinate system - have not been formally tested due to the same reasons as the coordinate system. Much like the coordinate system, initial inspection by observation would suggest to us that our parameters are far better for us.
 
 \begin{table}[h]
 \vskip 3mm
@@ -142,15 +132,15 @@ The other key parameters are mostly self-explanatory other than the following. [
 \abovespace\belowspace
 Parameters & Original value & Our value \\
 \hline
-  max_vel_x & 0.26 & 0.1 \\
-  min_vel_x & -0.26 & -0.1 \\
-  max_trans_vel & 0.26 & 0.1 \\
-  min_trans_vel & 0.13 & 0.07 \\
-  max_rot_vel & 1.82 & 1.3 \\
-  xy_goal_tolerance & 0.05 & 0.175 \\
-  path_distance_bias & 32.0 & 65.0 \\
-  goal_distance_bias & 20.0 & 40.0 \\
-  occdist_scale & 0.02 & 0.01
+  max\_vel\_x & 0.26 & 0.1 \\
+  min\_vel\_x & -0.26 & -0.1 \\
+  max\_trans\_vel & 0.26 & 0.1 \\
+  min\_trans\_vel & 0.13 & 0.07 \\
+  max\_rot\_vel & 1.82 & 1.3 \\
+  xy\_goal\_tolerance & 0.05 & 0.175 \\
+  path\_distance\_bias & 32.0 & 65.0 \\
+  goal\_distance\_bias & 20.0 & 40.0 \\
+  occdist\_scale & 0.02 & 0.01
 \end{tabular}
 \end{sc}
 \end{small}
@@ -204,6 +194,7 @@ Test  & Time(mins) & Errors & Success \\
 If you need a figure or table to stretch across two columns use the \verb+figure*+ or \verb+table*+ environment instead of the \verb+figure+ or \verb+table+ environment.  Use the \verb+subfigure+ environment if you want to include multiple graphics in a single figure.
 
 \section{Budget}
+
 \begin{table}[h]
 \begin{center}
     \resizebox{\columnwidth}{!}{
@@ -212,10 +203,11 @@ If you need a figure or table to stretch across two columns use the \verb+figure
     \hline
     Turtlebot Waffle & 1 & 1275.80 & 1275.80 & Robot \\
     Lego & 2.5kg & 15.00 & 37.50 & Lift \\
+    Arduino kit & 1 & 60.00 & 60.00 & Lift \\
     \hline \hline
                &       & Overall cost (\pounds) & 1787.43
   \end{tabular}}
-\caption{Non-budgeted monetary costs at demo \demoNumber.}
+\caption{Non-budgeted monetary costs at demo \demoNumber. }
 \label{tab:non-budget-cost}
 \end{center}
 \end{table}
@@ -227,10 +219,14 @@ If you need a figure or table to stretch across two columns use the \verb+figure
     {\bf Item} & {\bf Total cost (\pounds)} & {\bf Use} \\
     \hline
     Turtlebot supports  & 8.00 & Lift \\
-    MDF support (12mm x 270mm x 400mm) & 1.00  & Lift \\
+    MDF support (12mm x 270mm x 400mm) & 1.00  & Lift \\ 
     Lift support rods & 5.00 & Lift \\
     Pegboard ($0.62 \text{m}^2$ at \pounds 12 per $2.88 \text{m}^2$)& 2.59 & Arena \\
-    Misc (wires, screws, angle brackets) & 5.00 & Lift, arena \\
+    Misc (wires, screws, angle brackets) & 10.00 & Lift, arena \\
+    MDF support (6 x 350  x 230mm) & 0.30 & Lift \\
+    MDF support (9 x 70 x 230mm, 9 x 10 x 250mm (2x)) & 0.10 & Lift \\
+    Engraved tray & 5.80 & Lift \\
+    Weight sensors (2x) & 19.60 & Lift \\
     \hline
     \hline
      Budget spent (\pounds) & 21.59 \\
@@ -250,10 +246,13 @@ If you need a figure or table to stretch across two columns use the \verb+figure
     Manufacturing lift support rods & 1 & Lift \\
     Manufacturing lift base (MDF) & 0.5 & Lift \\
     Drilling holes in lift base & 0.25 & Lift \\
+    Engraving tray & 1 & Lift \\
+    Attaching lift to base & 1 & Lift \\
+    Cutting MDF to mount lift to base & 1 & Lift \\
     \hline
     \hline
-    Overall technician hours spent & 1.75 & \\
-    Total technician hours remaining & 5.25
+    Overall technician hours spent & 4.75 & \\
+    Total technician hours remaining & 1.25
   \end{tabular}}
 \caption{Budgeted technician time at demo \demoNumber. Note that hours remaining includes subtracting any hours lost due to not being used in previous weeks.}
 \label{tab:budget-cost-non-monetary}
