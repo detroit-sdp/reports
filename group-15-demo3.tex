@@ -42,7 +42,7 @@
 \item Implement bi-directional communication between the app and robot: {\bf achieved}.
 \end{itemize}
 
-Why weren't we able to complete some goals?
+We were not able to complete user interviews due to delays in receiving ethical approval (due to strike action). We intend to complete these as soon as we receive the approval. We were able to fully mount the lift onto the Turtlebot and partially able to implement communication between the robot and the lift, but the last part of this was scheduled for Saturday and therefore not completed due to the team having to move to remote work. Likewise, we were able to tune the robot's movement parameters, but we were not able to fully test this because of the team moving to remote work. 
 
 \begin{table}[]
   \begin{tabular}{l|l}
@@ -78,8 +78,24 @@ Owing to the ongoing coronavirus situation, the entire team will be working remo
 \end{itemize}
 
 \section{Technical details}
+\subsection{Connectivity}
 
 \subsection{Hardware}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\columnwidth]{figs/weight_sensor.jpg}
+    \caption{The top of the lift, showing the manufactured tray with the Tadashi logo and weight sensor underneath.}
+  \label{fig:sensor}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\columnwidth]{figs/lift_view.jpg}
+    \caption{Side view of the lift mounted to the Turtlebot. Points to note include the metal brackets used to fix the lift in place; the removal of the EV3 brick and addition of the Arduino kit and batteries; and the tray placed on top.}
+  \label{fig:lift}
+  \end{center}
+\end{figure}
 
 \subsection{User interface}
 
@@ -180,42 +196,6 @@ The future of the coding team remains uncertain due to the crisis we face at the
 \subsection{Business development}
 
 \section{Evaluation}
-
-This section should first outline any testing methods you used (e.g. repeated runs of subsystems, data-logging, naive user testing). 
-
-It should then present relevant quantitative results. If you are using graphs, please make sure they are properly labelled and logically illustrate the point you want to make (e.g. to compare two algorithms).
-
-
-At an absolute minimum, this section should provide a table (for instance, table~\ref{tab:sample-table}, using the \verb+table+ environment) of success rates for repeated runs of the whole system (as you will only be able to show one run in the demo).
-
-\begin{table}[h]
-\vskip 3mm
-\begin{center}
-\begin{small}
-\begin{sc}
-\begin{tabular}{lcccr}
-\hline
-\abovespace\belowspace
-Test  & Time(mins) & Errors & Success \\
-\hline
-\abovespace
-1    & 1:30 & 0 & $\surd$ \\
-2    & 3:00 & 2 & $\times$\\
-3    & 2:20 & 1 & $\surd$ \\
-4    & 1:50 & 1 & $\times$\\
-\belowspace
-5    & 2:10 & 0 & $\surd$ \\
-\hline
-\end{tabular}
-\end{sc}
-\end{small}
-\caption{Results for 5 tests of the system.}
-\label{tab:sample-table}
-\end{center}
-\vskip -3mm
-\end{table}
-
-If you need a figure or table to stretch across two columns use the \verb+figure*+ or \verb+table*+ environment instead of the \verb+figure+ or \verb+table+ environment.  Use the \verb+subfigure+ environment if you want to include multiple graphics in a single figure.
 
 \section{Budget}
 As with the previous demo, the bulk of our costs are associated with building, mounting, and integrating the lift. Tables \ref{tab:non-budget-cost}-\ref{tab:budget-cost-non-monetary} show spending to date including spending at previous demos. Equipment costs are based on values provided in the SDP wiki \cite{sdpcosts}.
