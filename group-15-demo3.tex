@@ -102,16 +102,14 @@ Owing to the ongoing coronavirus situation, the entire team began working remote
   \end{center}
 \end{figure}
 
-% \begin{figure}
-%   \begin{center}
-%     \includegraphics[width=\columnwidth]{figs/lift_detail.jpg}
-%     \caption{Inside view of lift mechanics. Note that the motors and sensors are now controlled by an Arduino to better allow for communication with the robot. }
-%   \label{fig:arduino}
-%   \end{center}
-% \end{figure}
-
 \subsection{User interface}
-
+To break down the task of managing the robot, we have finalized the four fragments that make up the application using best practices for app design \cite{design, ux}:
+\begin{enumerate}
+  \item {\bf Dashboard}: this provides system status information at a glance to the user, showing how many deliveries were sent to each resident.
+  \item {\bf Map}: this shows a top-down view of the care home ward, with icons to add a patient to each room.
+  \item {\bf Calendar}: this allows users to set a schedule for the robot to follow and deliver at specific times.
+  \item {\bf Me}: this contains account information and allows signing out. 
+\end{enumerate}
 \subsection{Software}
 
 %Item 1
@@ -199,6 +197,39 @@ For future presentations, we planned to next implement the Raspberry Pi inspecti
 \subsection{Business development}
 
 \section{Evaluation}
+\subsection{Usability testing}
+To ensure the app was usable by non-technical caregivers, we performed usability testing.
+
+We decided to perform our testing in an iterative manner, performing three cycles of testing with app modifications during each cycle. A cycle consists of:
+\begin{enumerate}
+  \item Prepare a testing task for the user to complete
+  \item Self-evaluate our app against the task to check for clear problems
+  \item Minor modifications to the task or app based on self-evaluation
+  \item Conduct user testing
+  \item Major app modifications based on testing
+\end{enumerate}
+
+For demo \demoNumber\ we performed one cycle of testing:
+
+{\bf Step 1}: we set 6 steps for the user to follow, each relevant to one of the 10 usability principles \cite{heuristics}:
+\begin{enumerate}
+  \item Create an account and sign in. \\{\it Standardisation: since most users already have experience with sign-up screens, we used a default template.}
+  \item Add 3 new residents to the rooms of the map. \\{\it Matching between the system and the real world: since the map represents a real care home floor, we want the user to intuitively recognize the layout, so the map is in the layout of the carehome.}
+  \item Send Tadashi to deliver to a resident. \\{\it User control: we want the user to feel in control of the robot, so we provide feedback and undo options.}
+  \item Set a delivery for a later date in the calendar. \\{\it Standardisation: the look of the scheduling system mimics Outlook, which users will be familiar with.}
+  \item Report back information contained in the dashboard. \\{\it Visibility of system status: the dashboard is the most updated feature and contains key information, so it needs to display information relevant to the user in an intuitive manner.}
+  \item Sign out. \\{\it Minimalism: we keep the settings area clear so users aren't confused on where to sign out.}
+\end{enumerate}
+
+{\bf Step 2}: During the self evaluation stage we completed a cognitive walkthrough of the app, putting us in the mind of a new user and completing our set tasks. The main problem found here was a general lack of direction and advice. Since the user starts at the dashboard, it wasn't immediately obvious that they should then use the map section to start adding residents.
+
+{\bf Step 3}: To quickly aid this problem before testing, we decided to add help buttons to the app which display a brief explanation of the current section, to help guide a user in case they get stuck.
+
+{\bf Step 4}: For our first cycle, we tested with three users. Each participant signed a consent form, and then sat down with a team member to complete the tasks. We gave each participant a quick briefing about our overall planned system use case. However we tried to give the testers as little technical advice as necessary so they could use the app as a real user would. 
+
+{\bf Step 5}: In testing, one user suggested adding more feedback from the robot to confirm that it was on its way. This point indicates that we should make the system status of the robot more visible to the user, however without over-sharing non relevant information. One future implementation could be adding an avatar of the robot to show its movement over the map.
+
+\subsection{Software and hardware testing}
 
 \section{Budget}
 As with the previous demo, the bulk of our costs are associated with building, mounting, and integrating the lift. Tables \ref{tab:non-budget-cost}-\ref{tab:budget-cost-non-monetary} show spending to date including spending at previous demos. Equipment costs are based on values provided in the SDP wiki \cite{sdpcosts}.
