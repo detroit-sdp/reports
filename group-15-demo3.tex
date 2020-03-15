@@ -35,38 +35,53 @@
 \item Begin testing app with non-technical users to gain insights on accessibility and ease of use: {\bf achieved}.
 \item Make changes to app justified against results of testing: {\bf partially achieved}.
 \item Complete user interviews with caregivers to assess demand for project features and implement new features based on caregiver requests: {\bf not achieved}.
-\item Physically integrate lift mechanism into robot body, and integrate lift control into robot control software: {\bf achieved}.
+\item Physically integrate lift mechanism into robot body, and integrate lift control into robot control software: {\bf partially achieved}.
 \item Design and manufacture a tray to place on top of the lift to hold items: {\bf achieved}.
 \item Add sensor to lift to determine whether items have been removed: {\bf achieved}.
 \item Refine robot problem-solving when stuck by tuning mapping sensitivity and obstacle avoidance logic: {\bf partially achieved}. 
 \item Implement bi-directional communication between the app and robot: {\bf achieved}.
 \end{itemize}
 
-We were not able to complete user interviews because strikes delayed ethical approval. We are hoping to receive ethical approval before the next demo, so this goal has been moved to demo 4. For robot problem solving, we were 
+Why weren't we able to complete some goals?
 
-Provide a one paragraph description of how your group organised the work towards the goals, including specific indication of which group member worked on which aspect(s). Highlight any methods used to ensure effective group work such as protocols for code integration, task tracking, automated testing, etc.
+\begin{table}[]
+  \begin{tabular}{l|l}
+    Task & Members \\
+    \hline
+    Robot refinements & Ben, Wojtek \\
+    App refinements & Ching Ling, Yuchen \\
+    Project management & Michael \\
+    User testing & Theo \\
+    Product development & Rebecca \\
+    Lift building and mounting & Luukas \\
+    Lift-robot connection & Errikos, Luukas, Jakub \\
+    App-robot connection & Ben, Yuchen \\
+  \end{tabular}
+  \caption{Task splits across the group up to demo \demoNumber. Core teams and points of contact remain the same as with demo 2, but tasks were done by combining expertise across teams. }
+  \label{tab:group-split}
+\end{table}
 
-Provide a summary of how your budget has been spent so far.
+We began the sprint with teams working the same as for demo 2 in order to refine individual components: refining robot problem-solving logic and movement parameters, refining the app, and finalizing the design and physical mounting of the lift. We then began focusing on the connections between aspects of our project. To do this, ad-hoc teams were created based on the knowledge each person had of the system they worked on, as seen in table \ref{tab:group-split}. To ensure effective collaboration, these teams met and worked in person, doing pair-programming to ensure expertise could be effectively utilised and to reduce the need to spend time integrating or merging code. As with previous sprints, code was tracked using GitHub for version control, and group communication was done through Slack and once-weekly meetings.
 
-Provide a clear statement of any modification (relative to your original plan) that you wish to make to your goals for the next demonstration.
+Our total budget spending so far consists of:
+\begin{itemize}
+  \item \pounds 0 ({\bf TODO update}) on non-budgeted monetary costs, ie. items taken from the starting kit and therefore not deducted from total budget;
+  \item \pounds 30.80 on budgeted monetary costs to improve the lift, leaving us with \pounds 147.61 in our monetary budget; 
+  \item 3 hours of technician time to mount the lift, leaving us with 1.25 hours technician time remaining. 
+\end{itemize}
+
+Owing to the ongoing coronavirus situation, the entire team will be working remotely from demo 3 onwards. This means we need to halt work on the robot and the lift, as we cannot access or run these remotely. Decisions are still ongoing as to how to continue work in this situation, so our goals may change as the situation develops. Currently, we aim to do the following for demo 4:
+\begin{itemize}
+  \item Complete user interviews, analyse results, and implement changes to our product to match user demand.
+  \item Improve app based on usability testing, and perform another round of usability tests to assess if changes have made a difference to usability. 
+  \item Explore other technical additions to the product to ensure our technical time is spent in a way that adds value to the product. 
+\end{itemize}
 
 \section{Technical details}
 
-This section should describe in technical terms the current status of your system implementation. It should provide clear justification for any design decisions, with brief reference to any alternatives considered or explored. If your implementation is based on the work of others (e.g. you have found a specific vision processing algorithm) you should cite the source (e.g. \cite{Newell81}) and add the details to the example-refs.bib file so that the full reference appears in the bibliography section. Note you can also refer back to your own previous reports. 
-
-You can export references in the bibtex format from Google Scholar. Click the quotation marks underneath the study name, click 'Bibtex' in the new popup. You can then copy and paste this code into example-refs.bib.
-
-The following are some suggested subsections. You might also want to include a system overview diagram showing how all the relevant parts connect. 
-
 \subsection{Hardware}
 
-Explain any construction on the hardware parts of your system, including choice and placement of sensors and actuators. Pictures should be used if appropriate (for instance, figure~\ref{fig:sample-fig}), using the \verb+\includegraphics+ environment to include an image (pdf, png, or jpg formats), ideally with informative labels added. 
-
-To keep your folders clean, it is often a good idea to keep your images in a separate folder. In this example, we've put the figures in the \texttt{figs/} folder. To include images from different folders, give the relative path from this file. Example: \verb+\includegraphics{figs/image_filename}+.
-
 \subsection{User interface}
-
-Depending on your system and its stage of development, it could be useful to include a section about the user interface design, and the usability decisions behind it. Note, however, that you will be asked to provide a separate 'user guide' for the final demo.
 
 \subsection{Software}
 
@@ -154,6 +169,8 @@ Parameters & Original value & Our value \\
 
 % Item 5
 Most of the work in terms of getting the bidirectional connectivity established with the app was done on the app side. Once they were able to forward packets from the host machine to the emulator, our job was to handle the sending of UDP packets to the app when appropriate. We discussed why UDP was used in previous demos and reports, but briefly, it was because there was no need for a formal connection to be held between the app and the robot. Due to the fact we were sending a single packet at any given time, packet loss is also a non-issue for our system. The system returns a packet to the app whenever the state changes. The packet simply contains one of the messages listed above and any logic for the handling of them happens on the app side. As mentioned in previous reports, we had to route the packets through the Turtlebot due to - what we believe to be - dynamic NAT being disabled on the sdp-robots router.
+
+\subsection{Business development}
 
 \section{Evaluation}
 
