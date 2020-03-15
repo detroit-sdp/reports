@@ -99,16 +99,14 @@ To break down the task of managing the robot, we have finalized the four fragmen
   \item {\bf Me}: this contains account information and allows signing out. 
 \end{enumerate}
 
-The main focus for this demo was on the calendar fragment, and the networking service. The calendar has been set up with a basic UI design - pre user testing. This simple design allows the user to select any date, and for the given date it displays the robots itinerary (past and future) for that date, in chronological order.
+The main focus for this demo was on the calendar fragment, and the networking service. The calendar allows the user to select any date, and for the given date it displays the robot's itinerary (past and future) for that date, in chronological order.
 
- The events are stored and kept track of in a database within our Firebase setup. The database layout is described in table~\ref{tab:delivery-history} and table~\ref{tab:residents}. Bold entries represent fields that are linked between the tables, and italic entries represent fields which are linked to Firebase's authentication feature for secure user data storage. The robot status is stored using Firebase's realtime database as it is a constantly updating piece of information. As a final note, carer is the user is currently logged in when they add the resident to the system.
+ The events are stored and kept track of in a database within our Firebase setup. The database layout is described in table~\ref{tab:delivery-history} and table~\ref{tab:residents}. Bold entries represent fields that are linked between the tables, and italic entries represent fields which are linked to Firebase's authentication feature for secure user data storage. The robot status is stored using Firebase's realtime database as it is a constantly updating piece of information. 
 
-The communication was uni-directional for the previous demo (app$\rightarrow$robot). The difficulty in achieving bidirectionality arose due to the fact that the app runs on an emulator which essentially has no access to the outer world. We overcame this using a complex port forwarding setup. The host machine receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on on the emulator 'device'.
+In the previous demo we only demonstrated app$\rightarrow$robot communication. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate bidirectional communication. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on the emulated device.
 
-To facilitate this connection, the app now has a network service running in the background until the app closes. We want to have the service run at all times, but unfortunately the service is destroyed eventually due to newer Android versions being optimised for power saving. The service may well have to be moved to the foreground in the future in order to achieve this.
+To facilitate this connection, the app now has a network service running in the background until the app closes. We want to have the service run at all times, but Android power saving optimizations will eventually destroy the service. The service may have to be moved to the foreground to avoid this. 
 \subsection{Software}
-
-
 \subsubsection{Fine-tuning movement}
 While operating, the robot knows its own position with respect to its starting point and the state of the map, with its starting point being the origin on the map. We set the starting position to be the base as marked on the arena floor. 
 
@@ -246,6 +244,20 @@ As with the previous demo, the bulk of our costs are associated with building, m
 % Clearpage also moves floats
 \clearpage
 \section{Appendix}
+\subsection{Software and hardware testing}
+We had planned to complete testing of the robot and lift to ensure it met the use-case needs. Unfortunately due to COVID-19 we were not able to complete these tests as planned. Below are the three tests we intended to do:
+
+\begin{itemize}
+\item To ensure the robot can consistently reach the target location for a delivery and return back to base, we would run the robot 10 times and measure how far it stopped from the goal. We defined the upper accuracy threshold as being 20cm radius away from the intended goal: this is still within reasonable reaching distance for a person collecting a delivery. If our testing found that the robot was not able to consistently stop within 20cm of the goal, ie. achieve this 9/10 times, we planned to undertake further work to investigate and fix the source of this issue. 
+\item We would also time how long each delivery took to ensure the robot can deliver food and water in a given amount of time (this is especially relevant if the food is hot). This would allow us to communicate to the caregiver a confidence interval for how long a delivery might take, as well as possibly send a notification to the app if the delivery were taking significantly longer than expected based on thse tests.
+\item The purpose of the weight sensors is to reliably be able to detect when objects have been placed onto and removed from the tray. We intended to perform tests where we would:
+  \begin{itemize}
+    \item Measure the weight with only the tray on top as the `empty' state of the lift.
+    \item Place a cup, and then a plate, on the lift, measuring the changes in weight to mark the lift as containing a delivery. 
+    \item Remove the cup, and then the plate, from the lift, measuring changes in weight to mark the delivery as completed. 
+  \end{itemize}
+  Based on a test run, we would program the lift control in the Turtlebot to be able to recognize when one or both objects were placed onto or removed from the tray. We would then perform 5 tests of these parameters by ensuring that the Turtlebot could reliably (5/5 times) recognize when both objects were placed on and taken off, or one at a time. 
+\end{itemize}
 \begin{figure}
   \begin{center}
     \includegraphics[width=\columnwidth]{figs/sequence.png}
@@ -268,22 +280,6 @@ As with the previous demo, the bulk of our costs are associated with building, m
   \label{fig:lift}
   \end{center}
 \end{figure}
-
-\subsection{Software and hardware testing}
-We had planned to complete testing of the robot and lift to ensure it met the use-case needs. Unfortunately due to COVID-19 we were not able to complete these tests as planned. Below are the three tests we intended to do:
-
-\begin{itemize}
-\item To ensure the robot can consistently reach the target location for a delivery and return back to base, we would run the robot 10 times and measure how far it stopped from the goal. We defined the upper accuracy threshold as being 20cm radius away from the intended goal: this is still within reasonable reaching distance for a person collecting a delivery. If our testing found that the robot was not able to consistently stop within 20cm of the goal, ie. achieve this 9/10 times, we planned to undertake further work to investigate and fix the source of this issue. 
-\item We would also time how long each delivery took to ensure the robot can deliver food and water in a given amount of time (this is especially relevant if the food is hot). This would allow us to communicate to the caregiver a confidence interval for how long a delivery might take, as well as possibly send a notification to the app if the delivery were taking significantly longer than expected based on thse tests.
-\item The purpose of the weight sensors is to reliably be able to detect when objects have been placed onto and removed from the tray. We intended to perform tests where we would:
-  \begin{itemize}
-    \item Measure the weight with only the tray on top as the `empty' state of the lift.
-    \item Place a cup, and then a plate, on the lift, measuring the changes in weight to mark the lift as containing a delivery. 
-    \item Remove the cup, and then the plate, from the lift, measuring changes in weight to mark the delivery as completed. 
-  \end{itemize}
-  Based on a test run, we would program the lift control in the Turtlebot to be able to recognize when one or both objects were placed onto or removed from the tray. We would then perform 5 tests of these parameters by ensuring that the Turtlebot could reliably (5/5 times) recognize when both objects were placed on and taken off, or one at a time. 
-\end{itemize}
-
 \begin{table}[h]
 \vskip 3mm
 \begin{center}
