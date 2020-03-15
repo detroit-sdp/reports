@@ -186,7 +186,7 @@ In order to achieve our future goal of the robot controlling the lift uppon arri
 
 The Arduino already possessed the code to operate the lift, so it was a case of writing a Python script that could read/write bytes of data over the connection. The Raspberry Pi sends a single byte to the Arduino with possible values from 0-3 indicating stop, extend lift, and retract lift respectively. The Arduino returns the status of the lift as well as the current readings from the two weight sensors.
 
-The connection was initially unreliable due to synchronization issues, however, after they were resolved the bytes were successfully transmitted every time.
+The connection was initially unreliable due to synchronization issues. After they were resolved the bytes were successfully transmitted every time.
 
 % Item 5
 Most of the work in terms of getting the bidirectional connectivity established with the app was done on the app side. Once they were able to forward packets from the host machine to the emulator, our job was to handle the sending of UDP packets to the app when appropriate. We discussed why UDP was used in previous demos and reports, but briefly, it was because there was no need for a formal connection to be held between the app and the robot. Due to the fact we were sending a single packet at any given time, packet loss is also a non-issue for our system. The system returns a packet to the app whenever the state changes. The packet simply contains one of the messages listed above and any logic for the handling of them happens on the app side. As mentioned in previous reports, we had to route the packets through the Turtlebot due to - what we believe to be - dynamic NAT being disabled on the sdp-robots router.
