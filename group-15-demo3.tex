@@ -100,15 +100,9 @@ To break down the task of managing the robot, we have finalized the four fragmen
   \end{enumerate}
   
 \subsection{Software}
-To communicate the state of the robot to the app, the robot stores the following information internally:
-\begin{itemize}
-\item {\bf Low battery}: set if the battery level gets below 15\%. This state requires the caregiver to charge the robot. 
-\item {\bf At base and not busy}. 
-\item {\bf Moving}.
-\item {\bf Assistance required}: set if the robot cannot find a path to the goal. This state requires rescue from the caregiver. 
-\item {\bf Arrived at goal}.
-\end{itemize}
 
+
+\subsubsection{Fine-tuning movement}
 While operating, the robot knows its own position with respect to its starting point and the state of the map, with its starting point being the origin on the map. We set the starting position to be the base as marked on the arena floor. 
 
 The navigation stack operates using vectors. When calculating the path from one point to another, the goal must be given as a pair of distances on the x and y axes and a rotation. The problem is that you are not always moving from the same base because the robot's view of its position may drift. In order to correct this, we decided to have our robot take in the coordinates of the goal and calculate the vector from its current position.
@@ -119,23 +113,28 @@ When receiving a GOTO command from the app, we receive the room number. We use a
 
 Based on observation, we believe that using the coordinates-vector system is more accurate over time than using distances. We were not able to test this before the team moved to remote working. 
 
-% Item 3
-We found a parameter under the robots description of itself that it provides to the stack named <collision>...</collision>. We believe the stack uses this in order to avoid collision between the robot and the surrounding world. Furthermore, this tag features an attribute <box size> which was set on default to values very closely resembling the dimensions of the Turtlebot. We altered this to match the new dimensions of our bot. Specfically, the length of our bot is approximately 40.0cm as opposed to the original 28.1cm. Unfortunately, this is something that is incredibly difficult to test due to the robot avoiding obstacles very conservatively as a result of other parameter changes below, but no problems were encountered in general with the change.
+In mounting the lift onto the Turtlebot, we increased the length of its footprint from 28.1cm to 40.0cm. We were concerned that this would cause the Turtlebot to drive into obstacles. We altered the <box\_size> parameter within the <collision> tag in the description of itself the robot provides to the navigation stack to reflect the change in size. The effect of this is difficult to test as we have set the robot to be very conserative in avoiding obstacles. 
 
-The other key parameters are mostly self-explanatory other than the following. [min/max]\_trans\_vel is the speed of the robot when moving in a straight line. path\_distance\_bias determines how closely the robot need follow the path it works out. goal\_distance\_bias smoothes the trajectory of the path and makes it more efficient. Finally, occdist\_scale determines how 'afraid' the robot is of obstacles. All our parameter changes are detailed in table~\ref{tab:params}. Much like the coordinate system, initial observation would suggest to us that our parameters are more suitable, with official testing on the speed and accuracy unable to be carried out.
+We fine-tuned a number of parameters for the robot, described in table~\ref{tab:params}. [min/max]\_trans\_vel is the speed of the robot when moving in a straight line. path\_distance\_bias determines how closely the robot need follow the path it works out. goal\_distance\_bias smoothes the trajectory of the path and makes it more efficient. Finally, occdist\_scale determines how `afraid' the robot is of obstacles. 
 
+\subsubsection{Communication with lift}
+We had to establish a connection between the Turtlebot and the Arduino controlling the lift. We reviewed multiple options (Bluetooth, WiFi), but decided that the fastest and most reliable method would be to use a serial connection between USB ports on each board.
 
-% Item 4
-We had to establish a connection between the Raspberry Pi and the Arduino (lift controller). We reviewed multiple options including some wireless methodologies (Bluetooth, WiFi etc), but decided in the end that the fastest and most reliable method would be to use a serial connection between USB ports on each board.
+The code to extend and retract the lift was already on the Arduino, so it was a case of writing a Python script that could read/write bytes of data over the cable. The Raspberry Pi sends a single byte to the Arduino with possible values from 0-3 indicating stop, extend lift, and retract lift respectively. The Arduino returns the status of the lift as well as the current readings from the two weight sensors.
 
-The Arduino already possessed the code to operate the lift, so it was a case of writing a Python script that could read/write bytes of data over the cable. The Raspberry Pi sends a single byte to the Arduino with possible values from 0-3 indicating stop, extend lift, and retract lift respectively. The Arduino returns the status of the lift as well as the current readings from the two weight sensors.
+The connection was initially unreliable due to synchronization issues. After they were resolved we were able to reliably communicate with the lift.
 
-The connection was initially unreliable due to synchronization issues. After they were resolved the bytes were successfully transmitted every time.
+\subsubsection{Communication with app}
+To communicate the state of the robot to the app, the robot stores the following information internally:
+\begin{itemize}
+\item {\bf Low battery}: set if the battery level gets below 15\%. This state requires the caregiver to charge the robot. 
+\item {\bf At base and not busy}. 
+\item {\bf Moving}.
+\item {\bf Assistance required}: set if the robot cannot find a path to the goal. This state requires rescue from the caregiver. 
+\item {\bf Arrived at goal}.
+\end{itemize}
 
-% Item 5
-Most of the work in terms of getting the bidirectional connectivity established with the app was done on the app side. Once they were able to forward packets from the host machine to the emulator, our job was to handle the sending of UDP packets to the app when appropriate. The use of UDP for our connection and the reasons behind it remains unchanged. The system returns a packet to the app whenever the state changes. The packet simply contains one of the status' listed above and any logic for the handling of them happens on the app side.
-
-For future presentations, we planned to next implement the Raspberry Pi inspecting for the {\bf STATUS ARRIVED} packet, and controlling the lift based on this. We also planned to have the robot retract the lift when items had been removed from the tray and return to the base after doing this. Finally, we planned to do testing for this demo as well as on our future plans followed by a general polishing of the product for industry day.
+Most of the work in terms of getting the bidirectional connectivity established with the app was done on the app side. The robot returns a packet to the app whenever the state changes. The packet simply contains one of the statuses listed above.
 
 \subsection{Business development}
 
@@ -240,8 +239,8 @@ As with the previous demo, the bulk of our costs are associated with building, m
 \end{table}
 
 
-%% Include any references in a bibliography
-\newpage
+% Clearpage also moves floats
+\clearpage
 \section{Appendix}
 \begin{figure}
   \begin{center}
