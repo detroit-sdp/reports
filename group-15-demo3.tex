@@ -126,61 +126,13 @@ We store our room information in another dictionary in Python. For this dictiona
 
 Based on observation, we believe that using the coordinates-vector system is more accurate over time than using distances. Due to the team not feeling comfortable returning to Appleton Tower in the wake of the global COVID-19 pandemic, we were not able to carry out official tests on this. Our test plans are detailed in Evaluation section of this report.
 
-\begin{table}[h]
-\vskip 3mm
-\begin{center}
-\begin{small}
-\begin{sc}
-\begin{tabular}{lcccc}
-\hline
-\abovespace\belowspace
-Direction & x & y & z & w \\
-\hline
-  Forward & 0 & 0 & 0 & 1\\
-  Backwards & 0 & 0 & 1 & 0 \\
-  Right & 0 & 0 & -0.7071 & 0.7071 \\
-  Left & 0 & 0 & 0.7071 & 0.7071 
-\end{tabular}
-\end{sc}
-\end{small}
-\caption{Quaternion movement inputs for each direction.}
-\label{tab:quaternions}
-\end{center}
-\vskip -3mm
-\end{table}
+
 
 % Item 3
 We found a parameter under the robots description of itself that it provides to the stack named <collision>...</collision>. We believe the stack uses this in order to avoid collision between the robot and the surrounding world. Furthermore, this tag features an attribute <box size> which was set on default to values very closely resembling the dimensions of the Turtlebot. We altered this to match the new dimensions of our bot. Specfically, the length of our bot is approximately 40.0cm as opposed to the original 28.1cm. Unfortunately, this is something that is incredibly difficult to test due to the robot avoiding obstacles very conservatively as a result of other parameter changes below, but no problems were encountered in general with the change.
 
 The other key parameters are mostly self-explanatory other than the following. [min/max]\_trans\_vel is the speed of the robot when moving in a straight line. path\_distance\_bias determines how closely the robot need follow the path it works out. goal\_distance\_bias smoothes the trajectory of the path and makes it more efficient. Finally, occdist\_scale determines how 'afraid' the robot is of obstacles. All our parameter changes are detailed in table~\ref{tab:params}. Much like the coordinate system, initial observation would suggest to us that our parameters are more suitable, with official testing on the speed and accuracy unable to be carried out.
 
-\begin{table}[h]
-\vskip 3mm
-\begin{center}
-\begin{small}
-\begin{sc}
-\begin{tabular}{lcc}
-\hline
-\abovespace\belowspace
-Parameters & Original value & Our value \\
-\hline
-  max\_vel\_x & 0.26 & 0.1 \\
-  min\_vel\_x & -0.26 & -0.1 \\
-  max\_trans\_vel & 0.26 & 0.1 \\
-  min\_trans\_vel & 0.13 & 0.07 \\
-  max\_rot\_vel & 1.82 & 1.3 \\
-  xy\_goal\_tolerance & 0.05 & 0.175 \\
-  path\_distance\_bias & 32.0 & 65.0 \\
-  goal\_distance\_bias & 20.0 & 40.0 \\
-  occdist\_scale & 0.02 & 0.01
-\end{tabular}
-\end{sc}
-\end{small}
-\caption{Our parameter alterations.}
-\label{tab:params}
-\end{center}
-\vskip -3mm
-\end{table}
 
 % Item 4
 We had to establish a connection between the Raspberry Pi and the Arduino (lift controller). We reviewed multiple options including some wireless methodologies (Bluetooth, WiFi etc), but decided in the end that the fastest and most reliable method would be to use a serial connection between USB ports on each board.
@@ -228,8 +180,6 @@ For demo \demoNumber\ we performed one cycle of testing:
 {\bf Step 4}: For our first cycle, we tested with three users. Each participant signed a consent form, and then sat down with a team member to complete the tasks. We gave each participant a quick briefing about our overall planned system use case. However we tried to give the testers as little technical advice as necessary so they could use the app as a real user would. 
 
 {\bf Step 5}: In testing, one user suggested adding more feedback from the robot to confirm that it was on its way. This point indicates that we should make the system status of the robot more visible to the user, however without over-sharing non relevant information. One future implementation could be adding an avatar of the robot to show its movement over the map.
-
-\subsection{Software and hardware testing}
 
 \section{Budget}
 As with the previous demo, the bulk of our costs are associated with building, mounting, and integrating the lift. Tables \ref{tab:non-budget-cost}-\ref{tab:budget-cost-non-monetary} show spending to date including spending at previous demos. Equipment costs are based on values provided in the SDP wiki \cite{sdpcosts}.
@@ -300,8 +250,75 @@ As with the previous demo, the bulk of our costs are associated with building, m
 
 
 %% Include any references in a bibliography
+\newpage
+\section{Appendix}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\columnwidth]{figs/sequence.png}
+  \end{center}
+  \caption{A simplified view of the steps of our use case and how each part of the product is involved in the use case. Note that for simplicity, 'Tadashi' represents both the Turtlebot and the ROS master.}
+\end{figure}
+
+\subsection{Software and hardware testing}
+We had planned to complete testing of the robot and lift to ensure it met the use-case needs. Unfortunately due to COVID-19 we were not able to complete these tests as planned. Below are the three tests we intended to do:
+
+\begin{itemize}
+\item To ensure the robot can consistently reach the target location for a delivery and return back to base, we would run the robot 10 times and measure how far it stopped from the goal. We defined the upper accuracy threshold as being 20cm radius away from the intended goal: this is still within reasonable reaching distance for a person collecting a delivery. If our testing found that the robot was not able to consistently stop within 20cm of the goal, ie. achieve this 9/10 times, we planned to undertake further work to investigate and fix the source of this issue. 
+\item We would also time how long each delivery took to ensure the robot can deliver food and water in a given amount of time (this is especially relevant if the food is hot). This would allow us to communicate to the caregiver a confidence interval for how long a delivery might take, as well as possibly send a notification to the app if the delivery were taking significantly longer than expected based on thse tests.
+\end{itemize}
+
+\begin{table}[h]
+\vskip 3mm
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{lcccc}
+\hline
+\abovespace\belowspace
+Direction & x & y & z & w \\
+\hline
+  Forward & 0 & 0 & 0 & 1\\
+  Backwards & 0 & 0 & 1 & 0 \\
+  Right & 0 & 0 & -0.7071 & 0.7071 \\
+  Left & 0 & 0 & 0.7071 & 0.7071 
+\end{tabular}
+\end{sc}
+\end{small}
+\caption{Quaternion movement inputs for each direction.}
+\label{tab:quaternions}
+\end{center}
+\vskip -3mm
+\end{table}
+\begin{table}[h]
+\vskip 3mm
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{lcc}
+\hline
+\abovespace\belowspace
+Parameters & Original value & Our value \\
+\hline
+  max\_vel\_x & 0.26 & 0.1 \\
+  min\_vel\_x & -0.26 & -0.1 \\
+  max\_trans\_vel & 0.26 & 0.1 \\
+  min\_trans\_vel & 0.13 & 0.07 \\
+  max\_rot\_vel & 1.82 & 1.3 \\
+  xy\_goal\_tolerance & 0.05 & 0.175 \\
+  path\_distance\_bias & 32.0 & 65.0 \\
+  goal\_distance\_bias & 20.0 & 40.0 \\
+  occdist\_scale & 0.02 & 0.01
+\end{tabular}
+\end{sc}
+\end{small}
+\caption{Our parameter alterations.}
+\label{tab:params}
+\end{center}
+\vskip -3mm
+\end{table}
 
 \bibliography{demo1-refs}
+
 
 \end{document} 
 
