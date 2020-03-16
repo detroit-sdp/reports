@@ -27,7 +27,7 @@
 
 \begin{abstract}
   Tadashi is an assistive robot for delivering food and water to residents in supported living, care home, and quarantine environments.
-  In this demo, we demonstrate significant progress towards a minimum viable product (MVP). We integrate components of our system together, demonstrating a full use case: the caregiver placing a delivery on the tray and scheduling the robot to visit a room; the robot navigating to the room; the lift extending on arrival and detecting that the resident has picked up the delivery using integrated weight sensors; the lift retracting once the delivery has been made, and the robot sending a message to the app to indicate this; and the robot returning to its starting point. We also discuss usability testing we have performed on our app to ensure it is usable by non-technical caregivers, and discuss future improvements to the app based on this. 
+  In this demo, we demonstrate significant progress towards a minimum viable product (MVP). We integrate components of our system together, demonstrating significant progress towards a full use case: the caregiver placing a delivery on the tray and scheduling the robot to visit a room; the robot navigating to the room; the lift extending on arrival and detecting that the resident has picked up the delivery using integrated weight sensors; the lift retracting once the delivery has been made, and the robot sending a message to the app to indicate this; and the robot returning to its starting point. We also discuss usability testing we have performed on our app to ensure it is usable by non-technical caregivers, and discuss future improvements to the app based on this. 
 \end{abstract} 
 
 \section{Project plan update} 
@@ -37,12 +37,12 @@
 \item Complete user interviews with caregivers to assess demand for project features and implement new features based on caregiver requests: {\bf not achieved}.
 \item Physically integrate lift mechanism into robot body, and integrate lift control into robot control software: {\bf partially achieved}.
 \item Design and manufacture a tray to place on top of the lift to hold items: {\bf achieved}.
-\item Add sensor to lift to determine whether items have been removed: {\bf achieved}.
+\item Add sensor to lift to determine whether items have been removed: {\bf partially achieved}.
 \item Refine robot problem-solving when stuck by tuning mapping sensitivity and obstacle avoidance logic: {\bf partially achieved}. 
 \item Implement bi-directional communication between the app and robot: {\bf achieved}.
 \end{itemize}
 
-We were not able to complete user interviews due to delays in receiving ethical approval (due to strike action). We intend to complete these as soon as we receive the approval. We were able to fully mount the lift onto the Turtlebot and partially able to implement communication between the robot and the lift, but the last part of this was scheduled for Saturday and therefore not completed due to the team having to move to remote work. Likewise, we were able to tune the robot's movement parameters, but we were not able to fully test this because of the team moving to remote work. 
+We were not able to complete user interviews due to delays in receiving ethical approval. We intend to complete these as soon as we receive the approval. Testing the robot's tuned parameters, finalizing the interpretation of the weight sensors, and finalizing communication between the robot and the lift could not be fully completed before the team moved to remote work.
 
 \begin{table}[]
   \begin{tabular}{l|l}
@@ -63,12 +63,7 @@ We were not able to complete user interviews due to delays in receiving ethical 
 
 We began the sprint with teams working the same as for demo 2 in order to refine individual components: refining robot problem-solving logic and movement parameters, refining the app, and finalizing the design and physical mounting of the lift. We then began focusing on the connections between aspects of our project. To do this, ad-hoc teams were created based on the knowledge each person had of the system they worked on, as seen in table \ref{tab:group-split}. To ensure effective collaboration, these teams met and worked in person, doing pair-programming to ensure expertise could be effectively utilized and to reduce the need to spend time integrating or merging code. As with previous sprints, code was tracked using GitHub for version control, and group communication was done through Slack and once-weekly meetings.
 
-Our total budget spending so far consists of:
-\begin{itemize}
-  \item \pounds 1476.46 on non-budgeted monetary costs, ie. items taken from the starting kit and therefore not deducted from total budget;
-  \item \pounds 30.80 on budgeted monetary costs to improve the lift, leaving us with \pounds 147.61 in our monetary budget; 
-  \item 3 hours of technician time to mount the lift, leaving us with 1.25 hours technician time remaining. 
-\end{itemize}
+Our total budget spending so far consists of: \pounds 1476.46 on non-budgeted monetary costs, ie. items taken from the starting kit and therefore not deducted from total budget; \pounds 30.80 on budgeted monetary costs to improve the lift, leaving us with \pounds 147.61 in our monetary budget; and 3 hours of technician time to mount the lift, leaving us with 2.25 hours technician time remaining. 
 
 Owing to the ongoing coronavirus situation, the entire team began working remotely from Saturday 14th March. This means we need to halt work on the robot and the lift, as we cannot access or run these remotely. Decisions are still ongoing as to how to continue work in this situation, so our goals may change as the situation develops. Our original goals for demo 4 are given in the appendix, section \ref{goals}. Given the changing situation, we instead aim to do the following for demo 4:
 \begin{itemize}
@@ -82,14 +77,14 @@ Owing to the ongoing coronavirus situation, the entire team began working remote
 \subsection{Connectivity}
 To aid the reader with understanding how the system fits together, we provide two diagrams in the appendix. Figure \ref{fig:seq} is a sequence diagram showing how each part of the system is involved in the use case mentioned in the abstract. Figure \ref{fig:connect-larger} shows the connections we have set up between each of the parts. 
 
-In the previous demo we only demonstrated app$\rightarrow$robot communication. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate bidirectional communication. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on the emulated device.
+In the previous demo we only demonstrated app $\rightarrow$ robot communication. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate app $\leftrightarrow$ robot communication. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on the emulated device.
 
 For robot $\leftrightarrow$ lift communication, the Turtlebot can send a command to extend or retract the lift to the Arduino controlling the lift. In return, the lift sends three bytes to the Turtlebot. The first two bytes are the voltage across the weight sensors, divided by 4 to fit 8 bits. The last byte is three zeroes followed by {\tt overloaded-retracted-retracting}\ {\tt -extended-extending}, representing the current state of the lift's movement.
 
-For safety reasons, if the connection between the Turtlebot and the Arduino is broken, the lift stops all operation. If the connection is not re-established within 20 seconds, the lift lowers itself down. 
+For safety reasons, if the connection between the Turtlebot and the Arduino is broken, the lift stops all operation. If the connection is not re-established within 20 seconds, the lift lowers itself down.  
 
 \subsection{Hardware}
-We attached the lift to the Turtlebot using MDF and mounting screws drilled into the Lego (figure \ref{fig:lift}). The lift is stable when the robot is moving. We also designed and manufactured a tray to place on top of the lift, indicating where items are to be placed (figure \ref{fig:sensor}). The figure also shows one of the weight sensors. We placed two weight sensors under the tray: these can be used to detect when deliveries have been placed and picked up on the robot. The weight sensors send voltage values to the Arduino, which are sent forward to the Turtlebot for interpretation. We intended to do testing to determine how best to interpret the weight sensor values --- whether by taking a mean of the two readings, or something else --- but were not able to do this before the team moved to remote. 
+We attached the lift to the Turtlebot using MDF and mounting screws drilled into the Lego (figure \ref{fig:lift}). The lift is stable when the robot is moving. We also designed and manufactured a tray to place on top of the lift, indicating where items are to be placed (figure \ref{fig:sensor}). The figure also shows one of the weight sensors. We placed two weight sensors under the tray: these can be used to detect when deliveries have been placed and picked up on the robot. The weight sensors send voltage values to the Arduino, which are sent forward to the Turtlebot for interpretation. We intended to do testing to determine how best to interpret the weight sensor values but were not able to do this before the team moved to remote. 
 
 To allow the Turtlebot to communicate with the lift, the EV3 brick was replaced with an Arduino (figure \ref{fig:arduino}), which contains scripts to move the lift up and down and communicate with the Turtlebot. 
 
@@ -113,7 +108,7 @@ While operating, the robot knows its own position with respect to its starting p
 
 The navigation stack operates using vectors. When calculating the path from one point to another, the goal must be given as a pair of distances on the $x$ and $y$ axes and a rotation. The problem is that you are not always moving from the same base because the robot's view of its position may drift. In order to correct this, we decided to have our robot take in the coordinates of the goal and calculate the vector from its current position.
 
-The robot views itself as always facing forward on the $x$ axis: while you can specify a rotational move using a quaternion $(x,y,z,w)$, the robot will always think of its own rotation as being $(0,0,0,1)$. This means that in the view of the software, when turning, the axes rotate --- not the robot. To reduce problems this may cause we decided to restrict the robot to a four-directional goal system - forwards, backwards, right, and left with each having its own quaternion move (Table~\ref{tab:quaternions}).
+The robot views itself as always facing forward on the $x$ axis: while you can specify a rotational move using a quaternion $(x,y,z,w)$, the robot will always think of its own rotation as being $(0,0,0,1)$. This means that in the view of the software, when turning, the axes rotate --- not the robot. To reduce problems this may cause we decided to restrict the robot to a four-directional goal system - forwards, backwards, right, and left with each having its own quaternion move (table~\ref{tab:quaternions}).
 
 When receiving a GOTO command from the app, we receive the room number. We use a dictionary to associate a room number with the coordinates of the room, and the targeted rotation at this goal (L, R, F, B).
 
@@ -128,7 +123,7 @@ To establish a connection between the Turtlebot and the Arduino controlling the 
 
 The code to extend and retract the lift was already on the Arduino, so it was a case of writing a Python script that could read/write bytes of data over the cable. The Raspberry Pi sends a single byte to the Arduino with possible values from 0-2 indicating stop, extend lift, and retract lift respectively. The Arduino returns the status of the lift as well as the current readings from the two weight sensors.
 
-The connection was initially unreliable due to synchronization issues. These were resolved by repeatedly sending out 0-bytes to the Arduino. 
+The connection was initially unreliable due to synchronization issues. By sending 0-bytes to the Arduino we can determine if the connection is disconnected, or just delayed. Details of this are in the appendix, section \ref{connection}.
 
 \subsubsection{Communication with app}
 To communicate the state of the robot to the app, the robot stores the following information internally. Firstly, {\bf low battery}, which is set if the battery level gets below 15\%. This state requires the caregiver to charge the robot. {\bf Assistance required} is set if the robot cannot find a path to the goal. This state requires rescue from the caregiver. The other possible states are {\bf at base and not busy}, {\bf moving}, and {\bf arrived at goal}.
@@ -167,9 +162,9 @@ For demo \demoNumber\ we performed one cycle of testing:
 
 {\bf Step 3}: Before proceeding with testing, we added help buttons to the app which display a brief explanation of the current section, to help a user in case they get stuck.
 
-{\bf Step 4}: For our first cycle, we tested with three users. Each participant signed a consent form, and then sat down with a team member to complete the tasks. We gave each participant a quick briefing about our overall planned system use case. However we tried to give the testers as little technical advice as necessary so they could use the app as a real user would. {\bf Two of the users successfully completed all six of the tasks. One failed to complete the third task but completed the rest with guidance.}
+{\bf Step 4}: For our first cycle, we tested with three users. Each participant signed a consent form, and then sat down with a team member to complete the tasks. We gave each participant a quick briefing about our overall planned system use case. However we tried to give the testers as little technical advice as necessary so they could use the app as a real user would. {\bf Two of the users successfully completed all six of the tasks. One failed to complete the third task but completed the rest with guidance.} Some users got confused at task 2 and working out the need to move from the dashboard to the map to add residents.
 
-{\bf Step 5}: In testing, one user suggested adding more feedback from the robot to confirm that it was on its way. This point indicates that we should make the system status of the robot more visible to the user, however without over-sharing non-relevant information. One future implementation could be adding an avatar of the robot to show its movement over the map.
+{\bf Step 5}: Based on the results of this testing, the changes we will make to the app are as follows. Fully integrate the `help' dialogues into the app and perform testing to see if this improves usability and reduces failure rates at task 3. Add a `begin adding residents' button to the dashboard that takes them to the map and see if this makes task 2 easier to complete. Additionally, in testing, one user suggested adding more feedback from the robot to confirm that it was on its way. This indicates we should make the system status of the robot more visible to the user. We could do this by adding an avatar of the robot to show its movement over the map. Finally, as an additional test, we plan to perform A/B testing to compare different dashboard layouts to see which one shows relevant information more intuitively. 
 
 \section{Budget}
 As with the previous demo, the bulk of our costs are associated with building, mounting, and integrating the lift. Tables \ref{tab:non-budget-cost}-\ref{tab:budget-cost-non-monetary} show spending to date including spending at previous demos. Equipment costs are based on values provided in the SDP wiki \cite{sdpcosts}.
@@ -233,7 +228,7 @@ As with the previous demo, the bulk of our costs are associated with building, m
     \hline
     \hline
     Overall technician hours spent & 4.75 & \\
-    Total technician hours remaining & 1.25
+    Total technician hours remaining & 2.25
   \end{tabular}}
 \caption{Budgeted technician time at demo \demoNumber. Note that hours remaining includes subtracting any hours lost due to not being used in previous weeks.}
 \label{tab:budget-cost-non-monetary}
@@ -250,7 +245,7 @@ Below are our initially planned goals for demo 4 which we will not be able to co
 \begin{itemize}
   \item Stop the robot from moving if the lift is extended, for safety reasons.
   \item Stop the lift from moving if it is overloaded (defined as loaded with a weight above 1.5kg).
-  \item Test and choose the methodology for interpreting weight sensor reading values. 
+  \item Test and choose the methodology for interpreting weight sensor reading values. This would involve first understanding how the voltages output map to the weights of objects placed on the sensors. Then we would test different orientations of the sensors under the tray, and decide how to combine the two sensor outputs, eg. by arithmetic or harmonic mean. 
   \item Implement checking of the battery charge on the lift, allowing for notification of both lift and robot battery status.
   \item Finalize and test connections between all components. 
 \end{itemize}
@@ -269,6 +264,13 @@ We had planned to complete testing of the robot and lift to ensure it met the us
   \end{itemize}
   Based on a test run, we would program the lift control in the Turtlebot to be able to recognize when one or both objects were placed onto or removed from the tray. We would then perform 5 tests of these parameters by ensuring that the Turtlebot could reliably (5/5 times) recognize when both objects were placed on and taken off, or one at a time. 
 \end{itemize}
+
+\subsection{Details of robot $\leftrightarrow$ lift connection}
+\label{connection}
+The serial connection between the Raspberry Pi and the Arduino tends to have a variable response time and can sometimes break, not sending back any data.
+
+As the Ardiuno is expected to always respond to messages from the Pi, we can check if it works by sending the `stop' command (a byte filled with zeroes) and waiting for a response. Usually it comes back within a fraction of a second, but sometimes it can lag, so we wait for up to one second. If no reply comes back, a reconnect function is executed, which repeatedly sends empty bytes every 50ms and checks if the input buffer fills up. When it detects a response, it waits an additional second and then clears the buffer. This way it's very unlikely the buffer fills up with late responses, delaying the connection. After a response is detected, most often it means the connection is working well again.
+
 \begin{figure*}
   \begin{center}
     \includegraphics[width=1.8\columnwidth]{figs/sequence.png}
@@ -286,17 +288,17 @@ We had planned to complete testing of the robot and lift to ensure it met the us
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=\columnwidth]{figs/weight_sensor.jpg}
-    \caption{The top of the lift, showing the manufactured tray with the Tadashi logo and weight sensor underneath.}
-  \label{fig:sensor}
+    \includegraphics[width=\columnwidth]{figs/lift_view.jpg}
+    \caption{Side view of the lift mounted to the Turtlebot. Points to note include the metal brackets used to fix the lift in place; the removal of the EV3 brick and addition of the Arduino kit and batteries; and the tray placed on top.}
+  \label{fig:lift}
   \end{center}
 \end{figure}
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=\columnwidth]{figs/lift_view.jpg}
-    \caption{Side view of the lift mounted to the Turtlebot. Points to note include the metal brackets used to fix the lift in place; the removal of the EV3 brick and addition of the Arduino kit and batteries; and the tray placed on top.}
-  \label{fig:lift}
+    \includegraphics[width=\columnwidth]{figs/weight_sensor.jpg}
+    \caption{The top of the lift, showing the manufactured tray with the Tadashi logo and weight sensor underneath.}
+  \label{fig:sensor}
   \end{center}
 \end{figure}
 
