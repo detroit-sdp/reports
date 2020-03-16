@@ -82,12 +82,16 @@ Owing to the ongoing coronavirus situation, the entire team began working remote
 \subsection{Connectivity}
 To aid the reader with understanding how the system fits together, we provide two diagrams in the appendix. Figure \ref{fig:seq} is a sequence diagram showing how each part of the system is involved in the use case mentioned in the abstract. Figure \ref{fig:connect-larger} shows the connections we have set up between each of the parts. 
 
-\subsection{Hardware}
-We attached the lift to the Turtlebot using MDF and mounting screws drilled into the Lego (figure \ref{fig:lift}). The lift is stable when the robot is moving. We also designed and manufactured a tray to place on top of the lift, indicating where items are to be placed (figure \ref{fig:sensor}). The figure also shows one of the weight sensors. We placed two weight sensors under the tray: these can be used to detect when deliveries have been placed and picked up on the robot. The weight sensors send voltage values to the Arduino, which are sent forward to the Turtlebot for interpretation.
+In the previous demo we only demonstrated app$\rightarrow$robot communication. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate bidirectional communication. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on the emulated device.
 
-To allow the Turtlebot to communicate with the lift, the EV3 brick was replaced with an Arduino (figure \ref{fig:arduino}), which contains scripts to move the lift up and down and communicate with the Turtlebot. The Turtlebot can send a command to extend or retract the lift to the Arduino. In return, the Arduino sends three bytes to the Turtlebot. The first two bytes are the voltage across the weight sensors, divided by 4 to fit 8 bits. The last byte is three zeroes followed by {\tt overloaded-retracted-retracting}\ {\tt -extended-extending}, representing the current state of the lift's movement.
+For robot $\leftrightarrow$ lift communication, the Turtlebot can send a command to extend or retract the lift to the Arduino controlling the lift. In return, the lift sends three bytes to the Turtlebot. The first two bytes are the voltage across the weight sensors, divided by 4 to fit 8 bits. The last byte is three zeroes followed by {\tt overloaded-retracted-retracting}\ {\tt -extended-extending}, representing the current state of the lift's movement.
 
 For safety reasons, if the connection between the Turtlebot and the Arduino is broken, the lift stops all operation. If the connection is not re-established within 20 seconds, the lift lowers itself down. 
+
+\subsection{Hardware}
+We attached the lift to the Turtlebot using MDF and mounting screws drilled into the Lego (figure \ref{fig:lift}). The lift is stable when the robot is moving. We also designed and manufactured a tray to place on top of the lift, indicating where items are to be placed (figure \ref{fig:sensor}). The figure also shows one of the weight sensors. We placed two weight sensors under the tray: these can be used to detect when deliveries have been placed and picked up on the robot. The weight sensors send voltage values to the Arduino, which are sent forward to the Turtlebot for interpretation. We intended to do testing to determine how best to interpret the weight sensor values --- whether by taking a mean of the two readings, or something else --- but were not able to do this before the team moved to remote. 
+
+To allow the Turtlebot to communicate with the lift, the EV3 brick was replaced with an Arduino (figure \ref{fig:arduino}), which contains scripts to move the lift up and down and communicate with the Turtlebot. 
 
 \subsection{User interface}
 To break down the task of managing the robot, we have finalized the four fragments that make up the application using best practices for app design \cite{design, ux}:
@@ -102,24 +106,22 @@ The main focus for this demo was on the calendar fragment, and the networking se
 
  The events are stored and kept track of in a database within our Firebase setup. The database layout is described in table~\ref{tab:delivery-history} and table~\ref{tab:residents}. Bold entries represent fields that are linked between the tables, and italic entries represent fields which are linked to Firebase's authentication feature for secure user data storage. The robot status is stored using Firebase's real-time database as it is a constantly updating piece of information. 
 
-In the previous demo we only demonstrated app$\rightarrow$robot communication. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate bidirectional communication. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on the emulated device.
-
-To facilitate this connection, the app now has a network service running in the background until the app closes. We want to have the service run at all times, but Android power saving optimizations will eventually destroy the service. The service may have to be moved to the foreground to avoid this. 
+To facilitate the app $\leftrightarrow$ robot connection, the app now has a network service running in the background until the app closes. We want to have the service run at all times, but Android power saving optimizations will eventually destroy the service. The service may have to be moved to the foreground to avoid this. 
 \subsection{Software}
 \subsubsection{Fine-tuning movement}
 While operating, the robot knows its own position with respect to its starting point and the state of the map, with its starting point being the origin on the map. We set the starting position to be the base as marked on the arena floor. 
 
-The navigation stack operates using vectors. When calculating the path from one point to another, the goal must be given as a pair of distances on the x and y axes and a rotation. The problem is that you are not always moving from the same base because the robot's view of its position may drift. In order to correct this, we decided to have our robot take in the coordinates of the goal and calculate the vector from its current position.
+The navigation stack operates using vectors. When calculating the path from one point to another, the goal must be given as a pair of distances on the $x$ and $y$ axes and a rotation. The problem is that you are not always moving from the same base because the robot's view of its position may drift. In order to correct this, we decided to have our robot take in the coordinates of the goal and calculate the vector from its current position.
 
-The robot views itself as always facing forward on the x axis: while you can specify a rotational move using a quaternion (x,y,z,w), the robot will always think of its own rotation as being (0,0,0,1). This means that in the view of the software, when turning, the axes rotate --- not the robot. To reduce problems this may cause we decided to restrict the robot to a four-directional goal system - forwards, backwards, right, and left with each having its own quaternion move (Table~\ref{tab:quaternions}).
+The robot views itself as always facing forward on the $x$ axis: while you can specify a rotational move using a quaternion $(x,y,z,w)$, the robot will always think of its own rotation as being $(0,0,0,1)$. This means that in the view of the software, when turning, the axes rotate --- not the robot. To reduce problems this may cause we decided to restrict the robot to a four-directional goal system - forwards, backwards, right, and left with each having its own quaternion move (Table~\ref{tab:quaternions}).
 
-When receiving a GOTO command from the app, we receive the room number. We use a dictionary to associate a room number with the coordinates of the room, and the targeted rotation at this goal (L, B, F, or R).
+When receiving a GOTO command from the app, we receive the room number. We use a dictionary to associate a room number with the coordinates of the room, and the targeted rotation at this goal (L, R, F, B).
 
 Based on observation, we believe that using the coordinates-vector system is more accurate over time than using distances. We were not able to test this before the team moved to remote working. 
 
 In mounting the lift onto the Turtlebot, we increased the length of its footprint from 28.1cm to 40.0cm. We were concerned that this would cause the Turtlebot to drive into obstacles. We altered the <box\_size> parameter within the <collision> tag in the description of itself the robot provides to the navigation stack to reflect the change in size. The effect of this is difficult to test as we have set the robot to be very conservative in avoiding obstacles. 
 
-We fine-tuned a number of parameters for the robot, described in table~\ref{tab:params}. [min/max]\_trans\_vel is the speed of the robot when moving in a straight line. path\_distance\_bias determines how closely the robot need follow the path it works out. goal\_distance\_bias smoothes the trajectory of the path and makes it more efficient. Finally, occdist\_scale determines how `afraid' the robot is of obstacles. Initial testing of these new parameters suggested that they improved the robot's obstacle avoidance, at the cost of a higher risk of the robot thinking it has gotten stuck.
+We fine-tuned a number of parameters for the robot, described in table~\ref{tab:params}. Initial testing of these new parameters suggested that they improved the robot's obstacle avoidance, at the cost of a higher risk of the robot thinking it has gotten stuck.
 
 \subsubsection{Communication with lift}
 To establish a connection between the Turtlebot and the Arduino controlling the lift, we reviewed multiple options (Bluetooth, WiFi). We decided that the fastest and most reliable method would be to use a serial connection between USB ports on each board.
@@ -151,7 +153,7 @@ We performed usability testing to ensure the app was usable by non-technical car
 
 For demo \demoNumber\ we performed one cycle of testing:
 
-{\bf Step 1}: we set 6 steps for the user to follow, each relevant to one of the 10 usability principles \cite{heuristics}:
+{\bf Step 1}: We set 6 steps for the user to follow, each relevant to one of the 10 usability principles \cite{heuristics}:
 \begin{enumerate}
   \item Create an account and sign in. \\{\it Standardization: since most users already have experience with sign-up screens, we used a default template.}
   \item Add 3 new residents to the rooms of the map. \\{\it Matching between the system and the real world: since the map represents a real care home floor, we want the user to intuitively recognize the layout, so the map is in the layout of the care home.}
@@ -248,6 +250,7 @@ Below are our initially planned goals for demo 4 which we will not be able to co
 \begin{itemize}
   \item Stop the robot from moving if the lift is extended, for safety reasons.
   \item Stop the lift from moving if it is overloaded (defined as loaded with a weight above 1.5kg).
+  \item Test and choose the methodology for interpreting weight sensor reading values. 
   \item Implement checking of the battery charge on the lift, allowing for notification of both lift and robot battery status.
   \item Finalize and test connections between all components. 
 \end{itemize}
@@ -315,7 +318,7 @@ We had planned to complete testing of the robot and lift to ensure it met the us
 Direction & x & y & z & w \\
 \hline
   Forward & 0 & 0 & 0 & 1\\
-  Backwards & 0 & 0 & 1 & 0 \\
+  Backward & 0 & 0 & 1 & 0 \\
   Right & 0 & 0 & -0.7071 & 0.7071 \\
   Left & 0 & 0 & 0.7071 & 0.7071 
 \end{tabular}
@@ -342,7 +345,7 @@ Parameters & Original value & Our value \\
   goal\_distance\_bias & 20.0 & 40.0 \\
   occdist\_scale & 0.02 & 0.01
 \end{tabular}
-\caption{Our parameter alterations.}
+\caption{Our parameter alterations. [min/max]\_trans\_vel is the speed of the robot when moving in a straight line. path\_distance\_bias determines how closely the robot need follow the path it works out. goal\_distance\_bias smoothes the trajectory of the path and makes it more efficient. Finally, occdist\_scale determines how `afraid' the robot is of obstacles.}
 \label{tab:params}
 \end{center}
 \vskip -3mm
