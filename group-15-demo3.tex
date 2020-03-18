@@ -77,6 +77,14 @@ Owing to the ongoing coronavirus situation, the entire team began working remote
 \subsection{Connectivity}
 To aid the reader with understanding how the system fits together, we provide two diagrams. Figure \ref{fig:seq} is a sequence diagram showing how each part of the system is involved in the use case mentioned in the abstract. Figure \ref{fig:connect-larger} shows the connections we have set up between each of the parts. 
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\columnwidth]{figs/sequence.png}
+  \end{center}
+  \caption{A simplified view of the steps of our use case and how each part of the product is involved in the use case. Note that for simplicity, `Tadashi' represents both the Turtlebot and the ROS master.}
+  \label{fig:seq}
+\end{figure}
+
 \subsubsection{App $\leftrightarrow$ robot}
 In the previous demo we only demonstrated app $\rightarrow$ robot communication. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate app $\leftrightarrow$ robot communication. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on the emulated device.
 
@@ -100,6 +108,15 @@ We attached the lift to the Turtlebot using MDF and mounting screws drilled into
 
 To allow the Turtlebot to communicate with the lift, the EV3 brick was replaced with an Arduino (figure \ref{fig:arduino}), which contains scripts to move the lift up and down and communicate with the Turtlebot. 
 
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.7\columnwidth]{figs/lift_diag.png}
+    \caption{Side view of the lift mounted to the Turtlebot. Points to note include the metal brackets used to fix the lift in place (1); the removal of the EV3 brick and addition of the Arduino kit and batteries (2); and the tray and weight sensor placed on top (3).}
+  \label{fig:lift}
+  \end{center}
+\end{figure}
+
 \subsection{User interface}
 To break down the task of managing the robot, we have finalized the four fragments that make up the application using best practices for app design \cite{design, ux}:
 \begin{enumerate}
@@ -112,7 +129,6 @@ To break down the task of managing the robot, we have finalized the four fragmen
 The main focus for this demo was on the calendar fragment, and the networking service. The calendar allows the user to select any date, and for the given date it displays the robot's itinerary (past and future) for that date, in chronological order.
 
  The events are stored and kept track of in a database within our Firebase setup. The database layout is described in table~\ref{tab:delivery-history} and table~\ref{tab:residents}. Bold entries represent fields that are linked between the tables, and italic entries represent fields which are linked to Firebase's authentication feature for secure user data storage. The robot status is stored using Firebase's real-time database as it is a constantly updating piece of information. 
-
 
 \subsection{Software}
 While operating, the robot knows its own position with respect to its starting point and the state of the map, with its starting point being the origin on the map. We set the starting position to be the base as marked on the arena floor. 
@@ -271,26 +287,11 @@ As the Ardiuno is expected to always respond to messages from the Pi, we can che
 
 \begin{figure*}
   \begin{center}
-    \includegraphics[width=1.8\columnwidth]{figs/sequence.png}
-  \end{center}
-  \caption{A simplified view of the steps of our use case and how each part of the product is involved in the use case. Note that for simplicity, `Tadashi' represents both the Turtlebot and the ROS master.}
-  \label{fig:seq}
-\end{figure*}
-\begin{figure*}
-  \begin{center}
     \includegraphics[width=1.8\columnwidth]{figs/connectivity.pdf}
   \end{center}
   \caption{The connections between each part of the system, showing what messages are sent during the use case.}
   \label{fig:connect-larger}
 \end{figure*}
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=\columnwidth]{figs/lift_view.jpg}
-    \caption{Side view of the lift mounted to the Turtlebot. Points to note include the metal brackets used to fix the lift in place; the removal of the EV3 brick and addition of the Arduino kit and batteries; and the tray placed on top.}
-  \label{fig:lift}
-  \end{center}
-\end{figure}
 
 \begin{figure}
   \begin{center}
