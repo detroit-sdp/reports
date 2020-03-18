@@ -118,12 +118,12 @@ To allow the Turtlebot to communicate with the lift, the EV3 brick was replaced 
 \end{figure}
 
 \subsection{User interface}
-To break down the task of managing the robot, we have finalized the four fragments that make up the application using best practices for app design \cite{design, ux}:
+Using the app, the user will be able to add and remove room-resident pairs to the system. They will be able to send one-off deliveries as well as schedule a one-off or recurring delivery to a certain patient. Finally, the app will allow for the user to keep track of some robot diagnostics and general information like: delivery weight, time, location, and return weight (what was sent back); and the robots current status within the world as discussed below. Our 6 step user-testing exercise in Evaluation describes the expected operation of the app with respect to these tasks. We have finalized the four fragments that achieve this functionality using best practices for app design \cite{design, ux}:
 \begin{enumerate}
-  \item {\bf Dashboard}: this provides system status information at a glance to the user, showing how many deliveries were sent to each resident.
-  \item {\bf Map}: this shows a top-down view of the care home ward, with icons to add a patient to each room.
-  \item {\bf Calendar}: this allows users to set a schedule for the robot to follow and deliver at specific times.
-  \item {\bf Me}: this contains account information and allows signing out. 
+  \item {\bf Dashboard}: for viewing robot/delivery information.
+  \item {\bf Map}: shows top-down map of the ward with an icon on each room to add/remove. 
+  \item {\bf Calendar}: for scheduling and checking robots itinerary.
+  \item {\bf Me}: shows logged-in account general information.
 \end{enumerate}
 
 The main focus for this demo was on the calendar fragment, and the networking service. The calendar allows the user to select any date, and for the given date it displays the robot's itinerary (past and future) for that date, in chronological order.
@@ -133,11 +133,11 @@ The main focus for this demo was on the calendar fragment, and the networking se
 \subsection{Software}
 While operating, the robot knows its own position with respect to its starting point and the state of the map, with its starting point being the origin on the map. We set the starting position to be the base as marked on the arena floor. 
 
-The navigation stack operates using vectors. When calculating the path from one point to another, the goal must be given as a pair of distances on the $x$ and $y$ axes and a rotation. The problem is that you are not always moving from the same base because the robot's view of its position may drift. In order to correct this, we decided to have our robot take in the coordinates of the goal and calculate the vector from its current position.
+The navigation stack operates using vectors. When calculating the path from one point to another, the goal must be given as a pair of distances on the $x$ and $y$ axes and a rotation. The natural drift and goal distance tolerance mean that the robot does not always arrive at its exact intended location. As a result, using fixed vectors cause the robots accuracy to significantly deteriorate over time. However, its positional awareness remains accurate. In order to correct this, we decided to store the rooms as coordinates rather than vectors and have the robot calculate a vector based on these coordinates. When the robot drifts, the vector changes thereby minimising the effects of drift.
 
-The robot views itself as always facing forward on the $x$ axis: while you can specify a rotational move using a quaternion $(x,y,z,w)$, the robot will always think of its own rotation as being $(0,0,0,1)$. This means that in the view of the software, when turning, the axes rotate --- not the robot. To reduce problems this may cause we decided to restrict the robot to a four-directional goal system - forwards, backwards, right, and left with each having its own quaternion move (table~\ref{tab:quaternions}).
+The robot operates using robot-based axes. In order for our base return vector calculation to remain as simple as possible, we have restricted the robot to a four-directional goal system. This means that our vector calculation, at worst, simply involves switching and/or negation of our calculated $x$ and $y$, rather than rotating the 'view' of the map based on the robots new orientation w.r.t its initial orientation. Table~\ref{tab:quaternions} shows the quaternion move for each direction. Returning to the base involves performing the 'opposite' move i.e. face left at goal \= face right at base, face backwards at goal \= face backwards at base.
 
-When receiving a GOTO command from the app, we receive the room number. We use a dictionary to associate a room number with the coordinates of the room, and the targeted rotation at this goal (L, R, F, B).
+When receiving a GOTO command from the app, we receive the room number. We use a dictionary to associate a room number with a tuple (($x$,$y$), rotation) where rotation is one of (L,F,R,B).
 
 Based on observation, we believe that using the coordinates-vector system is more accurate over time than using distances. We were not able to test this before the team moved to remote working. 
 
