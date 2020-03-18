@@ -61,7 +61,7 @@ We were not able to complete user interviews due to delays in receiving ethical 
   \label{tab:group-split}
 \end{table}
 
-We began the sprint with teams working as for demo 2 to refine individual components, then created ad-hoc teams to connect systems (\ref{tab:group-split}). We used pair programming to utilize each person's knowledge and reduce the need to merge code. We used GitHub for version control, and Slack and once-weekly meetings for communication.
+We began the sprint with teams working as for demo 2 to refine individual components, then created ad-hoc teams to connect systems (table \ref{tab:group-split}). We used pair programming to utilize each person's knowledge and reduce the need to merge code. We used GitHub for version control, and Slack and once-weekly meetings for communication.
 
 Our total budget spending so far is shown in section \ref{budget}.
 
@@ -86,6 +86,7 @@ To aid the reader with understanding how the system fits together, we provide tw
 \end{figure}
 
 \subsubsection{App $\leftrightarrow$ robot}
+\label{approbot}
 In the previous demo we only demonstrated app $\rightarrow$ robot communication. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate app $\leftrightarrow$ robot communication. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on the emulated device.
 
 To facilitate the app $\leftrightarrow$ robot connection, the app now has a network service running in the background until the app closes. We want to have the service run at all times, but Android power saving optimizations will eventually destroy the service. The service may have to be moved to the foreground to avoid this. 
@@ -118,7 +119,19 @@ To allow the Turtlebot to communicate with the lift, the EV3 brick was replaced 
 \end{figure}
 
 \subsection{User interface}
-Using the app, the user will be able to add and remove room-resident pairs to the system. They will be able to send one-off deliveries as well as schedule a one-off or recurring delivery to a certain patient. Finally, the app will allow for the user to keep track of some robot diagnostics and general information like: delivery weight, time, location, and return weight (what was sent back); and the robots current status within the world as discussed below. Our 6 step user-testing exercise in Evaluation describes the expected operation of the app with respect to these tasks. We have finalized the four fragments that achieve this functionality using best practices for app design \cite{design, ux}:
+\label{ui}
+We provide 6 key functionalities that users can perform using the app:
+\begin{enumerate}
+\item Create an account and sign in. 
+\item Add new residents to the rooms of the map.
+\item Send Tadashi to deliver to a resident. 
+\item Set a delivery for a later date in the calendar. 
+\item Report back information contained in the dashboard.
+\item Sign out.
+\end{enumerate}
+We also provide notifications for messages sent from the robot to the app as described in section \ref{approbot}.
+\\
+We have finalized the four fragments that achieve this functionality using best practices for app design \cite{design, ux}:
 \begin{enumerate}
   \item {\bf Dashboard}: for viewing robot/delivery information.
   \item {\bf Map}: shows top-down map of the ward with an icon on each room to add/remove. 
@@ -131,27 +144,25 @@ The main focus for this demo was on the calendar fragment, and the networking se
  The events are stored and kept track of in a database within our Firebase setup. The database layout is described in table~\ref{tab:delivery-history} and table~\ref{tab:residents}. Bold entries represent fields that are linked between the tables, and italic entries represent fields which are linked to Firebase's authentication feature for secure user data storage. The robot status is stored using Firebase's real-time database as it is a constantly updating piece of information. 
 
 \subsection{Software}
-While operating, the robot knows its own position with respect to its starting point and the state of the map, with its starting point being the origin on the map. We set the starting position to be the base as marked on the arena floor. 
+The robot moves to a specific point on the map and arrives there within some tolerance. For example, if told to move to $(3, 5)$ with a tolerance of $0.5$, it might stop at $(2.5, 5.5)$. In demo 2, we issued directions as offsets: for example, we would tell the robot to move $4$ points along the $x$-axis and $5$ along the $y$-axis. This meant that any drift from the goal increased as we sent more commands to the robot. To solve this, we started dynamically calculating new offsets based on the difference between the robot's actual position in the demo space and the target position. This significantly reduces drift over time and ensures the robot can more accurately get to the resident in the target room. 
 
-The navigation stack operates using vectors. When calculating the path from one point to another, the goal must be given as a pair of distances on the $x$ and $y$ axes and a rotation. The natural drift and goal distance tolerance mean that the robot does not always arrive at its exact intended location. As a result, using fixed vectors cause the robots accuracy to significantly deteriorate over time. However, its positional awareness remains accurate. In order to correct this, we decided to store the rooms as coordinates rather than vectors and have the robot calculate a vector based on these coordinates. When the robot drifts, the vector changes thereby minimising the effects of drift.
+The robot operates within a space that is representative of the real world, but far smaller. When arriving at its goal, the robot will by default try to face in the direction it was facing when it started moving. However, in the restricted demo space, there may not be enough space for the robot to rotate to face this direction. To solve this we pass the navigation stack a target rotation as well as the goal location. We found that restricting the target rotation to be a multiple of 90 degrees from the initial orientation reduced this problem. For each destination room, in addition to a location we hardcoded a target rotation that ensured the robot did not need to rotate too much to reach a specific orientation. In the real world, where there would be more space to maneuver, this would not be a problem, but it was necessary to introduce this restriction within the demo space.
 
-The robot operates using robot-based axes. In order for our base return vector calculation to remain as simple as possible, we have restricted the robot to a four-directional goal system. This means that our vector calculation, at worst, simply involves switching and/or negation of our calculated $x$ and $y$, rather than rotating the 'view' of the map based on the robots new orientation w.r.t its initial orientation. Table~\ref{tab:quaternions} shows the quaternion move for each direction. Returning to the base involves performing the 'opposite' move i.e. face left at goal \= face right at base, face backwards at goal \= face backwards at base.
+In initial tests runs of our robot, we found two problems.
+Firstly, the robot's tolerance in assessing whether it had successfully arrived at its goal was too low. This meant that the robot would think it could not make it to the goal location, even if it was very close to it. We fixed this by increasing the xy\_goal\_tolerance parameter.
+Secondly, the robot was moving too quickly between locations. This caused the lift --- and deliveries on the lift --- to become unstable. We decreased the max\_trans\_vel and max\_vel\_x parameters to force the robot to move slower, which made the lift and its delivery appear more stable.
+We also made some minor changes to other parameters to improve the robot's navigation ability. These are described in table \ref{tab:params}.  
 
-When receiving a GOTO command from the app, we receive the room number. We use a dictionary to associate a room number with a tuple (($x$,$y$), rotation) where rotation is one of (L,F,R,B).
+In mounting the lift onto the Turtlebot, we increased the length of its footprint from 28.1cm to 40.0cm. We were concerned that this would cause the Turtlebot to drive into obstacles. We altered the <box\_size> parameter within the <collision> tag in the description of itself the robot provides to the navigation stack to reflect the change in size. We were not able to test whether this prevented collisions.
 
-Based on observation, we believe that using the coordinates-vector system is more accurate over time than using distances. We were not able to test this before the team moved to remote working. 
-
-In mounting the lift onto the Turtlebot, we increased the length of its footprint from 28.1cm to 40.0cm. We were concerned that this would cause the Turtlebot to drive into obstacles. We altered the <box\_size> parameter within the <collision> tag in the description of itself the robot provides to the navigation stack to reflect the change in size. The effect of this is difficult to test as we have set the robot to be very conservative in avoiding obstacles. 
-
-We fine-tuned a number of parameters for the robot, described in table~\ref{tab:params}. Initial testing of these new parameters suggested that they improved the robot's obstacle avoidance, at the cost of a higher risk of the robot thinking it has gotten stuck.
 
 \subsection{Business development}
 The target market for Tadashi is care homes and supported living environments. There are approximately 433,000 people occupying care homes in the UK, with 5500 providers \cite{carehomes}. Currently, robots are being designed to take care of the elderly, however in these situations there is very little human interaction between the resident and the caregiver \cite{robotcarers}. Our robot is to be used to aid caregivers, not to take over their jobs.
 
-Another target market we have recently identified for Tadashi is in quarantine situations. Tadashi could be used to deliver food, water, and other supplies to quarantined people without the need for medical staff to expose themselves to possible infection. With over 100 million Europeans in quarantine due to the ongoing threat of the coronavirus pandemic \cite{quarantine}, and people over 70 in the UK likely to be asked to self-isolate \cite{isolate} in the near future, we see a strong demand for assistive robots like Tadashi. A hotel in China has recently introduced a robot that serves food to quarantined patients \cite{peanut}. Tadashi improves on this idea by having a lift, which allows quarantined people with mobility issues to reach their deliveries.
+Another target market we have recently identified for Tadashi is in quarantine situations. Tadashi could be used to deliver food, water, and other supplies to quarantined people without the need for medical staff to expose themselves to possible infection. With over 100 million Europeans in quarantine due to the ongoing threat of the coronavirus pandemic \cite{quarantine}, and people over 70 in the UK likely to be asked to self-isolate in the near future \cite{isolate}, we see a strong demand for assistive robots like Tadashi. A hotel in China has recently introduced a robot that serves food to quarantined patients \cite{peanut}. Tadashi improves on this idea by having a lift, which allows quarantined people with mobility issues to reach their deliveries.
 
 \section{Evaluation}
-We were unable to perform software and hardware testing, but our planned tests are described in the appendix: \ref{testing}. 
+We were unable to perform software and hardware testing, but our planned tests are described in section \ref{testing}. 
 We performed usability testing to ensure the app was usable by non-technical caregivers. We decided to perform our testing in an iterative manner, performing three cycles of testing with app modifications during each cycle. Following discussions with Chris during his office hour, a cycle consists of 5 steps.
 Step 1, prepare a testing task for the user to complete.
 Step 2, self-evaluate our app against the task to check for clear problems.
@@ -161,30 +172,24 @@ Step 5, major app modifications based on testing.
 
 For demo \demoNumber\ we performed one cycle of testing:
 
-{\bf Step 1}: We set 6 steps for the user to follow, each relevant to one of the 10 usability principles \cite{heuristics}:
-\begin{enumerate}
-  \item Create an account and sign in. \\{\it Standardization: since most users already have experience with sign-up screens, we used a default template.}
-  \item Add 3 new residents to the rooms of the map. \\{\it Matching between the system and the real world: since the map represents a real care home floor, we want the user to intuitively recognize the layout, so the map is in the layout of the care home.}
-  \item Send Tadashi to deliver to a resident. \\{\it User control: we want the user to feel in control of the robot, so we provide feedback and undo options.}
-  \item Set a delivery for a later date in the calendar. \\{\it Standardization: the look of the scheduling system mimics Outlook, which users will be familiar with.}
-  \item Report back information contained in the dashboard. \\{\it Visibility of system status: the dashboard is the most updated feature and contains key information, so it needs to display information relevant to the user in an intuitive manner.}
-  \item Sign out. \\{\it Minimalism: we keep the settings area clear so users aren't confused on where to sign out.}
-\end{enumerate}
+{\bf Step 1}: We set the user the task of following the 6 key functionality steps listed in section \ref{ui}, with 3 residents being added. Each task is relevant to one of the 10 usability principles \cite{heuristics}, as discussed in section \ref{usability}.
 
 {\bf Step 2}: During the self evaluation stage we completed a cognitive walkthrough of the app, putting us in the mind of a new user and completing our set tasks. The main problem found here was a general lack of direction and advice. Since the user starts at the dashboard, it wasn't immediately obvious that they should then use the map section to start adding residents.
 
-{\bf Step 3}: Before proceeding with testing, we added help buttons to the app which display a brief explanation of the current section, to help a user in case they get stuck.
+{\bf Step 3}: We added help buttons to the app which display a brief explanation of the current section, to help a user in case they get stuck.
 
-{\bf Step 4}: For our first cycle, we tested with three users. Each participant signed a consent form, and then sat down with a team member to complete the tasks. We gave each participant a quick briefing about our overall planned system use case. However we tried to give the testers as little technical advice as necessary so they could use the app as a real user would. {\bf Two of the users successfully completed all six of the tasks. One failed to complete the third task but completed the rest with guidance.} Some users got confused at task 2 and working out the need to move from the dashboard to the map to add residents.
+{\bf Step 4}: We tested with three users. Each participant signed a consent form, and then sat down with a team member to complete the tasks. We gave each participant a briefing of the use case. We tried to give the testers as little technical advice as necessary so they could use the app as a real user would. {\bf Two of the users successfully completed all six of the tasks. One failed to complete the third task but completed the rest with guidance.} Some users got confused at task 2 and working out the need to move from the dashboard to the map to add residents.
 
-{\bf Step 5}: Based on the results of this testing, the changes we will make to the app are as follows. Fully integrate the `help' dialogues into the app and perform testing to see if this improves usability and reduces failure rates at task 3. Add a `begin adding residents' button to the dashboard that takes them to the map and see if this makes task 2 easier to complete. Additionally, in testing, one user suggested adding more feedback from the robot to confirm that it was on its way. This indicates we should make the system status of the robot more visible to the user. We could do this by adding an avatar of the robot to show its movement over the map. Finally, as an additional test, we plan to perform A/B testing to compare different dashboard layouts to see which one shows relevant information more intuitively. 
+{\bf Step 5}: Based on the results of this testing, the changes we will make to the app are as follows. Fully integrate the `help' dialogues into the app and perform testing to see if this improves usability and reduces failure rates at task 3. Add a `begin adding residents' button to the dashboard that takes them to the map and see if this makes task 2 easier to complete. Finally, as an additional test, we plan to perform A/B testing to compare different dashboard layouts to see which one shows relevant information more intuitively. 
 
 \section{Budget}
 \label{budget}
 As with the previous demo, the bulk of our costs are associated with building, mounting, and integrating the lift. Tables \ref{tab:non-budget-cost}-\ref{tab:budget-cost-non-monetary} show spending to date including spending at previous demos. Equipment costs are based on values provided in the SDP wiki \cite{sdpcosts}.
 
 \begin{table}[h]
-\begin{center}
+  \begin{center}
+    \begin{small}
+      \begin{sc}
     \resizebox{\columnwidth}{!}{
   \begin{tabular}{lllll}
     {\bf Item} & {\bf Units} & {\bf Cost (\pounds\ per unit)} & {\bf Total cost (\pounds)} & {\bf Use} \\
@@ -197,13 +202,18 @@ As with the previous demo, the bulk of our costs are associated with building, m
     \hline \hline
                &       & Overall cost (\pounds) & 1476.46
   \end{tabular}}
+
+\end{sc}
+\end{small}
 \caption{Non-budgeted monetary costs at demo \demoNumber. Note that we have chosen to stop using the EV3 and instead use the Arduino kit.}
 \label{tab:non-budget-cost}
 \end{center}
 \end{table}
 
 \begin{table}[h]
-\begin{center}
+  \begin{center}
+    \begin{small}
+      \begin{sc}
   \resizebox{\columnwidth}{!}{
   \begin{tabular}{lllll}
     {\bf Item} & {\bf Total cost (\pounds)} & {\bf Use} \\
@@ -222,13 +232,19 @@ As with the previous demo, the bulk of our costs are associated with building, m
      Budget spent (\pounds) & 52.39 \\
      Budget remaining (\pounds) & 147.61
   \end{tabular}}
+\end{sc}
+\end{small}
+
 \caption{Budgeted monetary costs at demo \demoNumber.}
 \label{tab:budget-cost-monetary}
+
 \end{center}
 \end{table}
 
 \begin{table}[h]
-\begin{center}
+  \begin{center}
+    \begin{small}
+      \begin{sc}
   \resizebox{\columnwidth}{!}{
   \begin{tabular}{lll}
     {\bf Purpose} & {\bf Hours spent} & {\bf Use} \\
@@ -244,6 +260,8 @@ As with the previous demo, the bulk of our costs are associated with building, m
     Overall technician hours spent & 4.75 & \\
     Total technician hours remaining & 2.25
   \end{tabular}}
+\end{sc}
+\end{small}
 \caption{Budgeted technician time at demo \demoNumber. Note that hours remaining includes subtracting any hours lost due to not being used in previous weeks.}
 \label{tab:budget-cost-non-monetary}
 \end{center}
@@ -285,13 +303,16 @@ The serial connection between the Raspberry Pi and the Arduino tends to have a v
 
 As the Ardiuno is expected to always respond to messages from the Pi, we can check if it works by sending the `stop' command (a byte filled with zeroes) and waiting for a response. Usually it comes back within a fraction of a second, but sometimes it can lag, so we wait for up to one second. If no reply comes back, a reconnect function is executed, which repeatedly sends empty bytes every 50ms and checks if the input buffer fills up. When it detects a response, it waits an additional second and then clears the buffer. This way it's very unlikely the buffer fills up with late responses, delaying the connection. After a response is detected, most often it means the connection is working well again.
 
-\begin{figure*}
-  \begin{center}
-    \includegraphics[width=1.8\columnwidth]{figs/connectivity.pdf}
-  \end{center}
-  \caption{The connections between each part of the system, showing what messages are sent during the use case.}
-  \label{fig:connect-larger}
-\end{figure*}
+\subsection{Relevance of UI/UX testing to usability principles}
+\label{usability}
+\begin{enumerate}
+  \item Create an account and sign in. \\{\it Standardization: since most users already have experience with sign-up screens, we used a default template.}
+  \item Add 3 new residents to the rooms of the map. \\{\it Matching between the system and the real world: since the map represents a real care home floor, we want the user to intuitively recognize the layout, so the map is in the layout of the care home.}
+  \item Send Tadashi to deliver to a resident. \\{\it User control: we want the user to feel in control of the robot, so we provide feedback and undo options.}
+  \item Set a delivery for a later date in the calendar. \\{\it Standardization: the look of the scheduling system mimics Outlook, which users will be familiar with.}
+  \item Report back information contained in the dashboard. \\{\it Visibility of system status: the dashboard is the most updated feature and contains key information, so it needs to display information relevant to the user in an intuitive manner.}
+  \item Sign out. \\{\it Minimalism: we keep the settings area clear so users aren't confused on where to sign out.}
+\end{enumerate}
 
 \begin{figure}
   \begin{center}
@@ -309,25 +330,14 @@ As the Ardiuno is expected to always respond to messages from the Pi, we can che
   \end{center}
 \end{figure}
 
+\begin{figure*}
+  \begin{center}
+    \includegraphics[width=1.8\columnwidth]{figs/connectivity.pdf}
+  \end{center}
+  \caption{The connections between each part of the system, showing what messages are sent during the use case.}
+  \label{fig:connect-larger}
+\end{figure*}
 
-\begin{table}[h]
-\vskip 3mm
-\begin{center}
-\begin{tabular}{lcccc}
-\hline
-\abovespace\belowspace
-Direction & x & y & z & w \\
-\hline
-  Forward & 0 & 0 & 0 & 1\\
-  Backward & 0 & 0 & 1 & 0 \\
-  Right & 0 & 0 & -0.7071 & 0.7071 \\
-  Left & 0 & 0 & 0.7071 & 0.7071 
-\end{tabular}
-\caption{Quaternion movement inputs for each direction.}
-\label{tab:quaternions}
-\end{center}
-\vskip -3mm
-\end{table}
 \begin{table}[h]
 \vskip 3mm
 \begin{center}
