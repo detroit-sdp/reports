@@ -65,12 +65,12 @@ We began the sprint with teams working as for demo 2 to refine individual compon
 
 Our total budget spending so far is shown in section \ref{budget}.
 
-Owing to the ongoing coronavirus situation, the entire team began working remotely from Saturday 14th March. This means we needed to halt work on the robot and the lift, as we cannot access or run these remotely, meaning that goals relating to these parts of the system could only be partially completed. Decisions are still ongoing as to how to continue work in this situation, so our goals may change as the situation develops. Our original goals for demo 4 are given in the appendix, section \ref{goals}. Given the changing situation, we instead aim to do the following for demo 4:
+Owing to the ongoing coronavirus situation, the entire team began working remotely from Saturday 14th March. This meant we needed to halt work on the robot and the lift, as we could not access or run these remotely, so goals relating to these parts of the system could only be partially completed. Our original goals for demo 4 are given in the appendix, section \ref{goals}. Given the changing situation, our next goals are as follows:
 \begin{itemize}
   \item Complete user interviews, analyze results, and implement changes to our product to match user demand.
   \item Improve app based on usability testing, and perform another round of usability tests to assess if changes have made a difference to usability. 
   \item Write the user guide. 
-  \item Explore other technical additions to the product to ensure our technical time is spent in a way that adds value to the product. 
+  \item Complete the website. 
 \end{itemize}
 
 \section{Technical details}
@@ -85,29 +85,29 @@ To aid the reader with understanding how the system fits together, we provide tw
   \label{fig:seq}
 \end{figure}
 
-\subsubsection{App $\leftrightarrow$ robot}
+\subsubsection{Connectivity between Android app and robot}
 \label{approbot}
-In the previous demo we only demonstrated app $\rightarrow$ robot communication. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate app $\leftrightarrow$ robot communication. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on the emulated device.
+In the previous demo we only demonstrated sending packets from the Android app to the robot. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate sending packets in both directions. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on the emulated device.
 
-To facilitate the app $\leftrightarrow$ robot connection, the app now has a network service running in the background until the app closes. We want to have the service run at all times, but Android power saving optimizations will eventually destroy the service. The service may have to be moved to the foreground to avoid this. 
+To facilitate the connection between the app and the robot, the app now has a network service running in the background until the app closes. We want to have the service run at all times, but Android power saving optimizations will eventually destroy the service. The service may have to be moved to the foreground to avoid this. 
 
-To communicate the state of the robot to the app, the robot stores the following information internally. Firstly, {\bf low battery}, which is set if the battery level gets below 15\%. This state requires the caregiver to charge the robot. {\bf Assistance required} is set if the robot cannot find a path to the goal. This state requires rescue from the caregiver. The other possible states are {\bf at base and not busy}, {\bf moving}, and {\bf arrived at goal}. The robot sends a packet to the app whenever its internal state changes, containing one of the statuses listed above. 
+To communicate the state of the robot to the app, the robot stores the following information internally. Firstly, {\bf low battery}, which is set if the battery level gets below 15\%. This state requires the caregiver to charge the robot. {\bf Assistance required} is set if the robot cannot find a path to the goal. This state requires rescue from the caregiver. The other possible states are {\bf at base and not busy}, {\bf moving}, and {\bf arrived at goal}. The robot sends a packet containing one of the statuses above: \{low battery, assistance required, at base and not busy, moving, arrived at goal\} when one of these statuses is set. 
 
-\subsubsection{Robot $\leftrightarrow$ lift}
-The Turtlebot can send a command to extend or retract the lift to the Arduino controlling the lift. In return, the lift sends three bytes to the Turtlebot. The first two bytes are the voltage across the weight sensors, divided by 4 to fit 8 bits. The last byte is three zeroes followed by {\tt overloaded-retracted-retracting}\ {\tt -extended-extending}, representing the current state of the lift's movement.
+\subsubsection{Connectivity between robot and lift}
+The Turtlebot can send a command to extend or retract the lift to the Arduino controlling the lift. In return, the lift sends three bytes to the Turtlebot. The first two bytes are the voltage across the weight sensors, divided by 4 to fit 8 bits. The last byte is three zeroes followed by the lift's state of movement, one of \{overloaded, retracted, retracting, extended, extending\}, represented by one-hot encoding (for example, `overloaded' would be represented as {\tt 00010000}, `retracted' as {\tt 00001000}). 
 
 To establish a connection between the Turtlebot and the Arduino controlling the lift, we reviewed multiple options (Bluetooth, WiFi). We decided that the fastest and most reliable method would be to use a serial connection between USB ports on each board.
 
-The code to extend and retract the lift was already on the Arduino, so it was a case of writing a Python script that could read/write bytes of data over the cable. The Raspberry Pi sends a single byte to the Arduino with possible values from 0-2 indicating stop, extend lift, and retract lift respectively. The Arduino returns the status of the lift as well as the current readings from the two weight sensors.
+We wrote scripts and saved them on the Ardunio to extend and retract the lift. To establish connectivity, we wrote Python scripts that could read/write bytes of data over the cable to communicate with the Ardunio. The Raspberry Pi sends a single byte to the Arduino with possible values \{0, 1, 2\} indicating stop, extend lift, and retract lift respectively. The Arduino returns the status of the lift as well as the current readings from the two weight sensors.
 
 The connection was initially unreliable due to synchronization issues. By sending 0-bytes to the Arduino we can determine if the connection is disconnected, or just delayed. Details of this are in the appendix, section \ref{connection}.
 
 For safety reasons, if the connection between the Turtlebot and the Arduino is broken, the lift stops all operation. If the connection is not re-established within 20 seconds, the lift lowers itself down.  
 
 \subsection{Hardware}
-We attached the lift to the Turtlebot using MDF and mounting screws drilled into the Lego (figure \ref{fig:lift}). The lift is stable when the robot is moving. We also designed and manufactured a tray to place on top of the lift, indicating where items are to be placed (figure \ref{fig:sensor}). The figure also shows one of the weight sensors. We placed two weight sensors under the tray: these can be used to detect when deliveries have been placed and picked up on the robot. The weight sensors send voltage values to the Arduino, which are sent forward to the Turtlebot for interpretation. We intended to do testing to determine how best to interpret the weight sensor values but were not able to do this before the team moved to remote. 
+We attached the lift to the Turtlebot using MDF and mounting screws drilled into the Lego (figure \ref{fig:lift}). The lift is stable when the robot is moving. We also designed and manufactured a tray to place on top of the lift, indicating where items are to be placed (figure \ref{fig:sensor}). The figure also shows one of the weight sensors. We placed two weight sensors under the tray: these can be used to detect when deliveries have been placed and picked up on the robot. The weight sensors send voltage values to the Arduino, which are sent forward to the Turtlebot for interpretation. We intended to do testing to determine how best to interpret the weight sensor values but were not able to do this before the team moved to remote working. 
 
-To allow the Turtlebot to communicate with the lift, the EV3 brick was replaced with an Arduino (figure \ref{fig:arduino}), which contains scripts to move the lift up and down and communicate with the Turtlebot. 
+We replaced the EV3 brick with an Ardunio (figure \ref{fig:arduino}) as it was easier to set up a serial connection with the Arduino, and it had significantly faster boot times. 
 
 
 \begin{figure}
@@ -141,10 +141,10 @@ We have finalized the four fragments that achieve this functionality using best 
 
 The main focus for this demo was on the calendar fragment, and the networking service. The calendar allows the user to select any date, and for the given date it displays the robot's itinerary (past and future) for that date, in chronological order.
 
- The events are stored and kept track of in a database within our Firebase setup. The database layout is described in table~\ref{tab:delivery-history} and table~\ref{tab:residents}. Bold entries represent fields that are linked between the tables, and italic entries represent fields which are linked to Firebase's authentication feature for secure user data storage. The robot status is stored using Firebase's real-time database as it is a constantly updating piece of information. 
+ The events are stored and kept track of in a database within our Firebase setup. The database layout is described in table~\ref{tab:firebase}. The robot status is stored using Firebase's real-time database as it is a constantly updating piece of information. 
 
 \subsection{Software}
-The robot moves to a specific point on the map and arrives there within some tolerance. For example, if told to move to $(3, 5)$ with a tolerance of $0.5$, it might stop at $(2.5, 5.5)$. In demo 2, we issued directions as offsets: for example, we would tell the robot to move $4$ points along the $x$-axis and $5$ along the $y$-axis. This meant that any drift from the goal increased as we sent more commands to the robot. To solve this, we started dynamically calculating new offsets based on the difference between the robot's actual position in the demo space and the target position. This significantly reduces drift over time and ensures the robot can more accurately get to the resident in the target room. 
+The robot moves to a specific point on the map and arrives there within some tolerance. For example, if told to move to $(3, 5)$ with a tolerance of $0.5$, it might stop anywhere within $(2.5 \leq x \leq 3.5, 4.5 \leq y \leq 5.5)$. In demo 2, we issued directions as offsets: for example, we would tell the robot to move $4$ points along the $x$-axis and $5$ along the $y$-axis. This meant that any drift from the goal increased as we sent more commands to the robot. To solve this, we started dynamically calculating new offsets based on the difference between the robot's actual position in the demo space and the target position. This closed loop planning significantly reduces drift over time and ensures the robot can more accurately get to the resident in the target room. 
 
 The robot operates within a space that is representative of the real world, but far smaller. When arriving at its goal, the robot will by default try to face in the direction it was facing when it started moving. However, in the restricted demo space, there may not be enough space for the robot to rotate to face this direction. To solve this we pass the navigation stack a target rotation as well as the goal location. We found that restricting the target rotation to be a multiple of 90 degrees from the initial orientation reduced this problem. For each destination room, in addition to a location we hardcoded a target rotation that ensured the robot did not need to rotate too much to reach a specific orientation. In the real world, where there would be more space to maneuver, this would not be a problem, but it was necessary to introduce this restriction within the demo space.
 
@@ -297,7 +297,7 @@ We had planned to complete testing of the robot and lift to ensure it met the us
   Based on a test run, we would program the lift control in the Turtlebot to be able to recognize when one or both objects were placed onto or removed from the tray. We would then perform 5 tests of these parameters by ensuring that the Turtlebot could reliably (5/5 times) recognize when both objects were placed on and taken off, or one at a time. 
 \end{itemize}
 
-\subsection{Details of robot $\leftrightarrow$ lift connection}
+\subsection{Details of connection between robot and lift}
 \label{connection}
 The serial connection between the Raspberry Pi and the Arduino tends to have a variable response time and can sometimes break, not sending back any data.
 
@@ -362,51 +362,24 @@ Parameters & Original value & Our value \\
 \vskip -3mm
 \end{table}
 
-\begin{tabular}{cc}
-  \begin{minipage}{0.5\linewidth}
-    \begin{table}[H]
-      \centering
-    \begin{tabular}{|l|}
-      \hline
-      \abovespace\belowspace
-      DeliveryHistory \\
-      \hline
-      deliveryID \\
-      time \\
-      {\bf location} \\
-      category \\
-      weightBefore\\
-      weightAfter\\
-      {\it userID}\\
-      deliverySuccessful \\
-      \hline
-    \end{tabular}
-    
-    \caption{DeliveryHistory table from Firebase.}
-    \label{tab:delivery-history}
-    \end{table}
-  \end{minipage}
-  \begin{minipage}{0.5\linewidth}
-    \begin{table}[H]
-      \centering
-    \begin{tabular}{|l|}
-      \hline
-      \abovespace\belowspace
-      Residents \\
-      \hline
-      {\it carer} \\
-      firstName \\
-      lastName \\
-      {\bf location} \\
-      priority \\
-      \hline
-    \end{tabular}
-   
-    \caption{Residents table from Firebase.}
-    \label{tab:residents}
-    \end{table}
-  \end{minipage}
-\end{tabular}
+\begin{table}[h]
+  \begin{tabular}{|l|l|}
+    \hline
+    DeliveryHistory & Residents \\
+    \hline
+    {\bf location} & {\bf location} \\
+    {\it userID} & {\it carer} \\
+    deliveryID & firstName \\
+    time & lastName \\
+    categry & priority \\
+    weightBefore & \\
+    weightAfter &  \\
+    deliverySuccessful & \\
+    \hline
+  \end{tabular}
+  \caption{Database layout in Firebase supporting the Android app. Bold entries represent fields that are linked between the tables, and italic entries represent fields which are linked to Firebase's authentication feature for secure user data storage.}
+  \label{tab:firebase}
+\end{table}
 
 \clearpage
 \bibliography{demo1-refs}
