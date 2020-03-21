@@ -27,13 +27,13 @@
 
 \begin{abstract}
   Tadashi is an assistive robot for delivering food and water to residents in supported living, care home, and quarantine environments.
-  In this demo, we demonstrate significant progress towards a minimum viable product (MVP). We integrate components of our system together, demonstrating significant progress towards a full use case: the caregiver placing a delivery on the tray and scheduling the robot to visit a room; the robot navigating to the room; the lift extending on arrival and detecting that the resident has picked up the delivery using integrated weight sensors; the lift retracting once the delivery has been made, and the robot sending a message to the app to indicate this; and the robot returning to its starting point. We also discuss usability testing we have performed on our app to ensure it is usable by non-technical caregivers, and discuss future improvements to the app based on this. 
+  In this demo, we demonstrate significant progress towards a minimum viable product. We integrate components of our system together, demonstrating significant progress towards a full use case: the caregiver placing a delivery on the tray and scheduling the robot to visit a room; the robot navigating to the room; the lift extending on arrival and detecting that the resident has picked up the delivery using integrated weight sensors; the lift retracting once the delivery has been made, and the robot sending a message to the app to indicate this; and the robot returning to its starting point. We also discuss usability testing we have performed on our app to ensure it is usable by non-technical caregivers, and discuss future improvements to the app based on this. 
 \end{abstract} 
 
 \section{Project plan update} 
 \begin{itemize}
 \item Begin testing app with non-technical users to gain insights on accessibility and ease of use: {\bf achieved}.
-\item Make changes to app justified against results of testing: {\bf partially achieved}.
+\item Make changes to app justified against results of testing: {\bf achieved}.
 \item Complete user interviews with caregivers to assess demand for project features and implement new features based on caregiver requests: {\bf not achieved}.
 \item Physically integrate lift mechanism into robot body, and integrate lift control into robot control software: {\bf partially achieved}.
 \item Design and manufacture a tray to place on top of the lift to hold items: {\bf achieved}.
@@ -42,7 +42,7 @@
 \item Implement bi-directional communication between the app and robot: {\bf achieved}.
 \end{itemize}
 
-We were not able to complete user interviews due to delays in receiving ethical approval. We intend to complete these as soon as we receive the approval. 
+We were not able to complete user interviews due to delays in receiving ethical approval. We intend to complete these as soon as we receive the approval. The partially completed goals were due to the team needing to move to remote working. 
 
 \begin{table}[]
   \begin{tabular}{l|l}
@@ -87,7 +87,7 @@ To aid the reader with understanding how the system fits together, we provide tw
 
 \subsubsection{Connectivity between Android app and robot}
 \label{approbot}
-In the previous demo we only demonstrated sending packets from the Android app to the robot. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate sending packets in both directions. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is setup through the emulation software to forward all traffic onto a port on the emulated device.
+In the previous demo we only demonstrated sending packets from the Android app to the robot. Implementing the other direction was difficult because the app runs on an emulator. By introducing port forwarding we have been able to demonstrate sending packets in both directions. The host machine running the emulator receives the packets on a port and forwards them to another port on itself. This second port is set up through the emulation software to forward all traffic onto a port on the emulated device.
 
 To facilitate the connection between the app and the robot, the app now has a network service running in the background until the app closes. We want to have the service run at all times, but Android power saving optimizations will eventually destroy the service. The service may have to be moved to the foreground to avoid this. 
 
@@ -96,7 +96,7 @@ To communicate the state of the robot to the app, the robot stores the following
 \subsubsection{Connectivity between robot and lift}
 The Turtlebot can send a command to extend or retract the lift to the Arduino controlling the lift. In return, the lift sends three bytes to the Turtlebot. The first two bytes are the voltage across the weight sensors, divided by 4 to fit 8 bits. The last byte is three zeroes followed by the lift's state of movement, one of \{overloaded, retracted, retracting, extended, extending\}, represented by one-hot encoding (for example, `overloaded' would be represented as {\tt 00010000}, `retracted' as {\tt 00001000}). 
 
-To establish a connection between the Turtlebot and the Arduino controlling the lift, we reviewed multiple options (Bluetooth, WiFi). We decided that the fastest and most reliable method would be to use a serial connection between USB ports on each board.
+To establish a connection between the Turtlebot and the Arduino controlling the lift, we reviewed multiple options (Bluetooth, WiFi, serial). We decided that the fastest and most reliable method would be to use a serial connection between USB ports on each board.
 
 We wrote scripts and saved them on the Ardunio to extend and retract the lift. To establish connectivity, we wrote Python scripts that could read/write bytes of data over the cable to communicate with the Ardunio. The Raspberry Pi sends a single byte to the Arduino with possible values \{0, 1, 2\} indicating stop, extend lift, and retract lift respectively. The Arduino returns the status of the lift as well as the current readings from the two weight sensors.
 
@@ -107,7 +107,7 @@ For safety reasons, if the connection between the Turtlebot and the Arduino is b
 \subsection{Hardware}
 We attached the lift to the Turtlebot using MDF and mounting screws drilled into the Lego (figure \ref{fig:lift}). The lift is stable when the robot is moving. We also designed and manufactured a tray to place on top of the lift, indicating where items are to be placed (figure \ref{fig:sensor}). The figure also shows one of the weight sensors. We placed two weight sensors under the tray: these can be used to detect when deliveries have been placed and picked up on the robot. The weight sensors send voltage values to the Arduino, which are sent forward to the Turtlebot for interpretation. We intended to do testing to determine how best to interpret the weight sensor values but were not able to do this before the team moved to remote working. 
 
-We replaced the EV3 brick with an Ardunio (figure \ref{fig:arduino}) as it was easier to set up a serial connection with the Arduino, and it had significantly faster boot times. 
+We replaced the EV3 brick with an Ardunio (figure \ref{fig:arduino}) as the weight sensors needed to be powered by an Arduino, and we didn't want to complicate the system by having to connect 3 different systems (the EV3, Arduino, and Raspberry Pi).
 
 
 \begin{figure}
@@ -134,12 +134,12 @@ We also provide notifications for messages sent from the robot to the app as des
 We have finalized the four fragments that achieve this functionality using best practices for app design \cite{design, ux}:
 \begin{enumerate}
   \item {\bf Dashboard}: for viewing robot/delivery information.
-  \item {\bf Map}: shows top-down map of the ward with an icon on each room to add/remove. 
-  \item {\bf Calendar}: for scheduling and checking robots itinerary.
-  \item {\bf Me}: shows logged-in account general information.
+  \item {\bf Map}: shows top-down view of the map with an icon on each room to add/remove. 
+  \item {\bf Calendar}: for scheduling and checking the robot's itinerary.
+  \item {\bf Me}: shows information about the logged-in account.
 \end{enumerate}
 
-The main focus for this demo was on the calendar fragment, and the networking service. The calendar allows the user to select any date, and for the given date it displays the robot's itinerary (past and future) for that date, in chronological order.
+The main focus for this demo was on the calendar fragment, and the networking service. The calendar allows the user to select any date, and for the given date it displays the robot's itinerary (past and future) for that date, in chronological order. An example is shown in figure~\ref{fig:cal}.
 
  The events are stored and kept track of in a database within our Firebase setup. The database layout is described in table~\ref{tab:firebase}. The robot status is stored using Firebase's real-time database as it is a constantly updating piece of information. 
 
@@ -150,7 +150,7 @@ The robot operates within a space that is representative of the real world, but 
 
 In initial tests runs of our robot, we found two problems.
 Firstly, the robot's tolerance in assessing whether it had successfully arrived at its goal was too low. This meant that the robot would think it could not make it to the goal location, even if it was very close to it. We fixed this by increasing the xy\_goal\_tolerance parameter.
-Secondly, the robot was moving too quickly between locations. This caused the lift --- and deliveries on the lift --- to become unstable. We decreased the max\_trans\_vel and max\_vel\_x parameters to force the robot to move slower, which made the lift and its delivery appear more stable.
+Secondly, the robot was moving too quickly between locations. This caused the lift and deliveries on the lift to become unstable. We decreased the max\_trans\_vel and max\_vel\_x parameters to force the robot to move slower, which made the lift and its delivery appear more stable.
 We also made some minor changes to other parameters to improve the robot's navigation ability. These are described in table \ref{tab:params}.  
 
 In mounting the lift onto the Turtlebot, we increased the length of its footprint from 28.1cm to 40.0cm. We were concerned that this would cause the Turtlebot to drive into obstacles. We altered the <box\_size> parameter within the <collision> tag in the description of itself the robot provides to the navigation stack to reflect the change in size. We were not able to test whether this prevented collisions.
@@ -329,7 +329,13 @@ As the Ardiuno is expected to always respond to messages from the Pi, we can che
   \label{fig:arduino}
   \end{center}
 \end{figure}
-
+\begin{figure}
+  \begin{center}
+  \includegraphics[width=0.7\columnwidth]{figs/calendar.png}
+  \caption{Screenshot of the app, showing the calendar view: for the given date, past and future scheduled deliveries.}
+  \label{fig:cal}
+\end{center}
+\end{figure}
 \begin{figure*}
   \begin{center}
     \includegraphics[width=1.8\columnwidth]{figs/connectivity.pdf}
@@ -361,26 +367,34 @@ Parameters & Original value & Our value \\
 \end{center}
 \vskip -3mm
 \end{table}
-
 \begin{table}[h]
-  \begin{tabular}{|l|l|}
+  \begin{tabular}{|l|}
     \hline
-    DeliveryHistory & Residents \\
+    {\bf DeliveryHistory} \\
     \hline
-    {\bf location} & {\bf location} \\
-    {\it userID} & {\it carer} \\
-    deliveryID & firstName \\
-    time & lastName \\
-    categry & priority \\
-    weightBefore & \\
-    weightAfter &  \\
-    deliverySuccessful & \\
+    category (enum: Water, Food, Both) \\
+    date (date) \\
+    time (time) \\
+    deliveryState (enum: Pending, Send, Success) \\
+    note (string) \\
+    residentId (string) \\
+    {\it userId} (string) \\
+    weightAfter (number) \\
+    weightBefore (number) \\
+    \hline
+    {\bf Residents} \\
+    \hline
+    residentId (string) \\
+    {\it carer} (string) \\
+    firstName (string) \\
+    lastName (string) \\
+    location (string, ``Room n'') \\
+    priority (enum: High, Medium, Low) \\
     \hline
   \end{tabular}
-  \caption{Database layout in Firebase supporting the Android app. Bold entries represent fields that are linked between the tables, and italic entries represent fields which are linked to Firebase's authentication feature for secure user data storage.}
-  \label{tab:firebase}
+  \caption{Database layout in Firebase supporting the Android app. Italic entries represent fields which are linked to Firebase's authentication feature for secure user data storage. userId and carer both refer to the unique login for the carer using the app. residentId is the unique identifier for each resident. }
+  \label{tab:firebase}         
 \end{table}
-
 \clearpage
 \bibliography{demo1-refs}
 
